@@ -1,0 +1,27 @@
+# SaaS / apps industry pack. OWNER: Person A. PLACEHOLDER priors, to be tuned (Fri 16).
+# Priors are assumptions until the evidence step (Master Plan 4.6) replaces them with sourced numbers.
+pack: saas
+currency: SGD
+period: month            # budget and price are per month
+attributes: [ai_planning, simplicity, privacy, integrations]
+outside_option: "do nothing / use a free tool"
+min_outside_share: 0.15  # validator: population must keep at least this share of non-buyers
+segments:
+  - id: budget
+    name: Budget-conscious students
+    share: 0.35
+    priors: {budget: [3, 9], alpha: [0.15, 0.30], tau: [0.6, 1.0]}
+  - id: exam
+    name: Exam-focused students
+    share: 0.25
+    priors: {budget: [6, 15], alpha: [0.05, 0.15], tau: [0.6, 1.0]}
+  - id: power
+    name: Productivity enthusiasts
+    share: 0.15
+    priors: {budget: [8, 25], alpha: [0.05, 0.10], tau: [0.6, 1.0]}
+  - id: loyal
+    name: Free-tool loyalists (hostile)
+    share: 0.25
+    priors: {budget: [0, 4], alpha: [0.25, 0.30], tau: [0.6, 1.0]}
+competitor_archetypes: [free_tool, premium_chain_app, notebook_app]
+experiment_menu: [landing_two_prices, waitlist, five_user_interviews, price_ladder_survey]

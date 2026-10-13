@@ -1,0 +1,33 @@
+{
+  "hypotheses": [
+    "At least 8% of 100 landing-page visitors join the waitlist at S$7/month.",
+    "Median willingness to pay among exam-focused students is at least S$6.",
+    "4 of 5 interviewed students can name a trigger that would make them leave their free planner."
+  ],
+  "assets": {
+    "landing_copy": "StudyFlow: plan your revision in minutes, not hours. AI builds your timetable around your exams. S$7/month, cancel any time. Join the waitlist.",
+    "survey": [
+      "Which tool do you use to plan your study today?",
+      "How much do you pay for it per month?",
+      "At what monthly price would an AI revision planner feel too expensive?",
+      "At what price would it feel like a bargain?"
+    ],
+    "interview_script": [
+      "Walk me through how you planned your last exam period.",
+      "What did you try before your current tool, and why did you stop?",
+      "Tell me about the last time you paid for a study tool."
+    ],
+    "ad_variants": [
+      "Exams in 4 weeks? Let AI build your revision plan. Try StudyFlow.",
+      "Stop re-planning. Start revising. StudyFlow, S$7/month."
+    ],
+    "offline": {
+      "flyer": "Scan to join the StudyFlow waitlist and get the first month free.",
+      "checklist": ["Print 50 flyers with QR code", "Stand at the library entrance for two lunch hours", "Log sign-ups in the tracking sheet"]
+    },
+    "telegram_variants": [
+      "Variant A: Exam season is coming. StudyFlow builds your revision plan in minutes. First month free. Interested?",
+      "Variant B: StudyFlow is S$5/month for early members. Want in?"
+    ]
+  }
+}

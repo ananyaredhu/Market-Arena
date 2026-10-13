@@ -1,0 +1,60 @@
+{
+  "additionalProperties": true,
+  "properties": {
+    "currency": {
+      "default": "SGD",
+      "title": "Currency",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "features": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Features",
+      "type": "object"
+    },
+    "geography": {
+      "default": "SG",
+      "title": "Geography",
+      "type": "string"
+    },
+    "missing_assumptions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Assumptions",
+      "type": "array"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "pack": {
+      "title": "Pack",
+      "type": "string"
+    },
+    "price": {
+      "title": "Price",
+      "type": "number"
+    },
+    "target_customers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Customers",
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "pack",
+    "price"
+  ],
+  "title": "ProductProfile",
+  "type": "object"
+}

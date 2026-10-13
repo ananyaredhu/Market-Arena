@@ -1,0 +1,27 @@
+{
+  "_comment": "Placeholder content. Real notes come from the evidence step (Person A). URLs here are not real sources.",
+  "geography": "SG",
+  "evidence_snapshot_id": "ev_placeholder_1",
+  "research_notes": [
+    {
+      "topic": "competitor_pricing",
+      "note": "Several study planners offer a free tier and charge a few dollars a month for premium.",
+      "source_url": "https://example.com/placeholder-pricing",
+      "quote": "Premium plan from $4.99 per month."
+    },
+    {
+      "topic": "channels",
+      "note": "Students discover study tools mainly through peers and social media.",
+      "source_url": "https://example.com/placeholder-channels",
+      "quote": "Most students said they heard about the tool from a friend."
+    }
+  ],
+  "trend_notes": [
+    {
+      "note": "Rising cost of living is squeezing student budgets.",
+      "source_url": "https://example.com/placeholder-source",
+      "quote": "Students are cutting back on subscriptions.",
+      "effect": "budget -5%"
+    }
+  ]
+}

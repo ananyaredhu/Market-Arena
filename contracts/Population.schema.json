@@ -1,0 +1,210 @@
+{
+  "$defs": {
+    "Agent": {
+      "additionalProperties": true,
+      "properties": {
+        "alpha": {
+          "title": "Alpha",
+          "type": "number"
+        },
+        "brand": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Brand",
+          "type": "object"
+        },
+        "budget": {
+          "title": "Budget",
+          "type": "number"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "incumbent": {
+          "title": "Incumbent",
+          "type": "string"
+        },
+        "outside_utility": {
+          "title": "Outside Utility",
+          "type": "number"
+        },
+        "risk": {
+          "title": "Risk",
+          "type": "number"
+        },
+        "segment": {
+          "title": "Segment",
+          "type": "string"
+        },
+        "switch": {
+          "title": "Switch",
+          "type": "number"
+        },
+        "tau": {
+          "title": "Tau",
+          "type": "number"
+        },
+        "w": {
+          "items": {
+            "type": "number"
+          },
+          "title": "W",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "segment",
+        "budget",
+        "alpha",
+        "w",
+        "brand",
+        "switch",
+        "risk",
+        "incumbent",
+        "outside_utility",
+        "tau"
+      ],
+      "title": "Agent",
+      "type": "object"
+    },
+    "Segment": {
+      "additionalProperties": true,
+      "properties": {
+        "evidence": {
+          "default": "llm_assumption",
+          "enum": [
+            "evidence",
+            "user_supplied",
+            "llm_assumption"
+          ],
+          "title": "Evidence",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "share": {
+          "title": "Share",
+          "type": "number"
+        },
+        "sources": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/Source"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sources"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "share"
+      ],
+      "title": "Segment",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": true,
+      "properties": {
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "quote",
+        "retrieved_at"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "agents": {
+      "items": {
+        "$ref": "#/$defs/Agent"
+      },
+      "title": "Agents",
+      "type": "array"
+    },
+    "attributes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Attributes",
+      "type": "array"
+    },
+    "evidence_snapshot_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Evidence Snapshot Id"
+    },
+    "geography": {
+      "default": "SG",
+      "title": "Geography",
+      "type": "string"
+    },
+    "pack": {
+      "title": "Pack",
+      "type": "string"
+    },
+    "population_id": {
+      "title": "Population Id",
+      "type": "string"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "integer"
+    },
+    "segments": {
+      "items": {
+        "$ref": "#/$defs/Segment"
+      },
+      "title": "Segments",
+      "type": "array"
+    }
+  },
+  "required": [
+    "population_id",
+    "seed",
+    "pack",
+    "attributes",
+    "segments",
+    "agents"
+  ],
+  "title": "Population",
+  "type": "object"
+}

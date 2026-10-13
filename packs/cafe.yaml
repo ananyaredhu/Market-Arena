@@ -1,0 +1,23 @@
+# Cafe / food and beverage industry pack. OWNER: Person B. PLACEHOLDER, to be written (Fri 16).
+# Confirm the budget unit (per visit) and keep alpha on the same scale as the SaaS pack.
+pack: cafe
+currency: SGD
+period: visit            # budget and price are per visit
+attributes: [taste_quality, distance_minutes, wait_time, ambience, dietary_fit, loyalty_perks]
+outside_option: "make coffee at home / skip"
+min_outside_share: 0.15
+segments:
+  - id: office_lunch
+    name: Office lunch crowd
+    share: 0.35
+    priors: {budget: [6, 14], alpha: [0.05, 0.12]}
+  - id: students
+    name: Students on a budget
+    share: 0.35
+    priors: {budget: [3, 8], alpha: [0.15, 0.30]}
+  - id: remote
+    name: Remote workers
+    share: 0.30
+    priors: {budget: [5, 12], alpha: [0.05, 0.15]}
+competitor_archetypes: [chain_cafe, hawker_centre, convenience_store, home_brew]
+experiment_menu: [pop_up_stall, tasting_preorder_form, flyer_qr_test, telegram_promo, price_board_test]
