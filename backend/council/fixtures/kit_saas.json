@@ -1,0 +1,68 @@
+{
+  "hypotheses": [
+    "A free tier protects demand against a rival price cut. Proposed test threshold: at least 15% of visitors sign up for the free tier.",
+    "Students will pay S$9 for StudyFlow. Proposed test threshold: at least 8% of 100+ landing-page visitors join the waitlist at S$9.",
+    "S$9 sits below the 'getting expensive' point for target students. Proposed test threshold: at least 40% of 50+ survey respondents agree.",
+    "Free Planner users will switch for better AI planning. Proposed test threshold: at least 3 of 5 interviewed users describe a recent planning failure.",
+    "Opted-in study groups respond to an early-access offer. Proposed test threshold: at least 10% of subscribers tap 'Get early access' within 7 days."
+  ],
+  "assets": {
+    "landing_copy": "# StudyFlow: an exam plan that rewrites itself when your week changes\n\nTell it your modules and deadlines. It builds the plan and adjusts it every evening.\n\n## Why switch\n- Builds a revision plan from your module deadlines in two minutes.\n- Re-plans automatically when you miss a session, no guilt spiral.\n- Your notes stay private; nothing is shared with your school.\n- Syncs with the calendar you already use.\n\n## Price positioning to test (proposed variants)\n- Variant A: S$9/month, cancel any time.\n- Variant B: S$7.20/month for students who join the waitlist this month.\n- Variant C: free planner, S$9/month for AI re-planning.",
+    "survey": [
+      "Which year and course are you in?",
+      "How do you plan your revision today?",
+      "In the last month, how many deadlines or study sessions did you miss?",
+      "What was the main reason for the last one you missed?",
+      "Rank these - AI planning, simplicity, privacy, calendar integrations.",
+      "Do you pay for any study or productivity app today? Which, and how much?",
+      "At what monthly price would StudyFlow feel cheap? (price ladder)",
+      "At what monthly price would it start to feel expensive?",
+      "At what monthly price would it be too expensive to consider?",
+      "What would stop you from switching from Free Planner?",
+      "Would you join a waitlist for early access? (yes / no / maybe)"
+    ],
+    "interview_script": [
+      "Screen: full-time student with at least one exam this term; not on the founding team or a close friend.",
+      "Tell me about the last time a deadline crept up on you. What happened?",
+      "How did you plan that week? Show me the tool or notes if you can.",
+      "What did you try to fix it afterwards? What did that cost you?",
+      "Which apps do you pay for today, and what made them worth it?",
+      "If a tool re-planned your week every evening, what would you expect to pay? (do not suggest a number)",
+      "What would make you stop using Free Planner tomorrow?",
+      "Close: may we invite you to test StudyFlow? (record consent)",
+      "Notes template: quote, current tool, pain severity 1-5, price mentioned, switching trigger, follow-up consent."
+    ],
+    "ad_variants": [
+      "StudyFlow is free to plan. Upgrade to AI re-planning only when exams hit.",
+      "An exam plan that fixes itself, for S$9 a month. Join the StudyFlow waitlist.",
+      "Missed a study session? StudyFlow re-plans your week tonight. Early-access price S$7.20.",
+      "Still dragging tasks around in Free Planner? StudyFlow plans your revision for you.",
+      "Your modules in, your revision plan out. Try StudyFlow before finals."
+    ],
+    "offline": {
+      "flyer": "StudyFlow - YOUR EXAM PLAN, DONE TONIGHT\nScan to join the early-access waitlist and get the student price.\n[QR CODE: landing page with ?src=campus_poster]\nPrivate by default. Unsubscribe any time.",
+      "checklist": [
+        "Campus booth: book a 2-hour slot outside the library during the week before exams.",
+        "Bring a laptop running the demo and a printed price-ladder card.",
+        "Use a unique QR code per poster location so sign-ups can be traced.",
+        "Record every conversation in the interview notes template.",
+        "Ask for contact consent only after the demo."
+      ],
+      "price_board_test": []
+    },
+    "telegram_variants": [
+      "Exams are coming. StudyFlow builds your revision plan and fixes it when your week slips. S$9/month - tap Get early access. Reply /stop to unsubscribe.",
+      "Plan for free, upgrade to AI re-planning for S$7.20/month this month only. Tap Interested to hold a spot. Reply /stop to unsubscribe."
+    ],
+    "tracking_plan": {
+      "metrics": [
+        "Unique landing-page visitors per price variant",
+        "Waitlist sign-ups per variant and the sign-up rate",
+        "Survey price-ladder answers by segment",
+        "Interview pain severity and switching triggers",
+        "Telegram Get early access taps, Interested taps, unsubscribes"
+      ],
+      "decision_rule": "Keep S$9 if the landing test and the price-ladder survey both meet their proposed thresholds. If only S$7.20 passes, test a free tier plus paid AI upgrade next. If neither passes, revisit the target segment before changing the product."
+    }
+  }
+}

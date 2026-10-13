@@ -1,0 +1,72 @@
+{
+  "hypotheses": [
+    "Repeat visits survive a rival's price cut or promotion. Proposed test threshold: at least 30% of stamp-card holders return within 14 days.",
+    "Tasting changes price tolerance. Proposed test threshold: at least 40% of tasters choose S$4.80 or higher on the price-ladder card.",
+    "Customers accept S$4.80 for Corner Brew. Proposed test threshold: purchases at S$4.80 reach at least 70% of purchases at S$3.84 on the price board.",
+    "Chain caf\u00e9 regulars will try a new caf\u00e9 with a first-visit offer. Proposed test threshold: at least 5% of 200 flyers are redeemed within 7 days.",
+    "Pre-ordering removes the queue barrier for lunch. Proposed test threshold: at least 15% of Telegram subscribers pre-order within a week."
+  ],
+  "assets": {
+    "landing_copy": "# Corner Brew: proper coffee, without the queue\n\nFreshly brewed kopi and specialty coffee, ready when you arrive.\n\n## Why switch\n- Pre-order on Telegram and skip the lunchtime queue.\n- Seats and plugs for a quiet hour of work.\n- Oat milk and less-sugar options as standard.\n- Stamp card from the first cup.\n\n## Price positioning to test (proposed variants)\n- Variant A: every cup S$4.80, stamp card included.\n- Variant B: S$3.84 before 10 am, S$4.80 after.",
+    "survey": [
+      "Where do you usually buy coffee on a weekday?",
+      "How many times a week do you buy coffee or tea outside home?",
+      "What do you usually pay per cup?",
+      "At what price would a cup from Corner Brew be too expensive to consider? (price ladder)",
+      "At what price would it be so cheap you would doubt the quality?",
+      "Rank these for your weekday coffee - taste, speed, distance, seating, price, loyalty rewards.",
+      "How long are you willing to wait at the counter?",
+      "Would you pre-order through Telegram if it meant no queue?",
+      "Do you need oat milk, less sugar or other dietary options?",
+      "What would make you try a new caf\u00e9 instead of Chain caf\u00e9?"
+    ],
+    "interview_script": [
+      "Screen: buys coffee or tea outside home at least 3 times a week; not a friend of the founders.",
+      "Walk me through the last time you bought coffee. Where, when, and why there?",
+      "What did you pay, and how did you feel about the price?",
+      "When did you last try a new coffee place? What made you try it?",
+      "What would make you stop going to your usual spot?",
+      "If a caf\u00e9 2 minutes away let you pre-order, what would you expect to pay? (do not suggest a number)",
+      "Close: may we message you when we run a tasting day? (record consent)",
+      "Notes template: quote, current spot, price paid, switching trigger, follow-up consent."
+    ],
+    "ad_variants": [
+      "First tasting is free. Try Corner Brew and tell us what it is worth.",
+      "Coffee at S$4.80, no queue. Pre-order from Corner Brew on Telegram.",
+      "Bring this flyer for your first Corner Brew cup. Two minutes from Chain caf\u00e9.",
+      "Quiet seats, good coffee, plugs. Corner Brew is open from 7 am."
+    ],
+    "offline": {
+      "flyer": "Corner Brew - FIRST CUP OFFER\nScan the QR code to join our Telegram and claim your first-visit price.\n[QR CODE: t.me/<bot>?start=<campaign_id>]\nPre-order, skip the queue. Reply /stop any time to unsubscribe.",
+      "checklist": [
+        "Tasting event: book a 2-hour slot at a busy time; set the cup target before you start.",
+        "Prepare 30+ tasting cups and a printed price-ladder card for every taster.",
+        "Print 200 QR flyers with a campaign code unique to this event.",
+        "Assign one person to record every taster's price choice and comment.",
+        "Ask for Telegram opt-in only after the tasting, never before.",
+        "Photograph the setup and count leftover flyers at the end."
+      ],
+      "price_board_test": [
+        "Week 1, Mon-Wed lunch: board shows S$4.80. Record cups sold per hour.",
+        "Week 1, Thu-Fri lunch: board shows S$3.84. Record cups sold per hour.",
+        "Keep the menu, staff and opening hours identical across both periods.",
+        "Log weather and nearby events; repeat the test if either differs strongly.",
+        "Decision: compare cups per hour and revenue per hour against the proposed threshold."
+      ]
+    },
+    "telegram_variants": [
+      "Hi from Corner Brew! Lunch coffee is S$4.80 today. Tap Pre-order and skip the queue. Reply /stop to unsubscribe.",
+      "Hi from Corner Brew! Before 10 am every cup is S$3.84. Tap Interested to hold one for you. Reply /stop to unsubscribe."
+    ],
+    "tracking_plan": {
+      "metrics": [
+        "Cups sold per hour at each board price",
+        "Flyer redemptions by campaign code",
+        "Telegram subscribers, Pre-order taps, Too expensive taps, unsubscribes",
+        "Tasting price-ladder choices",
+        "14-day return rate of stamp-card holders"
+      ],
+      "decision_rule": "Keep S$4.80 only if the price-board and tasting tests both meet their proposed thresholds. If either misses, rerun the simulation with lower budget priors and test S$3.84 next."
+    }
+  }
+}

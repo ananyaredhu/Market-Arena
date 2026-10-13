@@ -1,0 +1,60 @@
+{
+  "run_id": "run_saas_fixture",
+  "verdict": "Simulated outcome under stated assumptions: StudyFlow takes a median share of 0.18 (p10 0.16, p90 0.20). Biggest threat: Free Planner responds with adding a feature (share 0.177 -> 0.135 (-0.042, -23.8%)). Fragility 0.12, confidence low.",
+  "confidence": "low",
+  "fragility": 0.125,
+  "who_buys": [
+    "Power planners: 35 of 90 simulated agents chose StudyFlow (0.39)"
+  ],
+  "who_rejects": [
+    "Budget-conscious students: 22 of 120 simulated agents chose StudyFlow (0.18); most chose Free Planner; 40 had StudyFlow as runner-up (mean utility gap 0.27)",
+    "Free-tool loyalists: 0 of 90 simulated agents chose StudyFlow (0.00); most chose Free Planner"
+  ],
+  "risks": [
+    {
+      "title": "Free Planner responds with adding a feature",
+      "evidence": "Competitor Strategist: the rival's best one-step response among the bounded moves.",
+      "metric": "share 0.177 -> 0.135 (-0.042, -23.8%)"
+    },
+    {
+      "title": "Willingness to pay is lower than assumed",
+      "evidence": "Devil's Advocate: if willingness to pay (budget) is 20% lower than assumed, the simulated share changes as shown.",
+      "metric": "share 0.177 -> 0.146 (-0.032, -17.9%)"
+    },
+    {
+      "title": "Customers are more price-sensitive than assumed",
+      "evidence": "Devil's Advocate: if price sensitivity is 20% higher than assumed, the simulated share changes as shown.",
+      "metric": "share 0.177 -> 0.162 (-0.015, -8.5%)"
+    }
+  ],
+  "competitor_reaction": {
+    "competitor_id": "free_tool",
+    "move": "add_feature",
+    "effect_on_share": -0.0423
+  },
+  "experiments": [
+    {
+      "title": "Free-tier landing variant against Free Planner",
+      "hypothesis": "A free tier with a paid AI upgrade keeps StudyFlow attractive when Free Planner reacts with a price cut, a new feature or a promotion.",
+      "pass_threshold": "Proposed test threshold (not an established benchmark): free-tier sign-ups are at least 15% of 100+ visitors and at least 10% of them try the paid upgrade page.",
+      "kind": "landing"
+    },
+    {
+      "title": "Two-price landing page (S$9 vs S$7.20)",
+      "hypothesis": "Students who want AI planning will join a paid waitlist for StudyFlow at S$9, not only at S$7.20.",
+      "pass_threshold": "Proposed test threshold (not an established benchmark): waitlist sign-up rate at S$9 is at least 8% of 100+ unique visitors and at least 70% of the rate at S$7.20.",
+      "kind": "landing"
+    },
+    {
+      "title": "Price-ladder survey with target students",
+      "hypothesis": "Target students rate S$9 a month as acceptable for an AI study planner.",
+      "pass_threshold": "Proposed test threshold (not an established benchmark): at least 40% of 50+ respondents in the target segment place S$9 at or below their \"getting expensive\" price.",
+      "kind": "survey"
+    }
+  ],
+  "limitations": [
+    "Confidence capped at low: results come from the mock engine adapter, not the real engine.",
+    "Simulated outcome under stated assumptions; not a forecast of real sales."
+  ],
+  "engine_source": "mock"
+}

@@ -1,0 +1,35 @@
+# Backtest case 1 (non-tech) - owner: Person B
+#
+# STATUS: needs_sourcing. No outcome has been entered because none has been
+# verified from a primary source yet. Do not fill `observed_outcome` from
+# memory or from an LLM; every number needs a source URL and access date.
+#
+# Format proposal for Person A's harness (master plan section 13): the harness
+# simulates `scenario_before` and `scenario_after`, then compares the direction
+# of the simulated share change with `observed_outcome.direction`.
+case_id: cafe_case_01
+pack: cafe
+status: needs_sourcing        # needs_sourcing | sourced | rejected
+question: >
+  When a neighbourhood F&B outlet raised its price (or a chain cut its price),
+  did the outlet's sales or footfall move in the direction the simulation
+  predicts?
+selection_criteria:
+  - Publicly reported price change for a café, kopitiam, bubble-tea or bakery chain in Singapore or a comparable city.
+  - A reported before/after outcome (sales, footfall, store count, or a stated customer reaction with numbers).
+  - Both the change and the outcome come from a primary or reputable secondary source (company filing, press release, major newspaper).
+candidate_search_queries:
+  - Singapore kopi price increase hawker sales impact
+  - bubble tea chain price increase Singapore sales
+  - coffee chain price cut market share Asia
+scenario_before:
+  products: []                # options in the frozen Option shape
+  notes: ""
+scenario_after:
+  change: ""                  # e.g. "chain_cafe price -20%"
+  products: []
+observed_outcome: null        # when sourced: {direction: up|down|flat, metric: "", value_before: , value_after: , period: ""}
+sources: []                   # [{url: "", title: "", accessed: "YYYY-MM-DD", supports: "which field"}]
+limitations: >
+  To be written after sourcing: confounders (season, inflation, openings
+  nearby) and how well the pack's illustrative priors match the market.

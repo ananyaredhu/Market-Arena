@@ -1,0 +1,9 @@
+.venv/
+.tools/
+node_modules/
+__pycache__/
+.pytest_cache/
+*.pyc
+.DS_Store
+.env
+.env.local

@@ -1,0 +1,6546 @@
+{
+  "population_id": "pop_saas_fixture",
+  "seed": 42,
+  "pack": "saas",
+  "attributes": [
+    "ai_planning",
+    "simplicity",
+    "privacy",
+    "integrations"
+  ],
+  "segments": [
+    {
+      "id": "budget",
+      "name": "Budget-conscious students",
+      "share": 0.4,
+      "evidence": "llm_assumption"
+    },
+    {
+      "id": "power",
+      "name": "Power planners",
+      "share": 0.3,
+      "evidence": "llm_assumption"
+    },
+    {
+      "id": "loyalist",
+      "name": "Free-tool loyalists",
+      "share": 0.3,
+      "evidence": "llm_assumption"
+    }
+  ],
+  "agents": [
+    {
+      "id": "a1",
+      "segment": "budget",
+      "budget": 12.1916,
+      "alpha": 0.0951,
+      "w": [
+        1.6869,
+        1.2184,
+        0.3471,
+        0.5902
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3283,
+        "chain_app": 0.1572
+      },
+      "switch": 0.1384,
+      "risk": 0.2351,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5414,
+      "tau": 0.7575
+    },
+    {
+      "id": "a2",
+      "segment": "budget",
+      "budget": 12.5821,
+      "alpha": 0.0955,
+      "w": [
+        1.1818,
+        1.1328,
+        0.3319,
+        0.5311
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2895,
+        "chain_app": 0.1516
+      },
+      "switch": 0.2064,
+      "risk": 0.3912,
+      "incumbent": "outside",
+      "outside_utility": 0.4227,
+      "tau": 0.5779
+    },
+    {
+      "id": "a3",
+      "segment": "budget",
+      "budget": 9.7338,
+      "alpha": 0.0635,
+      "w": [
+        1.1234,
+        1.2098,
+        0.6724,
+        0.587
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1977,
+        "chain_app": 0.0741
+      },
+      "switch": 0.2409,
+      "risk": 0.1568,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1806,
+      "tau": 0.5908
+    },
+    {
+      "id": "a4",
+      "segment": "budget",
+      "budget": 11.3585,
+      "alpha": 0.095,
+      "w": [
+        1.6661,
+        1.2202,
+        0.4562,
+        0.5329
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3414,
+        "chain_app": 0.0775
+      },
+      "switch": 0.1865,
+      "risk": 0.3047,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0401,
+      "tau": 0.5029
+    },
+    {
+      "id": "a5",
+      "segment": "budget",
+      "budget": 12.2954,
+      "alpha": 0.1132,
+      "w": [
+        1.5641,
+        1.2684,
+        0.5295,
+        0.4275
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1419,
+        "chain_app": 0.0229
+      },
+      "switch": 0.3005,
+      "risk": 0.2413,
+      "incumbent": "free_tool",
+      "outside_utility": 0.412,
+      "tau": 0.7539
+    },
+    {
+      "id": "a6",
+      "segment": "budget",
+      "budget": 10.4286,
+      "alpha": 0.1047,
+      "w": [
+        1.2432,
+        0.8185,
+        0.5184,
+        0.2858
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2226,
+        "chain_app": 0.1707
+      },
+      "switch": 0.1702,
+      "risk": 0.1175,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0349,
+      "tau": 0.7648
+    },
+    {
+      "id": "a7",
+      "segment": "budget",
+      "budget": 10.4563,
+      "alpha": 0.1227,
+      "w": [
+        1.5315,
+        1.0438,
+        0.707,
+        0.2668
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1068,
+        "chain_app": 0.018
+      },
+      "switch": 0.3167,
+      "risk": 0.2386,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2008,
+      "tau": 0.5609
+    },
+    {
+      "id": "a8",
+      "segment": "budget",
+      "budget": 11.5706,
+      "alpha": 0.0957,
+      "w": [
+        1.3048,
+        0.9809,
+        0.6151,
+        0.3447
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1263,
+        "chain_app": 0.0236
+      },
+      "switch": 0.3886,
+      "risk": 0.3726,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0127,
+      "tau": 0.8877
+    },
+    {
+      "id": "a9",
+      "segment": "budget",
+      "budget": 12.23,
+      "alpha": 0.1174,
+      "w": [
+        1.3595,
+        0.9633,
+        0.3482,
+        0.561
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2367,
+        "chain_app": 0.0405
+      },
+      "switch": 0.1918,
+      "risk": 0.2738,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4853,
+      "tau": 0.8034
+    },
+    {
+      "id": "a10",
+      "segment": "budget",
+      "budget": 11.7557,
+      "alpha": 0.0946,
+      "w": [
+        1.5018,
+        1.1505,
+        0.6249,
+        0.2338
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2247,
+        "chain_app": 0.0083
+      },
+      "switch": 0.2482,
+      "risk": 0.199,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1173,
+      "tau": 0.7351
+    },
+    {
+      "id": "a11",
+      "segment": "budget",
+      "budget": 7.3647,
+      "alpha": 0.134,
+      "w": [
+        1.4648,
+        1.0081,
+        0.5955,
+        0.2091
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3876,
+        "chain_app": 0.0965
+      },
+      "switch": 0.3348,
+      "risk": 0.1248,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1926,
+      "tau": 0.8751
+    },
+    {
+      "id": "a12",
+      "segment": "budget",
+      "budget": 10.5738,
+      "alpha": 0.0979,
+      "w": [
+        1.2136,
+        0.9989,
+        0.5603,
+        0.3756
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1065,
+        "chain_app": 0.1653
+      },
+      "switch": 0.3688,
+      "risk": 0.1421,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1131,
+      "tau": 0.7689
+    },
+    {
+      "id": "a13",
+      "segment": "budget",
+      "budget": 8.2499,
+      "alpha": 0.1128,
+      "w": [
+        1.5816,
+        1.2612,
+        0.3539,
+        0.5664
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1691,
+        "chain_app": 0.0075
+      },
+      "switch": 0.2665,
+      "risk": 0.2113,
+      "incumbent": "outside",
+      "outside_utility": 0.4466,
+      "tau": 0.6269
+    },
+    {
+      "id": "a14",
+      "segment": "budget",
+      "budget": 13.6232,
+      "alpha": 0.0833,
+      "w": [
+        1.412,
+        0.9536,
+        0.768,
+        0.2658
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1135,
+        "chain_app": 0.087
+      },
+      "switch": 0.3977,
+      "risk": 0.3675,
+      "incumbent": "outside",
+      "outside_utility": 0.5126,
+      "tau": 0.8574
+    },
+    {
+      "id": "a15",
+      "segment": "budget",
+      "budget": 10.1509,
+      "alpha": 0.0853,
+      "w": [
+        1.6176,
+        1.197,
+        0.4868,
+        0.2378
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.324,
+        "chain_app": 0.0525
+      },
+      "switch": 0.381,
+      "risk": 0.1723,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4649,
+      "tau": 0.5613
+    },
+    {
+      "id": "a16",
+      "segment": "budget",
+      "budget": 7.4341,
+      "alpha": 0.108,
+      "w": [
+        1.6996,
+        0.9179,
+        0.4552,
+        0.511
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3915,
+        "chain_app": 0.1001
+      },
+      "switch": 0.1432,
+      "risk": 0.1042,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0945,
+      "tau": 0.7711
+    },
+    {
+      "id": "a17",
+      "segment": "budget",
+      "budget": 6.9747,
+      "alpha": 0.1005,
+      "w": [
+        1.5554,
+        1.1487,
+        0.3999,
+        0.5216
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3146,
+        "chain_app": 0.1478
+      },
+      "switch": 0.1393,
+      "risk": 0.1371,
+      "incumbent": "outside",
+      "outside_utility": 0.1181,
+      "tau": 0.6204
+    },
+    {
+      "id": "a18",
+      "segment": "budget",
+      "budget": 9.9087,
+      "alpha": 0.113,
+      "w": [
+        1.7645,
+        0.9719,
+        0.7624,
+        0.2099
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2666,
+        "chain_app": 0.1268
+      },
+      "switch": 0.1318,
+      "risk": 0.1421,
+      "incumbent": "free_tool",
+      "outside_utility": 0.573,
+      "tau": 0.7384
+    },
+    {
+      "id": "a19",
+      "segment": "budget",
+      "budget": 13.4642,
+      "alpha": 0.1243,
+      "w": [
+        1.3739,
+        1.2709,
+        0.3089,
+        0.2437
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3488,
+        "chain_app": 0.1594
+      },
+      "switch": 0.1698,
+      "risk": 0.2592,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4942,
+      "tau": 0.7412
+    },
+    {
+      "id": "a20",
+      "segment": "budget",
+      "budget": 9.3006,
+      "alpha": 0.0899,
+      "w": [
+        1.3407,
+        1.1912,
+        0.7337,
+        0.3816
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1744,
+        "chain_app": 0.0473
+      },
+      "switch": 0.3238,
+      "risk": 0.345,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1468,
+      "tau": 0.7378
+    },
+    {
+      "id": "a21",
+      "segment": "budget",
+      "budget": 7.1694,
+      "alpha": 0.126,
+      "w": [
+        1.2483,
+        0.8863,
+        0.7605,
+        0.2662
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1854,
+        "chain_app": 0.0307
+      },
+      "switch": 0.1346,
+      "risk": 0.1063,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0603,
+      "tau": 0.5214
+    },
+    {
+      "id": "a22",
+      "segment": "budget",
+      "budget": 10.7292,
+      "alpha": 0.1145,
+      "w": [
+        1.3149,
+        0.9908,
+        0.5523,
+        0.55
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3553,
+        "chain_app": 0.0087
+      },
+      "switch": 0.1544,
+      "risk": 0.171,
+      "incumbent": "free_tool",
+      "outside_utility": 0.257,
+      "tau": 0.6665
+    },
+    {
+      "id": "a23",
+      "segment": "budget",
+      "budget": 6.394,
+      "alpha": 0.0899,
+      "w": [
+        1.419,
+        0.861,
+        0.7167,
+        0.2208
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3775,
+        "chain_app": 0.0198
+      },
+      "switch": 0.3531,
+      "risk": 0.3708,
+      "incumbent": "outside",
+      "outside_utility": 0.4416,
+      "tau": 0.8118
+    },
+    {
+      "id": "a24",
+      "segment": "budget",
+      "budget": 11.1399,
+      "alpha": 0.1223,
+      "w": [
+        1.1076,
+        1.1216,
+        0.5571,
+        0.543
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2388,
+        "chain_app": 0.077
+      },
+      "switch": 0.2919,
+      "risk": 0.1799,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1823,
+      "tau": 0.6668
+    },
+    {
+      "id": "a25",
+      "segment": "budget",
+      "budget": 7.8606,
+      "alpha": 0.0894,
+      "w": [
+        1.2931,
+        0.9965,
+        0.4897,
+        0.4743
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1891,
+        "chain_app": 0.1898
+      },
+      "switch": 0.3749,
+      "risk": 0.2443,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2283,
+      "tau": 0.8394
+    },
+    {
+      "id": "a26",
+      "segment": "budget",
+      "budget": 11.2207,
+      "alpha": 0.1244,
+      "w": [
+        1.4262,
+        1.1798,
+        0.4441,
+        0.494
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1607,
+        "chain_app": 0.139
+      },
+      "switch": 0.3582,
+      "risk": 0.1396,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1239,
+      "tau": 0.7903
+    },
+    {
+      "id": "a27",
+      "segment": "budget",
+      "budget": 6.6759,
+      "alpha": 0.1349,
+      "w": [
+        1.1099,
+        1.3753,
+        0.7004,
+        0.4375
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3348,
+        "chain_app": 0.159
+      },
+      "switch": 0.3838,
+      "risk": 0.176,
+      "incumbent": "free_tool",
+      "outside_utility": -0.124,
+      "tau": 0.7465
+    },
+    {
+      "id": "a28",
+      "segment": "budget",
+      "budget": 7.3703,
+      "alpha": 0.1052,
+      "w": [
+        1.4579,
+        1.0796,
+        0.5613,
+        0.5056
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3398,
+        "chain_app": 0.0984
+      },
+      "switch": 0.2799,
+      "risk": 0.3794,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1063,
+      "tau": 0.5351
+    },
+    {
+      "id": "a29",
+      "segment": "budget",
+      "budget": 11.2629,
+      "alpha": 0.0935,
+      "w": [
+        1.6195,
+        1.2027,
+        0.4668,
+        0.5593
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3288,
+        "chain_app": 0.0541
+      },
+      "switch": 0.2093,
+      "risk": 0.1943,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0818,
+      "tau": 0.8745
+    },
+    {
+      "id": "a30",
+      "segment": "budget",
+      "budget": 9.5032,
+      "alpha": 0.0907,
+      "w": [
+        1.5837,
+        1.1318,
+        0.7681,
+        0.5121
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2438,
+        "chain_app": 0.0753
+      },
+      "switch": 0.396,
+      "risk": 0.3153,
+      "incumbent": "outside",
+      "outside_utility": -0.1052,
+      "tau": 0.8402
+    },
+    {
+      "id": "a31",
+      "segment": "budget",
+      "budget": 11.0966,
+      "alpha": 0.0698,
+      "w": [
+        1.4706,
+        1.2117,
+        0.3062,
+        0.3817
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3476,
+        "chain_app": 0.0591
+      },
+      "switch": 0.2376,
+      "risk": 0.2327,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5348,
+      "tau": 0.8125
+    },
+    {
+      "id": "a32",
+      "segment": "budget",
+      "budget": 6.8847,
+      "alpha": 0.1398,
+      "w": [
+        1.7034,
+        0.9703,
+        0.7184,
+        0.2426
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3997,
+        "chain_app": 0.1331
+      },
+      "switch": 0.295,
+      "risk": 0.1271,
+      "incumbent": "outside",
+      "outside_utility": -0.1768,
+      "tau": 0.5963
+    },
+    {
+      "id": "a33",
+      "segment": "budget",
+      "budget": 7.1442,
+      "alpha": 0.1221,
+      "w": [
+        1.1586,
+        1.3464,
+        0.6281,
+        0.2145
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1016,
+        "chain_app": 0.0103
+      },
+      "switch": 0.2818,
+      "risk": 0.3404,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4795,
+      "tau": 0.5229
+    },
+    {
+      "id": "a34",
+      "segment": "budget",
+      "budget": 12.4077,
+      "alpha": 0.1342,
+      "w": [
+        1.6177,
+        1.2189,
+        0.719,
+        0.2161
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1605,
+        "chain_app": 0.025
+      },
+      "switch": 0.2514,
+      "risk": 0.3236,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4809,
+      "tau": 0.5621
+    },
+    {
+      "id": "a35",
+      "segment": "budget",
+      "budget": 11.877,
+      "alpha": 0.0754,
+      "w": [
+        1.2166,
+        1.2259,
+        0.7901,
+        0.4446
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1164,
+        "chain_app": 0.1233
+      },
+      "switch": 0.1127,
+      "risk": 0.3652,
+      "incumbent": "outside",
+      "outside_utility": -0.0615,
+      "tau": 0.5367
+    },
+    {
+      "id": "a36",
+      "segment": "budget",
+      "budget": 7.4683,
+      "alpha": 0.1384,
+      "w": [
+        1.3668,
+        1.2704,
+        0.6182,
+        0.429
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1435,
+        "chain_app": 0.1892
+      },
+      "switch": 0.1904,
+      "risk": 0.2734,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3194,
+      "tau": 0.8762
+    },
+    {
+      "id": "a37",
+      "segment": "budget",
+      "budget": 7.1875,
+      "alpha": 0.1007,
+      "w": [
+        1.3232,
+        1.0845,
+        0.3596,
+        0.2536
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1834,
+        "chain_app": 0.0609
+      },
+      "switch": 0.2284,
+      "risk": 0.2833,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1294,
+      "tau": 0.6635
+    },
+    {
+      "id": "a38",
+      "segment": "budget",
+      "budget": 7.741,
+      "alpha": 0.1071,
+      "w": [
+        1.2536,
+        0.8216,
+        0.5092,
+        0.3897
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1677,
+        "chain_app": 0.1145
+      },
+      "switch": 0.2697,
+      "risk": 0.3106,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3219,
+      "tau": 0.6265
+    },
+    {
+      "id": "a39",
+      "segment": "budget",
+      "budget": 12.2995,
+      "alpha": 0.1039,
+      "w": [
+        1.3451,
+        1.1756,
+        0.4803,
+        0.4051
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.321,
+        "chain_app": 0.1773
+      },
+      "switch": 0.3763,
+      "risk": 0.2511,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4399,
+      "tau": 0.6258
+    },
+    {
+      "id": "a40",
+      "segment": "budget",
+      "budget": 12.6991,
+      "alpha": 0.0995,
+      "w": [
+        1.0927,
+        0.8432,
+        0.721,
+        0.2222
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1842,
+        "chain_app": 0.0668
+      },
+      "switch": 0.1519,
+      "risk": 0.1942,
+      "incumbent": "outside",
+      "outside_utility": -0.1883,
+      "tau": 0.8309
+    },
+    {
+      "id": "a41",
+      "segment": "budget",
+      "budget": 12.8524,
+      "alpha": 0.0898,
+      "w": [
+        1.1229,
+        1.1605,
+        0.3598,
+        0.346
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3875,
+        "chain_app": 0.1991
+      },
+      "switch": 0.3316,
+      "risk": 0.1933,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3643,
+      "tau": 0.6551
+    },
+    {
+      "id": "a42",
+      "segment": "budget",
+      "budget": 11.1271,
+      "alpha": 0.0609,
+      "w": [
+        1.1672,
+        1.1151,
+        0.3819,
+        0.2664
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3509,
+        "chain_app": 0.1978
+      },
+      "switch": 0.2668,
+      "risk": 0.3517,
+      "incumbent": "outside",
+      "outside_utility": -0.0867,
+      "tau": 0.6793
+    },
+    {
+      "id": "a43",
+      "segment": "budget",
+      "budget": 9.1406,
+      "alpha": 0.0664,
+      "w": [
+        1.6043,
+        1.0603,
+        0.5347,
+        0.2603
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1543,
+        "chain_app": 0.1814
+      },
+      "switch": 0.1134,
+      "risk": 0.1699,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1922,
+      "tau": 0.7346
+    },
+    {
+      "id": "a44",
+      "segment": "budget",
+      "budget": 9.9463,
+      "alpha": 0.0667,
+      "w": [
+        1.1949,
+        1.3062,
+        0.6188,
+        0.4597
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3011,
+        "chain_app": 0.1526
+      },
+      "switch": 0.1174,
+      "risk": 0.21,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0708,
+      "tau": 0.8378
+    },
+    {
+      "id": "a45",
+      "segment": "budget",
+      "budget": 9.8606,
+      "alpha": 0.1215,
+      "w": [
+        1.6816,
+        1.1029,
+        0.7548,
+        0.4348
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3551,
+        "chain_app": 0.0681
+      },
+      "switch": 0.2496,
+      "risk": 0.2594,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1188,
+      "tau": 0.8669
+    },
+    {
+      "id": "a46",
+      "segment": "budget",
+      "budget": 11.0467,
+      "alpha": 0.0742,
+      "w": [
+        1.2711,
+        0.915,
+        0.3124,
+        0.571
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2345,
+        "chain_app": 0.0615
+      },
+      "switch": 0.2795,
+      "risk": 0.1022,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3624,
+      "tau": 0.7535
+    },
+    {
+      "id": "a47",
+      "segment": "budget",
+      "budget": 13.8544,
+      "alpha": 0.1096,
+      "w": [
+        1.382,
+        1.2569,
+        0.7517,
+        0.4883
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.389,
+        "chain_app": 0.1564
+      },
+      "switch": 0.36,
+      "risk": 0.1342,
+      "incumbent": "outside",
+      "outside_utility": 0.1521,
+      "tau": 0.7212
+    },
+    {
+      "id": "a48",
+      "segment": "budget",
+      "budget": 11.2328,
+      "alpha": 0.1376,
+      "w": [
+        1.7877,
+        0.9729,
+        0.6669,
+        0.5
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2039,
+        "chain_app": 0.0248
+      },
+      "switch": 0.1123,
+      "risk": 0.3332,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5884,
+      "tau": 0.686
+    },
+    {
+      "id": "a49",
+      "segment": "budget",
+      "budget": 13.8233,
+      "alpha": 0.0929,
+      "w": [
+        1.6349,
+        0.8509,
+        0.5777,
+        0.5208
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3774,
+        "chain_app": 0.1645
+      },
+      "switch": 0.1111,
+      "risk": 0.2118,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1126,
+      "tau": 0.7701
+    },
+    {
+      "id": "a50",
+      "segment": "budget",
+      "budget": 11.7061,
+      "alpha": 0.1219,
+      "w": [
+        1.6924,
+        1.2437,
+        0.7004,
+        0.2196
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1704,
+        "chain_app": 0.1244
+      },
+      "switch": 0.3574,
+      "risk": 0.1014,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3418,
+      "tau": 0.5118
+    },
+    {
+      "id": "a51",
+      "segment": "budget",
+      "budget": 9.2108,
+      "alpha": 0.1317,
+      "w": [
+        1.5373,
+        0.9426,
+        0.7264,
+        0.3392
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.356,
+        "chain_app": 0.0598
+      },
+      "switch": 0.2771,
+      "risk": 0.2191,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5092,
+      "tau": 0.575
+    },
+    {
+      "id": "a52",
+      "segment": "budget",
+      "budget": 6.6785,
+      "alpha": 0.0874,
+      "w": [
+        1.5741,
+        1.2845,
+        0.7994,
+        0.3185
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2224,
+        "chain_app": 0.0274
+      },
+      "switch": 0.2725,
+      "risk": 0.3993,
+      "incumbent": "outside",
+      "outside_utility": 0.2762,
+      "tau": 0.6569
+    },
+    {
+      "id": "a53",
+      "segment": "budget",
+      "budget": 13.3224,
+      "alpha": 0.0998,
+      "w": [
+        1.1075,
+        1.0192,
+        0.3336,
+        0.2808
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1053,
+        "chain_app": 0.0907
+      },
+      "switch": 0.2904,
+      "risk": 0.203,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5674,
+      "tau": 0.8008
+    },
+    {
+      "id": "a54",
+      "segment": "budget",
+      "budget": 10.3269,
+      "alpha": 0.0828,
+      "w": [
+        1.7176,
+        0.9411,
+        0.4627,
+        0.5636
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2589,
+        "chain_app": 0.1485
+      },
+      "switch": 0.2772,
+      "risk": 0.296,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0069,
+      "tau": 0.629
+    },
+    {
+      "id": "a55",
+      "segment": "budget",
+      "budget": 7.2435,
+      "alpha": 0.1299,
+      "w": [
+        1.2266,
+        1.1369,
+        0.696,
+        0.5135
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2315,
+        "chain_app": 0.0953
+      },
+      "switch": 0.3984,
+      "risk": 0.3024,
+      "incumbent": "outside",
+      "outside_utility": 0.522,
+      "tau": 0.815
+    },
+    {
+      "id": "a56",
+      "segment": "budget",
+      "budget": 7.4814,
+      "alpha": 0.105,
+      "w": [
+        1.0815,
+        1.1918,
+        0.7777,
+        0.4051
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2299,
+        "chain_app": 0.0072
+      },
+      "switch": 0.3879,
+      "risk": 0.1309,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0031,
+      "tau": 0.5262
+    },
+    {
+      "id": "a57",
+      "segment": "budget",
+      "budget": 9.6409,
+      "alpha": 0.1013,
+      "w": [
+        1.2501,
+        0.8306,
+        0.3558,
+        0.3538
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1182,
+        "chain_app": 0.1396
+      },
+      "switch": 0.1621,
+      "risk": 0.1906,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1333,
+      "tau": 0.5007
+    },
+    {
+      "id": "a58",
+      "segment": "budget",
+      "budget": 6.8966,
+      "alpha": 0.129,
+      "w": [
+        1.001,
+        1.1049,
+        0.5448,
+        0.3332
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2294,
+        "chain_app": 0.1561
+      },
+      "switch": 0.3524,
+      "risk": 0.1781,
+      "incumbent": "free_tool",
+      "outside_utility": -0.006,
+      "tau": 0.6919
+    },
+    {
+      "id": "a59",
+      "segment": "budget",
+      "budget": 11.4661,
+      "alpha": 0.0783,
+      "w": [
+        1.2646,
+        1.3582,
+        0.3243,
+        0.3843
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3135,
+        "chain_app": 0.0301
+      },
+      "switch": 0.1142,
+      "risk": 0.1415,
+      "incumbent": "outside",
+      "outside_utility": -0.1926,
+      "tau": 0.5753
+    },
+    {
+      "id": "a60",
+      "segment": "budget",
+      "budget": 6.2503,
+      "alpha": 0.0689,
+      "w": [
+        1.4961,
+        0.945,
+        0.5846,
+        0.4361
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3548,
+        "chain_app": 0.0009
+      },
+      "switch": 0.356,
+      "risk": 0.2857,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4183,
+      "tau": 0.8422
+    },
+    {
+      "id": "a61",
+      "segment": "budget",
+      "budget": 8.0341,
+      "alpha": 0.1335,
+      "w": [
+        1.3636,
+        1.1621,
+        0.7923,
+        0.3446
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3439,
+        "chain_app": 0.0637
+      },
+      "switch": 0.3398,
+      "risk": 0.2802,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1312,
+      "tau": 0.6271
+    },
+    {
+      "id": "a62",
+      "segment": "budget",
+      "budget": 6.6249,
+      "alpha": 0.0624,
+      "w": [
+        1.2772,
+        0.8114,
+        0.3827,
+        0.4901
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3124,
+        "chain_app": 0.1477
+      },
+      "switch": 0.1951,
+      "risk": 0.367,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0992,
+      "tau": 0.5575
+    },
+    {
+      "id": "a63",
+      "segment": "budget",
+      "budget": 11.5448,
+      "alpha": 0.0738,
+      "w": [
+        1.4058,
+        1.3951,
+        0.302,
+        0.2066
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3979,
+        "chain_app": 0.1169
+      },
+      "switch": 0.1381,
+      "risk": 0.3692,
+      "incumbent": "outside",
+      "outside_utility": 0.229,
+      "tau": 0.7487
+    },
+    {
+      "id": "a64",
+      "segment": "budget",
+      "budget": 8.1855,
+      "alpha": 0.064,
+      "w": [
+        1.4757,
+        0.9769,
+        0.6318,
+        0.5345
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1054,
+        "chain_app": 0.1191
+      },
+      "switch": 0.1694,
+      "risk": 0.3622,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2886,
+      "tau": 0.7214
+    },
+    {
+      "id": "a65",
+      "segment": "budget",
+      "budget": 9.1693,
+      "alpha": 0.1142,
+      "w": [
+        1.5806,
+        1.1402,
+        0.6792,
+        0.5934
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2258,
+        "chain_app": 0.1029
+      },
+      "switch": 0.1037,
+      "risk": 0.3388,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1264,
+      "tau": 0.5376
+    },
+    {
+      "id": "a66",
+      "segment": "budget",
+      "budget": 13.1173,
+      "alpha": 0.0916,
+      "w": [
+        1.5461,
+        0.8896,
+        0.7808,
+        0.2714
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1599,
+        "chain_app": 0.1718
+      },
+      "switch": 0.3738,
+      "risk": 0.1636,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3868,
+      "tau": 0.8513
+    },
+    {
+      "id": "a67",
+      "segment": "budget",
+      "budget": 9.0324,
+      "alpha": 0.1014,
+      "w": [
+        1.5934,
+        1.2387,
+        0.6915,
+        0.428
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1314,
+        "chain_app": 0.1808
+      },
+      "switch": 0.3597,
+      "risk": 0.3394,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0365,
+      "tau": 0.7974
+    },
+    {
+      "id": "a68",
+      "segment": "budget",
+      "budget": 6.1851,
+      "alpha": 0.1383,
+      "w": [
+        1.3017,
+        1.2316,
+        0.7438,
+        0.3579
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1957,
+        "chain_app": 0.1217
+      },
+      "switch": 0.2743,
+      "risk": 0.2227,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5483,
+      "tau": 0.6871
+    },
+    {
+      "id": "a69",
+      "segment": "budget",
+      "budget": 7.5739,
+      "alpha": 0.0902,
+      "w": [
+        1.3153,
+        0.8787,
+        0.3814,
+        0.4738
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2018,
+        "chain_app": 0.191
+      },
+      "switch": 0.1731,
+      "risk": 0.1297,
+      "incumbent": "outside",
+      "outside_utility": 0.5048,
+      "tau": 0.6112
+    },
+    {
+      "id": "a70",
+      "segment": "budget",
+      "budget": 7.6167,
+      "alpha": 0.0749,
+      "w": [
+        1.4176,
+        1.081,
+        0.4297,
+        0.2181
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2444,
+        "chain_app": 0.1919
+      },
+      "switch": 0.2958,
+      "risk": 0.2487,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0019,
+      "tau": 0.6179
+    },
+    {
+      "id": "a71",
+      "segment": "budget",
+      "budget": 12.1184,
+      "alpha": 0.1301,
+      "w": [
+        1.7213,
+        1.3907,
+        0.7912,
+        0.5812
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1215,
+        "chain_app": 0.0276
+      },
+      "switch": 0.1913,
+      "risk": 0.2659,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4766,
+      "tau": 0.7467
+    },
+    {
+      "id": "a72",
+      "segment": "budget",
+      "budget": 10.3389,
+      "alpha": 0.0732,
+      "w": [
+        1.2026,
+        0.8962,
+        0.726,
+        0.4337
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3205,
+        "chain_app": 0.0592
+      },
+      "switch": 0.2114,
+      "risk": 0.2215,
+      "incumbent": "outside",
+      "outside_utility": 0.4179,
+      "tau": 0.5827
+    },
+    {
+      "id": "a73",
+      "segment": "budget",
+      "budget": 13.5323,
+      "alpha": 0.0697,
+      "w": [
+        1.7169,
+        0.8602,
+        0.4323,
+        0.5386
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1538,
+        "chain_app": 0.0827
+      },
+      "switch": 0.235,
+      "risk": 0.1736,
+      "incumbent": "outside",
+      "outside_utility": 0.4811,
+      "tau": 0.8498
+    },
+    {
+      "id": "a74",
+      "segment": "budget",
+      "budget": 8.7146,
+      "alpha": 0.1025,
+      "w": [
+        1.1987,
+        0.9469,
+        0.3806,
+        0.576
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3664,
+        "chain_app": 0.1555
+      },
+      "switch": 0.2553,
+      "risk": 0.2472,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2293,
+      "tau": 0.6738
+    },
+    {
+      "id": "a75",
+      "segment": "budget",
+      "budget": 7.054,
+      "alpha": 0.0701,
+      "w": [
+        1.7618,
+        1.0892,
+        0.7766,
+        0.2654
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2663,
+        "chain_app": 0.0415
+      },
+      "switch": 0.176,
+      "risk": 0.109,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5335,
+      "tau": 0.6286
+    },
+    {
+      "id": "a76",
+      "segment": "budget",
+      "budget": 10.865,
+      "alpha": 0.0972,
+      "w": [
+        1.3204,
+        1.1191,
+        0.3936,
+        0.5954
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3455,
+        "chain_app": 0.1483
+      },
+      "switch": 0.2406,
+      "risk": 0.1459,
+      "incumbent": "outside",
+      "outside_utility": 0.0731,
+      "tau": 0.52
+    },
+    {
+      "id": "a77",
+      "segment": "budget",
+      "budget": 8.7392,
+      "alpha": 0.1236,
+      "w": [
+        1.4982,
+        1.2505,
+        0.6968,
+        0.2848
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3771,
+        "chain_app": 0.0876
+      },
+      "switch": 0.2917,
+      "risk": 0.1007,
+      "incumbent": "outside",
+      "outside_utility": 0.0247,
+      "tau": 0.5248
+    },
+    {
+      "id": "a78",
+      "segment": "budget",
+      "budget": 9.6661,
+      "alpha": 0.0703,
+      "w": [
+        1.1219,
+        1.1794,
+        0.4965,
+        0.5687
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1957,
+        "chain_app": 0.1452
+      },
+      "switch": 0.2383,
+      "risk": 0.298,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1782,
+      "tau": 0.88
+    },
+    {
+      "id": "a79",
+      "segment": "budget",
+      "budget": 8.7417,
+      "alpha": 0.0742,
+      "w": [
+        1.5425,
+        1.3076,
+        0.3201,
+        0.3799
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3677,
+        "chain_app": 0.1499
+      },
+      "switch": 0.3975,
+      "risk": 0.2594,
+      "incumbent": "free_tool",
+      "outside_utility": 0.042,
+      "tau": 0.879
+    },
+    {
+      "id": "a80",
+      "segment": "budget",
+      "budget": 8.9307,
+      "alpha": 0.1191,
+      "w": [
+        1.3225,
+        1.1371,
+        0.6599,
+        0.4036
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3721,
+        "chain_app": 0.0839
+      },
+      "switch": 0.2941,
+      "risk": 0.2027,
+      "incumbent": "free_tool",
+      "outside_utility": 0.152,
+      "tau": 0.5503
+    },
+    {
+      "id": "a81",
+      "segment": "budget",
+      "budget": 6.7338,
+      "alpha": 0.1134,
+      "w": [
+        1.5244,
+        1.1977,
+        0.3099,
+        0.3306
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1593,
+        "chain_app": 0.1556
+      },
+      "switch": 0.3582,
+      "risk": 0.174,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0965,
+      "tau": 0.6101
+    },
+    {
+      "id": "a82",
+      "segment": "budget",
+      "budget": 7.1092,
+      "alpha": 0.0827,
+      "w": [
+        1.5398,
+        1.3462,
+        0.4013,
+        0.4168
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3104,
+        "chain_app": 0.1906
+      },
+      "switch": 0.283,
+      "risk": 0.1765,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0564,
+      "tau": 0.8905
+    },
+    {
+      "id": "a83",
+      "segment": "budget",
+      "budget": 9.1974,
+      "alpha": 0.1148,
+      "w": [
+        1.0186,
+        1.04,
+        0.7376,
+        0.4441
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2332,
+        "chain_app": 0.1872
+      },
+      "switch": 0.3562,
+      "risk": 0.1967,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1919,
+      "tau": 0.7529
+    },
+    {
+      "id": "a84",
+      "segment": "budget",
+      "budget": 8.6729,
+      "alpha": 0.0795,
+      "w": [
+        1.7301,
+        1.3543,
+        0.7217,
+        0.5913
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3235,
+        "chain_app": 0.1529
+      },
+      "switch": 0.3288,
+      "risk": 0.2442,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0078,
+      "tau": 0.7579
+    },
+    {
+      "id": "a85",
+      "segment": "budget",
+      "budget": 8.3146,
+      "alpha": 0.0806,
+      "w": [
+        1.4688,
+        1.046,
+        0.4094,
+        0.5264
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3582,
+        "chain_app": 0.0335
+      },
+      "switch": 0.1023,
+      "risk": 0.2008,
+      "incumbent": "outside",
+      "outside_utility": 0.4713,
+      "tau": 0.5553
+    },
+    {
+      "id": "a86",
+      "segment": "budget",
+      "budget": 12.1947,
+      "alpha": 0.0693,
+      "w": [
+        1.3121,
+        1.3992,
+        0.3963,
+        0.2616
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2268,
+        "chain_app": 0.1239
+      },
+      "switch": 0.3799,
+      "risk": 0.3942,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0896,
+      "tau": 0.8163
+    },
+    {
+      "id": "a87",
+      "segment": "budget",
+      "budget": 8.1651,
+      "alpha": 0.1308,
+      "w": [
+        1.5308,
+        0.8671,
+        0.7163,
+        0.2705
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.227,
+        "chain_app": 0.1104
+      },
+      "switch": 0.2502,
+      "risk": 0.3058,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5936,
+      "tau": 0.8998
+    },
+    {
+      "id": "a88",
+      "segment": "budget",
+      "budget": 10.1317,
+      "alpha": 0.0676,
+      "w": [
+        1.5823,
+        1.386,
+        0.4592,
+        0.3845
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2274,
+        "chain_app": 0.0103
+      },
+      "switch": 0.3017,
+      "risk": 0.206,
+      "incumbent": "outside",
+      "outside_utility": 0.4657,
+      "tau": 0.8285
+    },
+    {
+      "id": "a89",
+      "segment": "budget",
+      "budget": 9.3333,
+      "alpha": 0.0857,
+      "w": [
+        1.5991,
+        1.2808,
+        0.5456,
+        0.5572
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1432,
+        "chain_app": 0.1758
+      },
+      "switch": 0.1288,
+      "risk": 0.1461,
+      "incumbent": "free_tool",
+      "outside_utility": -0.146,
+      "tau": 0.5211
+    },
+    {
+      "id": "a90",
+      "segment": "budget",
+      "budget": 6.0041,
+      "alpha": 0.0949,
+      "w": [
+        1.6197,
+        0.8209,
+        0.6261,
+        0.5293
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1504,
+        "chain_app": 0.0294
+      },
+      "switch": 0.3582,
+      "risk": 0.3469,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4554,
+      "tau": 0.5371
+    },
+    {
+      "id": "a91",
+      "segment": "budget",
+      "budget": 9.1559,
+      "alpha": 0.119,
+      "w": [
+        1.206,
+        1.2514,
+        0.5521,
+        0.5001
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2394,
+        "chain_app": 0.0736
+      },
+      "switch": 0.1658,
+      "risk": 0.1625,
+      "incumbent": "outside",
+      "outside_utility": -0.1049,
+      "tau": 0.5344
+    },
+    {
+      "id": "a92",
+      "segment": "budget",
+      "budget": 7.4103,
+      "alpha": 0.074,
+      "w": [
+        1.6585,
+        1.0391,
+        0.7952,
+        0.2549
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2961,
+        "chain_app": 0.0897
+      },
+      "switch": 0.2179,
+      "risk": 0.3625,
+      "incumbent": "outside",
+      "outside_utility": 0.4983,
+      "tau": 0.5769
+    },
+    {
+      "id": "a93",
+      "segment": "budget",
+      "budget": 7.7664,
+      "alpha": 0.1125,
+      "w": [
+        1.2313,
+        1.2408,
+        0.5832,
+        0.4204
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3486,
+        "chain_app": 0.1421
+      },
+      "switch": 0.108,
+      "risk": 0.1148,
+      "incumbent": "free_tool",
+      "outside_utility": 0.189,
+      "tau": 0.6041
+    },
+    {
+      "id": "a94",
+      "segment": "budget",
+      "budget": 9.3492,
+      "alpha": 0.1206,
+      "w": [
+        1.6613,
+        1.1367,
+        0.4927,
+        0.3083
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2566,
+        "chain_app": 0.0629
+      },
+      "switch": 0.2692,
+      "risk": 0.303,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1991,
+      "tau": 0.5849
+    },
+    {
+      "id": "a95",
+      "segment": "budget",
+      "budget": 13.1561,
+      "alpha": 0.1117,
+      "w": [
+        1.1376,
+        1.3342,
+        0.535,
+        0.3904
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3807,
+        "chain_app": 0.0119
+      },
+      "switch": 0.1646,
+      "risk": 0.2757,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3436,
+      "tau": 0.5856
+    },
+    {
+      "id": "a96",
+      "segment": "budget",
+      "budget": 6.7933,
+      "alpha": 0.0766,
+      "w": [
+        1.3382,
+        0.9057,
+        0.3673,
+        0.5441
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1961,
+        "chain_app": 0.0722
+      },
+      "switch": 0.1166,
+      "risk": 0.2072,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2884,
+      "tau": 0.5822
+    },
+    {
+      "id": "a97",
+      "segment": "budget",
+      "budget": 13.1069,
+      "alpha": 0.1344,
+      "w": [
+        1.0799,
+        0.8644,
+        0.3577,
+        0.4478
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1366,
+        "chain_app": 0.1705
+      },
+      "switch": 0.3263,
+      "risk": 0.3459,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5973,
+      "tau": 0.5177
+    },
+    {
+      "id": "a98",
+      "segment": "budget",
+      "budget": 9.2101,
+      "alpha": 0.0859,
+      "w": [
+        1.7589,
+        1.1461,
+        0.7031,
+        0.2681
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3936,
+        "chain_app": 0.0997
+      },
+      "switch": 0.2481,
+      "risk": 0.3913,
+      "incumbent": "free_tool",
+      "outside_utility": 0.118,
+      "tau": 0.7339
+    },
+    {
+      "id": "a99",
+      "segment": "budget",
+      "budget": 7.0244,
+      "alpha": 0.0857,
+      "w": [
+        1.1546,
+        0.862,
+        0.7331,
+        0.4357
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2076,
+        "chain_app": 0.0817
+      },
+      "switch": 0.2295,
+      "risk": 0.2899,
+      "incumbent": "outside",
+      "outside_utility": 0.5462,
+      "tau": 0.6566
+    },
+    {
+      "id": "a100",
+      "segment": "budget",
+      "budget": 8.6341,
+      "alpha": 0.0961,
+      "w": [
+        1.4543,
+        1.0771,
+        0.6294,
+        0.4218
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1962,
+        "chain_app": 0.0691
+      },
+      "switch": 0.2136,
+      "risk": 0.1284,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3785,
+      "tau": 0.6556
+    },
+    {
+      "id": "a101",
+      "segment": "budget",
+      "budget": 7.7163,
+      "alpha": 0.105,
+      "w": [
+        1.6044,
+        0.9545,
+        0.7134,
+        0.571
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2792,
+        "chain_app": 0.1338
+      },
+      "switch": 0.1158,
+      "risk": 0.3837,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5391,
+      "tau": 0.7316
+    },
+    {
+      "id": "a102",
+      "segment": "budget",
+      "budget": 6.037,
+      "alpha": 0.0631,
+      "w": [
+        1.5443,
+        1.1376,
+        0.3133,
+        0.4974
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3556,
+        "chain_app": 0.0993
+      },
+      "switch": 0.2397,
+      "risk": 0.1016,
+      "incumbent": "outside",
+      "outside_utility": 0.0646,
+      "tau": 0.8515
+    },
+    {
+      "id": "a103",
+      "segment": "budget",
+      "budget": 8.9845,
+      "alpha": 0.1052,
+      "w": [
+        1.2163,
+        0.8964,
+        0.6875,
+        0.3986
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2609,
+        "chain_app": 0.1931
+      },
+      "switch": 0.3891,
+      "risk": 0.3567,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2754,
+      "tau": 0.8513
+    },
+    {
+      "id": "a104",
+      "segment": "budget",
+      "budget": 8.9957,
+      "alpha": 0.0681,
+      "w": [
+        1.6488,
+        1.0891,
+        0.5822,
+        0.5929
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2822,
+        "chain_app": 0.085
+      },
+      "switch": 0.211,
+      "risk": 0.2253,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4358,
+      "tau": 0.8351
+    },
+    {
+      "id": "a105",
+      "segment": "budget",
+      "budget": 8.2752,
+      "alpha": 0.0843,
+      "w": [
+        1.6995,
+        0.8144,
+        0.5602,
+        0.3855
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.307,
+        "chain_app": 0.0327
+      },
+      "switch": 0.3005,
+      "risk": 0.213,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1679,
+      "tau": 0.6847
+    },
+    {
+      "id": "a106",
+      "segment": "budget",
+      "budget": 10.178,
+      "alpha": 0.0771,
+      "w": [
+        1.1117,
+        0.9131,
+        0.4721,
+        0.2387
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3842,
+        "chain_app": 0.081
+      },
+      "switch": 0.3427,
+      "risk": 0.3923,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3213,
+      "tau": 0.8486
+    },
+    {
+      "id": "a107",
+      "segment": "budget",
+      "budget": 11.0739,
+      "alpha": 0.0943,
+      "w": [
+        1.3449,
+        0.8215,
+        0.5673,
+        0.5974
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3876,
+        "chain_app": 0.0081
+      },
+      "switch": 0.3117,
+      "risk": 0.1905,
+      "incumbent": "outside",
+      "outside_utility": -0.1639,
+      "tau": 0.8743
+    },
+    {
+      "id": "a108",
+      "segment": "budget",
+      "budget": 12.6998,
+      "alpha": 0.0694,
+      "w": [
+        1.0479,
+        1.3008,
+        0.3779,
+        0.414
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3747,
+        "chain_app": 0.1135
+      },
+      "switch": 0.2192,
+      "risk": 0.2335,
+      "incumbent": "free_tool",
+      "outside_utility": 0.575,
+      "tau": 0.6243
+    },
+    {
+      "id": "a109",
+      "segment": "budget",
+      "budget": 7.5149,
+      "alpha": 0.0829,
+      "w": [
+        1.7715,
+        0.8566,
+        0.7337,
+        0.4831
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.349,
+        "chain_app": 0.1952
+      },
+      "switch": 0.3526,
+      "risk": 0.383,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4366,
+      "tau": 0.7183
+    },
+    {
+      "id": "a110",
+      "segment": "budget",
+      "budget": 10.348,
+      "alpha": 0.1319,
+      "w": [
+        1.7774,
+        1.2229,
+        0.5415,
+        0.3826
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2159,
+        "chain_app": 0.0723
+      },
+      "switch": 0.2175,
+      "risk": 0.1269,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4239,
+      "tau": 0.6784
+    },
+    {
+      "id": "a111",
+      "segment": "budget",
+      "budget": 13.4455,
+      "alpha": 0.109,
+      "w": [
+        1.0281,
+        0.8945,
+        0.4029,
+        0.5903
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1656,
+        "chain_app": 0.1032
+      },
+      "switch": 0.3809,
+      "risk": 0.3932,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1607,
+      "tau": 0.5614
+    },
+    {
+      "id": "a112",
+      "segment": "budget",
+      "budget": 6.5066,
+      "alpha": 0.0756,
+      "w": [
+        1.4549,
+        1.3475,
+        0.5686,
+        0.4504
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1606,
+        "chain_app": 0.1601
+      },
+      "switch": 0.2853,
+      "risk": 0.3592,
+      "incumbent": "outside",
+      "outside_utility": 0.0783,
+      "tau": 0.5362
+    },
+    {
+      "id": "a113",
+      "segment": "budget",
+      "budget": 7.8074,
+      "alpha": 0.095,
+      "w": [
+        1.7566,
+        1.027,
+        0.6854,
+        0.4162
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.1548,
+        "chain_app": 0.0641
+      },
+      "switch": 0.296,
+      "risk": 0.3019,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0171,
+      "tau": 0.7888
+    },
+    {
+      "id": "a114",
+      "segment": "budget",
+      "budget": 7.351,
+      "alpha": 0.1349,
+      "w": [
+        1.1503,
+        0.8644,
+        0.5488,
+        0.4078
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2525,
+        "chain_app": 0.0873
+      },
+      "switch": 0.3984,
+      "risk": 0.2459,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1374,
+      "tau": 0.5267
+    },
+    {
+      "id": "a115",
+      "segment": "budget",
+      "budget": 10.7437,
+      "alpha": 0.0782,
+      "w": [
+        1.5101,
+        0.8305,
+        0.7907,
+        0.3876
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.369,
+        "chain_app": 0.0951
+      },
+      "switch": 0.1181,
+      "risk": 0.3467,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4254,
+      "tau": 0.6713
+    },
+    {
+      "id": "a116",
+      "segment": "budget",
+      "budget": 11.1035,
+      "alpha": 0.1285,
+      "w": [
+        1.5049,
+        1.0086,
+        0.6313,
+        0.4687
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3882,
+        "chain_app": 0.0742
+      },
+      "switch": 0.2275,
+      "risk": 0.3436,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3893,
+      "tau": 0.6839
+    },
+    {
+      "id": "a117",
+      "segment": "budget",
+      "budget": 7.724,
+      "alpha": 0.1196,
+      "w": [
+        1.1049,
+        0.9192,
+        0.6134,
+        0.4989
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3684,
+        "chain_app": 0.0545
+      },
+      "switch": 0.1332,
+      "risk": 0.3868,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0419,
+      "tau": 0.6165
+    },
+    {
+      "id": "a118",
+      "segment": "budget",
+      "budget": 10.2351,
+      "alpha": 0.1306,
+      "w": [
+        1.6084,
+        1.2249,
+        0.3876,
+        0.3431
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2435,
+        "chain_app": 0.0295
+      },
+      "switch": 0.182,
+      "risk": 0.1925,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2402,
+      "tau": 0.782
+    },
+    {
+      "id": "a119",
+      "segment": "budget",
+      "budget": 6.5595,
+      "alpha": 0.0985,
+      "w": [
+        1.6258,
+        1.2488,
+        0.7075,
+        0.3793
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.3462,
+        "chain_app": 0.0482
+      },
+      "switch": 0.2082,
+      "risk": 0.1529,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1136,
+      "tau": 0.5964
+    },
+    {
+      "id": "a120",
+      "segment": "budget",
+      "budget": 12.0142,
+      "alpha": 0.0851,
+      "w": [
+        1.2182,
+        0.8785,
+        0.5194,
+        0.3212
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.2108,
+        "chain_app": 0.0472
+      },
+      "switch": 0.3289,
+      "risk": 0.379,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3144,
+      "tau": 0.8469
+    },
+    {
+      "id": "a121",
+      "segment": "power",
+      "budget": 24.9824,
+      "alpha": 0.0929,
+      "w": [
+        1.9118,
+        0.8543,
+        1.0749,
+        1.0766
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2243,
+        "free_tool": 0.0032
+      },
+      "switch": 0.3432,
+      "risk": 0.1989,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1023,
+      "tau": 0.7209
+    },
+    {
+      "id": "a122",
+      "segment": "power",
+      "budget": 22.5492,
+      "alpha": 0.0576,
+      "w": [
+        1.3801,
+        0.7965,
+        1.1087,
+        1.3969
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4619,
+        "free_tool": 0.178
+      },
+      "switch": 0.2943,
+      "risk": 0.1803,
+      "incumbent": "chain_app",
+      "outside_utility": -0.0756,
+      "tau": 0.8755
+    },
+    {
+      "id": "a123",
+      "segment": "power",
+      "budget": 15.1696,
+      "alpha": 0.089,
+      "w": [
+        1.437,
+        0.4849,
+        0.7171,
+        0.8348
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4848,
+        "free_tool": 0.0806
+      },
+      "switch": 0.4502,
+      "risk": 0.2363,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3772,
+      "tau": 0.8248
+    },
+    {
+      "id": "a124",
+      "segment": "power",
+      "budget": 13.9707,
+      "alpha": 0.1139,
+      "w": [
+        1.312,
+        0.7389,
+        1.0887,
+        0.9412
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2829,
+        "free_tool": 0.1929
+      },
+      "switch": 0.2794,
+      "risk": 0.186,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3229,
+      "tau": 0.8103
+    },
+    {
+      "id": "a125",
+      "segment": "power",
+      "budget": 21.5777,
+      "alpha": 0.0765,
+      "w": [
+        1.8681,
+        0.5065,
+        0.6026,
+        1.1427
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4982,
+        "free_tool": 0.0077
+      },
+      "switch": 0.2624,
+      "risk": 0.2038,
+      "incumbent": "free_tool",
+      "outside_utility": -0.4377,
+      "tau": 0.6581
+    },
+    {
+      "id": "a126",
+      "segment": "power",
+      "budget": 21.2061,
+      "alpha": 0.076,
+      "w": [
+        1.3511,
+        0.4977,
+        0.846,
+        1.0877
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4585,
+        "free_tool": 0.1285
+      },
+      "switch": 0.4071,
+      "risk": 0.2966,
+      "incumbent": "chain_app",
+      "outside_utility": -0.2177,
+      "tau": 0.8693
+    },
+    {
+      "id": "a127",
+      "segment": "power",
+      "budget": 13.6881,
+      "alpha": 0.1011,
+      "w": [
+        1.8037,
+        0.4489,
+        0.8809,
+        0.9203
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2556,
+        "free_tool": 0.0928
+      },
+      "switch": 0.2868,
+      "risk": 0.2592,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0619,
+      "tau": 0.6064
+    },
+    {
+      "id": "a128",
+      "segment": "power",
+      "budget": 14.112,
+      "alpha": 0.0678,
+      "w": [
+        1.308,
+        0.8719,
+        0.8412,
+        0.9348
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.454,
+        "free_tool": 0.0798
+      },
+      "switch": 0.2105,
+      "risk": 0.1324,
+      "incumbent": "free_tool",
+      "outside_utility": 0.048,
+      "tau": 0.5844
+    },
+    {
+      "id": "a129",
+      "segment": "power",
+      "budget": 23.7609,
+      "alpha": 0.1096,
+      "w": [
+        1.8787,
+        0.5138,
+        0.6303,
+        1.3205
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2917,
+        "free_tool": 0.1238
+      },
+      "switch": 0.428,
+      "risk": 0.1257,
+      "incumbent": "free_tool",
+      "outside_utility": 0.157,
+      "tau": 0.7913
+    },
+    {
+      "id": "a130",
+      "segment": "power",
+      "budget": 16.6183,
+      "alpha": 0.1114,
+      "w": [
+        1.622,
+        0.7724,
+        1.0923,
+        1.2496
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2864,
+        "free_tool": 0.0236
+      },
+      "switch": 0.2715,
+      "risk": 0.2006,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0921,
+      "tau": 0.658
+    },
+    {
+      "id": "a131",
+      "segment": "power",
+      "budget": 21.8034,
+      "alpha": 0.1139,
+      "w": [
+        1.3974,
+        0.7683,
+        1.0068,
+        1.1139
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2566,
+        "free_tool": 0.159
+      },
+      "switch": 0.4882,
+      "risk": 0.2444,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1889,
+      "tau": 0.6408
+    },
+    {
+      "id": "a132",
+      "segment": "power",
+      "budget": 19.5734,
+      "alpha": 0.0832,
+      "w": [
+        1.9893,
+        0.4469,
+        0.8474,
+        1.3253
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2852,
+        "free_tool": 0.1576
+      },
+      "switch": 0.3148,
+      "risk": 0.296,
+      "incumbent": "free_tool",
+      "outside_utility": -0.2891,
+      "tau": 0.8081
+    },
+    {
+      "id": "a133",
+      "segment": "power",
+      "budget": 15.0528,
+      "alpha": 0.0924,
+      "w": [
+        1.7268,
+        0.8148,
+        0.6147,
+        0.9321
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4136,
+        "free_tool": 0.1127
+      },
+      "switch": 0.3487,
+      "risk": 0.111,
+      "incumbent": "chain_app",
+      "outside_utility": 0.1056,
+      "tau": 0.5124
+    },
+    {
+      "id": "a134",
+      "segment": "power",
+      "budget": 15.9465,
+      "alpha": 0.1162,
+      "w": [
+        1.2407,
+        0.7749,
+        0.7546,
+        1.32
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4238,
+        "free_tool": 0.1771
+      },
+      "switch": 0.2648,
+      "risk": 0.2063,
+      "incumbent": "free_tool",
+      "outside_utility": -0.328,
+      "tau": 0.5923
+    },
+    {
+      "id": "a135",
+      "segment": "power",
+      "budget": 10.4077,
+      "alpha": 0.1171,
+      "w": [
+        1.768,
+        0.7178,
+        1.0464,
+        1.119
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3428,
+        "free_tool": 0.0899
+      },
+      "switch": 0.3921,
+      "risk": 0.1403,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0682,
+      "tau": 0.6398
+    },
+    {
+      "id": "a136",
+      "segment": "power",
+      "budget": 18.6791,
+      "alpha": 0.0599,
+      "w": [
+        1.9779,
+        0.8514,
+        1.1531,
+        0.9993
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2507,
+        "free_tool": 0.0424
+      },
+      "switch": 0.227,
+      "risk": 0.124,
+      "incumbent": "chain_app",
+      "outside_utility": 0.1929,
+      "tau": 0.5296
+    },
+    {
+      "id": "a137",
+      "segment": "power",
+      "budget": 11.9881,
+      "alpha": 0.1079,
+      "w": [
+        1.6642,
+        0.7872,
+        0.9785,
+        1.3293
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3915,
+        "free_tool": 0.1044
+      },
+      "switch": 0.4138,
+      "risk": 0.1895,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1726,
+      "tau": 0.5679
+    },
+    {
+      "id": "a138",
+      "segment": "power",
+      "budget": 21.9486,
+      "alpha": 0.0682,
+      "w": [
+        1.3228,
+        0.5232,
+        1.1052,
+        0.9981
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4058,
+        "free_tool": 0.1713
+      },
+      "switch": 0.2233,
+      "risk": 0.253,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3484,
+      "tau": 0.7756
+    },
+    {
+      "id": "a139",
+      "segment": "power",
+      "budget": 23.6469,
+      "alpha": 0.0707,
+      "w": [
+        1.6551,
+        0.5449,
+        0.9326,
+        1.1731
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3831,
+        "free_tool": 0.1247
+      },
+      "switch": 0.2405,
+      "risk": 0.2387,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0222,
+      "tau": 0.5296
+    },
+    {
+      "id": "a140",
+      "segment": "power",
+      "budget": 16.7026,
+      "alpha": 0.0786,
+      "w": [
+        1.2694,
+        0.5112,
+        0.8646,
+        1.2457
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2711,
+        "free_tool": 0.1659
+      },
+      "switch": 0.3637,
+      "risk": 0.2521,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1506,
+      "tau": 0.7479
+    },
+    {
+      "id": "a141",
+      "segment": "power",
+      "budget": 23.9196,
+      "alpha": 0.0844,
+      "w": [
+        1.6229,
+        0.701,
+        1.0425,
+        0.8431
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3547,
+        "free_tool": 0.0963
+      },
+      "switch": 0.4765,
+      "risk": 0.1987,
+      "incumbent": "chain_app",
+      "outside_utility": 0.1735,
+      "tau": 0.6802
+    },
+    {
+      "id": "a142",
+      "segment": "power",
+      "budget": 12.7133,
+      "alpha": 0.0652,
+      "w": [
+        1.2762,
+        0.4003,
+        0.8592,
+        1.2615
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.42,
+        "free_tool": 0.0064
+      },
+      "switch": 0.371,
+      "risk": 0.1309,
+      "incumbent": "free_tool",
+      "outside_utility": -0.3828,
+      "tau": 0.7507
+    },
+    {
+      "id": "a143",
+      "segment": "power",
+      "budget": 14.8936,
+      "alpha": 0.0949,
+      "w": [
+        1.5298,
+        0.7798,
+        0.7384,
+        1.3435
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3501,
+        "free_tool": 0.1512
+      },
+      "switch": 0.4549,
+      "risk": 0.2998,
+      "incumbent": "chain_app",
+      "outside_utility": -0.2992,
+      "tau": 0.6002
+    },
+    {
+      "id": "a144",
+      "segment": "power",
+      "budget": 13.9431,
+      "alpha": 0.0908,
+      "w": [
+        1.9948,
+        0.8951,
+        0.9161,
+        1.1834
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.458,
+        "free_tool": 0.1866
+      },
+      "switch": 0.2612,
+      "risk": 0.2057,
+      "incumbent": "free_tool",
+      "outside_utility": -0.2878,
+      "tau": 0.6759
+    },
+    {
+      "id": "a145",
+      "segment": "power",
+      "budget": 24.7843,
+      "alpha": 0.119,
+      "w": [
+        1.9249,
+        0.7992,
+        0.7615,
+        0.9925
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3642,
+        "free_tool": 0.1122
+      },
+      "switch": 0.3517,
+      "risk": 0.2273,
+      "incumbent": "chain_app",
+      "outside_utility": 0.0244,
+      "tau": 0.6334
+    },
+    {
+      "id": "a146",
+      "segment": "power",
+      "budget": 14.9602,
+      "alpha": 0.0589,
+      "w": [
+        1.351,
+        0.8253,
+        0.8678,
+        0.9367
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4278,
+        "free_tool": 0.1108
+      },
+      "switch": 0.2063,
+      "risk": 0.1633,
+      "incumbent": "chain_app",
+      "outside_utility": -0.0409,
+      "tau": 0.61
+    },
+    {
+      "id": "a147",
+      "segment": "power",
+      "budget": 10.9742,
+      "alpha": 0.0538,
+      "w": [
+        1.6654,
+        0.4109,
+        1.1093,
+        0.8932
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.382,
+        "free_tool": 0.0889
+      },
+      "switch": 0.3329,
+      "risk": 0.1144,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1251,
+      "tau": 0.5044
+    },
+    {
+      "id": "a148",
+      "segment": "power",
+      "budget": 12.6791,
+      "alpha": 0.1133,
+      "w": [
+        1.6396,
+        0.475,
+        0.7217,
+        1.196
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4174,
+        "free_tool": 0.1199
+      },
+      "switch": 0.4859,
+      "risk": 0.1988,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1659,
+      "tau": 0.6439
+    },
+    {
+      "id": "a149",
+      "segment": "power",
+      "budget": 13.3662,
+      "alpha": 0.0532,
+      "w": [
+        1.4818,
+        0.7557,
+        0.6111,
+        1.0635
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3932,
+        "free_tool": 0.1221
+      },
+      "switch": 0.433,
+      "risk": 0.2621,
+      "incumbent": "free_tool",
+      "outside_utility": -0.428,
+      "tau": 0.69
+    },
+    {
+      "id": "a150",
+      "segment": "power",
+      "budget": 19.0511,
+      "alpha": 0.0672,
+      "w": [
+        1.234,
+        0.5118,
+        0.8729,
+        1.0484
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.253,
+        "free_tool": 0.1649
+      },
+      "switch": 0.4777,
+      "risk": 0.1403,
+      "incumbent": "free_tool",
+      "outside_utility": -0.4875,
+      "tau": 0.87
+    },
+    {
+      "id": "a151",
+      "segment": "power",
+      "budget": 24.2789,
+      "alpha": 0.0508,
+      "w": [
+        1.8104,
+        0.8851,
+        1.1435,
+        1.3824
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3651,
+        "free_tool": 0.0156
+      },
+      "switch": 0.4549,
+      "risk": 0.2228,
+      "incumbent": "free_tool",
+      "outside_utility": -0.2079,
+      "tau": 0.7287
+    },
+    {
+      "id": "a152",
+      "segment": "power",
+      "budget": 12.3037,
+      "alpha": 0.1018,
+      "w": [
+        1.26,
+        0.7649,
+        1.1094,
+        1.0835
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3529,
+        "free_tool": 0.0624
+      },
+      "switch": 0.4908,
+      "risk": 0.2466,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3776,
+      "tau": 0.5878
+    },
+    {
+      "id": "a153",
+      "segment": "power",
+      "budget": 16.9588,
+      "alpha": 0.116,
+      "w": [
+        1.7873,
+        0.5076,
+        1.1157,
+        1.0269
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4555,
+        "free_tool": 0.0483
+      },
+      "switch": 0.3856,
+      "risk": 0.2853,
+      "incumbent": "chain_app",
+      "outside_utility": -0.015,
+      "tau": 0.8949
+    },
+    {
+      "id": "a154",
+      "segment": "power",
+      "budget": 12.259,
+      "alpha": 0.0562,
+      "w": [
+        1.7394,
+        0.5699,
+        0.6427,
+        1.0852
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4261,
+        "free_tool": 0.057
+      },
+      "switch": 0.3005,
+      "risk": 0.2691,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0899,
+      "tau": 0.6786
+    },
+    {
+      "id": "a155",
+      "segment": "power",
+      "budget": 24.2946,
+      "alpha": 0.0956,
+      "w": [
+        1.2927,
+        0.8425,
+        0.8936,
+        0.885
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2458,
+        "free_tool": 0.1375
+      },
+      "switch": 0.2142,
+      "risk": 0.1573,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1912,
+      "tau": 0.6657
+    },
+    {
+      "id": "a156",
+      "segment": "power",
+      "budget": 17.8281,
+      "alpha": 0.0696,
+      "w": [
+        1.2256,
+        0.7072,
+        0.8242,
+        1.1908
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2326,
+        "free_tool": 0.0028
+      },
+      "switch": 0.2745,
+      "risk": 0.1913,
+      "incumbent": "chain_app",
+      "outside_utility": 0.0672,
+      "tau": 0.6511
+    },
+    {
+      "id": "a157",
+      "segment": "power",
+      "budget": 17.9566,
+      "alpha": 0.0915,
+      "w": [
+        1.2175,
+        0.6576,
+        0.8069,
+        1.0528
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2301,
+        "free_tool": 0.1566
+      },
+      "switch": 0.4827,
+      "risk": 0.1045,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0347,
+      "tau": 0.6139
+    },
+    {
+      "id": "a158",
+      "segment": "power",
+      "budget": 21.8133,
+      "alpha": 0.0943,
+      "w": [
+        1.9433,
+        0.8905,
+        0.6254,
+        1.067
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3641,
+        "free_tool": 0.0293
+      },
+      "switch": 0.3009,
+      "risk": 0.2975,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1832,
+      "tau": 0.8371
+    },
+    {
+      "id": "a159",
+      "segment": "power",
+      "budget": 14.8585,
+      "alpha": 0.0836,
+      "w": [
+        1.9824,
+        0.6374,
+        0.6786,
+        0.831
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4836,
+        "free_tool": 0.0532
+      },
+      "switch": 0.3512,
+      "risk": 0.1181,
+      "incumbent": "chain_app",
+      "outside_utility": 0.1511,
+      "tau": 0.701
+    },
+    {
+      "id": "a160",
+      "segment": "power",
+      "budget": 24.567,
+      "alpha": 0.0681,
+      "w": [
+        1.6036,
+        0.8298,
+        0.869,
+        0.9677
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4566,
+        "free_tool": 0.078
+      },
+      "switch": 0.3592,
+      "risk": 0.2953,
+      "incumbent": "chain_app",
+      "outside_utility": -0.289,
+      "tau": 0.5124
+    },
+    {
+      "id": "a161",
+      "segment": "power",
+      "budget": 15.8776,
+      "alpha": 0.064,
+      "w": [
+        1.744,
+        0.4907,
+        1.0049,
+        0.9581
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3066,
+        "free_tool": 0.0698
+      },
+      "switch": 0.415,
+      "risk": 0.1933,
+      "incumbent": "chain_app",
+      "outside_utility": 0.0968,
+      "tau": 0.7288
+    },
+    {
+      "id": "a162",
+      "segment": "power",
+      "budget": 13.2075,
+      "alpha": 0.113,
+      "w": [
+        1.4741,
+        0.4195,
+        0.8968,
+        0.8744
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2715,
+        "free_tool": 0.1494
+      },
+      "switch": 0.2392,
+      "risk": 0.2614,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0754,
+      "tau": 0.7841
+    },
+    {
+      "id": "a163",
+      "segment": "power",
+      "budget": 20.7038,
+      "alpha": 0.1195,
+      "w": [
+        1.4732,
+        0.4814,
+        0.9115,
+        1.1199
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2534,
+        "free_tool": 0.1226
+      },
+      "switch": 0.2042,
+      "risk": 0.2855,
+      "incumbent": "chain_app",
+      "outside_utility": -0.4723,
+      "tau": 0.5433
+    },
+    {
+      "id": "a164",
+      "segment": "power",
+      "budget": 13.6037,
+      "alpha": 0.0692,
+      "w": [
+        1.2262,
+        0.5397,
+        0.7158,
+        1.0272
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3156,
+        "free_tool": 0.0678
+      },
+      "switch": 0.2984,
+      "risk": 0.1179,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3585,
+      "tau": 0.8027
+    },
+    {
+      "id": "a165",
+      "segment": "power",
+      "budget": 24.8621,
+      "alpha": 0.115,
+      "w": [
+        1.6034,
+        0.6659,
+        0.7887,
+        1.2644
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4294,
+        "free_tool": 0.1689
+      },
+      "switch": 0.4687,
+      "risk": 0.1869,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0645,
+      "tau": 0.6234
+    },
+    {
+      "id": "a166",
+      "segment": "power",
+      "budget": 23.9386,
+      "alpha": 0.0566,
+      "w": [
+        1.9954,
+        0.785,
+        0.656,
+        1.1937
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2103,
+        "free_tool": 0.154
+      },
+      "switch": 0.4398,
+      "risk": 0.2205,
+      "incumbent": "free_tool",
+      "outside_utility": -0.4315,
+      "tau": 0.6104
+    },
+    {
+      "id": "a167",
+      "segment": "power",
+      "budget": 16.2127,
+      "alpha": 0.053,
+      "w": [
+        1.5586,
+        0.5326,
+        0.8356,
+        1.0551
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4638,
+        "free_tool": 0.0541
+      },
+      "switch": 0.4681,
+      "risk": 0.1852,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1482,
+      "tau": 0.6671
+    },
+    {
+      "id": "a168",
+      "segment": "power",
+      "budget": 13.8606,
+      "alpha": 0.0852,
+      "w": [
+        1.3214,
+        0.576,
+        0.9395,
+        1.048
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4472,
+        "free_tool": 0.0513
+      },
+      "switch": 0.4909,
+      "risk": 0.2569,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0867,
+      "tau": 0.5568
+    },
+    {
+      "id": "a169",
+      "segment": "power",
+      "budget": 17.8969,
+      "alpha": 0.0619,
+      "w": [
+        1.8546,
+        0.6921,
+        0.7581,
+        1.3578
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2346,
+        "free_tool": 0.1128
+      },
+      "switch": 0.4163,
+      "risk": 0.1118,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0711,
+      "tau": 0.527
+    },
+    {
+      "id": "a170",
+      "segment": "power",
+      "budget": 17.6836,
+      "alpha": 0.0681,
+      "w": [
+        1.7303,
+        0.4593,
+        1.1622,
+        1.3368
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2558,
+        "free_tool": 0.0647
+      },
+      "switch": 0.3763,
+      "risk": 0.2436,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3906,
+      "tau": 0.5417
+    },
+    {
+      "id": "a171",
+      "segment": "power",
+      "budget": 24.9965,
+      "alpha": 0.0819,
+      "w": [
+        1.898,
+        0.6412,
+        1.1534,
+        0.8527
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2342,
+        "free_tool": 0.1859
+      },
+      "switch": 0.4842,
+      "risk": 0.1629,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1833,
+      "tau": 0.6665
+    },
+    {
+      "id": "a172",
+      "segment": "power",
+      "budget": 12.8507,
+      "alpha": 0.1129,
+      "w": [
+        1.4026,
+        0.7526,
+        0.6403,
+        0.8233
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3961,
+        "free_tool": 0.0678
+      },
+      "switch": 0.3966,
+      "risk": 0.1188,
+      "incumbent": "free_tool",
+      "outside_utility": 0.024,
+      "tau": 0.8505
+    },
+    {
+      "id": "a173",
+      "segment": "power",
+      "budget": 12.0471,
+      "alpha": 0.0724,
+      "w": [
+        1.4947,
+        0.6686,
+        0.7781,
+        0.8364
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3107,
+        "free_tool": 0.0509
+      },
+      "switch": 0.3158,
+      "risk": 0.1394,
+      "incumbent": "chain_app",
+      "outside_utility": -0.0611,
+      "tau": 0.6553
+    },
+    {
+      "id": "a174",
+      "segment": "power",
+      "budget": 15.1808,
+      "alpha": 0.0874,
+      "w": [
+        1.8175,
+        0.5894,
+        0.9525,
+        1.3797
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3566,
+        "free_tool": 0.182
+      },
+      "switch": 0.4381,
+      "risk": 0.1117,
+      "incumbent": "chain_app",
+      "outside_utility": -0.0112,
+      "tau": 0.8947
+    },
+    {
+      "id": "a175",
+      "segment": "power",
+      "budget": 16.8756,
+      "alpha": 0.0565,
+      "w": [
+        1.6496,
+        0.4633,
+        1.0509,
+        1.1046
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.417,
+        "free_tool": 0.1739
+      },
+      "switch": 0.3887,
+      "risk": 0.2225,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0897,
+      "tau": 0.8476
+    },
+    {
+      "id": "a176",
+      "segment": "power",
+      "budget": 10.5465,
+      "alpha": 0.0889,
+      "w": [
+        1.373,
+        0.8302,
+        0.989,
+        1.0521
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2564,
+        "free_tool": 0.0678
+      },
+      "switch": 0.4111,
+      "risk": 0.1409,
+      "incumbent": "chain_app",
+      "outside_utility": 0.1216,
+      "tau": 0.8057
+    },
+    {
+      "id": "a177",
+      "segment": "power",
+      "budget": 12.9969,
+      "alpha": 0.0705,
+      "w": [
+        1.9777,
+        0.7541,
+        0.9663,
+        0.9846
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2897,
+        "free_tool": 0.0079
+      },
+      "switch": 0.4185,
+      "risk": 0.1086,
+      "incumbent": "chain_app",
+      "outside_utility": 0.0106,
+      "tau": 0.8795
+    },
+    {
+      "id": "a178",
+      "segment": "power",
+      "budget": 21.3475,
+      "alpha": 0.083,
+      "w": [
+        1.5888,
+        0.6181,
+        0.7948,
+        1.113
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3293,
+        "free_tool": 0.1196
+      },
+      "switch": 0.4694,
+      "risk": 0.299,
+      "incumbent": "chain_app",
+      "outside_utility": -0.2307,
+      "tau": 0.5723
+    },
+    {
+      "id": "a179",
+      "segment": "power",
+      "budget": 15.2818,
+      "alpha": 0.0701,
+      "w": [
+        1.3396,
+        0.782,
+        0.8978,
+        1.3515
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2098,
+        "free_tool": 0.0134
+      },
+      "switch": 0.321,
+      "risk": 0.1161,
+      "incumbent": "chain_app",
+      "outside_utility": 0.1902,
+      "tau": 0.5836
+    },
+    {
+      "id": "a180",
+      "segment": "power",
+      "budget": 12.9718,
+      "alpha": 0.0902,
+      "w": [
+        1.5984,
+        0.6902,
+        0.826,
+        1.2961
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2416,
+        "free_tool": 0.0857
+      },
+      "switch": 0.4069,
+      "risk": 0.2736,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1026,
+      "tau": 0.5277
+    },
+    {
+      "id": "a181",
+      "segment": "power",
+      "budget": 12.5548,
+      "alpha": 0.0548,
+      "w": [
+        1.7823,
+        0.544,
+        1.0342,
+        0.8398
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4588,
+        "free_tool": 0.1671
+      },
+      "switch": 0.2267,
+      "risk": 0.1048,
+      "incumbent": "chain_app",
+      "outside_utility": 0.0975,
+      "tau": 0.5939
+    },
+    {
+      "id": "a182",
+      "segment": "power",
+      "budget": 18.2241,
+      "alpha": 0.0798,
+      "w": [
+        1.8364,
+        0.6444,
+        0.9004,
+        1.3935
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.245,
+        "free_tool": 0.1661
+      },
+      "switch": 0.2155,
+      "risk": 0.1955,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0344,
+      "tau": 0.7741
+    },
+    {
+      "id": "a183",
+      "segment": "power",
+      "budget": 13.9498,
+      "alpha": 0.0793,
+      "w": [
+        1.4933,
+        0.6607,
+        0.8773,
+        0.9961
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2916,
+        "free_tool": 0.0502
+      },
+      "switch": 0.3095,
+      "risk": 0.13,
+      "incumbent": "free_tool",
+      "outside_utility": -0.0785,
+      "tau": 0.5535
+    },
+    {
+      "id": "a184",
+      "segment": "power",
+      "budget": 20.4079,
+      "alpha": 0.1093,
+      "w": [
+        1.39,
+        0.4753,
+        0.6052,
+        0.8284
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4287,
+        "free_tool": 0.1974
+      },
+      "switch": 0.2135,
+      "risk": 0.2496,
+      "incumbent": "chain_app",
+      "outside_utility": -0.0855,
+      "tau": 0.8024
+    },
+    {
+      "id": "a185",
+      "segment": "power",
+      "budget": 15.3881,
+      "alpha": 0.0508,
+      "w": [
+        1.6762,
+        0.8956,
+        0.7546,
+        0.9137
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2372,
+        "free_tool": 0.1111
+      },
+      "switch": 0.3789,
+      "risk": 0.2585,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1248,
+      "tau": 0.8223
+    },
+    {
+      "id": "a186",
+      "segment": "power",
+      "budget": 13.709,
+      "alpha": 0.0889,
+      "w": [
+        1.4379,
+        0.5649,
+        1.1592,
+        1.2091
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4924,
+        "free_tool": 0.0834
+      },
+      "switch": 0.3612,
+      "risk": 0.1974,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3343,
+      "tau": 0.7111
+    },
+    {
+      "id": "a187",
+      "segment": "power",
+      "budget": 11.0106,
+      "alpha": 0.1152,
+      "w": [
+        1.2991,
+        0.499,
+        1.0592,
+        0.8582
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4701,
+        "free_tool": 0.1451
+      },
+      "switch": 0.2206,
+      "risk": 0.2384,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0301,
+      "tau": 0.8313
+    },
+    {
+      "id": "a188",
+      "segment": "power",
+      "budget": 20.7753,
+      "alpha": 0.091,
+      "w": [
+        1.458,
+        0.7486,
+        1.1742,
+        1.1525
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3993,
+        "free_tool": 0.0874
+      },
+      "switch": 0.4268,
+      "risk": 0.2995,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3583,
+      "tau": 0.7158
+    },
+    {
+      "id": "a189",
+      "segment": "power",
+      "budget": 17.2206,
+      "alpha": 0.09,
+      "w": [
+        1.2393,
+        0.6021,
+        0.9498,
+        1.1511
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3972,
+        "free_tool": 0.144
+      },
+      "switch": 0.3925,
+      "risk": 0.258,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1237,
+      "tau": 0.7425
+    },
+    {
+      "id": "a190",
+      "segment": "power",
+      "budget": 11.5179,
+      "alpha": 0.0691,
+      "w": [
+        1.6219,
+        0.8365,
+        1.0074,
+        0.8542
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3777,
+        "free_tool": 0.0443
+      },
+      "switch": 0.4202,
+      "risk": 0.2655,
+      "incumbent": "free_tool",
+      "outside_utility": -0.086,
+      "tau": 0.6354
+    },
+    {
+      "id": "a191",
+      "segment": "power",
+      "budget": 16.6938,
+      "alpha": 0.1105,
+      "w": [
+        1.7787,
+        0.6599,
+        0.8209,
+        0.8302
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2429,
+        "free_tool": 0.0386
+      },
+      "switch": 0.312,
+      "risk": 0.2888,
+      "incumbent": "free_tool",
+      "outside_utility": -0.3356,
+      "tau": 0.5423
+    },
+    {
+      "id": "a192",
+      "segment": "power",
+      "budget": 15.0746,
+      "alpha": 0.1071,
+      "w": [
+        1.5067,
+        0.7863,
+        1.0816,
+        0.8665
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3826,
+        "free_tool": 0.1918
+      },
+      "switch": 0.3206,
+      "risk": 0.1102,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1186,
+      "tau": 0.7089
+    },
+    {
+      "id": "a193",
+      "segment": "power",
+      "budget": 18.2838,
+      "alpha": 0.0648,
+      "w": [
+        1.8556,
+        0.6493,
+        0.6203,
+        1.2098
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4851,
+        "free_tool": 0.1658
+      },
+      "switch": 0.2832,
+      "risk": 0.1107,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1559,
+      "tau": 0.713
+    },
+    {
+      "id": "a194",
+      "segment": "power",
+      "budget": 19.6348,
+      "alpha": 0.0824,
+      "w": [
+        1.5358,
+        0.4597,
+        0.6581,
+        0.9396
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.451,
+        "free_tool": 0.0292
+      },
+      "switch": 0.268,
+      "risk": 0.2097,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3858,
+      "tau": 0.7253
+    },
+    {
+      "id": "a195",
+      "segment": "power",
+      "budget": 15.5214,
+      "alpha": 0.0938,
+      "w": [
+        1.9298,
+        0.4755,
+        1.1481,
+        1.3415
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4487,
+        "free_tool": 0.1263
+      },
+      "switch": 0.386,
+      "risk": 0.2278,
+      "incumbent": "free_tool",
+      "outside_utility": -0.4885,
+      "tau": 0.8832
+    },
+    {
+      "id": "a196",
+      "segment": "power",
+      "budget": 18.7841,
+      "alpha": 0.1047,
+      "w": [
+        1.5018,
+        0.4062,
+        0.9058,
+        1.1043
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3311,
+        "free_tool": 0.0679
+      },
+      "switch": 0.2749,
+      "risk": 0.2055,
+      "incumbent": "chain_app",
+      "outside_utility": 0.179,
+      "tau": 0.5692
+    },
+    {
+      "id": "a197",
+      "segment": "power",
+      "budget": 14.795,
+      "alpha": 0.0706,
+      "w": [
+        1.6346,
+        0.6496,
+        0.9862,
+        1.37
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2856,
+        "free_tool": 0.1386
+      },
+      "switch": 0.2075,
+      "risk": 0.1525,
+      "incumbent": "chain_app",
+      "outside_utility": -0.4783,
+      "tau": 0.7471
+    },
+    {
+      "id": "a198",
+      "segment": "power",
+      "budget": 20.1747,
+      "alpha": 0.1023,
+      "w": [
+        1.6133,
+        0.702,
+        0.8376,
+        0.8248
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.23,
+        "free_tool": 0.131
+      },
+      "switch": 0.4987,
+      "risk": 0.1032,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0257,
+      "tau": 0.8307
+    },
+    {
+      "id": "a199",
+      "segment": "power",
+      "budget": 18.1781,
+      "alpha": 0.0934,
+      "w": [
+        1.7574,
+        0.8295,
+        0.6734,
+        1.3557
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2078,
+        "free_tool": 0.1672
+      },
+      "switch": 0.223,
+      "risk": 0.1389,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1883,
+      "tau": 0.6337
+    },
+    {
+      "id": "a200",
+      "segment": "power",
+      "budget": 12.4899,
+      "alpha": 0.0816,
+      "w": [
+        1.5219,
+        0.7838,
+        1.1359,
+        1.1915
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2373,
+        "free_tool": 0.0591
+      },
+      "switch": 0.474,
+      "risk": 0.1177,
+      "incumbent": "chain_app",
+      "outside_utility": 0.1598,
+      "tau": 0.8803
+    },
+    {
+      "id": "a201",
+      "segment": "power",
+      "budget": 16.168,
+      "alpha": 0.0967,
+      "w": [
+        1.5654,
+        0.7767,
+        0.6189,
+        0.8865
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3843,
+        "free_tool": 0.0465
+      },
+      "switch": 0.3998,
+      "risk": 0.1702,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0735,
+      "tau": 0.6971
+    },
+    {
+      "id": "a202",
+      "segment": "power",
+      "budget": 21.5934,
+      "alpha": 0.069,
+      "w": [
+        1.5954,
+        0.4987,
+        1.1165,
+        1.2938
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4706,
+        "free_tool": 0.1755
+      },
+      "switch": 0.4879,
+      "risk": 0.1457,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1002,
+      "tau": 0.669
+    },
+    {
+      "id": "a203",
+      "segment": "power",
+      "budget": 18.4056,
+      "alpha": 0.074,
+      "w": [
+        1.4308,
+        0.5207,
+        0.6495,
+        1.0979
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4663,
+        "free_tool": 0.126
+      },
+      "switch": 0.3563,
+      "risk": 0.1857,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3535,
+      "tau": 0.8292
+    },
+    {
+      "id": "a204",
+      "segment": "power",
+      "budget": 12.9757,
+      "alpha": 0.1002,
+      "w": [
+        1.808,
+        0.6874,
+        1.1178,
+        0.9746
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4645,
+        "free_tool": 0.1459
+      },
+      "switch": 0.4396,
+      "risk": 0.2329,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1952,
+      "tau": 0.6681
+    },
+    {
+      "id": "a205",
+      "segment": "power",
+      "budget": 22.2087,
+      "alpha": 0.1021,
+      "w": [
+        1.5623,
+        0.8635,
+        0.8367,
+        1.1393
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2318,
+        "free_tool": 0.0452
+      },
+      "switch": 0.4522,
+      "risk": 0.1793,
+      "incumbent": "chain_app",
+      "outside_utility": -0.3278,
+      "tau": 0.6966
+    },
+    {
+      "id": "a206",
+      "segment": "power",
+      "budget": 22.0873,
+      "alpha": 0.1127,
+      "w": [
+        1.2561,
+        0.6874,
+        0.8804,
+        1.1686
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3342,
+        "free_tool": 0.0797
+      },
+      "switch": 0.3416,
+      "risk": 0.2164,
+      "incumbent": "free_tool",
+      "outside_utility": -0.1695,
+      "tau": 0.8271
+    },
+    {
+      "id": "a207",
+      "segment": "power",
+      "budget": 21.1847,
+      "alpha": 0.0739,
+      "w": [
+        1.8405,
+        0.8268,
+        0.6921,
+        1.1496
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2856,
+        "free_tool": 0.1478
+      },
+      "switch": 0.2716,
+      "risk": 0.2343,
+      "incumbent": "chain_app",
+      "outside_utility": -0.1422,
+      "tau": 0.8795
+    },
+    {
+      "id": "a208",
+      "segment": "power",
+      "budget": 15.7196,
+      "alpha": 0.1113,
+      "w": [
+        1.9896,
+        0.8374,
+        0.6995,
+        1.2918
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.2096,
+        "free_tool": 0.0787
+      },
+      "switch": 0.4612,
+      "risk": 0.2378,
+      "incumbent": "free_tool",
+      "outside_utility": -0.2285,
+      "tau": 0.8249
+    },
+    {
+      "id": "a209",
+      "segment": "power",
+      "budget": 20.6434,
+      "alpha": 0.0828,
+      "w": [
+        1.914,
+        0.515,
+        0.7022,
+        1.1857
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.4916,
+        "free_tool": 0.0495
+      },
+      "switch": 0.2749,
+      "risk": 0.1279,
+      "incumbent": "free_tool",
+      "outside_utility": -0.3415,
+      "tau": 0.7013
+    },
+    {
+      "id": "a210",
+      "segment": "power",
+      "budget": 24.8631,
+      "alpha": 0.0508,
+      "w": [
+        1.6452,
+        0.6561,
+        1.0845,
+        1.0132
+      ],
+      "brand": {
+        "you": 0.0,
+        "chain_app": 0.3231,
+        "free_tool": 0.0336
+      },
+      "switch": 0.4222,
+      "risk": 0.2569,
+      "incumbent": "chain_app",
+      "outside_utility": -0.2246,
+      "tau": 0.8572
+    },
+    {
+      "id": "a211",
+      "segment": "loyalist",
+      "budget": 0.0135,
+      "alpha": 0.3896,
+      "w": [
+        0.322,
+        1.0005,
+        0.3088,
+        0.63
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5908
+      },
+      "switch": 0.7648,
+      "risk": 0.6827,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0559,
+      "tau": 0.8378
+    },
+    {
+      "id": "a212",
+      "segment": "loyalist",
+      "budget": 0.8749,
+      "alpha": 0.5294,
+      "w": [
+        0.2442,
+        1.2697,
+        0.2825,
+        0.4933
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7485
+      },
+      "switch": 0.5165,
+      "risk": 0.4901,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5024,
+      "tau": 0.5323
+    },
+    {
+      "id": "a213",
+      "segment": "loyalist",
+      "budget": 4.4104,
+      "alpha": 0.5393,
+      "w": [
+        0.4479,
+        1.2191,
+        0.4697,
+        0.6625
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8264
+      },
+      "switch": 0.9596,
+      "risk": 0.4402,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0435,
+      "tau": 0.8779
+    },
+    {
+      "id": "a214",
+      "segment": "loyalist",
+      "budget": 2.2263,
+      "alpha": 0.5026,
+      "w": [
+        0.4364,
+        1.3946,
+        0.2647,
+        0.7998
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9437
+      },
+      "switch": 0.5244,
+      "risk": 0.7016,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3892,
+      "tau": 0.7056
+    },
+    {
+      "id": "a215",
+      "segment": "loyalist",
+      "budget": 1.2987,
+      "alpha": 0.3406,
+      "w": [
+        0.1468,
+        0.862,
+        0.4551,
+        0.5757
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6083
+      },
+      "switch": 0.8459,
+      "risk": 0.6747,
+      "incumbent": "free_tool",
+      "outside_utility": 0.561,
+      "tau": 0.6542
+    },
+    {
+      "id": "a216",
+      "segment": "loyalist",
+      "budget": 4.1793,
+      "alpha": 0.3225,
+      "w": [
+        0.3959,
+        1.3931,
+        0.5386,
+        0.6898
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8134
+      },
+      "switch": 0.6766,
+      "risk": 0.6718,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5989,
+      "tau": 0.697
+    },
+    {
+      "id": "a217",
+      "segment": "loyalist",
+      "budget": 0.3065,
+      "alpha": 0.4788,
+      "w": [
+        0.1476,
+        0.9469,
+        0.3315,
+        0.7655
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5919
+      },
+      "switch": 0.5829,
+      "risk": 0.418,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4161,
+      "tau": 0.516
+    },
+    {
+      "id": "a218",
+      "segment": "loyalist",
+      "budget": 0.1415,
+      "alpha": 0.4676,
+      "w": [
+        0.213,
+        1.158,
+        0.3738,
+        0.8617
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6439
+      },
+      "switch": 0.8396,
+      "risk": 0.4216,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5885,
+      "tau": 0.7956
+    },
+    {
+      "id": "a219",
+      "segment": "loyalist",
+      "budget": 2.3261,
+      "alpha": 0.366,
+      "w": [
+        0.425,
+        1.2418,
+        0.2888,
+        0.6256
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7314
+      },
+      "switch": 0.9132,
+      "risk": 0.6735,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3899,
+      "tau": 0.6082
+    },
+    {
+      "id": "a220",
+      "segment": "loyalist",
+      "budget": 1.8586,
+      "alpha": 0.3137,
+      "w": [
+        0.4148,
+        1.0598,
+        0.3753,
+        0.5227
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6047
+      },
+      "switch": 0.7939,
+      "risk": 0.493,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4605,
+      "tau": 0.6506
+    },
+    {
+      "id": "a221",
+      "segment": "loyalist",
+      "budget": 1.9012,
+      "alpha": 0.4294,
+      "w": [
+        0.426,
+        0.9925,
+        0.5032,
+        0.8698
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8304
+      },
+      "switch": 0.7158,
+      "risk": 0.6991,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2487,
+      "tau": 0.7101
+    },
+    {
+      "id": "a222",
+      "segment": "loyalist",
+      "budget": 1.5886,
+      "alpha": 0.3313,
+      "w": [
+        0.2659,
+        0.8743,
+        0.3642,
+        0.6785
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9654
+      },
+      "switch": 0.5181,
+      "risk": 0.6486,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0122,
+      "tau": 0.5998
+    },
+    {
+      "id": "a223",
+      "segment": "loyalist",
+      "budget": 0.5924,
+      "alpha": 0.365,
+      "w": [
+        0.2098,
+        1.0408,
+        0.4116,
+        0.4005
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5809
+      },
+      "switch": 0.5468,
+      "risk": 0.6199,
+      "incumbent": "free_tool",
+      "outside_utility": 0.329,
+      "tau": 0.5887
+    },
+    {
+      "id": "a224",
+      "segment": "loyalist",
+      "budget": 0.1211,
+      "alpha": 0.5824,
+      "w": [
+        0.1433,
+        0.8761,
+        0.2586,
+        0.8906
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8088
+      },
+      "switch": 0.8051,
+      "risk": 0.7947,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5847,
+      "tau": 0.5816
+    },
+    {
+      "id": "a225",
+      "segment": "loyalist",
+      "budget": 3.1154,
+      "alpha": 0.426,
+      "w": [
+        0.2536,
+        1.3587,
+        0.2597,
+        0.8985
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6896
+      },
+      "switch": 0.8244,
+      "risk": 0.7872,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5537,
+      "tau": 0.7271
+    },
+    {
+      "id": "a226",
+      "segment": "loyalist",
+      "budget": 3.522,
+      "alpha": 0.3448,
+      "w": [
+        0.3134,
+        1.2041,
+        0.3825,
+        0.4775
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6221
+      },
+      "switch": 0.9272,
+      "risk": 0.4138,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5996,
+      "tau": 0.503
+    },
+    {
+      "id": "a227",
+      "segment": "loyalist",
+      "budget": 0.8052,
+      "alpha": 0.5022,
+      "w": [
+        0.124,
+        1.1539,
+        0.4736,
+        0.6941
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6826
+      },
+      "switch": 0.8486,
+      "risk": 0.6377,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3379,
+      "tau": 0.8528
+    },
+    {
+      "id": "a228",
+      "segment": "loyalist",
+      "budget": 3.3342,
+      "alpha": 0.4415,
+      "w": [
+        0.2286,
+        0.8515,
+        0.2979,
+        0.4056
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9933
+      },
+      "switch": 0.6112,
+      "risk": 0.726,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1702,
+      "tau": 0.6673
+    },
+    {
+      "id": "a229",
+      "segment": "loyalist",
+      "budget": 1.622,
+      "alpha": 0.5395,
+      "w": [
+        0.4831,
+        1.3252,
+        0.2614,
+        0.7883
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.574
+      },
+      "switch": 0.9567,
+      "risk": 0.6072,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0942,
+      "tau": 0.5047
+    },
+    {
+      "id": "a230",
+      "segment": "loyalist",
+      "budget": 1.2397,
+      "alpha": 0.5742,
+      "w": [
+        0.4189,
+        1.3819,
+        0.2403,
+        0.6961
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6286
+      },
+      "switch": 0.7715,
+      "risk": 0.5282,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3443,
+      "tau": 0.5733
+    },
+    {
+      "id": "a231",
+      "segment": "loyalist",
+      "budget": 2.3457,
+      "alpha": 0.4952,
+      "w": [
+        0.1513,
+        1.3584,
+        0.4023,
+        0.8098
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.827
+      },
+      "switch": 0.855,
+      "risk": 0.6865,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3682,
+      "tau": 0.6113
+    },
+    {
+      "id": "a232",
+      "segment": "loyalist",
+      "budget": 0.4975,
+      "alpha": 0.4819,
+      "w": [
+        0.1265,
+        0.9448,
+        0.2243,
+        0.6744
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5802
+      },
+      "switch": 0.8052,
+      "risk": 0.7163,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1857,
+      "tau": 0.7196
+    },
+    {
+      "id": "a233",
+      "segment": "loyalist",
+      "budget": 2.8151,
+      "alpha": 0.4419,
+      "w": [
+        0.362,
+        0.9261,
+        0.5917,
+        0.449
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9146
+      },
+      "switch": 0.797,
+      "risk": 0.4979,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0507,
+      "tau": 0.8098
+    },
+    {
+      "id": "a234",
+      "segment": "loyalist",
+      "budget": 2.9499,
+      "alpha": 0.3332,
+      "w": [
+        0.1318,
+        1.2505,
+        0.3172,
+        0.8447
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.881
+      },
+      "switch": 0.8491,
+      "risk": 0.5114,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5689,
+      "tau": 0.5366
+    },
+    {
+      "id": "a235",
+      "segment": "loyalist",
+      "budget": 1.6308,
+      "alpha": 0.3704,
+      "w": [
+        0.2573,
+        1.2454,
+        0.3897,
+        0.6854
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6571
+      },
+      "switch": 0.5706,
+      "risk": 0.5068,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3615,
+      "tau": 0.6512
+    },
+    {
+      "id": "a236",
+      "segment": "loyalist",
+      "budget": 3.9495,
+      "alpha": 0.3193,
+      "w": [
+        0.2016,
+        0.9381,
+        0.5941,
+        0.753
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8089
+      },
+      "switch": 0.5025,
+      "risk": 0.4737,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2278,
+      "tau": 0.8697
+    },
+    {
+      "id": "a237",
+      "segment": "loyalist",
+      "budget": 3.8236,
+      "alpha": 0.4342,
+      "w": [
+        0.3998,
+        1.3852,
+        0.3844,
+        0.7213
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9593
+      },
+      "switch": 0.6243,
+      "risk": 0.7546,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3891,
+      "tau": 0.8131
+    },
+    {
+      "id": "a238",
+      "segment": "loyalist",
+      "budget": 3.073,
+      "alpha": 0.4487,
+      "w": [
+        0.3469,
+        0.891,
+        0.2862,
+        0.5349
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7989
+      },
+      "switch": 0.721,
+      "risk": 0.4978,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2244,
+      "tau": 0.6784
+    },
+    {
+      "id": "a239",
+      "segment": "loyalist",
+      "budget": 2.0485,
+      "alpha": 0.3546,
+      "w": [
+        0.3927,
+        1.0691,
+        0.2065,
+        0.882
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9079
+      },
+      "switch": 0.8618,
+      "risk": 0.7476,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2025,
+      "tau": 0.7444
+    },
+    {
+      "id": "a240",
+      "segment": "loyalist",
+      "budget": 3.044,
+      "alpha": 0.3802,
+      "w": [
+        0.1888,
+        0.8683,
+        0.4637,
+        0.7905
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8805
+      },
+      "switch": 0.6581,
+      "risk": 0.4821,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3281,
+      "tau": 0.8676
+    },
+    {
+      "id": "a241",
+      "segment": "loyalist",
+      "budget": 4.3741,
+      "alpha": 0.5748,
+      "w": [
+        0.4401,
+        1.3787,
+        0.3862,
+        0.4237
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5418
+      },
+      "switch": 0.6951,
+      "risk": 0.5031,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5719,
+      "tau": 0.5782
+    },
+    {
+      "id": "a242",
+      "segment": "loyalist",
+      "budget": 4.7969,
+      "alpha": 0.5283,
+      "w": [
+        0.3564,
+        1.2056,
+        0.3326,
+        0.7232
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5933
+      },
+      "switch": 0.9689,
+      "risk": 0.5207,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4267,
+      "tau": 0.7626
+    },
+    {
+      "id": "a243",
+      "segment": "loyalist",
+      "budget": 2.2565,
+      "alpha": 0.4897,
+      "w": [
+        0.1638,
+        1.204,
+        0.3082,
+        0.5364
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5811
+      },
+      "switch": 0.6662,
+      "risk": 0.5325,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1143,
+      "tau": 0.5772
+    },
+    {
+      "id": "a244",
+      "segment": "loyalist",
+      "budget": 2.7087,
+      "alpha": 0.3387,
+      "w": [
+        0.3756,
+        1.3664,
+        0.3707,
+        0.8506
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5492
+      },
+      "switch": 0.5215,
+      "risk": 0.6885,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5058,
+      "tau": 0.5227
+    },
+    {
+      "id": "a245",
+      "segment": "loyalist",
+      "budget": 3.8845,
+      "alpha": 0.413,
+      "w": [
+        0.2213,
+        0.9038,
+        0.5984,
+        0.4318
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9135
+      },
+      "switch": 0.8197,
+      "risk": 0.694,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5151,
+      "tau": 0.5735
+    },
+    {
+      "id": "a246",
+      "segment": "loyalist",
+      "budget": 0.0041,
+      "alpha": 0.4796,
+      "w": [
+        0.2415,
+        0.8743,
+        0.2745,
+        0.5659
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5351
+      },
+      "switch": 0.5285,
+      "risk": 0.7664,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5893,
+      "tau": 0.8857
+    },
+    {
+      "id": "a247",
+      "segment": "loyalist",
+      "budget": 0.7129,
+      "alpha": 0.5145,
+      "w": [
+        0.3403,
+        1.2144,
+        0.2385,
+        0.4943
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5383
+      },
+      "switch": 0.8021,
+      "risk": 0.7946,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4265,
+      "tau": 0.8938
+    },
+    {
+      "id": "a248",
+      "segment": "loyalist",
+      "budget": 3.3901,
+      "alpha": 0.3121,
+      "w": [
+        0.4468,
+        1.0188,
+        0.2017,
+        0.6536
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9685
+      },
+      "switch": 0.6287,
+      "risk": 0.5966,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0346,
+      "tau": 0.5322
+    },
+    {
+      "id": "a249",
+      "segment": "loyalist",
+      "budget": 3.6351,
+      "alpha": 0.5592,
+      "w": [
+        0.1573,
+        0.973,
+        0.278,
+        0.4134
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7767
+      },
+      "switch": 0.85,
+      "risk": 0.6592,
+      "incumbent": "free_tool",
+      "outside_utility": 0.333,
+      "tau": 0.5376
+    },
+    {
+      "id": "a250",
+      "segment": "loyalist",
+      "budget": 0.7715,
+      "alpha": 0.5795,
+      "w": [
+        0.4046,
+        1.3536,
+        0.5667,
+        0.7247
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9641
+      },
+      "switch": 0.7084,
+      "risk": 0.4014,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0657,
+      "tau": 0.5381
+    },
+    {
+      "id": "a251",
+      "segment": "loyalist",
+      "budget": 1.7585,
+      "alpha": 0.5104,
+      "w": [
+        0.4163,
+        1.1541,
+        0.2586,
+        0.774
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6774
+      },
+      "switch": 0.5065,
+      "risk": 0.5122,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1645,
+      "tau": 0.8247
+    },
+    {
+      "id": "a252",
+      "segment": "loyalist",
+      "budget": 3.7996,
+      "alpha": 0.5087,
+      "w": [
+        0.1556,
+        1.2847,
+        0.4709,
+        0.4974
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.824
+      },
+      "switch": 0.7418,
+      "risk": 0.5757,
+      "incumbent": "free_tool",
+      "outside_utility": 0.311,
+      "tau": 0.54
+    },
+    {
+      "id": "a253",
+      "segment": "loyalist",
+      "budget": 0.8213,
+      "alpha": 0.3398,
+      "w": [
+        0.4816,
+        0.9709,
+        0.3421,
+        0.561
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9491
+      },
+      "switch": 0.7815,
+      "risk": 0.7677,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0689,
+      "tau": 0.7225
+    },
+    {
+      "id": "a254",
+      "segment": "loyalist",
+      "budget": 1.7277,
+      "alpha": 0.5406,
+      "w": [
+        0.4518,
+        1.0835,
+        0.5885,
+        0.6765
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6355
+      },
+      "switch": 0.7445,
+      "risk": 0.4149,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0609,
+      "tau": 0.6235
+    },
+    {
+      "id": "a255",
+      "segment": "loyalist",
+      "budget": 2.8266,
+      "alpha": 0.3129,
+      "w": [
+        0.1317,
+        1.2177,
+        0.2287,
+        0.6385
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6693
+      },
+      "switch": 0.614,
+      "risk": 0.4755,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5709,
+      "tau": 0.5561
+    },
+    {
+      "id": "a256",
+      "segment": "loyalist",
+      "budget": 4.7984,
+      "alpha": 0.4784,
+      "w": [
+        0.3567,
+        1.226,
+        0.4816,
+        0.8099
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7417
+      },
+      "switch": 0.7667,
+      "risk": 0.5295,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3988,
+      "tau": 0.5134
+    },
+    {
+      "id": "a257",
+      "segment": "loyalist",
+      "budget": 1.3782,
+      "alpha": 0.3283,
+      "w": [
+        0.1763,
+        1.1832,
+        0.4514,
+        0.6105
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5451
+      },
+      "switch": 0.7167,
+      "risk": 0.5411,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3474,
+      "tau": 0.6966
+    },
+    {
+      "id": "a258",
+      "segment": "loyalist",
+      "budget": 2.4349,
+      "alpha": 0.5899,
+      "w": [
+        0.4025,
+        1.0982,
+        0.3917,
+        0.4132
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9713
+      },
+      "switch": 0.6596,
+      "risk": 0.5024,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4312,
+      "tau": 0.5189
+    },
+    {
+      "id": "a259",
+      "segment": "loyalist",
+      "budget": 0.3094,
+      "alpha": 0.3077,
+      "w": [
+        0.3398,
+        0.8429,
+        0.5734,
+        0.8685
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.773
+      },
+      "switch": 0.8083,
+      "risk": 0.5168,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4425,
+      "tau": 0.5407
+    },
+    {
+      "id": "a260",
+      "segment": "loyalist",
+      "budget": 0.4278,
+      "alpha": 0.3934,
+      "w": [
+        0.105,
+        1.0604,
+        0.4831,
+        0.8007
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8022
+      },
+      "switch": 0.9234,
+      "risk": 0.5626,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3039,
+      "tau": 0.5892
+    },
+    {
+      "id": "a261",
+      "segment": "loyalist",
+      "budget": 4.7207,
+      "alpha": 0.3825,
+      "w": [
+        0.1105,
+        0.9456,
+        0.3467,
+        0.5757
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7623
+      },
+      "switch": 0.9416,
+      "risk": 0.5169,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2041,
+      "tau": 0.8287
+    },
+    {
+      "id": "a262",
+      "segment": "loyalist",
+      "budget": 0.788,
+      "alpha": 0.3311,
+      "w": [
+        0.3012,
+        1.2031,
+        0.5182,
+        0.6948
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8869
+      },
+      "switch": 0.6964,
+      "risk": 0.4131,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0232,
+      "tau": 0.6316
+    },
+    {
+      "id": "a263",
+      "segment": "loyalist",
+      "budget": 2.4775,
+      "alpha": 0.4069,
+      "w": [
+        0.3242,
+        1.0884,
+        0.4712,
+        0.7335
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.659
+      },
+      "switch": 0.6731,
+      "risk": 0.6341,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1888,
+      "tau": 0.6321
+    },
+    {
+      "id": "a264",
+      "segment": "loyalist",
+      "budget": 3.4702,
+      "alpha": 0.4942,
+      "w": [
+        0.154,
+        1.0646,
+        0.5571,
+        0.4182
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9276
+      },
+      "switch": 0.5816,
+      "risk": 0.6029,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0061,
+      "tau": 0.8662
+    },
+    {
+      "id": "a265",
+      "segment": "loyalist",
+      "budget": 2.2746,
+      "alpha": 0.5863,
+      "w": [
+        0.2147,
+        1.3198,
+        0.569,
+        0.6784
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6013
+      },
+      "switch": 0.8426,
+      "risk": 0.6196,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2636,
+      "tau": 0.6074
+    },
+    {
+      "id": "a266",
+      "segment": "loyalist",
+      "budget": 0.6914,
+      "alpha": 0.5096,
+      "w": [
+        0.4896,
+        0.817,
+        0.4962,
+        0.8635
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5374
+      },
+      "switch": 0.5551,
+      "risk": 0.6768,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0413,
+      "tau": 0.8338
+    },
+    {
+      "id": "a267",
+      "segment": "loyalist",
+      "budget": 2.6171,
+      "alpha": 0.5722,
+      "w": [
+        0.4512,
+        1.2875,
+        0.4064,
+        0.5259
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.753
+      },
+      "switch": 0.5504,
+      "risk": 0.6635,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3067,
+      "tau": 0.5218
+    },
+    {
+      "id": "a268",
+      "segment": "loyalist",
+      "budget": 1.4976,
+      "alpha": 0.3696,
+      "w": [
+        0.348,
+        1.2721,
+        0.2229,
+        0.8251
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9304
+      },
+      "switch": 0.6711,
+      "risk": 0.6636,
+      "incumbent": "free_tool",
+      "outside_utility": 0.0925,
+      "tau": 0.7115
+    },
+    {
+      "id": "a269",
+      "segment": "loyalist",
+      "budget": 0.4318,
+      "alpha": 0.5635,
+      "w": [
+        0.4697,
+        1.293,
+        0.425,
+        0.6788
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9923
+      },
+      "switch": 0.624,
+      "risk": 0.4304,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1973,
+      "tau": 0.6289
+    },
+    {
+      "id": "a270",
+      "segment": "loyalist",
+      "budget": 0.0354,
+      "alpha": 0.4789,
+      "w": [
+        0.2056,
+        0.9127,
+        0.2162,
+        0.5822
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9395
+      },
+      "switch": 0.6683,
+      "risk": 0.6716,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1969,
+      "tau": 0.8287
+    },
+    {
+      "id": "a271",
+      "segment": "loyalist",
+      "budget": 3.4594,
+      "alpha": 0.4678,
+      "w": [
+        0.1004,
+        0.8211,
+        0.5963,
+        0.7911
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9688
+      },
+      "switch": 0.9512,
+      "risk": 0.4082,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2707,
+      "tau": 0.8158
+    },
+    {
+      "id": "a272",
+      "segment": "loyalist",
+      "budget": 0.0336,
+      "alpha": 0.3865,
+      "w": [
+        0.4005,
+        1.2758,
+        0.4479,
+        0.5506
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6552
+      },
+      "switch": 0.9834,
+      "risk": 0.5757,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3314,
+      "tau": 0.6638
+    },
+    {
+      "id": "a273",
+      "segment": "loyalist",
+      "budget": 2.7634,
+      "alpha": 0.4297,
+      "w": [
+        0.4307,
+        1.3454,
+        0.5728,
+        0.6821
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7211
+      },
+      "switch": 0.8526,
+      "risk": 0.7353,
+      "incumbent": "free_tool",
+      "outside_utility": 0.42,
+      "tau": 0.7999
+    },
+    {
+      "id": "a274",
+      "segment": "loyalist",
+      "budget": 3.382,
+      "alpha": 0.5238,
+      "w": [
+        0.1835,
+        1.099,
+        0.4353,
+        0.4012
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.928
+      },
+      "switch": 0.805,
+      "risk": 0.4517,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4302,
+      "tau": 0.8033
+    },
+    {
+      "id": "a275",
+      "segment": "loyalist",
+      "budget": 1.9602,
+      "alpha": 0.5563,
+      "w": [
+        0.2656,
+        1.1423,
+        0.2003,
+        0.7224
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8591
+      },
+      "switch": 0.7836,
+      "risk": 0.5986,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4088,
+      "tau": 0.6112
+    },
+    {
+      "id": "a276",
+      "segment": "loyalist",
+      "budget": 4.7954,
+      "alpha": 0.5122,
+      "w": [
+        0.4952,
+        1.3828,
+        0.5676,
+        0.7777
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8047
+      },
+      "switch": 0.5861,
+      "risk": 0.6173,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3125,
+      "tau": 0.8473
+    },
+    {
+      "id": "a277",
+      "segment": "loyalist",
+      "budget": 0.5483,
+      "alpha": 0.4143,
+      "w": [
+        0.3024,
+        1.0594,
+        0.2434,
+        0.4768
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9188
+      },
+      "switch": 0.7422,
+      "risk": 0.4195,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2841,
+      "tau": 0.5658
+    },
+    {
+      "id": "a278",
+      "segment": "loyalist",
+      "budget": 3.5256,
+      "alpha": 0.5386,
+      "w": [
+        0.1913,
+        1.1553,
+        0.2618,
+        0.5518
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9444
+      },
+      "switch": 0.772,
+      "risk": 0.7544,
+      "incumbent": "free_tool",
+      "outside_utility": 0.198,
+      "tau": 0.6884
+    },
+    {
+      "id": "a279",
+      "segment": "loyalist",
+      "budget": 2.4004,
+      "alpha": 0.5993,
+      "w": [
+        0.1458,
+        1.3112,
+        0.5455,
+        0.6766
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.672
+      },
+      "switch": 0.7596,
+      "risk": 0.517,
+      "incumbent": "free_tool",
+      "outside_utility": 0.299,
+      "tau": 0.8703
+    },
+    {
+      "id": "a280",
+      "segment": "loyalist",
+      "budget": 3.1135,
+      "alpha": 0.4543,
+      "w": [
+        0.3844,
+        1.1024,
+        0.5618,
+        0.4922
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9867
+      },
+      "switch": 0.9061,
+      "risk": 0.7443,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5023,
+      "tau": 0.6227
+    },
+    {
+      "id": "a281",
+      "segment": "loyalist",
+      "budget": 3.8097,
+      "alpha": 0.3421,
+      "w": [
+        0.2228,
+        1.0674,
+        0.3289,
+        0.5935
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9101
+      },
+      "switch": 0.6283,
+      "risk": 0.6981,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4594,
+      "tau": 0.8168
+    },
+    {
+      "id": "a282",
+      "segment": "loyalist",
+      "budget": 2.0085,
+      "alpha": 0.5167,
+      "w": [
+        0.4661,
+        1.2804,
+        0.3562,
+        0.6421
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8897
+      },
+      "switch": 0.6463,
+      "risk": 0.7216,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4836,
+      "tau": 0.5347
+    },
+    {
+      "id": "a283",
+      "segment": "loyalist",
+      "budget": 0.222,
+      "alpha": 0.5993,
+      "w": [
+        0.4478,
+        1.3297,
+        0.5805,
+        0.6192
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6434
+      },
+      "switch": 0.565,
+      "risk": 0.6005,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5613,
+      "tau": 0.5016
+    },
+    {
+      "id": "a284",
+      "segment": "loyalist",
+      "budget": 0.716,
+      "alpha": 0.3739,
+      "w": [
+        0.1796,
+        0.9355,
+        0.4624,
+        0.5638
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8075
+      },
+      "switch": 0.9451,
+      "risk": 0.641,
+      "incumbent": "free_tool",
+      "outside_utility": 0.2193,
+      "tau": 0.5639
+    },
+    {
+      "id": "a285",
+      "segment": "loyalist",
+      "budget": 1.6029,
+      "alpha": 0.5893,
+      "w": [
+        0.3487,
+        0.9665,
+        0.3804,
+        0.8178
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8342
+      },
+      "switch": 0.7803,
+      "risk": 0.7541,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3856,
+      "tau": 0.5759
+    },
+    {
+      "id": "a286",
+      "segment": "loyalist",
+      "budget": 0.5319,
+      "alpha": 0.5895,
+      "w": [
+        0.3395,
+        1.0494,
+        0.4356,
+        0.4309
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.9111
+      },
+      "switch": 0.6083,
+      "risk": 0.7218,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1659,
+      "tau": 0.5121
+    },
+    {
+      "id": "a287",
+      "segment": "loyalist",
+      "budget": 4.0792,
+      "alpha": 0.3529,
+      "w": [
+        0.1207,
+        1.2535,
+        0.34,
+        0.5947
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6235
+      },
+      "switch": 0.9296,
+      "risk": 0.5189,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1855,
+      "tau": 0.5813
+    },
+    {
+      "id": "a288",
+      "segment": "loyalist",
+      "budget": 1.5883,
+      "alpha": 0.3249,
+      "w": [
+        0.1634,
+        1.0502,
+        0.5518,
+        0.4286
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6063
+      },
+      "switch": 0.9542,
+      "risk": 0.756,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1443,
+      "tau": 0.6679
+    },
+    {
+      "id": "a289",
+      "segment": "loyalist",
+      "budget": 1.0561,
+      "alpha": 0.3386,
+      "w": [
+        0.252,
+        1.1455,
+        0.344,
+        0.7054
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6481
+      },
+      "switch": 0.6729,
+      "risk": 0.7163,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1932,
+      "tau": 0.7286
+    },
+    {
+      "id": "a290",
+      "segment": "loyalist",
+      "budget": 1.3908,
+      "alpha": 0.316,
+      "w": [
+        0.3951,
+        0.9026,
+        0.3703,
+        0.6435
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5922
+      },
+      "switch": 0.5473,
+      "risk": 0.5392,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3691,
+      "tau": 0.6526
+    },
+    {
+      "id": "a291",
+      "segment": "loyalist",
+      "budget": 0.1946,
+      "alpha": 0.4801,
+      "w": [
+        0.1369,
+        1.1255,
+        0.5008,
+        0.6118
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6497
+      },
+      "switch": 0.5237,
+      "risk": 0.4099,
+      "incumbent": "free_tool",
+      "outside_utility": 0.53,
+      "tau": 0.5976
+    },
+    {
+      "id": "a292",
+      "segment": "loyalist",
+      "budget": 2.8703,
+      "alpha": 0.5053,
+      "w": [
+        0.1243,
+        0.8919,
+        0.3325,
+        0.735
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7195
+      },
+      "switch": 0.8671,
+      "risk": 0.747,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5953,
+      "tau": 0.8017
+    },
+    {
+      "id": "a293",
+      "segment": "loyalist",
+      "budget": 4.2609,
+      "alpha": 0.5497,
+      "w": [
+        0.3921,
+        1.2811,
+        0.5739,
+        0.6376
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.8191
+      },
+      "switch": 0.7575,
+      "risk": 0.7404,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4918,
+      "tau": 0.8197
+    },
+    {
+      "id": "a294",
+      "segment": "loyalist",
+      "budget": 4.8094,
+      "alpha": 0.3747,
+      "w": [
+        0.3838,
+        1.2542,
+        0.5745,
+        0.8535
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.7868
+      },
+      "switch": 0.7896,
+      "risk": 0.4669,
+      "incumbent": "free_tool",
+      "outside_utility": 0.153,
+      "tau": 0.7899
+    },
+    {
+      "id": "a295",
+      "segment": "loyalist",
+      "budget": 3.979,
+      "alpha": 0.4324,
+      "w": [
+        0.1845,
+        0.9134,
+        0.5426,
+        0.6554
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5451
+      },
+      "switch": 0.8585,
+      "risk": 0.5001,
+      "incumbent": "free_tool",
+      "outside_utility": 0.1857,
+      "tau": 0.5801
+    },
+    {
+      "id": "a296",
+      "segment": "loyalist",
+      "budget": 0.4243,
+      "alpha": 0.4535,
+      "w": [
+        0.2803,
+        1.2508,
+        0.3858,
+        0.5719
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.6308
+      },
+      "switch": 0.6391,
+      "risk": 0.7711,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5929,
+      "tau": 0.6308
+    },
+    {
+      "id": "a297",
+      "segment": "loyalist",
+      "budget": 0.442,
+      "alpha": 0.3746,
+      "w": [
+        0.1234,
+        1.274,
+        0.405,
+        0.5685
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.831
+      },
+      "switch": 0.8153,
+      "risk": 0.7759,
+      "incumbent": "free_tool",
+      "outside_utility": 0.4084,
+      "tau": 0.8271
+    },
+    {
+      "id": "a298",
+      "segment": "loyalist",
+      "budget": 3.9621,
+      "alpha": 0.4474,
+      "w": [
+        0.3818,
+        0.847,
+        0.5032,
+        0.8809
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5425
+      },
+      "switch": 0.9181,
+      "risk": 0.7732,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3149,
+      "tau": 0.8711
+    },
+    {
+      "id": "a299",
+      "segment": "loyalist",
+      "budget": 4.8011,
+      "alpha": 0.3384,
+      "w": [
+        0.2396,
+        1.2189,
+        0.2886,
+        0.5624
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5116
+      },
+      "switch": 0.5768,
+      "risk": 0.6249,
+      "incumbent": "free_tool",
+      "outside_utility": 0.3893,
+      "tau": 0.8113
+    },
+    {
+      "id": "a300",
+      "segment": "loyalist",
+      "budget": 2.0764,
+      "alpha": 0.382,
+      "w": [
+        0.1062,
+        0.924,
+        0.325,
+        0.4891
+      ],
+      "brand": {
+        "you": 0.0,
+        "free_tool": 0.5101
+      },
+      "switch": 0.5787,
+      "risk": 0.6664,
+      "incumbent": "free_tool",
+      "outside_utility": 0.5614,
+      "tau": 0.8193
+    }
+  ],
+  "meta": {
+    "source": "mock_fixture"
+  }
+}

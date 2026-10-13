@@ -1,0 +1,4489 @@
+{
+  "run_id": "run_saas_fixture",
+  "seed": 42,
+  "option_ids": [
+    "you",
+    "free_tool",
+    "chain_app",
+    "outside"
+  ],
+  "totals": {
+    "you": {
+      "count": 57,
+      "share": 0.19,
+      "p10": 0.1593,
+      "p50": 0.1833,
+      "p90": 0.2037
+    },
+    "free_tool": {
+      "count": 185,
+      "share": 0.6167,
+      "p10": 0.5823,
+      "p50": 0.6117,
+      "p90": 0.637
+    },
+    "chain_app": {
+      "count": 44,
+      "share": 0.1467,
+      "p10": 0.1267,
+      "p50": 0.14,
+      "p90": 0.1637
+    },
+    "outside": {
+      "count": 14,
+      "share": 0.0467,
+      "p10": 0.0467,
+      "p50": 0.07,
+      "p90": 0.08
+    }
+  },
+  "choices": [
+    {
+      "agent_id": "a1",
+      "segment": "budget",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.2738,
+      "components": {
+        "brand": 0.1572,
+        "feature": 2.7384,
+        "price": -1.1412,
+        "switch": -0.1384,
+        "risk": -0.047
+      }
+    },
+    {
+      "agent_id": "a2",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": 0.3576,
+      "components": {
+        "brand": 0.2895,
+        "feature": 1.3626,
+        "price": -0.0,
+        "switch": -0.2064,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a3",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": -0.0109,
+      "components": {
+        "brand": 0.1977,
+        "feature": 1.5804,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a4",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.1182,
+      "components": {
+        "brand": 0.3414,
+        "feature": 1.523,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a5",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.1798,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9388,
+        "price": -1.0188,
+        "switch": -0.3005,
+        "risk": -0.1448
+      }
+    },
+    {
+      "agent_id": "a6",
+      "segment": "budget",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.2638,
+      "components": {
+        "outside": 0.0349
+      }
+    },
+    {
+      "agent_id": "a7",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.1885,
+      "components": {
+        "brand": 0.1068,
+        "feature": 1.3267,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a8",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.346,
+      "components": {
+        "brand": 0.1263,
+        "feature": 1.27,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a9",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.5063,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4292,
+        "price": -1.0566,
+        "switch": -0.1918,
+        "risk": -0.1643
+      }
+    },
+    {
+      "agent_id": "a10",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.0009,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7904,
+        "price": -0.8514,
+        "switch": -0.2482,
+        "risk": -0.1194
+      }
+    },
+    {
+      "agent_id": "a11",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4108,
+      "components": {
+        "brand": 0.3876,
+        "feature": 1.2158,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a12",
+      "segment": "budget",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.4897,
+      "components": {
+        "outside": -0.1131
+      }
+    },
+    {
+      "agent_id": "a13",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.9784,
+      "components": {
+        "brand": 0.1691,
+        "feature": 1.5224,
+        "price": -0.0,
+        "switch": -0.2665,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a14",
+      "segment": "budget",
+      "choice": "chain_app",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.4323,
+      "components": {
+        "brand": 0.087,
+        "feature": 2.2674,
+        "price": -0.9996,
+        "switch": -0.3977,
+        "risk": -0.0735
+      }
+    },
+    {
+      "agent_id": "a15",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.096,
+      "components": {
+        "brand": 0.324,
+        "feature": 1.3371,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a16",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7872,
+      "components": {
+        "brand": 0.3915,
+        "feature": 1.3012,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a17",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 1.4897,
+      "components": {
+        "brand": 0.3146,
+        "feature": 1.4325,
+        "price": -0.0,
+        "switch": -0.1393,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a18",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.1829,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9712,
+        "price": -1.017,
+        "switch": -0.1318,
+        "risk": -0.0853
+      }
+    },
+    {
+      "agent_id": "a19",
+      "segment": "budget",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.009,
+      "components": {
+        "brand": 0.1594,
+        "feature": 2.1905,
+        "price": -1.4916,
+        "switch": -0.1698,
+        "risk": -0.0518
+      }
+    },
+    {
+      "agent_id": "a20",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.1725,
+      "components": {
+        "brand": 0.1744,
+        "feature": 1.4903,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a21",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4549,
+      "components": {
+        "brand": 0.1854,
+        "feature": 1.2092,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a22",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.4466,
+      "components": {
+        "brand": 0.3553,
+        "feature": 1.376,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a23",
+      "segment": "budget",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "free_tool",
+      "gap": -0.7466,
+      "components": {
+        "outside": 0.4416
+      }
+    },
+    {
+      "agent_id": "a24",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.6822,
+      "components": {
+        "brand": 0.2388,
+        "feature": 1.4445,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a25",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.2681,
+      "components": {
+        "brand": 0.1891,
+        "feature": 1.3073,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a26",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.4558,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.709,
+        "price": -1.1196,
+        "switch": -0.3582,
+        "risk": -0.0838
+      }
+    },
+    {
+      "agent_id": "a27",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.0752,
+      "components": {
+        "brand": 0.3348,
+        "feature": 1.6164,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a28",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8755,
+      "components": {
+        "brand": 0.3398,
+        "feature": 1.4294,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a29",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.0864,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9359,
+        "price": -0.8415,
+        "switch": -0.2093,
+        "risk": -0.1166
+      }
+    },
+    {
+      "agent_id": "a30",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.2565,
+      "components": {
+        "brand": 0.2438,
+        "feature": 1.5651,
+        "price": -0.0,
+        "switch": -0.396,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a31",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.0828,
+      "components": {
+        "brand": 0.3476,
+        "feature": 1.3468,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a32",
+      "segment": "budget",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "free_tool",
+      "gap": -1.564,
+      "components": {
+        "outside": -0.1768
+      }
+    },
+    {
+      "agent_id": "a33",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.0604,
+      "components": {
+        "brand": 0.1016,
+        "feature": 1.4383,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a34",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.2343,
+      "components": {
+        "brand": 0.1605,
+        "feature": 1.4323,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a35",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "free_tool",
+      "gap": 0.248,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8247,
+        "price": -0.6786,
+        "switch": -0.1127,
+        "risk": -0.2191
+      }
+    },
+    {
+      "agent_id": "a36",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.3547,
+      "components": {
+        "brand": 0.1435,
+        "feature": 1.5306,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a37",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.2415,
+      "components": {
+        "brand": 0.1834,
+        "feature": 1.1875,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a38",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 0.9838,
+      "components": {
+        "brand": 0.1677,
+        "feature": 1.138,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a39",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.5456,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6301,
+        "price": -0.9351,
+        "switch": -0.3763,
+        "risk": -0.1507
+      }
+    },
+    {
+      "agent_id": "a40",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": 0.0484,
+      "components": {
+        "brand": 0.1842,
+        "feature": 1.1212,
+        "price": -0.0,
+        "switch": -0.1519,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a41",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.6103,
+      "components": {
+        "brand": 0.3875,
+        "feature": 1.2762,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a42",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": 0.0236,
+      "components": {
+        "brand": 0.3509,
+        "feature": 1.2099,
+        "price": -0.0,
+        "switch": -0.2668,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a43",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": -0.5038,
+      "components": {
+        "brand": 0.1543,
+        "feature": 1.2727,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a44",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.0376,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7395,
+        "price": -0.6003,
+        "switch": -0.1174,
+        "risk": -0.126
+      }
+    },
+    {
+      "agent_id": "a45",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.2674,
+      "components": {
+        "brand": 0.3551,
+        "feature": 1.503,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a46",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.1875,
+      "components": {
+        "brand": 0.2345,
+        "feature": 1.2352,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a47",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": 0.0907,
+      "components": {
+        "brand": 0.389,
+        "feature": 1.6117,
+        "price": -0.0,
+        "switch": -0.36,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a48",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.1497,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0314,
+        "price": -1.2384,
+        "switch": -0.1123,
+        "risk": -0.1999
+      }
+    },
+    {
+      "agent_id": "a49",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.0135,
+      "components": {
+        "brand": 0.3774,
+        "feature": 1.3027,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a50",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.0558,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0817,
+        "price": -1.0971,
+        "switch": -0.3574,
+        "risk": -0.0608
+      }
+    },
+    {
+      "agent_id": "a51",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.4799,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7776,
+        "price": -1.1853,
+        "switch": -0.2771,
+        "risk": -0.1315
+      }
+    },
+    {
+      "agent_id": "a52",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 1.2411,
+      "components": {
+        "brand": 0.2224,
+        "feature": 1.5674,
+        "price": -0.0,
+        "switch": -0.2725,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a53",
+      "segment": "budget",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.8049,
+      "components": {
+        "brand": 0.0907,
+        "feature": 1.8644,
+        "price": -1.1976,
+        "switch": -0.2904,
+        "risk": -0.0406
+      }
+    },
+    {
+      "agent_id": "a54",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.0042,
+      "components": {
+        "brand": 0.2589,
+        "feature": 1.3538,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a55",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.8161,
+      "components": {
+        "brand": 0.2315,
+        "feature": 1.505,
+        "price": -0.0,
+        "switch": -0.3984,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a56",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7295,
+      "components": {
+        "brand": 0.2299,
+        "feature": 1.4965,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a57",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.2142,
+      "components": {
+        "brand": 0.1182,
+        "feature": 1.061,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a58",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5268,
+      "components": {
+        "brand": 0.2294,
+        "feature": 1.2914,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a59",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "free_tool",
+      "gap": 0.034,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5746,
+        "price": -0.7047,
+        "switch": -0.1142,
+        "risk": -0.0849
+      }
+    },
+    {
+      "agent_id": "a60",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.2431,
+      "components": {
+        "brand": 0.3548,
+        "feature": 1.3066,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a61",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6862,
+      "components": {
+        "brand": 0.3439,
+        "feature": 1.4735,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a62",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5544,
+      "components": {
+        "brand": 0.3124,
+        "feature": 1.1428,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a63",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": 0.0103,
+      "components": {
+        "brand": 0.3979,
+        "feature": 1.3619,
+        "price": -0.0,
+        "switch": -0.1381,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a64",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.2216,
+      "components": {
+        "brand": 0.1054,
+        "feature": 1.4048,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a65",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.1081,
+      "components": {
+        "brand": 0.2258,
+        "feature": 1.5839,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a66",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": -0.0503,
+      "components": {
+        "brand": 0.1599,
+        "feature": 1.2525,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a67",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.0974,
+      "components": {
+        "brand": 0.1314,
+        "feature": 1.5598,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a68",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.152,
+      "components": {
+        "brand": 0.1957,
+        "feature": 1.5046,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a69",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.7074,
+      "components": {
+        "brand": 0.2018,
+        "feature": 1.1835,
+        "price": -0.0,
+        "switch": -0.1731,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a70",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4437,
+      "components": {
+        "brand": 0.2444,
+        "feature": 1.2012,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a71",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.013,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.4411,
+        "price": -1.1709,
+        "switch": -0.1913,
+        "risk": -0.1595
+      }
+    },
+    {
+      "agent_id": "a72",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "free_tool",
+      "gap": 0.083,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4934,
+        "price": -0.6588,
+        "switch": -0.2114,
+        "risk": -0.1329
+      }
+    },
+    {
+      "agent_id": "a73",
+      "segment": "budget",
+      "choice": "chain_app",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.1867,
+      "components": {
+        "brand": 0.0827,
+        "feature": 2.5791,
+        "price": -0.8364,
+        "switch": -0.235,
+        "risk": -0.0347
+      }
+    },
+    {
+      "agent_id": "a74",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4176,
+      "components": {
+        "brand": 0.3664,
+        "feature": 1.2805,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a75",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.1413,
+      "components": {
+        "brand": 0.2663,
+        "feature": 1.4085,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a76",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "free_tool",
+      "gap": -0.1673,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5707,
+        "price": -0.8748,
+        "switch": -0.2406,
+        "risk": -0.0875
+      }
+    },
+    {
+      "agent_id": "a77",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 1.5355,
+      "components": {
+        "brand": 0.3771,
+        "feature": 1.4748,
+        "price": -0.0,
+        "switch": -0.2917,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a78",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.2013,
+      "components": {
+        "brand": 0.1957,
+        "feature": 1.4776,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a79",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7512,
+      "components": {
+        "brand": 0.3677,
+        "feature": 1.4255,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a80",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6544,
+      "components": {
+        "brand": 0.3721,
+        "feature": 1.4343,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a81",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.569,
+      "components": {
+        "brand": 0.1593,
+        "feature": 1.3132,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a82",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7609,
+      "components": {
+        "brand": 0.3104,
+        "feature": 1.5069,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a83",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.6664,
+      "components": {
+        "brand": 0.2332,
+        "feature": 1.3914,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a84",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.0958,
+      "components": {
+        "brand": 0.3235,
+        "feature": 1.7645,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a85",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 1.1433,
+      "components": {
+        "brand": 0.3582,
+        "feature": 1.3587,
+        "price": -0.0,
+        "switch": -0.1023,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a86",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.2367,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6563,
+        "price": -0.6237,
+        "switch": -0.3799,
+        "risk": -0.2365
+      }
+    },
+    {
+      "agent_id": "a87",
+      "segment": "budget",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.8423,
+      "components": {
+        "outside": 0.5936
+      }
+    },
+    {
+      "agent_id": "a88",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "free_tool",
+      "gap": 0.4727,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9749,
+        "price": -0.6084,
+        "switch": -0.3017,
+        "risk": -0.1236
+      }
+    },
+    {
+      "agent_id": "a89",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.3032,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0432,
+        "price": -0.7713,
+        "switch": -0.1288,
+        "risk": -0.0877
+      }
+    },
+    {
+      "agent_id": "a90",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 0.9996,
+      "components": {
+        "brand": 0.1504,
+        "feature": 1.3046,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a91",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "free_tool",
+      "gap": -0.2574,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6679,
+        "price": -1.071,
+        "switch": -0.1658,
+        "risk": -0.0975
+      }
+    },
+    {
+      "agent_id": "a92",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.9441,
+      "components": {
+        "brand": 0.2961,
+        "feature": 1.3642,
+        "price": -0.0,
+        "switch": -0.2179,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a93",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6368,
+      "components": {
+        "brand": 0.3486,
+        "feature": 1.4772,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a94",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.2979,
+      "components": {
+        "brand": 0.2566,
+        "feature": 1.3439,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a95",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.5935,
+      "components": {
+        "brand": 0.3807,
+        "feature": 1.4959,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a96",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.1489,
+      "components": {
+        "brand": 0.1961,
+        "feature": 1.2412,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a97",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 0.6641,
+      "components": {
+        "brand": 0.1366,
+        "feature": 1.1248,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a98",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.0118,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0817,
+        "price": -0.7731,
+        "switch": -0.2481,
+        "risk": -0.2348
+      }
+    },
+    {
+      "agent_id": "a99",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.7054,
+      "components": {
+        "brand": 0.2076,
+        "feature": 1.2735,
+        "price": -0.0,
+        "switch": -0.2295,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a100",
+      "segment": "budget",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.2219,
+      "components": {
+        "outside": 0.3785
+      }
+    },
+    {
+      "agent_id": "a101",
+      "segment": "budget",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.1966,
+      "components": {
+        "outside": 0.5391
+      }
+    },
+    {
+      "agent_id": "a102",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 1.4258,
+      "components": {
+        "brand": 0.3556,
+        "feature": 1.3745,
+        "price": -0.0,
+        "switch": -0.2397,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a103",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.2488,
+      "components": {
+        "brand": 0.2609,
+        "feature": 1.2633,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a104",
+      "segment": "budget",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.3623,
+      "components": {
+        "outside": 0.4358
+      }
+    },
+    {
+      "agent_id": "a105",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6703,
+      "components": {
+        "brand": 0.307,
+        "feature": 1.1954,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a106",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.59,
+      "components": {
+        "brand": 0.3842,
+        "feature": 1.0824,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a107",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": 0.1523,
+      "components": {
+        "brand": 0.3876,
+        "feature": 1.2949,
+        "price": -0.0,
+        "switch": -0.3117,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a108",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.3742,
+      "components": {
+        "brand": 0.3747,
+        "feature": 1.4149,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a109",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.2725,
+      "components": {
+        "brand": 0.349,
+        "feature": 1.3601,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a110",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.1012,
+      "components": {
+        "brand": 0.2159,
+        "feature": 1.4799,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a111",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.8598,
+      "components": {
+        "brand": 0.1656,
+        "feature": 1.2443,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a112",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 1.3834,
+      "components": {
+        "brand": 0.1606,
+        "feature": 1.5864,
+        "price": -0.0,
+        "switch": -0.2853,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a113",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5903,
+      "components": {
+        "brand": 0.1548,
+        "feature": 1.4184,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a114",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.2994,
+      "components": {
+        "brand": 0.2525,
+        "feature": 1.1843,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a115",
+      "segment": "budget",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.0555,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7356,
+        "price": -0.7038,
+        "switch": -0.1181,
+        "risk": -0.208
+      }
+    },
+    {
+      "agent_id": "a116",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.59,
+      "components": {
+        "brand": 0.3882,
+        "feature": 1.3902,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a117",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7089,
+      "components": {
+        "brand": 0.3684,
+        "feature": 1.2986,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a118",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.3012,
+      "components": {
+        "brand": 0.2435,
+        "feature": 1.3792,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a119",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7799,
+      "components": {
+        "brand": 0.3462,
+        "feature": 1.5473,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a120",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.388,
+      "components": {
+        "brand": 0.2108,
+        "feature": 1.1372,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a121",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.2083,
+      "components": {
+        "brand": 0.2243,
+        "feature": 3.439,
+        "price": -1.1148,
+        "switch": -0.0,
+        "risk": -0.0398
+      }
+    },
+    {
+      "agent_id": "a122",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.6009,
+      "components": {
+        "brand": 0.4619,
+        "feature": 3.2013,
+        "price": -0.6912,
+        "switch": -0.0,
+        "risk": -0.0361
+      }
+    },
+    {
+      "agent_id": "a123",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.736,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.517,
+        "price": -0.801,
+        "switch": -0.4502,
+        "risk": -0.1418
+      }
+    },
+    {
+      "agent_id": "a124",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.0555,
+      "components": {
+        "brand": 0.1929,
+        "feature": 1.6486,
+        "price": -0.0,
+        "switch": -0.2794,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a125",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.5077,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9322,
+        "price": -0.6885,
+        "switch": -0.2624,
+        "risk": -0.1223
+      }
+    },
+    {
+      "agent_id": "a126",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.7712,
+      "components": {
+        "brand": 0.4585,
+        "feature": 2.6734,
+        "price": -0.912,
+        "switch": -0.0,
+        "risk": -0.0593
+      }
+    },
+    {
+      "agent_id": "a127",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.0273,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9651,
+        "price": -0.9099,
+        "switch": -0.2868,
+        "risk": -0.1555
+      }
+    },
+    {
+      "agent_id": "a128",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.1448,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8562,
+        "price": -0.6102,
+        "switch": -0.2105,
+        "risk": -0.0794
+      }
+    },
+    {
+      "agent_id": "a129",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.2291,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0404,
+        "price": -0.9864,
+        "switch": -0.428,
+        "risk": -0.0754
+      }
+    },
+    {
+      "agent_id": "a130",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": -0.0627,
+      "components": {
+        "brand": 0.0236,
+        "feature": 1.8896,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a131",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.5141,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0534,
+        "price": -1.0251,
+        "switch": -0.4882,
+        "risk": -0.1466
+      }
+    },
+    {
+      "agent_id": "a132",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.3106,
+      "components": {
+        "brand": 0.2852,
+        "feature": 3.413,
+        "price": -0.9984,
+        "switch": -0.3148,
+        "risk": -0.0592
+      }
+    },
+    {
+      "agent_id": "a133",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.4984,
+      "components": {
+        "brand": 0.4136,
+        "feature": 2.9531,
+        "price": -1.1088,
+        "switch": -0.0,
+        "risk": -0.0222
+      }
+    },
+    {
+      "agent_id": "a134",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": 0.3522,
+      "components": {
+        "brand": 0.1771,
+        "feature": 1.7603,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a135",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.0275,
+      "components": {
+        "brand": 0.0899,
+        "feature": 1.7692,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a136",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.1296,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.6845,
+        "price": -0.5391,
+        "switch": -0.227,
+        "risk": -0.0744
+      }
+    },
+    {
+      "agent_id": "a137",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": -0.2632,
+      "components": {
+        "brand": 0.1044,
+        "feature": 1.9064,
+        "price": -0.0,
+        "switch": -0.4138,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a138",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.742,
+      "components": {
+        "brand": 0.1713,
+        "feature": 1.5395,
+        "price": -0.0,
+        "switch": -0.2233,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a139",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.282,
+      "components": {
+        "brand": 0.3831,
+        "feature": 3.0736,
+        "price": -0.8484,
+        "switch": -0.2405,
+        "risk": -0.0477
+      }
+    },
+    {
+      "agent_id": "a140",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.5624,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6779,
+        "price": -0.7074,
+        "switch": -0.3637,
+        "risk": -0.1513
+      }
+    },
+    {
+      "agent_id": "a141",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.4486,
+      "components": {
+        "brand": 0.3547,
+        "feature": 2.9026,
+        "price": -1.0128,
+        "switch": -0.0,
+        "risk": -0.0397
+      }
+    },
+    {
+      "agent_id": "a142",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.4272,
+      "components": {
+        "brand": 0.0064,
+        "feature": 1.5084,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a143",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.7248,
+      "components": {
+        "brand": 0.3501,
+        "feature": 3.1369,
+        "price": -1.1388,
+        "switch": -0.0,
+        "risk": -0.06
+      }
+    },
+    {
+      "agent_id": "a144",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.206,
+      "components": {
+        "brand": 0.458,
+        "feature": 3.556,
+        "price": -1.0896,
+        "switch": -0.2612,
+        "risk": -0.0411
+      }
+    },
+    {
+      "agent_id": "a145",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.3987,
+      "components": {
+        "brand": 0.3642,
+        "feature": 3.2306,
+        "price": -1.428,
+        "switch": -0.0,
+        "risk": -0.0455
+      }
+    },
+    {
+      "agent_id": "a146",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.3702,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8775,
+        "price": -0.5301,
+        "switch": -0.2063,
+        "risk": -0.098
+      }
+    },
+    {
+      "agent_id": "a147",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.5806,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.989,
+        "price": -0.4842,
+        "switch": -0.3329,
+        "risk": -0.0686
+      }
+    },
+    {
+      "agent_id": "a148",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.7721,
+      "components": {
+        "brand": 0.4174,
+        "feature": 2.9586,
+        "price": -1.3596,
+        "switch": -0.0,
+        "risk": -0.0398
+      }
+    },
+    {
+      "agent_id": "a149",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.3943,
+      "components": {
+        "brand": 0.1221,
+        "feature": 1.5597,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a150",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.2154,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.576,
+        "price": -0.6048,
+        "switch": -0.4777,
+        "risk": -0.0842
+      }
+    },
+    {
+      "agent_id": "a151",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.2224,
+      "components": {
+        "brand": 0.3651,
+        "feature": 3.6352,
+        "price": -0.6096,
+        "switch": -0.4549,
+        "risk": -0.0446
+      }
+    },
+    {
+      "agent_id": "a152",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.4601,
+      "components": {
+        "brand": 0.3529,
+        "feature": 2.827,
+        "price": -1.2216,
+        "switch": -0.0,
+        "risk": -0.0493
+      }
+    },
+    {
+      "agent_id": "a153",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.5088,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.2286,
+        "price": -1.044,
+        "switch": -0.3856,
+        "risk": -0.1712
+      }
+    },
+    {
+      "agent_id": "a154",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.4581,
+      "components": {
+        "brand": 0.4261,
+        "feature": 2.9756,
+        "price": -0.6744,
+        "switch": -0.3005,
+        "risk": -0.0538
+      }
+    },
+    {
+      "agent_id": "a155",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.0446,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8417,
+        "price": -0.8604,
+        "switch": -0.2142,
+        "risk": -0.0944
+      }
+    },
+    {
+      "agent_id": "a156",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.3706,
+      "components": {
+        "brand": 0.2326,
+        "feature": 2.739,
+        "price": -0.8352,
+        "switch": -0.0,
+        "risk": -0.0383
+      }
+    },
+    {
+      "agent_id": "a157",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.4344,
+      "components": {
+        "brand": 0.1566,
+        "feature": 1.5365,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a158",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.5078,
+      "components": {
+        "brand": 0.3641,
+        "feature": 3.298,
+        "price": -1.1316,
+        "switch": -0.0,
+        "risk": -0.0595
+      }
+    },
+    {
+      "agent_id": "a159",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.6001,
+      "components": {
+        "brand": 0.4836,
+        "feature": 3.0391,
+        "price": -1.0032,
+        "switch": -0.0,
+        "risk": -0.0236
+      }
+    },
+    {
+      "agent_id": "a160",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.6003,
+      "components": {
+        "brand": 0.4566,
+        "feature": 2.9799,
+        "price": -0.8172,
+        "switch": -0.0,
+        "risk": -0.0591
+      }
+    },
+    {
+      "agent_id": "a161",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.5282,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0621,
+        "price": -0.576,
+        "switch": -0.415,
+        "risk": -0.116
+      }
+    },
+    {
+      "agent_id": "a162",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.2551,
+      "components": {
+        "brand": 0.2715,
+        "feature": 2.5947,
+        "price": -1.356,
+        "switch": -0.2392,
+        "risk": -0.0523
+      }
+    },
+    {
+      "agent_id": "a163",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.2259,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8145,
+        "price": -1.0755,
+        "switch": -0.2042,
+        "risk": -0.1713
+      }
+    },
+    {
+      "agent_id": "a164",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.4775,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4575,
+        "price": -0.6228,
+        "switch": -0.2984,
+        "risk": -0.0707
+      }
+    },
+    {
+      "agent_id": "a165",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": 0.2232,
+      "components": {
+        "brand": 0.1689,
+        "feature": 1.7006,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a166",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.5713,
+      "components": {
+        "brand": 0.154,
+        "feature": 1.7277,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a167",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.8529,
+      "components": {
+        "brand": 0.4638,
+        "feature": 2.8474,
+        "price": -0.636,
+        "switch": -0.0,
+        "risk": -0.037
+      }
+    },
+    {
+      "agent_id": "a168",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.0173,
+      "components": {
+        "brand": 0.4472,
+        "feature": 2.6915,
+        "price": -1.0224,
+        "switch": -0.4909,
+        "risk": -0.0514
+      }
+    },
+    {
+      "agent_id": "a169",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.2186,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.2797,
+        "price": -0.5571,
+        "switch": -0.4163,
+        "risk": -0.0671
+      }
+    },
+    {
+      "agent_id": "a170",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.5438,
+      "components": {
+        "brand": 0.2558,
+        "feature": 3.3212,
+        "price": -0.8172,
+        "switch": -0.0,
+        "risk": -0.0487
+      }
+    },
+    {
+      "agent_id": "a171",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.3201,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.3901,
+        "price": -0.7371,
+        "switch": -0.4842,
+        "risk": -0.0977
+      }
+    },
+    {
+      "agent_id": "a172",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": 0.3106,
+      "components": {
+        "brand": 0.0678,
+        "feature": 1.4172,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a173",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.3625,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7624,
+        "price": -0.6516,
+        "switch": -0.3158,
+        "risk": -0.0836
+      }
+    },
+    {
+      "agent_id": "a174",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.6621,
+      "components": {
+        "brand": 0.3566,
+        "feature": 3.4152,
+        "price": -1.0488,
+        "switch": -0.0,
+        "risk": -0.0223
+      }
+    },
+    {
+      "agent_id": "a175",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.3015,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0554,
+        "price": -0.5085,
+        "switch": -0.3887,
+        "risk": -0.1335
+      }
+    },
+    {
+      "agent_id": "a176",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "free_tool",
+      "gap": 0.3455,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0433,
+        "price": -0.8001,
+        "switch": -0.4111,
+        "risk": -0.0845
+      }
+    },
+    {
+      "agent_id": "a177",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -1.4608,
+      "components": {
+        "brand": 0.0079,
+        "feature": 1.7029,
+        "price": -0.0,
+        "switch": -0.4185,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a178",
+      "segment": "power",
+      "choice": "outside",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -2.4515,
+      "components": {
+        "outside": -0.2307
+      }
+    },
+    {
+      "agent_id": "a179",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.3808,
+      "components": {
+        "brand": 0.2098,
+        "feature": 3.037,
+        "price": -0.8412,
+        "switch": -0.0,
+        "risk": -0.0232
+      }
+    },
+    {
+      "agent_id": "a180",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.5482,
+      "components": {
+        "brand": 0.2416,
+        "feature": 3.1509,
+        "price": -1.0824,
+        "switch": -0.0,
+        "risk": -0.0547
+      }
+    },
+    {
+      "agent_id": "a181",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.4112,
+      "components": {
+        "brand": 0.4588,
+        "feature": 2.9616,
+        "price": -0.6576,
+        "switch": -0.0,
+        "risk": -0.021
+      }
+    },
+    {
+      "agent_id": "a182",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.1795,
+      "components": {
+        "brand": 0.245,
+        "feature": 3.4499,
+        "price": -0.9576,
+        "switch": -0.2155,
+        "risk": -0.0391
+      }
+    },
+    {
+      "agent_id": "a183",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.216,
+      "components": {
+        "brand": 0.0502,
+        "feature": 1.5604,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a184",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.2659,
+      "components": {
+        "brand": 0.1974,
+        "feature": 1.2108,
+        "price": -0.0,
+        "switch": -0.2135,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a185",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.067,
+      "components": {
+        "brand": 0.2372,
+        "feature": 2.9892,
+        "price": -0.6096,
+        "switch": -0.3789,
+        "risk": -0.0517
+      }
+    },
+    {
+      "agent_id": "a186",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.5882,
+      "components": {
+        "brand": 0.4924,
+        "feature": 3.0075,
+        "price": -1.0668,
+        "switch": -0.0,
+        "risk": -0.0395
+      }
+    },
+    {
+      "agent_id": "a187",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.2693,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6941,
+        "price": -1.0368,
+        "switch": -0.2206,
+        "risk": -0.143
+      }
+    },
+    {
+      "agent_id": "a188",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.5125,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.2385,
+        "price": -0.819,
+        "switch": -0.4268,
+        "risk": -0.1797
+      }
+    },
+    {
+      "agent_id": "a189",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.1697,
+      "components": {
+        "brand": 0.3972,
+        "feature": 2.7172,
+        "price": -1.08,
+        "switch": -0.3925,
+        "risk": -0.0516
+      }
+    },
+    {
+      "agent_id": "a190",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.2865,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.1954,
+        "price": -0.6219,
+        "switch": -0.4202,
+        "risk": -0.1593
+      }
+    },
+    {
+      "agent_id": "a191",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": -0.0784,
+      "components": {
+        "brand": 0.2429,
+        "feature": 2.9233,
+        "price": -1.326,
+        "switch": -0.312,
+        "risk": -0.0578
+      }
+    },
+    {
+      "agent_id": "a192",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.0744,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.1216,
+        "price": -0.9639,
+        "switch": -0.3206,
+        "risk": -0.0661
+      }
+    },
+    {
+      "agent_id": "a193",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.4688,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0769,
+        "price": -0.5832,
+        "switch": -0.2832,
+        "risk": -0.0664
+      }
+    },
+    {
+      "agent_id": "a194",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.6072,
+      "components": {
+        "brand": 0.451,
+        "feature": 2.627,
+        "price": -0.9888,
+        "switch": -0.0,
+        "risk": -0.0419
+      }
+    },
+    {
+      "agent_id": "a195",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.2896,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.4758,
+        "price": -0.8442,
+        "switch": -0.386,
+        "risk": -0.1367
+      }
+    },
+    {
+      "agent_id": "a196",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.4067,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7679,
+        "price": -0.9423,
+        "switch": -0.2749,
+        "risk": -0.1233
+      }
+    },
+    {
+      "agent_id": "a197",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.3827,
+      "components": {
+        "brand": 0.2856,
+        "feature": 3.2864,
+        "price": -0.8472,
+        "switch": -0.0,
+        "risk": -0.0305
+      }
+    },
+    {
+      "agent_id": "a198",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.3327,
+      "components": {
+        "brand": 0.23,
+        "feature": 2.7978,
+        "price": -1.2276,
+        "switch": -0.4987,
+        "risk": -0.0206
+      }
+    },
+    {
+      "agent_id": "a199",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.3181,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.2384,
+        "price": -0.8406,
+        "switch": -0.223,
+        "risk": -0.0833
+      }
+    },
+    {
+      "agent_id": "a200",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.3768,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.306,
+        "price": -0.7344,
+        "switch": -0.474,
+        "risk": -0.0706
+      }
+    },
+    {
+      "agent_id": "a201",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": 0.0178,
+      "components": {
+        "brand": 0.3843,
+        "feature": 2.754,
+        "price": -1.1604,
+        "switch": -0.3998,
+        "risk": -0.034
+      }
+    },
+    {
+      "agent_id": "a202",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "you",
+      "gap": 0.323,
+      "components": {
+        "brand": 0.4706,
+        "feature": 3.1669,
+        "price": -0.828,
+        "switch": -0.4879,
+        "risk": -0.0291
+      }
+    },
+    {
+      "agent_id": "a203",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.7696,
+      "components": {
+        "brand": 0.4663,
+        "feature": 2.6862,
+        "price": -0.888,
+        "switch": -0.0,
+        "risk": -0.0371
+      }
+    },
+    {
+      "agent_id": "a204",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.084,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.3708,
+        "price": -0.9018,
+        "switch": -0.4396,
+        "risk": -0.1397
+      }
+    },
+    {
+      "agent_id": "a205",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.3895,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.1438,
+        "price": -0.9189,
+        "switch": -0.4522,
+        "risk": -0.1076
+      }
+    },
+    {
+      "agent_id": "a206",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.4362,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7894,
+        "price": -1.0143,
+        "switch": -0.3416,
+        "risk": -0.1298
+      }
+    },
+    {
+      "agent_id": "a207",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "chain_app",
+      "runner_up": "chain_app",
+      "gap": -0.4562,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.2394,
+        "price": -0.6651,
+        "switch": -0.2716,
+        "risk": -0.1406
+      }
+    },
+    {
+      "agent_id": "a208",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -0.0309,
+      "components": {
+        "brand": 0.2096,
+        "feature": 3.5226,
+        "price": -1.3356,
+        "switch": -0.4612,
+        "risk": -0.0476
+      }
+    },
+    {
+      "agent_id": "a209",
+      "segment": "power",
+      "choice": "you",
+      "prev_choice": "free_tool",
+      "runner_up": "chain_app",
+      "gap": -0.429,
+      "components": {
+        "brand": 0.0,
+        "feature": 3.0749,
+        "price": -0.7452,
+        "switch": -0.2749,
+        "risk": -0.0767
+      }
+    },
+    {
+      "agent_id": "a210",
+      "segment": "power",
+      "choice": "chain_app",
+      "prev_choice": "chain_app",
+      "runner_up": "you",
+      "gap": 0.5526,
+      "components": {
+        "brand": 0.3231,
+        "feature": 3.0531,
+        "price": -0.6096,
+        "switch": -0.0,
+        "risk": -0.0514
+      }
+    },
+    {
+      "agent_id": "a211",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.769,
+      "components": {
+        "brand": 0.5908,
+        "feature": 1.2341,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a212",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5683,
+      "components": {
+        "brand": 0.7485,
+        "feature": 1.3222,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a213",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.2664,
+      "components": {
+        "brand": 0.8264,
+        "feature": 1.4835,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a214",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.1601,
+      "components": {
+        "brand": 0.9437,
+        "feature": 1.6056,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a215",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.1928,
+      "components": {
+        "brand": 0.6083,
+        "feature": 1.1455,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a216",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8586,
+      "components": {
+        "brand": 0.8134,
+        "feature": 1.6441,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a217",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4453,
+      "components": {
+        "brand": 0.5919,
+        "feature": 1.2695,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a218",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5538,
+      "components": {
+        "brand": 0.6439,
+        "feature": 1.4984,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a219",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7441,
+      "components": {
+        "brand": 0.7314,
+        "feature": 1.4026,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a220",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.3913,
+      "components": {
+        "brand": 0.6047,
+        "feature": 1.2471,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a221",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.0422,
+      "components": {
+        "brand": 0.8304,
+        "feature": 1.4605,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a222",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.1446,
+      "components": {
+        "brand": 0.9654,
+        "feature": 1.1914,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a223",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4064,
+      "components": {
+        "brand": 0.5809,
+        "feature": 1.1545,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a224",
+      "segment": "loyalist",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.4895,
+      "components": {
+        "outside": 0.5847
+      }
+    },
+    {
+      "agent_id": "a225",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7553,
+      "components": {
+        "brand": 0.6896,
+        "feature": 1.6194,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a226",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.3362,
+      "components": {
+        "brand": 0.6221,
+        "feature": 1.3137,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a227",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7707,
+      "components": {
+        "brand": 0.6826,
+        "feature": 1.426,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a228",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8045,
+      "components": {
+        "brand": 0.9933,
+        "feature": 0.9814,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a229",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.0333,
+      "components": {
+        "brand": 0.574,
+        "feature": 1.5535,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a230",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8073,
+      "components": {
+        "brand": 0.6286,
+        "feature": 1.523,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a231",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.0716,
+      "components": {
+        "brand": 0.827,
+        "feature": 1.6128,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a232",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5629,
+      "components": {
+        "brand": 0.5802,
+        "feature": 1.1684,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a233",
+      "segment": "loyalist",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -2.0545,
+      "components": {
+        "outside": 0.0507
+      }
+    },
+    {
+      "agent_id": "a234",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8343,
+      "components": {
+        "brand": 0.881,
+        "feature": 1.5222,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a235",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7602,
+      "components": {
+        "brand": 0.6571,
+        "feature": 1.4646,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a236",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9474,
+      "components": {
+        "brand": 0.8089,
+        "feature": 1.3663,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a237",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.1664,
+      "components": {
+        "brand": 0.9593,
+        "feature": 1.5962,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a238",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6683,
+      "components": {
+        "brand": 0.7989,
+        "feature": 1.0938,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a239",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.1048,
+      "components": {
+        "brand": 0.9079,
+        "feature": 1.3994,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a240",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8389,
+      "components": {
+        "brand": 0.8805,
+        "feature": 1.2865,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a241",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.3877,
+      "components": {
+        "brand": 0.5418,
+        "feature": 1.4178,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a242",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6131,
+      "components": {
+        "brand": 0.5933,
+        "feature": 1.4465,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a243",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7711,
+      "components": {
+        "brand": 0.5811,
+        "feature": 1.3043,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a244",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6961,
+      "components": {
+        "brand": 0.5492,
+        "feature": 1.6527,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a245",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5516,
+      "components": {
+        "brand": 0.9135,
+        "feature": 1.1532,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a246",
+      "segment": "loyalist",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.0313,
+      "components": {
+        "outside": 0.5893
+      }
+    },
+    {
+      "agent_id": "a247",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.3879,
+      "components": {
+        "brand": 0.5383,
+        "feature": 1.2761,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a248",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.1646,
+      "components": {
+        "brand": 0.9685,
+        "feature": 1.2307,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a249",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4998,
+      "components": {
+        "brand": 0.7767,
+        "feature": 1.0561,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a250",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.5479,
+      "components": {
+        "brand": 0.9641,
+        "feature": 1.6495,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a251",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9302,
+      "components": {
+        "brand": 0.6774,
+        "feature": 1.4173,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a252",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9146,
+      "components": {
+        "brand": 0.824,
+        "feature": 1.4017,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a253",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.0814,
+      "components": {
+        "brand": 0.9491,
+        "feature": 1.2012,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a254",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.0195,
+      "components": {
+        "brand": 0.6355,
+        "feature": 1.4449,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a255",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4385,
+      "components": {
+        "brand": 0.6693,
+        "feature": 1.3401,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a256",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9153,
+      "components": {
+        "brand": 0.7417,
+        "feature": 1.5724,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a257",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5904,
+      "components": {
+        "brand": 0.5451,
+        "feature": 1.3927,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a258",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7537,
+      "components": {
+        "brand": 0.9713,
+        "feature": 1.2136,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a259",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.705,
+      "components": {
+        "brand": 0.773,
+        "feature": 1.3745,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a260",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9247,
+      "components": {
+        "brand": 0.8022,
+        "feature": 1.4264,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a261",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7153,
+      "components": {
+        "brand": 0.7623,
+        "feature": 1.1571,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a262",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.3601,
+      "components": {
+        "brand": 0.8869,
+        "feature": 1.4965,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a263",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8931,
+      "components": {
+        "brand": 0.659,
+        "feature": 1.4229,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a264",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.1559,
+      "components": {
+        "brand": 0.9276,
+        "feature": 1.2344,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a265",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9177,
+      "components": {
+        "brand": 0.6013,
+        "feature": 1.58,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a266",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8335,
+      "components": {
+        "brand": 0.5374,
+        "feature": 1.3374,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a267",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8708,
+      "components": {
+        "brand": 0.753,
+        "feature": 1.4245,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a268",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.3474,
+      "components": {
+        "brand": 0.9304,
+        "feature": 1.5095,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a269",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.3244,
+      "components": {
+        "brand": 0.9923,
+        "feature": 1.5293,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a270",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8378,
+      "components": {
+        "brand": 0.9395,
+        "feature": 1.0953,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a271",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9961,
+      "components": {
+        "brand": 0.9688,
+        "feature": 1.298,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a272",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7664,
+      "components": {
+        "brand": 0.6552,
+        "feature": 1.4426,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a273",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9243,
+      "components": {
+        "brand": 0.7211,
+        "feature": 1.6232,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a274",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7003,
+      "components": {
+        "brand": 0.928,
+        "feature": 1.2025,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a275",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.79,
+      "components": {
+        "brand": 0.8591,
+        "feature": 1.3397,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a276",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.2033,
+      "components": {
+        "brand": 0.8047,
+        "feature": 1.7111,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a277",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.79,
+      "components": {
+        "brand": 0.9188,
+        "feature": 1.1553,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a278",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.01,
+      "components": {
+        "brand": 0.9444,
+        "feature": 1.2636,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a279",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9296,
+      "components": {
+        "brand": 0.672,
+        "feature": 1.5566,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a280",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8146,
+      "components": {
+        "brand": 0.9867,
+        "feature": 1.3302,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a281",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7078,
+      "components": {
+        "brand": 0.9101,
+        "feature": 1.2571,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a282",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8767,
+      "components": {
+        "brand": 0.8897,
+        "feature": 1.4706,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a283",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6614,
+      "components": {
+        "brand": 0.6434,
+        "feature": 1.5793,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a284",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.7842,
+      "components": {
+        "brand": 0.8075,
+        "feature": 1.196,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a285",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8029,
+      "components": {
+        "brand": 0.8342,
+        "feature": 1.3543,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a286",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.9465,
+      "components": {
+        "brand": 0.9111,
+        "feature": 1.2013,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a287",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8203,
+      "components": {
+        "brand": 0.6235,
+        "feature": 1.3823,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a288",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6914,
+      "components": {
+        "brand": 0.6063,
+        "feature": 1.2294,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a289",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.8428,
+      "components": {
+        "brand": 0.6481,
+        "feature": 1.3879,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a290",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4286,
+      "components": {
+        "brand": 0.5922,
+        "feature": 1.2055,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a291",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4886,
+      "components": {
+        "brand": 0.6497,
+        "feature": 1.3689,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a292",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.335,
+      "components": {
+        "brand": 0.7195,
+        "feature": 1.2108,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a293",
+      "segment": "loyalist",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.8754,
+      "components": {
+        "outside": 0.4918
+      }
+    },
+    {
+      "agent_id": "a294",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 2.292,
+      "components": {
+        "brand": 0.7868,
+        "feature": 1.6582,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a295",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.6275,
+      "components": {
+        "brand": 0.5451,
+        "feature": 1.2681,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a296",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4389,
+      "components": {
+        "brand": 0.6308,
+        "feature": 1.401,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a297",
+      "segment": "loyalist",
+      "choice": "outside",
+      "prev_choice": "free_tool",
+      "runner_up": "free_tool",
+      "gap": -1.8298,
+      "components": {
+        "outside": 0.4084
+      }
+    },
+    {
+      "agent_id": "a298",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.5885,
+      "components": {
+        "brand": 0.5425,
+        "feature": 1.3609,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a299",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.4524,
+      "components": {
+        "brand": 0.5116,
+        "feature": 1.3301,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a300",
+      "segment": "loyalist",
+      "choice": "free_tool",
+      "prev_choice": "free_tool",
+      "runner_up": "outside",
+      "gap": 1.0296,
+      "components": {
+        "brand": 0.5101,
+        "feature": 1.0809,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    }
+  ],
+  "meta": {
+    "source": "mock_fixture"
+  }
+}
