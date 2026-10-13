@@ -1,0 +1,53 @@
+{
+  "run_id": "run_42",
+  "verdict": "StudyFlow wins a small niche (about 8% of the simulated market) but is fragile: it depends on exam-focused students accepting S$7 against a free alternative.",
+  "confidence": "low",
+  "fragility": 0.62,
+  "who_buys": ["Exam-focused students who value AI planning", "Some productivity enthusiasts"],
+  "who_rejects": ["Free-tool loyalists", "Budget-conscious students whose budget is below S$7"],
+  "risks": [
+    {
+      "title": "Free alternative absorbs most demand",
+      "evidence": "61% of simulated customers stay with the free planner",
+      "metric": "free_tool share 0.61 at price S$7"
+    },
+    {
+      "title": "Price sensitivity higher than assumed",
+      "evidence": "Share more than halves if price sensitivity rises 20%",
+      "metric": "share 0.075 -> 0.03 if alpha +20%"
+    },
+    {
+      "title": "Integrations gap versus ChainApp",
+      "evidence": "Power users pick ChainApp for integrations",
+      "metric": "power segment: you 0.10, chain_app 0.55"
+    }
+  ],
+  "competitor_reaction": { "competitor_id": "chain_app", "move": "price_cut_20", "effect_on_share": -0.02 },
+  "experiments": [
+    {
+      "title": "Two-price landing page",
+      "hypothesis": "At least 8% of 100 visitors join the waitlist at S$7/month",
+      "pass_threshold": ">= 8 sign-ups from 100 visitors",
+      "kind": "landing"
+    },
+    {
+      "title": "Exam-student interviews",
+      "hypothesis": "Exam-focused students would pay S$7 for AI planning over a free tool",
+      "pass_threshold": "4 of 5 interviewees name a concrete trigger to switch",
+      "kind": "interview"
+    },
+    {
+      "title": "Price ladder survey",
+      "hypothesis": "Median willingness to pay among exam students is at least S$6",
+      "pass_threshold": "Median >= S$6 from 30 responses",
+      "kind": "survey"
+    }
+  ],
+  "trend_context": [
+    {
+      "trend": "Rising cost of living is squeezing student budgets",
+      "source_url": "https://example.com/placeholder-source",
+      "used_in": "risks[1]"
+    }
+  ]
+}

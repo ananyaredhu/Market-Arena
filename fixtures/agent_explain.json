@@ -1,0 +1,17 @@
+{
+  "agent_id": "a055",
+  "segment": "power",
+  "choice": "chain_app",
+  "runner_up": "you",
+  "top_drivers": [
+    { "term": "feature", "delta": 1.495 },
+    { "term": "price", "delta": -0.66 },
+    { "term": "brand", "delta": 0.288 }
+  ],
+  "narration": "Chose ChainApp because its integrations and existing brand preference outweighed StudyFlow's lower price; no price cut alone would win this customer.",
+  "flip": {
+    "price_drop": null,
+    "feature_boost": { "attr": "integrations", "amount": 0.62 },
+    "note": "A price cut of S$7.61 would be needed, which is more than the S$7 price, so price alone cannot flip this agent."
+  }
+}

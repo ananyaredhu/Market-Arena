@@ -1,0 +1,147 @@
+{
+  "$defs": {
+    "Choice": {
+      "additionalProperties": true,
+      "properties": {
+        "agent_id": {
+          "title": "Agent Id",
+          "type": "string"
+        },
+        "choice": {
+          "title": "Choice",
+          "type": "string"
+        },
+        "components": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Components",
+          "type": "object"
+        },
+        "gap": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gap"
+        },
+        "prev_choice": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prev Choice"
+        },
+        "runner_up": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Runner Up"
+        },
+        "segment": {
+          "title": "Segment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agent_id",
+        "segment",
+        "choice",
+        "components"
+      ],
+      "title": "Choice",
+      "type": "object"
+    },
+    "Totals": {
+      "additionalProperties": true,
+      "properties": {
+        "count": {
+          "title": "Count",
+          "type": "integer"
+        },
+        "p10": {
+          "title": "P10",
+          "type": "number"
+        },
+        "p50": {
+          "title": "P50",
+          "type": "number"
+        },
+        "p90": {
+          "title": "P90",
+          "type": "number"
+        },
+        "share": {
+          "title": "Share",
+          "type": "number"
+        }
+      },
+      "required": [
+        "count",
+        "share",
+        "p10",
+        "p50",
+        "p90"
+      ],
+      "title": "Totals",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "choices": {
+      "items": {
+        "$ref": "#/$defs/Choice"
+      },
+      "title": "Choices",
+      "type": "array"
+    },
+    "option_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Option Ids",
+      "type": "array"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "seed": {
+      "title": "Seed",
+      "type": "integer"
+    },
+    "totals": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Totals"
+      },
+      "title": "Totals",
+      "type": "object"
+    }
+  },
+  "required": [
+    "run_id",
+    "seed",
+    "option_ids",
+    "totals",
+    "choices"
+  ],
+  "title": "RunResult",
+  "type": "object"
+}

@@ -1,0 +1,102 @@
+{
+  "$defs": {
+    "KitAssets": {
+      "additionalProperties": true,
+      "properties": {
+        "ad_variants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ad Variants",
+          "type": "array"
+        },
+        "interview_script": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Interview Script",
+          "type": "array"
+        },
+        "landing_copy": {
+          "title": "Landing Copy",
+          "type": "string"
+        },
+        "offline": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/OfflineKit"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "survey": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Survey",
+          "type": "array"
+        },
+        "telegram_variants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Telegram Variants",
+          "type": "array"
+        }
+      },
+      "required": [
+        "landing_copy",
+        "survey",
+        "interview_script",
+        "ad_variants",
+        "telegram_variants"
+      ],
+      "title": "KitAssets",
+      "type": "object"
+    },
+    "OfflineKit": {
+      "additionalProperties": true,
+      "properties": {
+        "checklist": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checklist",
+          "type": "array"
+        },
+        "flyer": {
+          "title": "Flyer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "flyer",
+        "checklist"
+      ],
+      "title": "OfflineKit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "assets": {
+      "$ref": "#/$defs/KitAssets"
+    },
+    "hypotheses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Hypotheses",
+      "type": "array"
+    }
+  },
+  "required": [
+    "hypotheses",
+    "assets"
+  ],
+  "title": "KitOutput",
+  "type": "object"
+}

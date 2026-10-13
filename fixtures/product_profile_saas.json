@@ -1,0 +1,11 @@
+{
+  "name": "StudyFlow",
+  "description": "An AI study planner that builds a revision timetable around a student's exams.",
+  "pack": "saas",
+  "price": 7.0,
+  "currency": "SGD",
+  "target_customers": ["university students", "exam-focused students"],
+  "features": { "ai_planning": 0.8, "simplicity": 0.5, "privacy": 0.6, "integrations": 0.3 },
+  "geography": "SG",
+  "missing_assumptions": ["Do users already pay for a study tool?", "Is there a student discount?"]
+}
