@@ -296,6 +296,30 @@ def run_scenario(agents, options, seed=42):
 
 **Guard against LLM optimism:** the segment-prior prompt must require at least one *hostile* segment (non-buyers, free-tool loyalists) and a minimum share for the outside option. A validator rejects populations where average willingness to pay exceeds a plausible bound for the category, or where segment diversity (parameter variance) is below a threshold.
 
+### 4.6 Evidence-first population (v2 amendment)
+
+Before the segment priors are generated, a **bounded research agent** (retrieval-augmented generation over the live web) looks for real information that is useful for *this* type of startup in *this* country. It is not limited to economics. It starts from a topic checklist and picks what is relevant: competitor pricing, market size and demand, sourced behaviour statistics (e.g. "62% of students use free planners"), regulation and licensing, distribution channels and costs, seasonality, rent or supply costs, recent trends and news, and country-level economics (e.g. the World Bank API **[VERIFY free access]**).
+
+How findings are used:
+
+| Finding type | Used for |
+|---|---|
+| Maps to a model parameter (price points, budget ranges, segment shares, free-alternative share) | Sets the centre and spread of the segment priors, tagged `evidence` |
+| Everything else (regulation, channels, qualitative facts) | Stored as cited `research_notes` that feed the Council, the narration context and the Experiment Kit |
+| Trends and news | Stored as `trend_notes` (see Section 6). May apply a small, bounded, user-visible, toggleable adjustment (about ±10% on budget or price sensitivity) |
+
+Rules that keep it honest:
+1. **Every number carries a source URL and a quote.** Our code (outside the agent) checks that the quote actually appears in the fetched page. If not, the number is dropped and the value stays `llm_assumption`.
+2. **No evidence found, a failure or a timeout means the original LLM-prior plan runs unchanged.** The user sees which numbers had evidence and which did not.
+3. **Hard caps:** about 8 tool calls and 60 seconds per run. Page text is treated as data, never as instructions (prompt-injection guard).
+4. **Geography is dynamic:** data is fetched for the country in the user's idea (default Singapore), cached per country as users request it. Budgets are scaled relative to the baseline the pack's priors were written for. Country-based price-sensitivity scaling is tagged `llm_assumption`.
+5. **No cultural stereotypes.** Inferring national "personalities" or personal traits by country is excluded (see Section 18). Sourced behavioural statistics are allowed; assumed ones are not.
+6. **Reproducibility:** the evidence used is saved as an `evidence_snapshot` with each population, so re-running a scenario reuses the same evidence and seeded results stay comparable.
+7. **Fetching:** plain HTTP plus a text extractor first; a headless browser (Playwright) only for JavaScript-rendered pages; no scraping of search-engine result pages; respect robots.txt and site terms. The search provider is an open decision (Section 19).
+8. **Demo safety:** evidence for the SaaS and café demos is precomputed so the demo never depends on live search.
+
+Owner: Person A (Simulation Core).
+
 ---
 
 ## 5. The Glass-Box layer (transparent, interruptible agents)
@@ -357,6 +381,11 @@ Each role has a defined input, a defined output, and is grounded in engine numbe
 3. Top 3 risks (from the Devil's Advocate)
 4. Likely competitor reaction (from the Strategist)
 5. The 3 experiments to run first, ranked by "information gained per rupee/dollar"
+
+**Trend context (v2 amendment).** The evidence step (Section 4.6) also outputs `trend_notes` and `research_notes`, each with a source URL and a verified quote (e.g. "rising cost of living", "a rival launched a free tier"). The **Moderator and Devil's Advocate receive them as context** when writing risks and the verdict. Rules:
+- A claim that cites a trend must cite its source; the Moderator test "every claim cites a metric or a source" covers this.
+- Trend notes never change engine numbers, except Person A's bounded, user-visible, toggleable prior adjustment (about ±10%).
+- No trends found means the Council runs exactly as before.
 
 ---
 
@@ -428,6 +457,8 @@ Each pack ships with: source notes for priors, one backtest case where possible,
   "totals": {"you":{"p10":0.14,"p50":0.19,"p90":0.24}, "...":{}}
 }
 ```
+
+*v2 amendment:* the Population, segment and Council contracts gain **optional, backward-compatible** fields: `geography` (country code, default `SG`), `evidence_snapshot_id`, per-segment `sources: [{url, quote, retrieved_at}]`, `research_notes`, `trend_notes: [{note, source_url, quote, effect}]` and `trend_context` on the Council output. Existing consumers can ignore them.
 
 ### 8.3 Implementation
 
@@ -521,7 +552,8 @@ users(id, email, plan, created_at)
 projects(id, user_id, name, industry_pack, created_at)
 product_profiles(id, project_id, version, json, created_at)
 segments(id, project_id, name, priors_json, evidence_tag, share_assumption)
-populations(id, project_id, seed, n_agents, created_at)
+populations(id, project_id, seed, n_agents, geography, evidence_snapshot_id, created_at)
+evidence_snapshots(id, project_id, country, sources_json, research_notes_json, trend_notes_json, created_at)   -- v2
 agents(id, population_id, segment_id, params_json)
 options(id, scenario_id, role, name, price, features_json, novelty)   -- you / competitor / outside
 scenarios(id, project_id, parent_scenario_id, config_json, created_at, label)
@@ -562,7 +594,7 @@ tg_* tables (Section 10)
 | Simulation | **NumPy / pandas / SciPy** | Vectorised, fast, easy to test |
 | Job queue | **Redis + RQ or Celery** | Runs, narration, kit generation |
 | Database | **Postgres** (+ pgvector later for similar-case retrieval) | Relational integrity for runs and overrides |
-| LLM | Claude via the Anthropic API (use structured outputs / tool-use JSON schema); keep a provider abstraction | Reliable structured extraction; swappable |
+| LLM | **Free open-weight provider chain behind one OpenAI-style interface (v2 change; the team has no paid API credits):** Groq (`gpt-oss-120b`) → OpenRouter `:free` models → local Ollama (small Qwen, demo fallback) → cached or template answer. Timeouts, retry on 429/5xx, temporary skip of a failing provider, cache by prompt hash, model logged per run. **[VERIFY current free-tier limits, tool-calling support and any router library's fallback support before relying on them.]** Free tiers may train on prompts: fine for fictional demo ideas; state it in the privacy section | Free, swappable, survives one provider failing. Schema validation runs on every provider's answer, so a weaker fallback model cannot pass bad output through |
 | Validation | **Pydantic** schemas for every LLM output | Reject malformed data |
 | Telegram | `python-telegram-bot` or `aiogram` | Webhook bot |
 | Auth | Clerk, Auth0 or Supabase Auth | Avoids writing auth |
@@ -707,6 +739,8 @@ Tip: show a *second, non-tech* example (the café) in the video to prove general
 | 10 | Data privacy (user idea confidentiality) | Medium / Medium | Clear privacy policy; no training on user data; delete-on-request | Offer local or private-instance mode for incubators |
 | 11 | Competition rules differ from assumptions | Medium / Medium | Email the organiser now; keep materials format-flexible | Adapt quickly |
 | 12 | False confidence from a polished UI | High / High | Always show ranges, fragility, assumptions, and "simulated" labels | Remove single-number displays |
+| 13 | Free-tier LLM rate limits or provider outage (v2) | High / Medium | Provider chain with fallback, cache by prompt hash, `LLM_MODE=mock` for day-to-day work, precomputed demo runs | Cached or template answers; local Ollama for demos |
+| 14 | Web evidence is wrong, stale or contains injected instructions (v2) | Medium / High | Quote-in-source verification, source URL on every number, page text treated as data, hard caps, evidence snapshot saved per population | Drop the number and fall back to `llm_assumption` priors (original plan) |
 
 ---
 
@@ -726,7 +760,8 @@ Tip: show a *second, non-tech* example (the café) in the video to prove general
 1. **Track:** confirm Track 01 versus Track 04 after the organiser replies. With the Arena and Glass-Box features, either is defensible; Track 01 is the safer fit because of the task-execution loop.
 2. **Primary demo case:** study planner (tech) plus café (non-tech) is recommended.
 3. **Telegram scope:** full demo or a short clip? Decide by Day 10 based on progress.
-4. **LLM provider and budget:** choose the model and set a daily spend cap.
+4. **LLM provider and budget:** *decided (v2):* free open-weight provider chain (Section 12). Still to do: confirm current free-tier limits and get API keys.
+8. **Search provider for the evidence agent (v2):** DuckDuckGo wrapper, Tavily, Brave free tier or self-hosted SearXNG. Verify current free terms first; do not scrape search-engine pages.
 5. **Backtest cases:** agree on 6 to 10 and who sources the data.
 6. **Team roles:** fill in Section 2.11.
 7. **Naming:** confirm "Glass-Box" or your preferred term for the transparent-reasoning feature.
