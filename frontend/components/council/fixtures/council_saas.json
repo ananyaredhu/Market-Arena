@@ -1,36 +1,36 @@
 {
   "run_id": "run_saas_fixture",
-  "verdict": "Simulated outcome under stated assumptions: StudyFlow takes a median share of 0.18 (p10 0.16, p90 0.20). Biggest threat: Free Planner responds with adding a feature (share 0.177 -> 0.135 (-0.042, -23.8%)). Fragility 0.12, confidence low.",
-  "confidence": "low",
-  "fragility": 0.125,
+  "verdict": "Simulated outcome under stated assumptions: StudyFlow takes a median share of 0.18 (p10 0.16, p90 0.19). Biggest threat: Free Planner responds with adding a feature (share 0.190 -> 0.140 (-0.050, -26.3%)). Fragility 0.09, confidence high.",
+  "confidence": "high",
+  "fragility": 0.086,
   "who_buys": [
-    "Power planners: 35 of 90 simulated agents chose StudyFlow (0.39)"
+    "Power planners: 33 of 90 simulated agents chose StudyFlow (0.37)",
+    "Budget-conscious students: 22 of 120 simulated agents chose StudyFlow (0.18)"
   ],
   "who_rejects": [
-    "Budget-conscious students: 22 of 120 simulated agents chose StudyFlow (0.18); most chose Free Planner; 40 had StudyFlow as runner-up (mean utility gap 0.27)",
     "Free-tool loyalists: 0 of 90 simulated agents chose StudyFlow (0.00); most chose Free Planner"
   ],
   "risks": [
     {
       "title": "Free Planner responds with adding a feature",
       "evidence": "Competitor Strategist: the rival's best one-step response among the bounded moves.",
-      "metric": "share 0.177 -> 0.135 (-0.042, -23.8%)"
+      "metric": "share 0.190 -> 0.140 (-0.050, -26.3%)"
     },
     {
       "title": "Willingness to pay is lower than assumed",
       "evidence": "Devil's Advocate: if willingness to pay (budget) is 20% lower than assumed, the simulated share changes as shown.",
-      "metric": "share 0.177 -> 0.146 (-0.032, -17.9%)"
+      "metric": "share 0.190 -> 0.173 (-0.017, -8.8%)"
     },
     {
       "title": "Customers are more price-sensitive than assumed",
       "evidence": "Devil's Advocate: if price sensitivity is 20% higher than assumed, the simulated share changes as shown.",
-      "metric": "share 0.177 -> 0.162 (-0.015, -8.5%)"
+      "metric": "share 0.190 -> 0.173 (-0.017, -8.8%)"
     }
   ],
   "competitor_reaction": {
     "competitor_id": "free_tool",
     "move": "add_feature",
-    "effect_on_share": -0.0423
+    "effect_on_share": -0.05
   },
   "experiments": [
     {
@@ -52,9 +52,9 @@
       "kind": "survey"
     }
   ],
+  "trend_context": null,
   "limitations": [
-    "Confidence capped at low: results come from the mock engine adapter, not the real engine.",
     "Simulated outcome under stated assumptions; not a forecast of real sales."
   ],
-  "engine_source": "mock"
+  "engine_source": "engine"
 }

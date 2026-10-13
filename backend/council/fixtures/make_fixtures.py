@@ -32,6 +32,8 @@ SAAS = {
          "features": [0.1, 0.7, 0.4, 0.6], "novelty": 0.0},
         {"id": "chain_app", "label": "PlanPro AI", "role": "competitor", "price": 12.0,
          "features": [0.9, 0.5, 0.4, 0.8], "novelty": 0.2},
+        {"id": "outside", "label": "Do nothing / free tool", "role": "outside", "price": 0.0,
+         "features": [0.0, 0.0, 0.0, 0.0], "novelty": 0.0},
     ],
     "segments": [
         {"id": "budget", "name": "Budget-conscious students", "share": 0.4, "evidence": "llm_assumption",
@@ -58,9 +60,18 @@ SAAS = {
 
 def cafe_spec() -> dict:
     pack = yaml.safe_load((REPO / "packs" / "cafe.yaml").read_text())
+    outside = pack.get("outside_option") or {}
+    n = len(pack["attributes"])
     options = [pack["demo_product"]] + [
         {k: a[k] for k in ("id", "label", "role", "price", "features", "novelty")} for a in pack["competitor_archetypes"]
-    ]
+    ] + [{
+        "id": outside.get("id", "outside"),
+        "label": outside.get("label", "Make coffee at home or skip"),
+        "role": "outside",
+        "price": 0.0,
+        "features": [0.0] * n,
+        "novelty": 0.0,
+    }]
     return {"pack": "cafe", "attributes": pack["attributes"], "options": options, "segments": pack["segments"]}
 
 
@@ -151,11 +162,7 @@ def write(path: Path, data) -> None:
 
 
 def main() -> None:
-    from council.schemas import json_schemas
-    from council.service import run_council, run_kit
-
-    for name, schema in json_schemas().items():
-        write(HERE.parent / "contracts" / name, schema)
+    from backend.council.service import run_council, run_kit
 
     for spec, n in ((SAAS, 300), (cafe_spec(), 300)):
         pack = spec["pack"]

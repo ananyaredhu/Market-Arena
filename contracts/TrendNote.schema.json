@@ -1,0 +1,36 @@
+{
+  "additionalProperties": true,
+  "properties": {
+    "effect": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Effect"
+    },
+    "note": {
+      "title": "Note",
+      "type": "string"
+    },
+    "quote": {
+      "title": "Quote",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    }
+  },
+  "required": [
+    "note",
+    "source_url",
+    "quote"
+  ],
+  "title": "TrendNote",
+  "type": "object"
+}

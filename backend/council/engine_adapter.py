@@ -148,12 +148,13 @@ class FrozenSignatureAdapter:
 
 
 def get_default_adapter(mode: Optional[str] = None) -> EngineAdapter:
-    """``COUNCIL_ENGINE=mock`` forces the mock; ``auto`` (default) uses Person A's
-    engine if it is importable with the frozen signature, otherwise the mock."""
+    """``COUNCIL_ENGINE=mock`` forces the mock; ``auto`` (default) uses the
+    frozen ``backend.engine.engine_ref.run_scenario`` (or ``engine.py`` when A
+    ships it), otherwise the labelled mock."""
     mode = (mode or os.environ.get("COUNCIL_ENGINE", "auto")).lower()
     if mode == "mock":
         return MockEngineAdapter()
-    for module in ("engine.engine", "engine.engine_ref"):
+    for module in ("backend.engine.engine", "backend.engine.engine_ref"):
         try:
             mod = __import__(module, fromlist=["run_scenario"])
             return FrozenSignatureAdapter(getattr(mod, "run_scenario"))

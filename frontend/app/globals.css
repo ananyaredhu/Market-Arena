@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/*
+ * Market Arena design tokens (from "Market Arena UI Ideas").
+ * SHARED FILE: change a token here and every screen follows. Announce changes to the team.
+ * Use as Tailwind classes: bg-bg, bg-surface, border-line, text-muted, text-accent, font-display ...
+ */
+@theme {
+  /* surfaces, darkest to lightest */
+  --color-bg: #0b0e14;
+  --color-surface: #0f1420;
+  --color-surface-2: #101624;
+  --color-surface-3: #131b2b;
+  --color-raised: #1b2333;
+
+  /* borders */
+  --color-line: #232b3b;
+  --color-line-2: #2c3650;
+  --color-line-3: #3a4358;
+  --color-line-dashed: #4a5570;
+
+  /* text */
+  --color-ink: #e8ecf4;
+  --color-ink-soft: #c9d2e3;
+  --color-soft: #a9b4c8;
+  --color-muted: #9aa6bc;
+
+  /* accent (the one brand colour) and supporting colours */
+  --color-accent: #c8f560;
+  --color-accent-bg: #131b14;
+  --color-blue: #6b9bff;
+  --color-teal: #34d3be;
+  --color-coral: #ff7a6b;
+  --color-amber: #f6b93b;
+  --color-violet: #a98bff;
+  --color-slate: #7c8db0;
+
+  /* warning / assumption callouts */
+  --color-warn-bg: #1e1a0f;
+  --color-warn-line: #5a4a1e;
+  --color-warn-ink: #e8dcc0;
+
+  /* telegram bubbles */
+  --color-tg: #1e2d4a;
+  --color-tg-button: #2b3f66;
+
+  --font-display: var(--font-bricolage), sans-serif;
+  --font-sans: var(--font-dm-sans), sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --ease-arena: cubic-bezier(0.6, 0, 0.2, 1);
+}
+
+html {
+  background: var(--color-bg);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+textarea:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Arena dots and bubbles glide between positions when a scenario changes. */
+.dot {
+  transition:
+    left 1.5s var(--ease-arena),
+    top 1.5s var(--ease-arena);
+}
+
+.bubble {
+  transition: all 1.5s var(--ease-arena);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .bubble {
+    transition: none;
+  }
+}

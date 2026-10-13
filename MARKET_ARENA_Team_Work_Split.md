@@ -4,6 +4,8 @@
 
 > **Assumptions to confirm now:** (1) the deadline is Sunday 18 Oct, but the cut-off *time* and timezone are unknown, so this plan targets submitting on the night of **Saturday 17 Oct** and keeps Sunday as a buffer; (2) each person can give roughly **30 focused hours** between Tue 13 and Sat 17 **[ASSUMPTION]**; (3) all three can code in Python and TypeScript at a basic level.
 
+> **v2 amendments (added by Person A, please read):** (1) population generation is now **evidence-first**: a bounded research agent fetches real data for the startup type and country before priors are generated (Master Plan Section 4.6); (2) the Council gets optional **trend and research notes** as cited context (Master Plan Section 6, "Trend context"); (3) the LLM is a **free open-weight provider chain**, not the Claude API (Master Plan Section 12); (4) contracts gain **optional** fields only (Section 4.2, "v2 optional fields"). New dependencies are **D11 to D13** in Section 6. Every v2 item falls back to the original plan if it is late or fails, so nobody is blocked.
+
 ---
 
 ## 1. The idea that makes "no dependencies" possible
@@ -132,6 +134,18 @@ run_scenario(agents: list[dict], options: list[dict], seed: int, repeats: int = 
               "telegram_variants": ["variant A text", "variant B text"] } }
 ```
 
+**v2 optional fields (backward compatible; consumers may ignore them):**
+```json
+{ "population": { "geography": "SG", "evidence_snapshot_id": "ev_01",
+                  "segments": [{ "id": "budget", "evidence": "evidence",
+                                 "sources": [{ "url": "https://...", "quote": "verbatim text from the page", "retrieved_at": "2026-10-14" }] }] },
+  "research_notes": [{ "topic": "competitor_pricing", "note": "...", "source_url": "https://...", "quote": "..." }],
+  "trend_notes": [{ "note": "rising cost of living", "source_url": "https://...", "quote": "...", "effect": "budget -5%" }],
+  "council": { "trend_context": [{ "trend": "...", "source_url": "https://...", "used_in": "risks[1]" }] } }
+```
+Notes: `geography` defaults to `SG`. Every number with `evidence` must have a `sources` entry with a quote verified against the fetched page. A also owns `fixtures/trend_notes.json` so B and C can use it from day one.
+**Scale fix to agree tonight:** the example Population above uses `alpha: 1.1` with prices around 9, which makes the price term about −9.9 and swamps every other term. Use `alpha` in roughly 0.05 to 0.3 per currency unit (or normalise prices) in all fixtures.
+
 **Frontend component props (frozen):**
 ```ts
 <Arena runResult={RunResult} onAgentClick={(agentId: string) => void} />          // C builds
@@ -198,6 +212,8 @@ Each person works only against fixtures and the frozen contracts. Each package e
 
 **Definition of done:** (1) `pytest` passes for the engine; (2) `/population/generate` returns a valid Population; (3) GlassBoxDrawer works standalone on fixtures and live; (4) the harness can run a backtest case file.
 
+**v2 additions for A (extra hours accepted by Person A; compare view stays full):** evidence researcher (bounded agent, about 8 tool calls and 60 s, quote-in-source check, fallback to original priors), dynamic country economics (budget scaling), trend and research notes (bounded ±10% prior adjustment, toggleable), evidence snapshot saved per population, precomputed SaaS and café demo evidence. Tests: fabricated quote is dropped; empty result falls back to original plan; injected instructions in a page are ignored; caps enforced. Built mostly Wed to Fri; first fixtures (`fixtures/trend_notes.json`) available from Tuesday.
+
 ### Person B: Council & Kit
 
 **Days: Tue 13 to Fri 16**
@@ -210,6 +226,10 @@ Each person works only against fixtures and the frozen contracts. Each package e
 | Fri 16 | Make strategist and advocate deterministic under a seed | Write `packs/cafe.yaml` (segments, attributes, competitor archetypes, experiment menu) | Polish; loading states | **Backtest case 1 (non-tech)**: gather data and write the case file |
 
 **Definition of done:** (1) `/council` and `/kit` return schema-valid output from any RunResult fixture; (2) CouncilPanel works standalone on fixtures; (3) café and SaaS packs both generate sensible kits.
+
+**v2 additions for B:**
+- **Trend context for the Council.** The Moderator and Devil's Advocate prompts accept optional `trend_notes` and `research_notes` (use `fixtures/trend_notes.json` until A's real evidence step lands, D11). Use them only as cited context for risks and verdict wording; they never change engine numbers. Output `trend_context` (optional) listing which trend was used where. Add a test: any claim that cites a trend must include its source URL; with no notes, output is identical to before. The Experiment Kit prompts may also use `research_notes` (channels, regulation, seasonality) to make tests realistic for the country.
+- **LLM provider chain.** `llm.py` stays B's file. Please extend it to the free provider chain in Master Plan Section 12 (Groq, then OpenRouter free, then local Ollama, then cache or template), keeping `LLM_MODE=mock|live` unchanged so nobody else changes code (D12). Verify current free-tier limits first.
 
 ### Person C: Intake, Arena & Telegram
 
@@ -225,6 +245,8 @@ Each person works only against fixtures and the frozen contracts. Each package e
 **Definition of done:** (1) pasting an idea creates a valid ProductProfile; (2) the Arena animates between two RunResult fixtures; (3) the Telegram bot can opt in a test user and send an A/B message after approval; (4) precomputed demo runs exist for both the SaaS and café examples.
 
 **Cut rule for C:** if behind on Thu night, drop Telegram sending and show the Kit's Telegram variants and the opt-in QR flow only.
+
+**v2 additions for C:** intake also extracts the **country** (`geography`, ISO code) from the idea text, default `SG` if missing (D13); the intake wizard shows an editable country field. Orchestrator stores and passes through `evidence_snapshot_id` with each population and run. The results page may show a small "evidence used" panel listing sources when present.
 
 ---
 
@@ -245,6 +267,9 @@ Outside this table, **no one should be waiting for anyone**. Each dependency has
 | **D8** | Backtest case files (one each) | A's harness | B and C | **Fri 16** | A tests the harness with a dummy case |
 | **D9** | Full end-to-end run on real components | All | All | **Fri 16 evening** | Fall back to precomputed demo runs |
 | **D10** | Final deck, video, IP statement, submission | All | All | **Sat 17** | See Section 8 |
+| **D11** (v2) | `trend_notes`, `research_notes` and `evidence_snapshot_id` from the real evidence step | B (Council and Kit context), C (stores and displays) | A | **Thu 15 pm** (fixture `fixtures/trend_notes.json` from Tue) | B and C keep using the fixture; with no notes everything behaves as before |
+| **D12** (v2) | Free LLM provider chain in `llm.py` | A, B, C | B | **Wed 14** | Stay on `LLM_MODE=mock`; the interface does not change |
+| **D13** (v2) | Country (`geography`) extracted by intake | A (evidence step and budget scaling) | C | **Wed 14** | A defaults to `SG` |
 
 **Rule:** if you are going to miss a handover time, say so in the team chat **at least 2 hours before**, and everyone continues on the fixture. Never wait silently.
 
@@ -255,7 +280,7 @@ Outside this table, **no one should be waiting for anyone**. Each dependency has
 1. **Branches:** one branch per person (`a/sim`, `b/council`, `c/arena`). Merge to `main` through a pull request. A reviewer is **not** required, but the other two must be notified.
 2. **Folders:** only edit your own folders (Section 4.3). If you need a change in someone else's folder or a contract, message them and let them make it.
 3. **Contract changes:** need agreement from all three, a note in `contracts/CHANGELOG.md`, and a fixture update in the same commit. Prefer *adding* optional fields over changing existing ones.
-4. **Mock mode:** run `MOCK=1` and `LLM_MODE=mock` for day-to-day work. Use `LLM_MODE=live` sparingly (shared key, spending cap set tonight).
+4. **Mock mode:** run `MOCK=1` and `LLM_MODE=mock` for day-to-day work. Use `LLM_MODE=live` sparingly (free-tier keys have rate limits; see the provider chain in Master Plan Section 12).
 5. **Daily sync:** 10 minutes at 9:30 and 10 minutes at 21:00 on a call or chat. Each person says: done, doing, blocked. Blockers resolve with fixtures first.
 6. **Merge windows:** merge to `main` at least twice a day (lunchtime and 21:00) so integration problems surface early.
 7. **Definition of done:** a feature is done when it runs on fixtures, passes its tests and is merged.
@@ -295,10 +320,11 @@ The competition also needs a project description, a deck or business plan, a dem
 Cut in this order if behind schedule:
 
 1. Telegram sending (keep opt-in QR and message variants only)
-2. Café pack depth (keep SaaS fully, café as a lighter second example)
-3. Scenario compare view (keep a simple before/after)
-4. Experiment Kit export (keep on-screen display)
-5. Backtest down to 2 cases
+2. (v2) Live trend search, then live search entirely (keep country budget scaling and precomputed demo evidence)
+3. Café pack depth (keep SaaS fully, café as a lighter second example)
+4. Scenario compare view (keep a simple before/after)
+5. Experiment Kit export (keep on-screen display)
+6. Backtest down to 2 cases
 
 **Never cut:** the decision engine, the Live Arena animation, the Glass-Box inspector (explain, flip and override), the Council verdict, and the demo video.
 

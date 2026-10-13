@@ -1,9 +1,2 @@
-export { CouncilPanel, default } from "./CouncilPanel";
-export type {
-  CouncilOutput,
-  CouncilPanelProps,
-  KitOutput,
-  Confidence,
-  Experiment,
-  Risk,
-} from "./types";
+export { default as CouncilPanel, default } from "./CouncilPanel";
+export { default as CouncilFixturePage } from "./FixturePage";

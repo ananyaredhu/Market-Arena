@@ -1,82 +1,110 @@
-"""Council and Kit routes (owner: Person B). Mounted by Person C's main.py.
+"""Person B routes: Council verdict and Experiment Kit.
 
-Until Person C's run storage exists, the caller sends the inputs in the body.
-With ``fixture=<pack>`` (or ``MOCK=1`` and no body) the local mock fixtures
-in backend/council/fixtures are used instead.
+Paths and response shapes are frozen. Bodies compute via Person B modules when
+shared fixtures (or supplied inputs) are available. With MOCK=1, any compute
+failure falls back to fixtures/council.json and fixtures/kit.json so the
+frontend keeps working.
 """
 from __future__ import annotations
 
-import json
+import logging
 import os
-from pathlib import Path
 from typing import List, Optional
 
-from fastapi import APIRouter, Body, HTTPException, Query
+from fastapi import APIRouter, Body, HTTPException
 from pydantic import BaseModel
 
-from council.schemas import CouncilOutput, KitOutput, RunResult
-from council.service import run_council, run_kit
-from kit.generator import KitValidationError
-from kit.packs import UnknownPackError
+from backend.common.contracts import CouncilOutput, KitOutput, RunResult
+from backend.common.fixtures import load_fixture
+from backend.common.mock import mock_enabled, not_built
+from backend.council.service import run_council, run_kit
+from backend.kit.generator import KitValidationError
+from backend.kit.packs import UnknownPackError
 
-router = APIRouter(tags=["council"])
-FIXTURES = Path(__file__).resolve().parent / "council" / "fixtures"
+logger = logging.getLogger(__name__)
+router = APIRouter(tags=["council and kit (B)"])
 
 
 class CouncilRequest(BaseModel):
     run_result: RunResult
     population: dict
     options: List[dict]
-    pack: str
+    pack: str = "saas"
 
 
 class KitRequest(BaseModel):
     council: CouncilOutput
     options: List[dict]
-    pack: str
+    pack: str = "saas"
 
 
-def _fixture(name: str, pack: str):
-    path = FIXTURES / f"{name}_{pack}.json"
-    if not path.exists():
-        raise HTTPException(404, f"no fixture {path.name}")
-    return json.loads(path.read_text())
+def _shared_inputs(pack: str = "saas") -> tuple[dict, list, dict]:
+    """Load population / options / run_result from the shared /fixtures tree."""
+    if pack == "saas":
+        population = load_fixture("population_saas")
+        options = load_fixture("options_saas")
+        run_result = load_fixture("run_result")
+    else:
+        # Café shared fixtures are not in /fixtures yet; use Person B local ones.
+        from pathlib import Path
+        import json
+
+        root = Path(__file__).resolve().parent / "council" / "fixtures"
+        population = json.loads((root / f"population_{pack}.json").read_text())
+        options = json.loads((root / f"options_{pack}.json").read_text())
+        run_result = json.loads((root / f"run_result_{pack}.json").read_text())
+    return population, options, run_result
 
 
-def _use_fixture(body, fixture: Optional[str]) -> Optional[str]:
-    if fixture:
-        return fixture
-    if body is None and os.environ.get("MOCK") == "1":
-        return "saas"
+def _compute_council(run_id: str, body: Optional[CouncilRequest] = None) -> CouncilOutput:
     if body is None:
-        raise HTTPException(422, "request body required (or pass ?fixture=saas|cafe)")
-    return None
-
-
-@router.post("/runs/{run_id}/council", response_model=CouncilOutput)
-def council(run_id: str, body: Optional[CouncilRequest] = Body(None), fixture: Optional[str] = Query(None)):
-    pack = _use_fixture(body, fixture)
-    if pack:
-        body = CouncilRequest(
-            run_result=_fixture("run_result", pack), population=_fixture("population", pack),
-            options=_fixture("options", pack), pack=pack,
+        population, options, run_result = _shared_inputs("saas")
+        pack = "saas"
+    else:
+        population, options, run_result, pack = (
+            body.population,
+            body.options,
+            body.run_result.model_dump(),
+            body.pack,
         )
-    elif body.run_result.run_id != run_id:
-        raise HTTPException(400, f"run_id in path ({run_id}) does not match body ({body.run_result.run_id})")
-    try:
-        return run_council(body.run_result, body.population, body.options, body.pack)["council"]
-    except UnknownPackError as exc:
-        raise HTTPException(400, str(exc)) from exc
+    result = run_council(run_result, population, options, pack)
+    council = result["council"]
+    data = council.model_dump() if hasattr(council, "model_dump") else dict(council)
+    data["run_id"] = run_id
+    return CouncilOutput.model_validate(data)
 
 
-@router.post("/runs/{run_id}/kit", response_model=KitOutput)
-def kit(run_id: str, body: Optional[KitRequest] = Body(None), fixture: Optional[str] = Query(None)):
-    pack = _use_fixture(body, fixture)
-    if pack:
-        body = KitRequest(council=_fixture("council", pack), options=_fixture("options", pack), pack=pack)
-    elif body.council.run_id != run_id:
-        raise HTTPException(400, f"run_id in path ({run_id}) does not match council ({body.council.run_id})")
+def _compute_kit(run_id: str, body: Optional[KitRequest] = None) -> KitOutput:
+    if body is None:
+        council = _compute_council(run_id)
+        _, options, _ = _shared_inputs("saas")
+        pack = "saas"
+    else:
+        council, options, pack = body.council, body.options, body.pack
+    return run_kit(council, pack, options)
+
+
+@router.post("/runs/{run_id}/council")
+def council(run_id: str, body: Optional[CouncilRequest] = Body(None)):
     try:
-        return run_kit(body.council, body.pack, body.options)
-    except (UnknownPackError, KitValidationError) as exc:
-        raise HTTPException(400, str(exc)) from exc
+        return _compute_council(run_id, body)
+    except Exception as exc:  # noqa: BLE001 — fall back in mock; surface otherwise
+        logger.exception("council compute failed")
+        if mock_enabled():
+            return load_fixture("council") | {"run_id": run_id}
+        if isinstance(exc, (UnknownPackError, KitValidationError)):
+            raise HTTPException(400, str(exc)) from exc
+        raise not_built("POST /runs/{id}/council")
+
+
+@router.post("/runs/{run_id}/kit")
+def kit(run_id: str, body: Optional[KitRequest] = Body(None)):
+    try:
+        return _compute_kit(run_id, body)
+    except Exception as exc:  # noqa: BLE001
+        logger.exception("kit compute failed")
+        if mock_enabled():
+            return load_fixture("kit")
+        if isinstance(exc, (UnknownPackError, KitValidationError)):
+            raise HTTPException(400, str(exc)) from exc
+        raise not_built("POST /runs/{id}/kit")

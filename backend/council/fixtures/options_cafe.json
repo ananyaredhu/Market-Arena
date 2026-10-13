@@ -58,5 +58,20 @@
       0.2
     ],
     "novelty": 0.0
+  },
+  {
+    "id": "outside",
+    "label": "Make coffee at home or skip",
+    "role": "outside",
+    "price": 0.0,
+    "features": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "novelty": 0.0
   }
 ]

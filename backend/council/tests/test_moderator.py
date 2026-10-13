@@ -1,14 +1,14 @@
 """Moderator / CouncilOutput tests (Person B)."""
 from __future__ import annotations
 
-from council.advocate import run_advocate
-from council.claims import Evidence, unsupported_numbers
-from council.engine_adapter import MockEngineAdapter
-from council.moderator import build_council, decide_confidence, enforce_grounding
-from council.schemas import CouncilOutput, Risk
-from council.service import run_council
-from council.strategist import run_strategist
-from kit.packs import kit_content
+from backend.council.advocate import run_advocate
+from backend.council.claims import Evidence, unsupported_numbers
+from backend.council.engine_adapter import MockEngineAdapter
+from backend.council.moderator import build_council, decide_confidence, enforce_grounding
+from backend.council.schemas import CouncilOutput, Risk
+from backend.council.service import run_council
+from backend.council.strategist import run_strategist
+from backend.kit.packs import kit_content
 
 
 def test_council_validates_against_schema(saas):
@@ -58,15 +58,15 @@ def test_claims_cannot_cite_absent_numbers(saas):
 
 
 def test_confidence_caps_for_mock():
-    from council.advocate import AdvocateReport
-    from council.strategist import StrategistReport
+    from backend.council.advocate import AdvocateReport
+    from backend.council.strategist import StrategistReport
 
     advocate = AdvocateReport(
         status="ok", engine_source="mock", seed=1, baseline_share=0.2, baseline_leader="you",
         perturbations=[], fragility=0.1,
     )
     # Pretend all three parameters were tested cleanly.
-    from council.advocate import Perturbation
+    from backend.council.advocate import Perturbation
 
     advocate.perturbations = [
         Perturbation(parameter=p, factor=0.8, direction="-20%", assumption="x", status="ok")
@@ -79,7 +79,7 @@ def test_confidence_caps_for_mock():
 
 
 def test_llm_wording_rejected_on_bad_numbers(saas):
-    from council.wording import CallableLLMWording
+    from backend.council.wording import CallableLLMWording
 
     class BadLLM:
         def __call__(self, prompt: str) -> str:

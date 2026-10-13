@@ -1,84 +1,47 @@
 # Person B — Council & Kit
 
-Independent work package for the Market Arena competition MVP.
+Independent work package, now aligned with the Phase 0 monorepo skeleton on `main`.
 
-## What this owns
+## Ownership
 
 | Area | Path |
 |---|---|
-| Competitor Strategist | `backend/council/strategist.py` |
-| Devil's Advocate | `backend/council/advocate.py` |
-| Moderator / claims | `backend/council/moderator.py`, `claims.py`, `wording.py` |
-| Engine adapter (mock + frozen signature) | `backend/council/engine_adapter.py` |
-| Schemas / contract proposals | `backend/council/schemas.py`, `backend/council/contracts/` |
+| Strategist / Advocate / Moderator | `backend/council/` |
 | Routes | `backend/council_routes.py` |
 | Experiment Kit | `backend/kit/` |
 | Café pack | `packs/cafe.yaml` |
 | SaaS kit content (priors stay with A) | `backend/kit/content/saas.yaml` |
-| Non-tech backtest case | `backend/council/backtest/cafe_case_01.yaml` |
-| CouncilPanel | `frontend/components/council/` |
+| Backtest stub | `backend/council/backtest/cafe_case_01.yaml` |
+| Council UI | `frontend/components/council/` |
+
+Shared contracts live in `backend/common/contracts.py` / `contracts/`. Person B does **not** fork them.
 
 ## Setup
 
 ```bash
-cd /Users/umeshgjh/Projects/Market-Arena
-python3 -m venv .venv
-.venv/bin/pip install -r backend/requirements-person-b.txt
+make setup
+make test
+make api    # :8000
+make web    # :3000 — open /dev/council
 ```
 
-## Regenerate mock fixtures
+## How routes behave
+
+`POST /runs/{id}/council` and `POST /runs/{id}/kit` compute via Person B modules using
+shared `/fixtures` inputs (and `backend.engine.engine_ref` by default). If compute fails
+and `MOCK=1`, they fall back to `fixtures/council.json` / `fixtures/kit.json`.
+
+Force the labelled mock engine adapter with `COUNCIL_ENGINE=mock`.
+
+## Local fixtures
+
+Person B still keeps richer SaaS/café fixtures under `backend/council/fixtures/` for unit
+tests and the standalone HTML page:
 
 ```bash
 cd backend && ../.venv/bin/python -m council.fixtures.make_fixtures
-python ../frontend/components/council/build_standalone.py
-```
-
-Fixtures are labelled `meta.source = mock_fixture` / `engine_source = mock`. They are **not** Person A's engine output.
-
-## Run tests
-
-```bash
-cd backend && ../.venv/bin/pytest
-```
-
-## Run Council / Kit on fixtures (no API)
-
-```bash
-cd backend && ../.venv/bin/python - <<'PY'
-from council.engine_adapter import MockEngineAdapter
-from council.service import run_council, run_kit
-from council.tests.conftest import load
-pop, opts, rr = load("population_saas.json"), load("options_saas.json"), load("run_result_saas.json")
-out = run_council(rr, pop, opts, "saas", adapter=MockEngineAdapter())
-print(out["council"].verdict)
-print(run_kit(out["council"], "saas", opts).hypotheses[0])
-PY
-```
-
-## Frontend component
-
-- React: `frontend/components/council/CouncilPanel.tsx` + `FixturePage.tsx`
-- No Next.js app exists yet. Until Person C scaffolds it, open the standalone HTML:
-
-```bash
+# from repo root after PYTHONPATH=. :
+.venv/bin/python -m backend.council.fixtures.make_fixtures
+.venv/bin/python frontend/components/council/build_standalone.py
 open frontend/components/council/council_standalone.html
 ```
-
-Mount later as:
-
-```tsx
-// app/dev/council/page.tsx
-export { default } from "@/components/council/FixturePage";
-```
-
-## Environment flags
-
-| Variable | Effect |
-|---|---|
-| `COUNCIL_ENGINE=mock` | Force mock adapter |
-| `COUNCIL_ENGINE=auto` | Prefer Person A's `run_scenario` if importable, else mock |
-| `MOCK=1` | Routes serve fixtures when body is omitted |
-
-## Do not edit
-
-Person A's engine/population, Person C's intake/orchestration/Arena/Telegram, or shared `/contracts` until the team approves the proposals in `backend/council/contracts/`.

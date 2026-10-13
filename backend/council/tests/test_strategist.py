@@ -5,8 +5,8 @@ import copy
 
 import pytest
 
-from council.engine_adapter import MockEngineAdapter, YOU_ID
-from council.strategist import MOVES, apply_move, run_strategist
+from backend.council.engine_adapter import MockEngineAdapter, YOU_ID
+from backend.council.strategist import MOVES, apply_move, run_strategist
 
 
 def _you_share(agents, options):
@@ -109,7 +109,7 @@ def test_invalid_competitor_skipped(stub_adapter):
 
 
 def test_failed_evaluation_not_fabricated():
-    from council.engine_adapter import EngineEvaluation
+    from backend.council.engine_adapter import EngineEvaluation
 
     class Boom:
         source = "engine"

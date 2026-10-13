@@ -1,0 +1,142 @@
+{
+  "$defs": {
+    "Driver": {
+      "additionalProperties": true,
+      "properties": {
+        "delta": {
+          "title": "Delta",
+          "type": "number"
+        },
+        "term": {
+          "title": "Term",
+          "type": "string"
+        }
+      },
+      "required": [
+        "term",
+        "delta"
+      ],
+      "title": "Driver",
+      "type": "object"
+    },
+    "FeatureBoost": {
+      "additionalProperties": true,
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "type": "number"
+        },
+        "attr": {
+          "title": "Attr",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attr",
+        "amount"
+      ],
+      "title": "FeatureBoost",
+      "type": "object"
+    },
+    "Flip": {
+      "additionalProperties": true,
+      "properties": {
+        "feature_boost": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FeatureBoost"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        },
+        "price_drop": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Drop"
+        }
+      },
+      "title": "Flip",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "agent_id": {
+      "title": "Agent Id",
+      "type": "string"
+    },
+    "choice": {
+      "title": "Choice",
+      "type": "string"
+    },
+    "flip": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Flip"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "narration": {
+      "title": "Narration",
+      "type": "string"
+    },
+    "runner_up": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Runner Up"
+    },
+    "segment": {
+      "title": "Segment",
+      "type": "string"
+    },
+    "top_drivers": {
+      "items": {
+        "$ref": "#/$defs/Driver"
+      },
+      "title": "Top Drivers",
+      "type": "array"
+    }
+  },
+  "required": [
+    "agent_id",
+    "segment",
+    "choice",
+    "top_drivers",
+    "narration"
+  ],
+  "title": "AgentExplain",
+  "type": "object"
+}

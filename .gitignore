@@ -1,9 +1,26 @@
+# Python
 .venv/
-.tools/
-node_modules/
 __pycache__/
-.pytest_cache/
 *.pyc
-.DS_Store
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+
+# Env and secrets
 .env
 .env.local
+
+# Local caches and runtime data
+.cache/
+data/
+.tools/
+
+# Node
+node_modules/
+.next/
+frontend/.env.local
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store

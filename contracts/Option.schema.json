@@ -1,0 +1,46 @@
+{
+  "additionalProperties": true,
+  "properties": {
+    "features": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Features",
+      "type": "array"
+    },
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "novelty": {
+      "default": 0.0,
+      "title": "Novelty",
+      "type": "number"
+    },
+    "price": {
+      "default": 0.0,
+      "title": "Price",
+      "type": "number"
+    },
+    "role": {
+      "enum": [
+        "you",
+        "competitor",
+        "outside"
+      ],
+      "title": "Role",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "label",
+    "role"
+  ],
+  "title": "Option",
+  "type": "object"
+}

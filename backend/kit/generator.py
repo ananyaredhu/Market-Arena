@@ -8,8 +8,8 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from council.schemas import CouncilOutput, KitAssets, KitOffline, KitOutput, TrackingPlan
-from kit.packs import kit_content, load_pack, outside_label
+from backend.council.schemas import CouncilOutput, KitAssets, KitOffline, KitOutput, TrackingPlan
+from backend.kit.packs import kit_content, load_pack, outside_label
 
 ALT_PRICE_FACTOR = 0.8  # matches the Devil's Advocate -20% willingness-to-pay test
 THRESHOLD_MARKER = "Proposed test threshold"
@@ -120,10 +120,14 @@ def validate_kit(kit: KitOutput) -> None:
         problems.append("expected at least 2 ad variants")
     if len(a.telegram_variants) != 2:
         problems.append("expected exactly 2 Telegram variants")
-    if not a.interview_script or not a.offline.checklist or not a.offline.flyer.strip() or not a.landing_copy.strip():
+    if a.offline is None:
+        problems.append("offline kit assets are required for SaaS and café packs")
+    elif not a.interview_script or not a.offline.checklist or not a.offline.flyer.strip() or not a.landing_copy.strip():
         problems.append("interview script, checklist, flyer and landing copy must be non-empty")
-    texts = [a.landing_copy, a.offline.flyer, *kit.hypotheses, *a.survey, *a.interview_script,
-             *a.ad_variants, *a.telegram_variants, *a.offline.checklist, *a.offline.price_board_test]
+    price_board = list(getattr(a.offline, "price_board_test", None) or []) if a.offline else []
+    texts = [a.landing_copy, *kit.hypotheses, *a.survey, *a.interview_script, *a.ad_variants, *a.telegram_variants]
+    if a.offline:
+        texts.extend([a.offline.flyer, *a.offline.checklist, *price_board])
     if any("{" in t and "}" in t for t in texts):
         problems.append("unfilled template placeholder in kit text")
     if problems:

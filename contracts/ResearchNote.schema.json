@@ -1,0 +1,29 @@
+{
+  "additionalProperties": true,
+  "properties": {
+    "note": {
+      "title": "Note",
+      "type": "string"
+    },
+    "quote": {
+      "title": "Quote",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "topic": {
+      "title": "Topic",
+      "type": "string"
+    }
+  },
+  "required": [
+    "topic",
+    "note",
+    "source_url",
+    "quote"
+  ],
+  "title": "ResearchNote",
+  "type": "object"
+}

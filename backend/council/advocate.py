@@ -29,7 +29,7 @@ import math
 from dataclasses import asdict, dataclass, field
 from typing import Dict, List, Optional
 
-from council.engine_adapter import OUTSIDE_ID, YOU_ID, EngineAdapter
+from backend.council.engine_adapter import OUTSIDE_ID, YOU_ID, EngineAdapter
 
 FACTORS = (0.8, 1.2)
 SHARE_FLOOR = 0.05

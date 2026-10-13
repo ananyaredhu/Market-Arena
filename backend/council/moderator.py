@@ -20,12 +20,12 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from typing import Dict, List, Optional, Tuple
 
-from council.advocate import FACTORS, AdvocateReport
-from council.claims import Evidence, is_grounded, unsupported_numbers
-from council.engine_adapter import OUTSIDE_ID, YOU_ID
-from council.schemas import CompetitorReaction, CouncilOutput, Experiment, Risk, RunResult
-from council.strategist import PRICE_CUTS, StrategistReport
-from council.wording import TemplateWording, Wording
+from backend.council.advocate import FACTORS, AdvocateReport
+from backend.council.claims import Evidence, is_grounded, unsupported_numbers
+from backend.council.engine_adapter import OUTSIDE_ID, YOU_ID
+from backend.council.schemas import CompetitorReaction, CouncilOutput, Experiment, Risk, RunResult
+from backend.council.strategist import PRICE_CUTS, StrategistReport
+from backend.council.wording import TemplateWording, Wording
 
 LEVELS = ("low", "medium", "high")
 THRESHOLD_LABEL = "Proposed test threshold (not an established benchmark): "

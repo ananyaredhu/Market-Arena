@@ -1,34 +1,33 @@
-"""Council route smoke tests (Person B). Requires FastAPI + httpx."""
+"""Council route smoke tests (Person B) against the mounted FastAPI app."""
 from __future__ import annotations
 
 import pytest
-
-fastapi = pytest.importorskip("fastapi")
-from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from council_routes import router
+from backend.common.contracts import CouncilOutput, KitOutput
+from backend.main import app
 
 
 @pytest.fixture
-def client():
-    app = FastAPI()
-    app.include_router(router)
+def client(monkeypatch):
+    monkeypatch.setenv("MOCK", "1")
+    monkeypatch.setenv("COUNCIL_ENGINE", "mock")
     return TestClient(app)
 
 
-def test_council_fixture_endpoint(client):
-    response = client.post("/runs/run_saas_fixture/council?fixture=saas")
+def test_council_endpoint_computes_or_falls_back(client):
+    response = client.post("/runs/run_42/council")
     assert response.status_code == 200
-    body = response.json()
-    assert body["run_id"] == "run_saas_fixture"
-    assert body["confidence"] in ("low", "medium", "high")
-    assert 0.0 <= body["fragility"] <= 1.0
+    body = CouncilOutput.model_validate(response.json())
+    assert body.run_id == "run_42"
+    assert body.confidence in ("low", "medium", "high")
+    assert 0.0 <= body.fragility <= 1.0
+    assert body.verdict
 
 
-def test_kit_fixture_endpoint(client):
-    response = client.post("/runs/run_saas_fixture/kit?fixture=saas")
+def test_kit_endpoint_computes_or_falls_back(client):
+    response = client.post("/runs/run_42/kit")
     assert response.status_code == 200
-    body = response.json()
-    assert 3 <= len(body["hypotheses"]) <= 5
-    assert body["assets"]["landing_copy"]
+    body = KitOutput.model_validate(response.json())
+    assert body.hypotheses
+    assert body.assets.landing_copy

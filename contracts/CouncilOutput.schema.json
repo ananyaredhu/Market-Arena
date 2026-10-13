@@ -1,0 +1,202 @@
+{
+  "$defs": {
+    "CompetitorReaction": {
+      "additionalProperties": true,
+      "properties": {
+        "competitor_id": {
+          "title": "Competitor Id",
+          "type": "string"
+        },
+        "effect_on_share": {
+          "title": "Effect On Share",
+          "type": "number"
+        },
+        "move": {
+          "title": "Move",
+          "type": "string"
+        }
+      },
+      "required": [
+        "competitor_id",
+        "move",
+        "effect_on_share"
+      ],
+      "title": "CompetitorReaction",
+      "type": "object"
+    },
+    "Experiment": {
+      "additionalProperties": true,
+      "properties": {
+        "hypothesis": {
+          "title": "Hypothesis",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "landing",
+            "survey",
+            "interview",
+            "offline",
+            "telegram"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "pass_threshold": {
+          "title": "Pass Threshold",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "hypothesis",
+        "pass_threshold",
+        "kind"
+      ],
+      "title": "Experiment",
+      "type": "object"
+    },
+    "Risk": {
+      "additionalProperties": true,
+      "properties": {
+        "evidence": {
+          "title": "Evidence",
+          "type": "string"
+        },
+        "metric": {
+          "title": "Metric",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "evidence",
+        "metric"
+      ],
+      "title": "Risk",
+      "type": "object"
+    },
+    "TrendContext": {
+      "additionalProperties": true,
+      "properties": {
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "trend": {
+          "title": "Trend",
+          "type": "string"
+        },
+        "used_in": {
+          "title": "Used In",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trend",
+        "source_url",
+        "used_in"
+      ],
+      "title": "TrendContext",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "properties": {
+    "competitor_reaction": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CompetitorReaction"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "confidence": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "experiments": {
+      "items": {
+        "$ref": "#/$defs/Experiment"
+      },
+      "title": "Experiments",
+      "type": "array"
+    },
+    "fragility": {
+      "title": "Fragility",
+      "type": "number"
+    },
+    "risks": {
+      "items": {
+        "$ref": "#/$defs/Risk"
+      },
+      "title": "Risks",
+      "type": "array"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "trend_context": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/TrendContext"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trend Context"
+    },
+    "verdict": {
+      "title": "Verdict",
+      "type": "string"
+    },
+    "who_buys": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Who Buys",
+      "type": "array"
+    },
+    "who_rejects": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Who Rejects",
+      "type": "array"
+    }
+  },
+  "required": [
+    "run_id",
+    "verdict",
+    "confidence",
+    "fragility",
+    "who_buys",
+    "who_rejects",
+    "risks",
+    "experiments"
+  ],
+  "title": "CouncilOutput",
+  "type": "object"
+}

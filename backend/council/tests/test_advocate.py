@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import copy
 
-from council.advocate import FACTORS, PARAMETERS, check_availability, fragility_score, perturb, run_advocate
-from council.engine_adapter import MockEngineAdapter, YOU_ID
+from backend.council.advocate import FACTORS, PARAMETERS, check_availability, fragility_score, perturb, run_advocate
+from backend.council.engine_adapter import MockEngineAdapter, YOU_ID
 
 
 def test_perturbations_change_intended_parameter_only(saas):
@@ -37,7 +37,7 @@ def test_fragility_in_unit_interval(saas):
 
 
 def test_fragility_score_bounds():
-    from council.advocate import Perturbation
+    from backend.council.advocate import Perturbation
 
     empty = fragility_score(0.2, [])
     assert empty == 1.0

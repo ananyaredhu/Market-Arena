@@ -17,7 +17,7 @@ import math
 from dataclasses import asdict, dataclass, field
 from typing import Dict, List, Optional, Tuple
 
-from council.engine_adapter import YOU_ID, EngineAdapter
+from backend.council.engine_adapter import YOU_ID, EngineAdapter
 
 MOVES: Tuple[str, ...] = ("price_cut_10", "price_cut_20", "add_feature", "promo")
 PRICE_CUTS = {"price_cut_10": 0.10, "price_cut_20": 0.20}

@@ -3,14 +3,14 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from council.advocate import run_advocate
-from council.engine_adapter import YOU_ID, EngineAdapter, get_default_adapter
-from council.moderator import build_council
-from council.schemas import CouncilOutput, KitOutput, RunResult
-from council.strategist import run_strategist
-from council.wording import Wording
-from kit.generator import ALT_PRICE_FACTOR, generate_kit, money
-from kit.packs import kit_content, load_pack, outside_label
+from backend.council.advocate import run_advocate
+from backend.council.engine_adapter import YOU_ID, EngineAdapter, get_default_adapter
+from backend.council.moderator import build_council
+from backend.council.schemas import CouncilOutput, KitOutput, RunResult
+from backend.council.strategist import run_strategist
+from backend.council.wording import Wording
+from backend.kit.generator import ALT_PRICE_FACTOR, generate_kit, money
+from backend.kit.packs import kit_content, load_pack, outside_label
 
 
 def _product(options: List[dict]) -> dict:

@@ -1,5 +1,5 @@
 """Claim grounding tests (Person B)."""
-from council.claims import Evidence, cited_numbers, is_grounded, unsupported_numbers
+from backend.council.claims import Evidence, cited_numbers, is_grounded, unsupported_numbers
 
 
 def test_identifiers_are_not_claims():

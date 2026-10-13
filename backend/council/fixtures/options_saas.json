@@ -37,5 +37,18 @@
       0.8
     ],
     "novelty": 0.2
+  },
+  {
+    "id": "outside",
+    "label": "Do nothing / free tool",
+    "role": "outside",
+    "price": 0.0,
+    "features": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "novelty": 0.0
   }
 ]
