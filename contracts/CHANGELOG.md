@@ -4,6 +4,10 @@ Source of truth: `backend/common/contracts.py` (Pydantic). JSON schemas in this 
 with `make schemas` and checked in CI. Change rules: all three people agree, add fields as OPTIONAL
 only, update the fixtures in the same commit, add a line here.
 
+## 2026-10-14: optional fields on Choice (Person A, engine.py)
+- `Choice.p_choice` (model probability of the chosen option) and `Choice.locked` (human override pinned the
+  choice). Both optional; `engine_ref.py` does not emit them. Existing consumers can ignore them.
+
 ## 2026-10-13: initial lock (Phase 0)
 - Option, Population (Segment, Agent), RunResult (Totals, Choice), AgentExplain, CouncilOutput,
   KitOutput, ProductProfile.

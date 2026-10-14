@@ -30,6 +30,30 @@
           "default": null,
           "title": "Gap"
         },
+        "locked": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locked"
+        },
+        "p_choice": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "P Choice"
+        },
         "prev_choice": {
           "anyOf": [
             {
