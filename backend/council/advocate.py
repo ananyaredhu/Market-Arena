@@ -144,7 +144,13 @@ def fragility_score(baseline: float, perturbations: List[Perturbation]) -> float
 
 def run_advocate(agents: List[dict], options: List[dict], adapter: EngineAdapter, seed: int) -> AdvocateReport:
     order = [o["id"] for o in options if o.get("role") != OUTSIDE_ID] + [OUTSIDE_ID]
-    report = AdvocateReport(status="ok", engine_source=adapter.source, seed=seed, baseline_share=None, baseline_leader=None)
+    report = AdvocateReport(
+        status="ok",
+        engine_source=adapter.source,
+        seed=seed,
+        baseline_share=None,
+        baseline_leader=None,
+    )
     try:
         base = adapter.evaluate(agents, options, seed)
         s0 = base.share(YOU_ID)

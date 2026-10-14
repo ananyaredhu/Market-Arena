@@ -1,9 +1,10 @@
-from __future__ import annotations
 """Person C routes: projects, scenarios, runs and the SSE stream.
 
 Stubs return fixtures when MOCK=1. The real version stores projects/scenarios/runs (SQLite or
 JSON), calls run_scenario in a background task and streams progress and frames.
 """
+from __future__ import annotations
+
 import asyncio
 import json
 

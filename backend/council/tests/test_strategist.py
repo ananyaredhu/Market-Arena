@@ -3,16 +3,13 @@ from __future__ import annotations
 
 import copy
 
-import pytest
-
-from backend.council.engine_adapter import MockEngineAdapter, YOU_ID
+from backend.council.engine_adapter import YOU_ID, MockEngineAdapter
 from backend.council.strategist import MOVES, apply_move, run_strategist
 
 
 def _you_share(agents, options):
     # Scripted: our share falls with rival price and rises with rival feature.
     rival = next(o for o in options if o["role"] == "competitor")
-    you = next(o for o in options if o["id"] == YOU_ID)
     share = 0.30 - 0.01 * max(0.0, 10.0 - rival["price"]) - 0.05 * (rival["features"][0] - 0.5)
     # Promo is modelled as brand boost on agents; detect via brand.
     for a in agents:

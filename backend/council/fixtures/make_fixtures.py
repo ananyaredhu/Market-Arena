@@ -37,23 +37,41 @@ SAAS = {
     ],
     "segments": [
         {"id": "budget", "name": "Budget-conscious students", "share": 0.4, "evidence": "llm_assumption",
-         "priors": {"budget": [6, 14], "alpha": [0.06, 0.14],
-                    "w": {"ai_planning": [1.0, 1.8], "simplicity": [0.8, 1.4], "privacy": [0.3, 0.8], "integrations": [0.2, 0.6]},
-                    "switch": [0.1, 0.4], "risk": [0.1, 0.4], "outside_utility": [-0.2, 0.6], "tau": [0.5, 0.9],
-                    "brand": {"free_tool": [0.1, 0.4], "chain_app": [0.0, 0.2]},
-                    "incumbent": {"free_tool": 0.7, "outside": 0.3}}},
+         "priors": {
+             "budget": [6, 14], "alpha": [0.06, 0.14],
+             "w": {
+                 "ai_planning": [1.0, 1.8], "simplicity": [0.8, 1.4],
+                 "privacy": [0.3, 0.8], "integrations": [0.2, 0.6],
+             },
+             "switch": [0.1, 0.4], "risk": [0.1, 0.4],
+             "outside_utility": [-0.2, 0.6], "tau": [0.5, 0.9],
+             "brand": {"free_tool": [0.1, 0.4], "chain_app": [0.0, 0.2]},
+             "incumbent": {"free_tool": 0.7, "outside": 0.3},
+         }},
         {"id": "power", "name": "Power planners", "share": 0.3, "evidence": "llm_assumption",
-         "priors": {"budget": [10, 25], "alpha": [0.05, 0.12],
-                    "w": {"ai_planning": [1.2, 2.0], "simplicity": [0.4, 0.9], "privacy": [0.6, 1.2], "integrations": [0.8, 1.4]},
-                    "switch": [0.2, 0.5], "risk": [0.1, 0.3], "outside_utility": [-0.5, 0.2], "tau": [0.5, 0.9],
-                    "brand": {"chain_app": [0.2, 0.5], "free_tool": [0.0, 0.2]},
-                    "incumbent": {"chain_app": 0.5, "free_tool": 0.5}}},
+         "priors": {
+             "budget": [10, 25], "alpha": [0.05, 0.12],
+             "w": {
+                 "ai_planning": [1.2, 2.0], "simplicity": [0.4, 0.9],
+                 "privacy": [0.6, 1.2], "integrations": [0.8, 1.4],
+             },
+             "switch": [0.2, 0.5], "risk": [0.1, 0.3],
+             "outside_utility": [-0.5, 0.2], "tau": [0.5, 0.9],
+             "brand": {"chain_app": [0.2, 0.5], "free_tool": [0.0, 0.2]},
+             "incumbent": {"chain_app": 0.5, "free_tool": 0.5},
+         }},
         {"id": "loyalist", "name": "Free-tool loyalists", "share": 0.3, "evidence": "llm_assumption",
-         "priors": {"budget": [0, 5], "alpha": [0.3, 0.6],
-                    "w": {"ai_planning": [0.1, 0.5], "simplicity": [0.8, 1.4], "privacy": [0.2, 0.6], "integrations": [0.4, 0.9]},
-                    "switch": [0.5, 1.0], "risk": [0.4, 0.8], "outside_utility": [0.0, 0.6], "tau": [0.5, 0.9],
-                    "brand": {"free_tool": [0.5, 1.0]},
-                    "incumbent": {"free_tool": 1.0}}},
+         "priors": {
+             "budget": [0, 5], "alpha": [0.3, 0.6],
+             "w": {
+                 "ai_planning": [0.1, 0.5], "simplicity": [0.8, 1.4],
+                 "privacy": [0.2, 0.6], "integrations": [0.4, 0.9],
+             },
+             "switch": [0.5, 1.0], "risk": [0.4, 0.8],
+             "outside_utility": [0.0, 0.6], "tau": [0.5, 0.9],
+             "brand": {"free_tool": [0.5, 1.0]},
+             "incumbent": {"free_tool": 1.0},
+         }},
     ],
 }
 
@@ -62,9 +80,9 @@ def cafe_spec() -> dict:
     pack = yaml.safe_load((REPO / "packs" / "cafe.yaml").read_text())
     outside = pack.get("outside_option") or {}
     n = len(pack["attributes"])
-    options = [pack["demo_product"]] + [
-        {k: a[k] for k in ("id", "label", "role", "price", "features", "novelty")} for a in pack["competitor_archetypes"]
-    ] + [{
+    keys = ("id", "label", "role", "price", "features", "novelty")
+    rivals = [{k: a[k] for k in keys} for a in pack["competitor_archetypes"]]
+    options = [pack["demo_product"]] + rivals + [{
         "id": outside.get("id", "outside"),
         "label": outside.get("label", "Make coffee at home or skip"),
         "role": "outside",
@@ -81,7 +99,8 @@ def sample_population(spec: dict, n: int, seed: int) -> dict:
     counts = [int(round(s["share"] * n)) for s in spec["segments"]]
     counts[-1] = n - sum(counts[:-1])
     agents = []
-    u = lambda lo_hi: float(round(rng.uniform(*lo_hi), 4))
+    def u(lo_hi):
+        return float(round(rng.uniform(*lo_hi), 4))
     for seg, count in zip(spec["segments"], counts):
         p = seg["priors"]
         inc_ids, inc_p = zip(*p["incumbent"].items())

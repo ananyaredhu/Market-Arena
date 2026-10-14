@@ -1,9 +1,10 @@
-from __future__ import annotations
 """Person C routes: Telegram campaigns (opt-in, approval, A/B send, results) and webhook.
 
 Stubs return canned data when MOCK=1. Real version: consent log, /start and /stop, human approval
 gate, A/B split, frequency cap, click/button tracking.
 """
+from __future__ import annotations
+
 from fastapi import APIRouter
 
 from backend.common.fixtures import load_fixture

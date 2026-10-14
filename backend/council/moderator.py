@@ -57,7 +57,8 @@ def decide_confidence(
     if advocate.status != "ok" or len(tested) < 3 or any(p.status != "ok" for p in advocate.perturbations):
         level = _cap(level, "medium")
         reasons.append("Confidence capped at medium: not every sensitivity test could be run.")
-    if any(c.status == "failed" for c in strategist.candidates) or strategist.status in ("baseline_failed", "invalid_input"):
+    failed_moves = any(c.status == "failed" for c in strategist.candidates)
+    if failed_moves or strategist.status in ("baseline_failed", "invalid_input"):
         level = _cap(level, "medium")
         reasons.append("Confidence capped at medium: some competitor moves could not be evaluated.")
     if totals_you and all(totals_you.get(k) is not None for k in ("p10", "p50", "p90")) and totals_you["p50"] > 0:
@@ -89,7 +90,12 @@ def _segment_stats(rr: RunResult) -> Dict[str, dict]:
     return dict(stats)
 
 
-def build_evidence(rr: RunResult, strategist: StrategistReport, advocate: AdvocateReport, seg_stats: Dict[str, dict]) -> Evidence:
+def build_evidence(
+    rr: RunResult,
+    strategist: StrategistReport,
+    advocate: AdvocateReport,
+    seg_stats: Dict[str, dict],
+) -> Evidence:
     ev = Evidence()
     for t in rr.totals.values():
         ev.extend([t.share, t.p10, t.p50, t.p90], as_percent=True)
@@ -117,7 +123,11 @@ def _metric(before: float, after: float) -> str:
     return f"share {before:.3f} -> {after:.3f} ({change:+.3f}{rel})"
 
 
-def _ranked_risks(strategist: StrategistReport, advocate: AdvocateReport, labels: Dict[str, str]) -> List[Tuple[str, float, Risk]]:
+def _ranked_risks(
+    strategist: StrategistReport,
+    advocate: AdvocateReport,
+    labels: Dict[str, str],
+) -> List[Tuple[str, float, Risk]]:
     items: List[Tuple[str, float, Risk]] = []
     for r in advocate.risks:
         items.append((r["key"], r["abs_change"], Risk(
@@ -252,17 +262,25 @@ def build_council(
         if candidate and not bad and "simulat" in candidate.lower():
             verdict = candidate
         elif candidate:
-            limitations.append(f"LLM wording rejected (unsupported numbers {bad} or missing 'simulated' label); template used.")
+            limitations.append(
+                "LLM wording rejected "
+                f"(unsupported numbers {bad} or missing 'simulated' label); template used."
+            )
 
     reaction = None
     if strategist.selected:
         sel = strategist.selected
-        reaction = CompetitorReaction(competitor_id=sel["competitor_id"], move=sel["move"], effect_on_share=round(sel["share_change"], 4))
+        reaction = CompetitorReaction(
+            competitor_id=sel["competitor_id"],
+            move=sel["move"],
+            effect_on_share=round(sel["share_change"], 4),
+        )
 
     ctx = dict(context or {})
     ctx.setdefault("product", product)
     if strategist.selected:
-        ctx.setdefault("competitor", labels.get(strategist.selected["competitor_id"], strategist.selected["competitor_id"]))
+        cid = strategist.selected["competitor_id"]
+        ctx.setdefault("competitor", labels.get(cid, cid))
     experiments = _experiments([k for k, _, _ in ranked], experiment_library, ctx)
 
     out = CouncilOutput(

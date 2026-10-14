@@ -5,7 +5,7 @@ from backend.council.advocate import run_advocate
 from backend.council.claims import Evidence, unsupported_numbers
 from backend.council.engine_adapter import MockEngineAdapter
 from backend.council.moderator import build_council, decide_confidence, enforce_grounding
-from backend.council.schemas import CouncilOutput, Risk
+from backend.council.schemas import CouncilOutput
 from backend.council.service import run_council
 from backend.council.strategist import run_strategist
 from backend.kit.packs import kit_content

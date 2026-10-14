@@ -4,7 +4,7 @@ from __future__ import annotations
 import copy
 
 from backend.council.advocate import FACTORS, PARAMETERS, check_availability, fragility_score, perturb, run_advocate
-from backend.council.engine_adapter import MockEngineAdapter, YOU_ID
+from backend.council.engine_adapter import YOU_ID, MockEngineAdapter
 
 
 def test_perturbations_change_intended_parameter_only(saas):

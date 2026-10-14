@@ -72,7 +72,8 @@ def build_context(council: CouncilOutput, pack: str, product: dict, competitor_l
 def generate_kit(council: CouncilOutput, pack: str, product: dict, competitor_label: Optional[str] = None) -> KitOutput:
     content = kit_content(pack)
     ctx = _SafeDict(build_context(council, pack, product, competitor_label))
-    fmt = lambda s: s.format_map(ctx).strip()
+    def fmt(s):
+        return s.format_map(ctx).strip()
     order = risk_order(council)
 
     hypotheses = [fmt(h["text"]) for h in _prioritise(content["hypotheses"], order)][:5]

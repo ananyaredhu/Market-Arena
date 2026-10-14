@@ -8,7 +8,6 @@ frontend keeps working.
 from __future__ import annotations
 
 import logging
-import os
 from typing import List, Optional
 
 from fastapi import APIRouter, Body, HTTPException
@@ -46,8 +45,8 @@ def _shared_inputs(pack: str = "saas") -> tuple[dict, list, dict]:
         run_result = load_fixture("run_result")
     else:
         # Café shared fixtures are not in /fixtures yet; use Person B local ones.
-        from pathlib import Path
         import json
+        from pathlib import Path
 
         root = Path(__file__).resolve().parent / "council" / "fixtures"
         population = json.loads((root / f"population_{pack}.json").read_text())
