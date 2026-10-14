@@ -6,21 +6,25 @@ JSON), calls run_scenario in a background task and streams progress and frames.
 import asyncio
 import json
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 
 from backend.common.fixtures import load_fixture
 from backend.common.mock import mock_enabled, not_built
+from backend.intake.projects import ProjectCreateRequest, create_persisted_project, get_persisted_project
 
 router = APIRouter(tags=["intake and runs (C)"])
 
 
 @router.post("/projects")
-def create_project(body: dict | None = None):
+def create_project(body: ProjectCreateRequest | None = None):
     if mock_enabled():
         return {"id": "proj_1", "profile": load_fixture("product_profile_saas"),
                 "competitors": load_fixture("competitors_saas")}
-    raise not_built("POST /projects")
+    if body is None:
+        # Preserve the no-body fixture call in mock mode while requiring input in real mode.
+        raise HTTPException(status_code=422, detail="request body is required")
+    return create_persisted_project(body)
 
 
 @router.get("/projects/{project_id}")
@@ -28,7 +32,7 @@ def get_project(project_id: str):
     if mock_enabled():
         return {"id": project_id, "profile": load_fixture("product_profile_saas"),
                 "competitors": load_fixture("competitors_saas")}
-    raise not_built("GET /projects/{id}")
+    return get_persisted_project(project_id)
 
 
 @router.post("/scenarios")

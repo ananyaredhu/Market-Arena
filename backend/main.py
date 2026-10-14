@@ -13,7 +13,7 @@ from backend.telegram import routes as telegram_routes
 app = FastAPI(title="Market Arena")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000", "http://localhost:3001"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
