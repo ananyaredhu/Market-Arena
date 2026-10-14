@@ -7,3 +7,4 @@ pyyaml>=6.0
 pytest>=8.0
 hypothesis>=6.100
 ruff>=0.5
+eval_type_backport>=0.2; python_version < "3.10"

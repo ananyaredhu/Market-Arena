@@ -1,23 +1,256 @@
-# Cafe / food and beverage industry pack. OWNER: Person B. PLACEHOLDER, to be written (Fri 16).
-# Confirm the budget unit (per visit) and keep alpha on the same scale as the SaaS pack.
+# Café / local retail Industry Pack (owner: Person B)
+#
+# EVERY PRIOR IN THIS FILE IS AN ILLUSTRATIVE ASSUMPTION written for the
+# competition MVP. None has been validated against real customer data.
+# Replace ranges with measured values once experiments return results.
 pack: cafe
-currency: SGD
-period: visit            # budget and price are per visit
-attributes: [taste_quality, distance_minutes, wait_time, ambience, dietary_fit, loyalty_perks]
-outside_option: "make coffee at home / skip"
-min_outside_share: 0.15
+version: 0.1
+label: Café / local F&B retail
+evidence: illustrative_assumption
+currency: "S$"
+price_unit: per visit
+known_limitations: >
+  Priors are hand-written ranges, not fitted to Singapore data. Location,
+  opening hours and seating capacity are not modelled; distance and queues
+  are folded into the "convenience" and "speed" attributes. Treat results as
+  a way to choose what to test, not as a sales forecast.
+
+# Feature values run from 0 (worst) to 1 (best). Price is a separate term in the
+# utility model, so it is not listed as an attribute.
+attributes: [taste_quality, convenience, speed, ambience, dietary_fit, loyalty_perks]
+attribute_notes:
+  convenience: inverse of walking distance from the customer's usual route
+  speed: inverse of typical wait time at the counter
+  loyalty_perks: stamp cards, app points, member pricing
+
+outside_option:
+  id: outside
+  label: Make coffee at home or skip
+  assumption: >
+    Always available at near-zero cost. Its utility per agent is sampled from
+    each segment's outside_utility range (illustrative).
+
+# Illustrative demo product used by fixtures; real products come from intake.
+demo_product:
+  id: you
+  label: Corner Brew
+  role: you
+  price: 4.8
+  features: [0.8, 0.6, 0.6, 0.8, 0.7, 0.5]
+  novelty: 0.7
+
+competitor_archetypes:
+  - id: chain_cafe
+    label: Chain café
+    role: competitor
+    price: 7.0
+    features: [0.7, 0.7, 0.6, 0.7, 0.5, 0.8]
+    novelty: 0.0
+    notes: Strong brand and loyalty app, higher price.
+  - id: hawker_kopi
+    label: Hawker kopi stall
+    role: competitor
+    price: 1.8
+    features: [0.6, 0.8, 0.8, 0.2, 0.3, 0.1]
+    novelty: 0.0
+    notes: Very cheap and fast; little seating comfort.
+  - id: convenience_store
+    label: Convenience-store coffee
+    role: competitor
+    price: 2.2
+    features: [0.3, 0.9, 0.9, 0.1, 0.2, 0.2]
+    novelty: 0.0
+    notes: On every route, fastest option, weakest taste.
+
+# Ranges are [low, high] for uniform sampling. evidence: illustrative_assumption.
 segments:
   - id: office_lunch
     name: Office lunch crowd
-    share: 0.35
-    priors: {budget: [6, 14], alpha: [0.05, 0.12]}
+    share: 0.3
+    evidence: illustrative_assumption
+    priors:
+      budget: [5, 12]
+      alpha: [0.15, 0.35]
+      w: {taste_quality: [0.6, 1.0], convenience: [0.8, 1.4], speed: [0.8, 1.4], ambience: [0.2, 0.5], dietary_fit: [0.1, 0.4], loyalty_perks: [0.2, 0.5]}
+      switch: [0.1, 0.4]
+      risk: [0.1, 0.4]
+      outside_utility: [-0.5, 0.3]
+      tau: [0.5, 0.9]
+      brand: {chain_cafe: [0.1, 0.4], hawker_kopi: [0.0, 0.3]}
+      incumbent: {chain_cafe: 0.5, hawker_kopi: 0.3, convenience_store: 0.2}
   - id: students
     name: Students on a budget
-    share: 0.35
-    priors: {budget: [3, 8], alpha: [0.15, 0.30]}
-  - id: remote
+    share: 0.3
+    evidence: illustrative_assumption
+    priors:
+      budget: [3, 7]
+      alpha: [0.4, 0.7]
+      w: {taste_quality: [0.4, 0.8], convenience: [0.5, 0.9], speed: [0.3, 0.6], ambience: [0.6, 1.0], dietary_fit: [0.2, 0.5], loyalty_perks: [0.5, 0.9]}
+      switch: [0.1, 0.3]
+      risk: [0.1, 0.3]
+      outside_utility: [0.0, 0.6]
+      tau: [0.5, 0.9]
+      brand: {hawker_kopi: [0.1, 0.4]}
+      incumbent: {hawker_kopi: 0.5, convenience_store: 0.2, outside: 0.3}
+  - id: remote_workers
     name: Remote workers
-    share: 0.30
-    priors: {budget: [5, 12], alpha: [0.05, 0.15]}
-competitor_archetypes: [chain_cafe, hawker_centre, convenience_store, home_brew]
+    share: 0.2
+    evidence: illustrative_assumption
+    priors:
+      budget: [5, 12]
+      alpha: [0.1, 0.3]
+      w: {taste_quality: [0.7, 1.1], convenience: [0.2, 0.5], speed: [0.1, 0.3], ambience: [1.0, 1.6], dietary_fit: [0.3, 0.7], loyalty_perks: [0.3, 0.6]}
+      switch: [0.2, 0.4]
+      risk: [0.1, 0.3]
+      outside_utility: [-0.2, 0.4]
+      tau: [0.5, 0.9]
+      brand: {chain_cafe: [0.2, 0.5]}
+      incumbent: {chain_cafe: 0.6, outside: 0.4}
+  # Hostile segment (required by master plan 4.5): unlikely to ever switch.
+  - id: hawker_loyalists
+    name: Hawker loyalists
+    share: 0.2
+    evidence: illustrative_assumption
+    priors:
+      budget: [2, 4]
+      alpha: [0.6, 1.0]
+      w: {taste_quality: [0.3, 0.6], convenience: [0.8, 1.2], speed: [0.8, 1.2], ambience: [0.0, 0.2], dietary_fit: [0.0, 0.2], loyalty_perks: [0.0, 0.2]}
+      switch: [0.6, 1.0]
+      risk: [0.5, 0.9]
+      outside_utility: [0.0, 0.5]
+      tau: [0.5, 0.9]
+      brand: {hawker_kopi: [0.5, 0.9]}
+      incumbent: {hawker_kopi: 1.0}
+
 experiment_menu: [pop_up_stall, tasting_preorder_form, flyer_qr_test, telegram_promo, price_board_test]
+
+# ------------------------------------------------------------------ Experiment Kit content
+# Placeholders: {product} {price} {price_low} {price_high} {competitor} {outside}
+# All thresholds are PROPOSED test thresholds for the founder to adjust.
+kit:
+  experiment_library:
+    budget:
+      title: Price-board test at {price} vs {price_low}
+      hypothesis: Enough walk-past customers buy {product} at {price} that the lower {price_low} price is not needed.
+      pass_threshold: over two comparable weekday lunch hours, purchases at {price} reach at least 70% of purchases at {price_low}.
+      kind: offline
+    alpha:
+      title: Tasting event with a price-ladder card
+      hypothesis: After tasting, students and office workers state they would pay {price} rather than switch back to a cheaper option.
+      pass_threshold: at least 40% of 30+ tasters pick {price} or higher on the price-ladder card.
+      kind: offline
+    brand:
+      title: QR flyer next to {competitor}
+      hypothesis: Regulars of {competitor} will try {product} when given a first-visit offer.
+      pass_threshold: at least 5% of 200 flyers handed out within 150 m of {competitor} are redeemed within 7 days.
+      kind: offline
+    competitor:
+      title: Loyalty-card retention check against {competitor}
+      hypothesis: A stamp card keeps repeat visits steady even if {competitor} reacts with a price cut, a new menu item or a promotion.
+      pass_threshold: at least 30% of first-time stamp-card holders return within 14 days.
+      kind: offline
+    defaults:
+      - title: Telegram pre-order for weekday lunch
+        hypothesis: Nearby office workers will pre-order {product} through a Telegram link from the counter QR code.
+        pass_threshold: at least 15% of Telegram subscribers tap "Pre-order" within the first week.
+        kind: telegram
+      - title: Pop-up stall pilot day
+        hypothesis: A single pop-up day sells enough cups at {price} to cover the stall cost.
+        pass_threshold: break-even cup count set by the founder before the day, reached by 2 pm.
+        kind: offline
+      - title: Five regulars interview
+        hypothesis: People who buy coffee at least 3 times a week name a concrete reason to switch from their current spot.
+        pass_threshold: at least 3 of 5 interviewees name the same switching reason unprompted.
+        kind: interview
+
+  hypotheses:
+    - key: budget
+      text: "Customers accept {price} for {product}. Proposed test threshold: purchases at {price} reach at least 70% of purchases at {price_low} on the price board."
+    - key: alpha
+      text: "Tasting changes price tolerance. Proposed test threshold: at least 40% of tasters choose {price} or higher on the price-ladder card."
+    - key: brand
+      text: "{competitor} regulars will try a new café with a first-visit offer. Proposed test threshold: at least 5% of 200 flyers are redeemed within 7 days."
+    - key: competitor
+      text: "Repeat visits survive a rival's price cut or promotion. Proposed test threshold: at least 30% of stamp-card holders return within 14 days."
+    - key: default
+      text: "Pre-ordering removes the queue barrier for lunch. Proposed test threshold: at least 15% of Telegram subscribers pre-order within a week."
+
+  landing:
+    headline: "{product}: proper coffee, without the queue"
+    subhead: Freshly brewed kopi and specialty coffee, ready when you arrive.
+    benefits:
+      - Pre-order on Telegram and skip the lunchtime queue.
+      - Seats and plugs for a quiet hour of work.
+      - Oat milk and less-sugar options as standard.
+      - Stamp card from the first cup.
+    price_positioning:
+      - "Variant A: every cup {price}, stamp card included."
+      - "Variant B: {price_low} before 10 am, {price} after."
+
+  survey:
+    - Where do you usually buy coffee on a weekday?
+    - How many times a week do you buy coffee or tea outside home?
+    - What do you usually pay per cup?
+    - "At what price would a cup from {product} be too expensive to consider? (price ladder)"
+    - At what price would it be so cheap you would doubt the quality?
+    - Rank these for your weekday coffee - taste, speed, distance, seating, price, loyalty rewards.
+    - How long are you willing to wait at the counter?
+    - Would you pre-order through Telegram if it meant no queue?
+    - Do you need oat milk, less sugar or other dietary options?
+    - What would make you try a new café instead of {competitor}?
+
+  interview_script:
+    - "Screen: buys coffee or tea outside home at least 3 times a week; not a friend of the founders."
+    - Walk me through the last time you bought coffee. Where, when, and why there?
+    - What did you pay, and how did you feel about the price?
+    - When did you last try a new coffee place? What made you try it?
+    - What would make you stop going to your usual spot?
+    - "If a café 2 minutes away let you pre-order, what would you expect to pay? (do not suggest a number)"
+    - "Close: may we message you when we run a tasting day? (record consent)"
+    - "Notes template: quote, current spot, price paid, switching trigger, follow-up consent."
+
+  ad_variants:
+    - key: budget
+      text: "Coffee at {price}, no queue. Pre-order from {product} on Telegram."
+    - key: alpha
+      text: "First tasting is free. Try {product} and tell us what it is worth."
+    - key: brand
+      text: "Bring this flyer for your first {product} cup. Two minutes from {competitor}."
+    - key: default
+      text: "Quiet seats, good coffee, plugs. {product} is open from 7 am."
+
+  offline:
+    flyer: |
+      {product} - FIRST CUP OFFER
+      Scan the QR code to join our Telegram and claim your first-visit price.
+      [QR CODE: t.me/<bot>?start=<campaign_id>]
+      Pre-order, skip the queue. Reply /stop any time to unsubscribe.
+    checklist:
+      - "Tasting event: book a 2-hour slot at a busy time; set the cup target before you start."
+      - Prepare 30+ tasting cups and a printed price-ladder card for every taster.
+      - Print 200 QR flyers with a campaign code unique to this event.
+      - Assign one person to record every taster's price choice and comment.
+      - Ask for Telegram opt-in only after the tasting, never before.
+      - Photograph the setup and count leftover flyers at the end.
+    price_board_test:
+      - "Week 1, Mon-Wed lunch: board shows {price}. Record cups sold per hour."
+      - "Week 1, Thu-Fri lunch: board shows {price_low}. Record cups sold per hour."
+      - Keep the menu, staff and opening hours identical across both periods.
+      - Log weather and nearby events; repeat the test if either differs strongly.
+      - "Decision: compare cups per hour and revenue per hour against the proposed threshold."
+
+  telegram_variants:
+    - "Hi from {product}! Lunch coffee is {price} today. Tap Pre-order and skip the queue. Reply /stop to unsubscribe."
+    - "Hi from {product}! Before 10 am every cup is {price_low}. Tap Interested to hold one for you. Reply /stop to unsubscribe."
+
+  tracking_plan:
+    metrics:
+      - Cups sold per hour at each board price
+      - Flyer redemptions by campaign code
+      - Telegram subscribers, Pre-order taps, Too expensive taps, unsubscribes
+      - Tasting price-ladder choices
+      - 14-day return rate of stamp-card holders
+    decision_rule: >
+      Keep {price} only if the price-board and tasting tests both meet their
+      proposed thresholds. If either misses, rerun the simulation with lower
+      budget priors and test {price_low} next.

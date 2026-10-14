@@ -1,0 +1,54 @@
+[
+  {
+    "id": "you",
+    "label": "StudyFlow",
+    "role": "you",
+    "price": 9.0,
+    "features": [
+      0.85,
+      0.8,
+      0.8,
+      0.4
+    ],
+    "novelty": 0.6
+  },
+  {
+    "id": "free_tool",
+    "label": "Free Planner",
+    "role": "competitor",
+    "price": 0.0,
+    "features": [
+      0.1,
+      0.7,
+      0.4,
+      0.6
+    ],
+    "novelty": 0.0
+  },
+  {
+    "id": "chain_app",
+    "label": "PlanPro AI",
+    "role": "competitor",
+    "price": 12.0,
+    "features": [
+      0.9,
+      0.5,
+      0.4,
+      0.8
+    ],
+    "novelty": 0.2
+  },
+  {
+    "id": "outside",
+    "label": "Do nothing / free tool",
+    "role": "outside",
+    "price": 0.0,
+    "features": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "novelty": 0.0
+  }
+]

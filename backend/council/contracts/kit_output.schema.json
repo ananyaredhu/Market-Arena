@@ -1,0 +1,137 @@
+{
+  "$defs": {
+    "KitAssets": {
+      "additionalProperties": false,
+      "properties": {
+        "landing_copy": {
+          "title": "Landing Copy",
+          "type": "string"
+        },
+        "survey": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Survey",
+          "type": "array"
+        },
+        "interview_script": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Interview Script",
+          "type": "array"
+        },
+        "ad_variants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ad Variants",
+          "type": "array"
+        },
+        "offline": {
+          "$ref": "#/$defs/KitOffline"
+        },
+        "telegram_variants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Telegram Variants",
+          "type": "array"
+        },
+        "tracking_plan": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TrackingPlan"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "landing_copy",
+        "survey",
+        "interview_script",
+        "ad_variants",
+        "offline",
+        "telegram_variants"
+      ],
+      "title": "KitAssets",
+      "type": "object"
+    },
+    "KitOffline": {
+      "additionalProperties": false,
+      "properties": {
+        "flyer": {
+          "title": "Flyer",
+          "type": "string"
+        },
+        "checklist": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checklist",
+          "type": "array"
+        },
+        "price_board_test": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Price Board Test",
+          "type": "array"
+        }
+      },
+      "required": [
+        "flyer",
+        "checklist"
+      ],
+      "title": "KitOffline",
+      "type": "object"
+    },
+    "TrackingPlan": {
+      "additionalProperties": false,
+      "description": "PROPOSED optional field: metrics to record and the decision rule.",
+      "properties": {
+        "metrics": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Metrics",
+          "type": "array"
+        },
+        "decision_rule": {
+          "title": "Decision Rule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "metrics",
+        "decision_rule"
+      ],
+      "title": "TrackingPlan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "hypotheses": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Hypotheses",
+      "type": "array"
+    },
+    "assets": {
+      "$ref": "#/$defs/KitAssets"
+    }
+  },
+  "required": [
+    "hypotheses",
+    "assets"
+  ],
+  "title": "KitOutput",
+  "type": "object"
+}

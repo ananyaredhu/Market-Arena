@@ -3,6 +3,8 @@
 Stubs return fixtures when MOCK=1. Replace the body of each route with the real implementation
 (keep the path and the response shape, they are frozen contracts).
 """
+from __future__ import annotations
+
 from fastapi import APIRouter
 
 from backend.common.fixtures import load_fixture

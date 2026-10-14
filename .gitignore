@@ -13,6 +13,7 @@ __pycache__/
 # Local caches and runtime data
 .cache/
 data/
+.tools/
 
 # Node
 node_modules/
