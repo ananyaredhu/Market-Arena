@@ -5,6 +5,8 @@ import { FEATURE_LABELS } from "@/lib/mock/intake";
 import type { ProductProfile } from "@/lib/types";
 
 export default function ProfileCard({ profile, trial = "14 days" }: { profile: ProductProfile; trial?: string }) {
+  const pricePeriod = profile.pack === "cafe" ? "visit" : "mo";
+
   return (
     <Card className="flex flex-col gap-4 !rounded-2xl !p-[22px]">
       <div className="flex items-baseline justify-between">
@@ -13,7 +15,7 @@ export default function ProfileCard({ profile, trial = "14 days" }: { profile: P
       </div>
       <div className="font-display text-[28px] font-bold">{profile.name}</div>
       <div className="flex gap-2.5">
-        <KeyValue label="Price" value={`S$${profile.price} / mo`} />
+        <KeyValue label="Price" value={`${profile.currency} ${profile.price} / ${pricePeriod}`} />
         <KeyValue label="Trial" value={trial} />
       </div>
       <div>
