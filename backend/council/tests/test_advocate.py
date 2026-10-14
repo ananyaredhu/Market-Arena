@@ -76,6 +76,73 @@ def test_reproducible(saas):
     assert a == b
 
 
+def test_risks_ranked_by_measured_drop(stub_adapter):
+    agents = [{"id": "a1", "budget": 10, "alpha": 0.2, "brand": {"you": 0.0, "rival": 0.4},
+               "w": [1.0], "switch": 0.1, "risk": 0.1, "incumbent": "rival", "outside_utility": 0.0, "tau": 1.0}]
+    options = [
+        {"id": "you", "role": "you", "price": 9.0, "features": [0.5], "novelty": 0.0},
+        {"id": "rival", "role": "competitor", "price": 8.0, "features": [0.4], "novelty": 0.0},
+    ]
+
+    def shares(changed, _options):
+        budget = changed[0]["budget"]
+        alpha = changed[0]["alpha"]
+        you = 0.40
+        if budget < 10:
+            you = 0.10
+        elif budget > 10:
+            you = 0.35
+        if alpha > 0.2:
+            you -= 0.05
+        return {"you": you, "rival": 0.4, "outside": round(0.6 - you, 10)}
+
+    report = run_advocate(agents, options, stub_adapter(shares), seed=1)
+    assert [risk["key"] for risk in report.risks][0] == "budget"
+    assert report.risks[0]["abs_change"] <= report.risks[-1]["abs_change"]
+    assert report.risks[0]["baseline_share"] == 0.40
+    assert report.risks[0]["perturbed_share"] == 0.10
+
+
+def test_zero_baseline_has_no_relative_change(stub_adapter):
+    agents = [{"id": "a1", "budget": 10, "alpha": 0.2, "brand": {"you": 0.0, "rival": 0.4},
+               "w": [1.0], "switch": 0.1, "risk": 0.1, "incumbent": "rival", "outside_utility": 0.0, "tau": 1.0}]
+    options = [
+        {"id": "you", "role": "you", "price": 9.0, "features": [0.5], "novelty": 0.0},
+        {"id": "rival", "role": "competitor", "price": 8.0, "features": [0.4], "novelty": 0.0},
+    ]
+    flat = stub_adapter(lambda a, o: {"you": 0.0, "rival": 0.2, "outside": 0.8})
+    report = run_advocate(agents, options, flat, seed=1)
+    ok = [p for p in report.perturbations if p.status == "ok"]
+    assert ok
+    assert all(p.rel_change is None for p in ok)
+    assert report.fragility == 0.0 or report.fragility == 1.0 or 0.0 <= report.fragility <= 1.0
+
+
+def test_unsupported_parameter_is_reported():
+    agents = [{"id": "a1", "budget": 10, "alpha": 0.1, "brand": {"rival": 0.2}}]
+    message = check_availability("weather", agents)
+    assert message is not None and "unknown parameter" in message
+
+
+def test_real_engine_sensitivity_is_reproducible():
+    from backend.common.fixtures import load_fixture
+    from backend.council.engine_adapter import get_default_adapter
+
+    population = load_fixture("population_saas")
+    options = load_fixture("options_saas")
+    adapter = get_default_adapter("engine")
+    first = run_advocate(population["agents"], options, adapter, seed=42)
+    second = run_advocate(population["agents"], options, adapter, seed=42)
+    assert first.to_dict() == second.to_dict()
+    assert first.engine_source == "engine"
+    assert first.baseline_share == load_fixture("run_result")["totals"]["you"]["share"]
+    drops = [p for p in first.perturbations if p.status == "ok" and p.abs_change is not None]
+    assert drops
+    assert [p.abs_change for p in drops]  # measured, not a fixed score
+    ranked = sorted(first.risks, key=lambda r: r["abs_change"])
+    assert [r["key"] for r in first.risks] == [r["key"] for r in ranked]
+
+
 def test_baseline_failed(stub_adapter, saas):
     class Boom:
         source = "engine"

@@ -70,6 +70,21 @@ def test_pack_content_loads():
     assert load_pack("cafe").get("evidence") == "illustrative_assumption"
 
 
+def test_kit_text_follows_the_product_and_the_top_risk(saas_council):
+    council, options = saas_council
+    study = run_kit(council, "saas", options)
+    renamed = [dict(o) for o in options]
+    renamed[0] = {**renamed[0], "label": "NightOwl", "price": 18}
+    other = run_kit(council, "saas", renamed)
+    assert any("NightOwl" in line for line in other.hypotheses)
+    assert any("StudyFlow" in line or "your product" in line for line in study.hypotheses)
+    assert study.hypotheses != other.hypotheses
+
+    flipped = council.model_copy(update={"risks": list(reversed(council.risks))})
+    reordered = run_kit(flipped, "saas", options)
+    assert reordered.hypotheses != study.hypotheses
+
+
 def test_invalid_price_raises(saas_council):
     council, _ = saas_council
     with pytest.raises(KitValidationError):

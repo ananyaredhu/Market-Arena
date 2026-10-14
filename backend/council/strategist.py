@@ -17,7 +17,7 @@ import math
 from dataclasses import asdict, dataclass, field
 from typing import Dict, List, Optional, Tuple
 
-from backend.council.engine_adapter import YOU_ID, EngineAdapter
+from backend.council.engine_adapter import YOU_ID, EngineAdapter, EngineEvaluation
 
 MOVES: Tuple[str, ...] = ("price_cut_10", "price_cut_20", "add_feature", "promo")
 PRICE_CUTS = {"price_cut_10": 0.10, "price_cut_20": 0.20}
@@ -116,7 +116,11 @@ def apply_move(move: str, competitor_id: str, agents: List[dict], options: List[
 
 
 def run_strategist(
-    agents: List[dict], options: List[dict], adapter: EngineAdapter, seed: int
+    agents: List[dict],
+    options: List[dict],
+    adapter: EngineAdapter,
+    seed: int,
+    baseline: Optional[EngineEvaluation] = None,
 ) -> StrategistReport:
     report = StrategistReport(status="ok", engine_source=adapter.source, seed=seed, baseline_share=None)
     you = next((o for o in options if o.get("id") == YOU_ID), None)
@@ -131,7 +135,11 @@ def run_strategist(
         return report
 
     try:
-        report.baseline_share = adapter.evaluate(agents, options, seed).share(YOU_ID)
+        if baseline is None:
+            report.baseline_share = adapter.evaluate(agents, options, seed).share(YOU_ID)
+        else:
+            # The caller already holds this scenario's engine result. Do not draw it again.
+            report.baseline_share = baseline.share(YOU_ID)
     except Exception as exc:  # noqa: BLE001 - reported, never hidden
         report.status = "baseline_failed"
         report.limitations.append(f"baseline evaluation failed: {exc}")

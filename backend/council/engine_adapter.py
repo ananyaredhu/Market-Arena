@@ -136,15 +136,50 @@ class FrozenSignatureAdapter:
         totals = result.get("totals") if isinstance(result, dict) else None
         if not isinstance(totals, dict) or not totals:
             raise EngineEvaluationError("engine result has no 'totals'; expected the frozen RunResult shape")
-        shares: Dict[str, float] = {}
-        for oid, entry in totals.items():
-            share = entry.get("p50", entry.get("share")) if isinstance(entry, dict) else None
-            if not _finite(share):
-                raise EngineEvaluationError(f"engine returned a non-numeric share for '{oid}'")
-            shares[oid] = float(share)
+        shares = _shares_from_totals(totals)
         return EngineEvaluation(
             shares=shares, source=self.source, detail={"seed": seed, "run_id": result.get("run_id")}
         )
+
+
+def _entry_share(entry: Any) -> Any:
+    """Canonical repeat-0 share. ``p50`` is only a fallback for older totals objects.
+
+    With ``repeats > 1``, ``engine.py`` keeps ``share`` as the unjittered draw and
+    lets ``p50`` move. Council comparisons use ``share`` so they match ``RunResult``.
+    """
+    if hasattr(entry, "share"):
+        return entry.share
+    if isinstance(entry, dict):
+        if "share" in entry:
+            return entry["share"]
+        return entry.get("p50")
+    return None
+
+
+def _shares_from_totals(totals: Any) -> Dict[str, float]:
+    if not isinstance(totals, dict) or not totals:
+        raise EngineEvaluationError("engine result has no 'totals'; expected the frozen RunResult shape")
+    shares: Dict[str, float] = {}
+    for oid, entry in totals.items():
+        share = _entry_share(entry)
+        if not _finite(share):
+            raise EngineEvaluationError(f"engine returned a non-numeric share for '{oid}'")
+        shares[str(oid)] = float(share)
+    return shares
+
+
+def evaluation_from_result(result: Any, *, source: str) -> EngineEvaluation:
+    """Build an evaluation from a RunResult without calling the engine again."""
+    if hasattr(result, "model_dump"):
+        result = result.model_dump()
+    if not isinstance(result, dict):
+        raise EngineEvaluationError("run result is not an object")
+    return EngineEvaluation(
+        shares=_shares_from_totals(result.get("totals")),
+        source=source,
+        detail={"seed": result.get("seed"), "run_id": result.get("run_id"), "from": "run_result"},
+    )
 
 
 def get_default_adapter(mode: Optional[str] = None) -> EngineAdapter:

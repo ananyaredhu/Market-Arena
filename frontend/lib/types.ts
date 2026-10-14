@@ -71,6 +71,40 @@ export interface Experiment {
   kind: "landing" | "survey" | "interview" | "offline" | "telegram";
 }
 
+export interface MeasuredRisk {
+  title: string;
+  baseline_share: number;
+  perturbed_share: number;
+  abs_change: number;
+}
+
+export interface MeasuredSegment {
+  id: string;
+  name: string;
+  n: number;
+  n_you: number;
+  share: number;
+  relationship: "buys" | "rejects";
+}
+
+export interface CouncilMeasured {
+  baseline_share: number | null;
+  median_share: number | null;
+  p10: number | null;
+  p90: number | null;
+  fragility: number;
+  segments: MeasuredSegment[];
+  risks: MeasuredRisk[];
+  competitor: {
+    competitor_id: string;
+    move: string;
+    description?: string;
+    baseline_share: number;
+    candidate_share: number;
+    share_change: number;
+  } | null;
+}
+
 export interface CouncilOutput {
   run_id: string;
   verdict: string;
@@ -82,6 +116,11 @@ export interface CouncilOutput {
   competitor_reaction?: { competitor_id: string; move: string; effect_on_share: number } | null;
   experiments: Experiment[];
   trend_context?: { trend: string; source_url: string; used_in: string }[] | null;
+  limitations?: string[];
+  engine_source?: string;
+  scenario_origin?: "demo" | "stored" | "engine" | "request" | "fixture_fallback";
+  project_id?: string | null;
+  measured?: CouncilMeasured;
 }
 
 export interface KitOutput {
