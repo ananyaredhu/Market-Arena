@@ -49,14 +49,20 @@ function markdownExport(kit: KitOutput, runId: string): string {
 export default function KitView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const runId = useSearchParams().get("run") || "run_42";
+  const requestKey = `${id}:${runId}`;
+  const [activeKey, setActiveKey] = useState(requestKey);
   const [status, setStatus] = useState<Status>("loading");
   const [error, setError] = useState<string | null>(null);
   const [kit, setKit] = useState<KitOutput | null>(null);
+  if (activeKey !== requestKey) {
+    setActiveKey(requestKey);
+    setStatus("loading");
+    setError(null);
+    setKit(null);
+  }
 
   useEffect(() => {
     let cancelled = false;
-    setStatus("loading");
-    setError(null);
     post<CouncilOutput>(`/runs/${encodeURIComponent(runId)}/council`, { project_id: id })
       .then((council) => {
         if (cancelled) return null;
