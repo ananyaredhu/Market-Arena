@@ -1,0 +1,4418 @@
+{
+  "run_id": "run_cafe_fixture",
+  "seed": 42,
+  "option_ids": [
+    "you",
+    "chain_cafe",
+    "hawker_kopi",
+    "convenience_store",
+    "outside",
+    "outside"
+  ],
+  "totals": {
+    "you": {
+      "count": 36,
+      "share": 0.12,
+      "p10": 0.0997,
+      "p50": 0.12,
+      "p90": 0.1433
+    },
+    "chain_cafe": {
+      "count": 23,
+      "share": 0.0767,
+      "p10": 0.063,
+      "p50": 0.0733,
+      "p90": 0.0867
+    },
+    "hawker_kopi": {
+      "count": 139,
+      "share": 0.4633,
+      "p10": 0.4367,
+      "p50": 0.4567,
+      "p90": 0.4933
+    },
+    "convenience_store": {
+      "count": 46,
+      "share": 0.1533,
+      "p10": 0.1227,
+      "p50": 0.16,
+      "p90": 0.19
+    },
+    "outside": {
+      "count": 34,
+      "share": 0.1133,
+      "p10": 0.103,
+      "p50": 0.1233,
+      "p90": 0.1467
+    }
+  },
+  "choices": [
+    {
+      "agent_id": "a1",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5555,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3525,
+        "price": -0.5232,
+        "switch": -0.2112,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a2",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.2922,
+      "components": {
+        "brand": 0.2335,
+        "feature": 2.5523,
+        "price": -0.4696,
+        "switch": -0.1584,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a3",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5834,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.2347,
+        "price": -0.7557,
+        "switch": -0.2311,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a4",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.6346,
+      "components": {
+        "brand": 0.2115,
+        "feature": 2.2302,
+        "price": -0.4095,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a5",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1306,
+      "components": {
+        "brand": 0.1092,
+        "feature": 2.7912,
+        "price": -1.7094,
+        "switch": -0.1644,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a6",
+      "segment": "office_lunch",
+      "choice": "outside",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -2.2645,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.127,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a7",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.474,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.168,
+        "price": -0.6365,
+        "switch": -0.3726,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a8",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5192,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3163,
+        "price": -0.5278,
+        "switch": -0.357,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a9",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.4748,
+      "components": {
+        "brand": 0.131,
+        "feature": 2.2113,
+        "price": -1.96,
+        "switch": -0.1512,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a10",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.4959,
+      "components": {
+        "brand": 0.142,
+        "feature": 2.3626,
+        "price": -0.6151,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a11",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.3782,
+      "components": {
+        "brand": 0.2306,
+        "feature": 2.1671,
+        "price": -0.5926,
+        "switch": -0.1323,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a12",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.1296,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5378,
+        "price": -0.6952,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a13",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.2654,
+      "components": {
+        "brand": 0.0787,
+        "feature": 2.4529,
+        "price": -0.5917,
+        "switch": -0.381,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a14",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.423,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.1903,
+        "price": -0.5938,
+        "switch": -0.1689,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a15",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.4013,
+      "components": {
+        "brand": 0.1193,
+        "feature": 2.5671,
+        "price": -0.4792,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a16",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.7232,
+      "components": {
+        "brand": 0.2799,
+        "feature": 2.2935,
+        "price": -0.279,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a17",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.273,
+      "components": {
+        "brand": 0.1278,
+        "feature": 2.4503,
+        "price": -0.5569,
+        "switch": -0.2956,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a18",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -1.4671,
+      "components": {
+        "brand": 0.1432,
+        "feature": 2.3103,
+        "price": -2.1931,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a19",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.2956,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4544,
+        "price": -0.4068,
+        "switch": -0.113,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a20",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": 0.0176,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.1662,
+        "price": -0.3518,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a21",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.1309,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5804,
+        "price": -0.3892,
+        "switch": -0.2434,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a22",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.7104,
+      "components": {
+        "brand": 0.2546,
+        "feature": 2.6006,
+        "price": -0.4066,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a23",
+      "segment": "office_lunch",
+      "choice": "outside",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -2.3784,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.1412,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a24",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5583,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.163,
+        "price": -0.7462,
+        "switch": -0.2568,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a25",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.354,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.2159,
+        "price": -0.3826,
+        "switch": -0.3288,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a26",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": -0.1112,
+      "components": {
+        "brand": 0.1129,
+        "feature": 2.5102,
+        "price": -0.607,
+        "switch": -0.396,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a27",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.4813,
+      "components": {
+        "brand": 0.1327,
+        "feature": 2.3169,
+        "price": -0.3139,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a28",
+      "segment": "office_lunch",
+      "choice": "you",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7184,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7457,
+        "price": -0.9926,
+        "switch": -0.1722,
+        "risk": -0.1
+      }
+    },
+    {
+      "agent_id": "a29",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.0016,
+      "components": {
+        "brand": 0.1172,
+        "feature": 2.4593,
+        "price": -1.1004,
+        "switch": -0.3783,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a30",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.4804,
+      "components": {
+        "brand": 0.0812,
+        "feature": 2.5982,
+        "price": -0.315,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a31",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.1703,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.02,
+        "price": -0.719,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a32",
+      "segment": "office_lunch",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -2.1127,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.1914,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a33",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.6571,
+      "components": {
+        "brand": 0.1697,
+        "feature": 2.1151,
+        "price": -0.3483,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a34",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": -0.0156,
+      "components": {
+        "brand": 0.1561,
+        "feature": 2.451,
+        "price": -0.4253,
+        "switch": -0.34,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a35",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.3677,
+      "components": {
+        "brand": 0.2482,
+        "feature": 2.0994,
+        "price": -0.5731,
+        "switch": -0.357,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a36",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -1.0619,
+      "components": {
+        "brand": 0.2923,
+        "feature": 2.8683,
+        "price": -2.3919,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a37",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7762,
+      "components": {
+        "brand": 0.3266,
+        "feature": 2.6841,
+        "price": -1.8284,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a38",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.2866,
+      "components": {
+        "brand": 0.1947,
+        "feature": 2.4183,
+        "price": -0.3751,
+        "switch": -0.3011,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a39",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.9513,
+      "components": {
+        "brand": 0.3551,
+        "feature": 2.958,
+        "price": -2.2323,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a40",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.3495,
+      "components": {
+        "brand": 0.0022,
+        "feature": 2.0204,
+        "price": -0.3339,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a41",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.0704,
+      "components": {
+        "brand": 0.132,
+        "feature": 2.8834,
+        "price": -0.5441,
+        "switch": -0.2659,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a42",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.4835,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.9424,
+        "price": -0.66,
+        "switch": -0.2235,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a43",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.3967,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.0186,
+        "price": -0.6919,
+        "switch": -0.3218,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a44",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.3534,
+      "components": {
+        "brand": 0.1713,
+        "feature": 2.6291,
+        "price": -1.0563,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a45",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.155,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.0829,
+        "price": -0.7201,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a46",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.1878,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.0447,
+        "price": -0.7328,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a47",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.2261,
+      "components": {
+        "brand": 0.0898,
+        "feature": 2.4952,
+        "price": -0.5929,
+        "switch": -0.1724,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a48",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.4545,
+      "components": {
+        "brand": 0.2363,
+        "feature": 2.502,
+        "price": -0.5551,
+        "switch": -0.1556,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a49",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.2266,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.2982,
+        "price": -0.5205,
+        "switch": -0.1938,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a50",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5939,
+      "components": {
+        "brand": 0.1004,
+        "feature": 2.4343,
+        "price": -1.3398,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a51",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.2022,
+      "components": {
+        "brand": 0.1382,
+        "feature": 2.4179,
+        "price": -0.3861,
+        "switch": -0.3135,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a52",
+      "segment": "office_lunch",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.627,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3092,
+        "price": -0.901,
+        "switch": -0.356,
+        "risk": -0.2
+      }
+    },
+    {
+      "agent_id": "a53",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.3287,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6909,
+        "price": -0.7344,
+        "switch": -0.1649,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a54",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.0681,
+      "components": {
+        "brand": 0.0378,
+        "feature": 2.5573,
+        "price": -0.2768,
+        "switch": -0.1431,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a55",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.287,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3153,
+        "price": -0.3373,
+        "switch": -0.1152,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a56",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.0684,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4119,
+        "price": -0.592,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a57",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.3391,
+      "components": {
+        "brand": 0.2885,
+        "feature": 2.2052,
+        "price": -0.5566,
+        "switch": -0.1535,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a58",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.6236,
+      "components": {
+        "brand": 0.0314,
+        "feature": 2.5046,
+        "price": -0.5341,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a59",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.4616,
+      "components": {
+        "brand": 0.2826,
+        "feature": 2.8237,
+        "price": -1.0822,
+        "switch": -0.2227,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a60",
+      "segment": "office_lunch",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8872,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4355,
+        "price": -1.0982,
+        "switch": -0.3643,
+        "risk": -0.1284
+      }
+    },
+    {
+      "agent_id": "a61",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": 0.1801,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5394,
+        "price": -0.4442,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a62",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": -0.0558,
+      "components": {
+        "brand": 0.0496,
+        "feature": 2.275,
+        "price": -0.2959,
+        "switch": -0.176,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a63",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.1373,
+      "components": {
+        "brand": 0.0301,
+        "feature": 2.6634,
+        "price": -0.4037,
+        "switch": -0.1794,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a64",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8406,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5031,
+        "price": -0.6424,
+        "switch": -0.3664,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a65",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.1764,
+      "components": {
+        "brand": 0.0623,
+        "feature": 2.3986,
+        "price": -0.4264,
+        "switch": -0.176,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a66",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.21,
+      "components": {
+        "brand": 0.0459,
+        "feature": 2.3265,
+        "price": -0.4374,
+        "switch": -0.3762,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a67",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.2937,
+      "components": {
+        "brand": 0.0843,
+        "feature": 2.5496,
+        "price": -0.5404,
+        "switch": -0.1186,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a68",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.104,
+      "components": {
+        "brand": 0.1028,
+        "feature": 2.4843,
+        "price": -0.6019,
+        "switch": -0.1532,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a69",
+      "segment": "office_lunch",
+      "choice": "you",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.3217,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8428,
+        "price": -1.4395,
+        "switch": -0.2685,
+        "risk": -0.2211
+      }
+    },
+    {
+      "agent_id": "a70",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.3394,
+      "components": {
+        "brand": 0.0059,
+        "feature": 2.1848,
+        "price": -0.3933,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a71",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.2295,
+      "components": {
+        "brand": 0.2626,
+        "feature": 2.3742,
+        "price": -1.2313,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a72",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.4663,
+      "components": {
+        "brand": 0.2562,
+        "feature": 2.2184,
+        "price": -0.4138,
+        "switch": -0.1967,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a73",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.3239,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9085,
+        "price": -0.7315,
+        "switch": -0.1721,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a74",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.1355,
+      "components": {
+        "brand": 0.3518,
+        "feature": 2.7037,
+        "price": -1.3566,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a75",
+      "segment": "office_lunch",
+      "choice": "you",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -1.0789,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8215,
+        "price": -1.1261,
+        "switch": -0.299,
+        "risk": -0.0935
+      }
+    },
+    {
+      "agent_id": "a76",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.4494,
+      "components": {
+        "brand": 0.293,
+        "feature": 2.7934,
+        "price": -0.4504,
+        "switch": -0.1955,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a77",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.4545,
+      "components": {
+        "brand": 0.2679,
+        "feature": 2.6346,
+        "price": -0.5535,
+        "switch": -0.1432,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a78",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.4199,
+      "components": {
+        "brand": 0.0441,
+        "feature": 2.3969,
+        "price": -0.2891,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a79",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.1925,
+      "components": {
+        "brand": 0.0625,
+        "feature": 2.4928,
+        "price": -0.5357,
+        "switch": -0.3254,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a80",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.6119,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3354,
+        "price": -0.5053,
+        "switch": -0.1577,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a81",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.6472,
+      "components": {
+        "brand": 0.1256,
+        "feature": 2.3543,
+        "price": -0.4684,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a82",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.1694,
+      "components": {
+        "brand": 0.0516,
+        "feature": 2.2679,
+        "price": -0.3832,
+        "switch": -0.3671,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a83",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.1436,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.2468,
+        "price": -0.5878,
+        "switch": -0.3581,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a84",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": -0.2619,
+      "components": {
+        "brand": 0.0366,
+        "feature": 2.6711,
+        "price": -0.4898,
+        "switch": -0.3557,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a85",
+      "segment": "office_lunch",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8231,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7989,
+        "price": -1.1054,
+        "switch": -0.3913,
+        "risk": -0.1499
+      }
+    },
+    {
+      "agent_id": "a86",
+      "segment": "office_lunch",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": -0.957,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5637,
+        "price": -0.9053,
+        "switch": -0.3798,
+        "risk": -0.1522
+      }
+    },
+    {
+      "agent_id": "a87",
+      "segment": "office_lunch",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.4596,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.1534,
+        "price": -0.62,
+        "switch": -0.1644,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a88",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.1919,
+      "components": {
+        "brand": 0.0116,
+        "feature": 2.4937,
+        "price": -0.4851,
+        "switch": -0.3041,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a89",
+      "segment": "office_lunch",
+      "choice": "chain_cafe",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1981,
+      "components": {
+        "brand": 0.1811,
+        "feature": 2.637,
+        "price": -1.7024,
+        "switch": -0.3325,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a90",
+      "segment": "office_lunch",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "convenience_store",
+      "gap": 0.4087,
+      "components": {
+        "brand": 0.2946,
+        "feature": 2.5674,
+        "price": -0.3375,
+        "switch": -0.2822,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a91",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.3161,
+      "components": {
+        "brand": 0.307,
+        "feature": 1.5526,
+        "price": -1.1723,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a92",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8066,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.2618,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a93",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.3192,
+      "components": {
+        "brand": 0.3117,
+        "feature": 1.5207,
+        "price": -0.9517,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a94",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.6989,
+      "components": {
+        "brand": 0.2335,
+        "feature": 1.6288,
+        "price": -0.7522,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a95",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.1976,
+      "components": {
+        "brand": 0.1381,
+        "feature": 1.9354,
+        "price": -0.7709,
+        "switch": -0.2592,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a96",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.4765,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.3587,
+        "price": -1.1988,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a97",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "outside",
+      "gap": -0.5095,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.5619,
+        "price": -1.5239,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a98",
+      "segment": "students",
+      "choice": "you",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1328,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6247,
+        "price": -2.2109,
+        "switch": -0.1876,
+        "risk": -0.2024
+      }
+    },
+    {
+      "agent_id": "a99",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.8496,
+      "components": {
+        "brand": 0.381,
+        "feature": 1.6764,
+        "price": -0.8932,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a100",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.0448,
+      "components": {
+        "outside": 0.5381
+      }
+    },
+    {
+      "agent_id": "a101",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.3571,
+      "components": {
+        "outside": 0.2225
+      }
+    },
+    {
+      "agent_id": "a102",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1093,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.2495,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a103",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.6887,
+      "components": {
+        "brand": 0.2073,
+        "feature": 1.6927,
+        "price": -0.8267,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a104",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5846,
+      "components": {
+        "outside": 0.2805
+      }
+    },
+    {
+      "agent_id": "a105",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.0403,
+      "components": {
+        "outside": 0.3858
+      }
+    },
+    {
+      "agent_id": "a106",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -1.0408,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.1989,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a107",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "convenience_store",
+      "gap": 0.558,
+      "components": {
+        "brand": 0.2205,
+        "feature": 1.9728,
+        "price": -0.8417,
+        "switch": -0.1536,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a108",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.3358,
+      "components": {
+        "brand": 0.1576,
+        "feature": 1.5378,
+        "price": -0.8116,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a109",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.0786,
+      "components": {
+        "brand": 0.1759,
+        "feature": 1.5635,
+        "price": -1.1597,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a110",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.6016,
+      "components": {
+        "outside": 0.1173
+      }
+    },
+    {
+      "agent_id": "a111",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.5348,
+      "components": {
+        "brand": 0.1738,
+        "feature": 1.8272,
+        "price": -1.1853,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a112",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.5938,
+      "components": {
+        "brand": 0.1764,
+        "feature": 1.7512,
+        "price": -0.9704,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a113",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "convenience_store",
+      "gap": 0.561,
+      "components": {
+        "brand": 0.3545,
+        "feature": 1.6748,
+        "price": -0.7389,
+        "switch": -0.1455,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a114",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.8901,
+      "components": {
+        "brand": 0.3234,
+        "feature": 1.9078,
+        "price": -0.7893,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a115",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.2194,
+      "components": {
+        "brand": 0.3034,
+        "feature": 1.6899,
+        "price": -0.9929,
+        "switch": -0.2046,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a116",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.1395,
+      "components": {
+        "outside": 0.588
+      }
+    },
+    {
+      "agent_id": "a117",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.0105,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.2127,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a118",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7386,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.4962,
+        "price": -1.1416,
+        "switch": -0.1432,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a119",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.4701,
+      "components": {
+        "brand": 0.2921,
+        "feature": 1.7657,
+        "price": -1.2377,
+        "switch": -0.1403,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a120",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7429,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.1143,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a121",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5724,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.7051,
+        "price": -1.3911,
+        "switch": -0.1935,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a122",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.9298,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.2378,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a123",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.5648,
+      "components": {
+        "brand": 0.1222,
+        "feature": 1.6319,
+        "price": -1.0559,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a124",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.5025,
+      "components": {
+        "brand": 0.3784,
+        "feature": 1.7738,
+        "price": -0.848,
+        "switch": -0.1984,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a125",
+      "segment": "students",
+      "choice": "you",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1075,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6065,
+        "price": -2.6136,
+        "switch": -0.119,
+        "risk": -0.0701
+      }
+    },
+    {
+      "agent_id": "a126",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5071,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.5384,
+        "price": -1.2562,
+        "switch": -0.2519,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a127",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": -0.9416,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.3627,
+        "price": -1.5391,
+        "switch": -0.2054,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a128",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "outside",
+      "gap": 0.2957,
+      "components": {
+        "brand": 0.1807,
+        "feature": 1.7523,
+        "price": -1.1698,
+        "switch": -0.1642,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a129",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.2899,
+      "components": {
+        "brand": 0.1684,
+        "feature": 1.436,
+        "price": -1.1246,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a130",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7422,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.2889,
+        "price": -1.0615,
+        "switch": -0.1889,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a131",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.8204,
+      "components": {
+        "brand": 0.2798,
+        "feature": 1.6434,
+        "price": -0.8165,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a132",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8473,
+      "components": {
+        "outside": 0.285
+      }
+    },
+    {
+      "agent_id": "a133",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.6654,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a134",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.474,
+      "components": {
+        "brand": 0.2844,
+        "feature": 1.8774,
+        "price": -1.244,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a135",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.4498,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a136",
+      "segment": "students",
+      "choice": "you",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -1.0832,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6013,
+        "price": -2.4648,
+        "switch": -0.1301,
+        "risk": -0.0824
+      }
+    },
+    {
+      "agent_id": "a137",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.359,
+      "components": {
+        "outside": 0.2936
+      }
+    },
+    {
+      "agent_id": "a138",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.602,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.2708,
+        "price": -1.3339,
+        "switch": -0.1064,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a139",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.0972,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.203,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a140",
+      "segment": "students",
+      "choice": "you",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8032,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6676,
+        "price": -1.9522,
+        "switch": -0.1085,
+        "risk": -0.1323
+      }
+    },
+    {
+      "agent_id": "a141",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.522,
+      "components": {
+        "brand": 0.1393,
+        "feature": 1.7114,
+        "price": -0.7288,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a142",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "outside",
+      "gap": -0.4522,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.6275,
+        "price": -1.4938,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a143",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7701,
+      "components": {
+        "outside": 0.2168
+      }
+    },
+    {
+      "agent_id": "a144",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.6868,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.3282,
+        "price": -1.021,
+        "switch": -0.1262,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a145",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7599,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.3608,
+        "price": -1.5352,
+        "switch": -0.2855,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a146",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.0939,
+      "components": {
+        "brand": 0.1269,
+        "feature": 1.4041,
+        "price": -0.7376,
+        "switch": -0.105,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a147",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "convenience_store",
+      "gap": 0.651,
+      "components": {
+        "brand": 0.3301,
+        "feature": 1.7822,
+        "price": -1.0071,
+        "switch": -0.2613,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a148",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.5958,
+      "components": {
+        "brand": 0.1294,
+        "feature": 1.6158,
+        "price": -0.7704,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a149",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.7325,
+      "components": {
+        "brand": 0.2253,
+        "feature": 1.7057,
+        "price": -0.9495,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a150",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.4794,
+      "components": {
+        "brand": 0.2579,
+        "feature": 1.8288,
+        "price": -1.165,
+        "switch": -0.134,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a151",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": 0.0791,
+      "components": {
+        "outside": 0.5368
+      }
+    },
+    {
+      "agent_id": "a152",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8341,
+      "components": {
+        "outside": 0.0684
+      }
+    },
+    {
+      "agent_id": "a153",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.5024,
+      "components": {
+        "brand": 0.3116,
+        "feature": 1.5461,
+        "price": -0.8899,
+        "switch": -0.1134,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a154",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.6982,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.56,
+        "price": -1.507,
+        "switch": -0.1121,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a155",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.653,
+      "components": {
+        "brand": 0.3899,
+        "feature": 1.5613,
+        "price": -1.0586,
+        "switch": -0.2044,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a156",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": 0.1797,
+      "components": {
+        "outside": 0.4527
+      }
+    },
+    {
+      "agent_id": "a157",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.5457,
+      "components": {
+        "brand": 0.2017,
+        "feature": 1.6164,
+        "price": -0.7396,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a158",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1016,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a159",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8255,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.4751,
+        "price": -1.2008,
+        "switch": -0.1157,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a160",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.278,
+      "components": {
+        "outside": 0.3442
+      }
+    },
+    {
+      "agent_id": "a161",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.5139,
+      "components": {
+        "brand": 0.2703,
+        "feature": 1.6037,
+        "price": -0.9234,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a162",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.5584,
+      "components": {
+        "outside": 0.2933
+      }
+    },
+    {
+      "agent_id": "a163",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.3546,
+      "components": {
+        "brand": 0.179,
+        "feature": 1.5988,
+        "price": -0.801,
+        "switch": -0.1837,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a164",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.7739,
+      "components": {
+        "brand": 0.3543,
+        "feature": 1.5428,
+        "price": -0.8555,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a165",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "convenience_store",
+      "gap": 0.9219,
+      "components": {
+        "brand": 0.2786,
+        "feature": 1.5478,
+        "price": -0.7443,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a166",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.3659,
+      "components": {
+        "brand": 0.1989,
+        "feature": 1.8514,
+        "price": -1.1479,
+        "switch": -0.2864,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a167",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8777,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a168",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.122,
+      "components": {
+        "outside": 0.5986
+      }
+    },
+    {
+      "agent_id": "a169",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "outside",
+      "gap": 0.1955,
+      "components": {
+        "brand": 0.2972,
+        "feature": 1.5284,
+        "price": -1.0112,
+        "switch": -0.244,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a170",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.4302,
+      "components": {
+        "outside": 0.3548
+      }
+    },
+    {
+      "agent_id": "a171",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.5249,
+      "components": {
+        "brand": 0.212,
+        "feature": 1.5629,
+        "price": -1.1866,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a172",
+      "segment": "students",
+      "choice": "convenience_store",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.2009,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.5656,
+        "price": -1.133,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a173",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "convenience_store",
+      "runner_up": "convenience_store",
+      "gap": 0.3721,
+      "components": {
+        "brand": 0.3821,
+        "feature": 1.6582,
+        "price": -0.9893,
+        "switch": -0.2874,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a174",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "convenience_store",
+      "runner_up": "hawker_kopi",
+      "gap": -0.1615,
+      "components": {
+        "outside": 0.5473
+      }
+    },
+    {
+      "agent_id": "a175",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.9464,
+      "components": {
+        "brand": 0.3874,
+        "feature": 1.7737,
+        "price": -1.2073,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a176",
+      "segment": "students",
+      "choice": "you",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.3244,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.292,
+        "price": -2.5493,
+        "switch": -0.1588,
+        "risk": -0.1461
+      }
+    },
+    {
+      "agent_id": "a177",
+      "segment": "students",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.6016,
+      "components": {
+        "brand": 0.324,
+        "feature": 1.3965,
+        "price": -1.094,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a178",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": -0.3764,
+      "components": {
+        "outside": 0.0156
+      }
+    },
+    {
+      "agent_id": "a179",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7316,
+      "components": {
+        "outside": 0.1772
+      }
+    },
+    {
+      "agent_id": "a180",
+      "segment": "students",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1623,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.1288,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a181",
+      "segment": "remote_workers",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.8111,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a182",
+      "segment": "remote_workers",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -1.2246,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.9626,
+        "price": -0.4059,
+        "switch": -0.326,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a183",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": 0.1529,
+      "components": {
+        "brand": 0.4188,
+        "feature": 2.8415,
+        "price": -0.9779,
+        "switch": -0.3597,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a184",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": 0.1767,
+      "components": {
+        "brand": 0.4522,
+        "feature": 2.4616,
+        "price": -1.7423,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a185",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "chain_cafe",
+      "gap": -0.8314,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.4441,
+        "price": -0.2052,
+        "switch": -0.3002,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a186",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.3301,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.3398,
+        "price": -0.4873,
+        "switch": -0.3022,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a187",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": 0.344,
+      "components": {
+        "brand": 0.3164,
+        "feature": 2.6947,
+        "price": -0.9324,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a188",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.4305,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6274,
+        "price": -1.0973,
+        "switch": -0.3982,
+        "risk": -0.0717
+      }
+    },
+    {
+      "agent_id": "a189",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.5268,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.414,
+        "price": -0.3278,
+        "switch": -0.2598,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a190",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.6454,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8099,
+        "price": -0.9883,
+        "switch": -0.3566,
+        "risk": -0.0989
+      }
+    },
+    {
+      "agent_id": "a191",
+      "segment": "remote_workers",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -1.378,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a192",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.3175,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9059,
+        "price": -1.3872,
+        "switch": -0.2098,
+        "risk": -0.1756
+      }
+    },
+    {
+      "agent_id": "a193",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.5599,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3657,
+        "price": -0.6096,
+        "switch": -0.3078,
+        "risk": -0.2009
+      }
+    },
+    {
+      "agent_id": "a194",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.3635,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.5696,
+        "price": -0.5359,
+        "switch": -0.2985,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a195",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": 0.1385,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6133,
+        "price": -1.1818,
+        "switch": -0.3117,
+        "risk": -0.1095
+      }
+    },
+    {
+      "agent_id": "a196",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.2182,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7251,
+        "price": -1.1318,
+        "switch": -0.3473,
+        "risk": -0.1011
+      }
+    },
+    {
+      "agent_id": "a197",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": 0.0124,
+      "components": {
+        "brand": 0.3315,
+        "feature": 2.3438,
+        "price": -1.6002,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a198",
+      "segment": "remote_workers",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -1.2848,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.1451,
+        "price": -0.3857,
+        "switch": -0.2863,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a199",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.2473,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.6377,
+        "price": -0.5803,
+        "switch": -0.2915,
+        "risk": -0.0729
+      }
+    },
+    {
+      "agent_id": "a200",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": 0.5026,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3371,
+        "price": -0.8654,
+        "switch": -0.2444,
+        "risk": -0.0734
+      }
+    },
+    {
+      "agent_id": "a201",
+      "segment": "remote_workers",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.8419,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a202",
+      "segment": "remote_workers",
+      "choice": "outside",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -1.394,
+      "components": {
+        "outside": -0.0535
+      }
+    },
+    {
+      "agent_id": "a203",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.4696,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.3532,
+        "price": -0.4352,
+        "switch": -0.3176,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a204",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.1603,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3483,
+        "price": -1.3267,
+        "switch": -0.2445,
+        "risk": -0.1841
+      }
+    },
+    {
+      "agent_id": "a205",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.035,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9337,
+        "price": -1.2466,
+        "switch": -0.2673,
+        "risk": -0.092
+      }
+    },
+    {
+      "agent_id": "a206",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": 0.1453,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4626,
+        "price": -1.4112,
+        "switch": -0.2367,
+        "risk": -0.1357
+      }
+    },
+    {
+      "agent_id": "a207",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": 0.1515,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9566,
+        "price": -1.2667,
+        "switch": -0.3213,
+        "risk": -0.0793
+      }
+    },
+    {
+      "agent_id": "a208",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": -0.3927,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.5642,
+        "price": -0.3998,
+        "switch": -0.242,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a209",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "hawker_kopi",
+      "gap": 0.0755,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3253,
+        "price": -1.1957,
+        "switch": -0.3779,
+        "risk": -0.1767
+      }
+    },
+    {
+      "agent_id": "a210",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.0158,
+      "components": {
+        "brand": 0.2942,
+        "feature": 2.5114,
+        "price": -0.8281,
+        "switch": -0.2283,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a211",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.0845,
+      "components": {
+        "brand": 0.2553,
+        "feature": 2.439,
+        "price": -0.7903,
+        "switch": -0.3271,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a212",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.145,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.531,
+        "price": -0.5312,
+        "switch": -0.3566,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a213",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.7283,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.7956,
+        "price": -0.7392,
+        "switch": -0.2364,
+        "risk": -0.1724
+      }
+    },
+    {
+      "agent_id": "a214",
+      "segment": "remote_workers",
+      "choice": "convenience_store",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.8758,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.2112,
+        "price": -0.5383,
+        "switch": -0.2228,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a215",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": -0.8014,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.7127,
+        "price": -0.3433,
+        "switch": -0.2095,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a216",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": 0.3053,
+      "components": {
+        "brand": 0.256,
+        "feature": 2.7907,
+        "price": -0.9737,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a217",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.0829,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.3309,
+        "price": -1.0872,
+        "switch": -0.2908,
+        "risk": -0.0967
+      }
+    },
+    {
+      "agent_id": "a218",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.1059,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5473,
+        "price": -1.3862,
+        "switch": -0.2114,
+        "risk": -0.1788
+      }
+    },
+    {
+      "agent_id": "a219",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -1.0391,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.6435,
+        "price": -0.2029,
+        "switch": -0.3197,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a220",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.9734,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.9771,
+        "price": -0.5347,
+        "switch": -0.3381,
+        "risk": -0.0834
+      }
+    },
+    {
+      "agent_id": "a221",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": 0.0304,
+      "components": {
+        "brand": 0.2013,
+        "feature": 2.5449,
+        "price": -1.6408,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a222",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.5498,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.5024,
+        "price": -0.5573,
+        "switch": -0.34,
+        "risk": -0.1607
+      }
+    },
+    {
+      "agent_id": "a223",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": -0.3767,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.7327,
+        "price": -0.5155,
+        "switch": -0.2125,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a224",
+      "segment": "remote_workers",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.7899,
+      "components": {
+        "outside": -0.1166
+      }
+    },
+    {
+      "agent_id": "a225",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.203,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4611,
+        "price": -0.6672,
+        "switch": -0.2265,
+        "risk": -0.2036
+      }
+    },
+    {
+      "agent_id": "a226",
+      "segment": "remote_workers",
+      "choice": "convenience_store",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -1.326,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.0211,
+        "price": -0.4677,
+        "switch": -0.2945,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a227",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.0989,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.2031,
+        "price": -1.2518,
+        "switch": -0.2954,
+        "risk": -0.1174
+      }
+    },
+    {
+      "agent_id": "a228",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": 0.3198,
+      "components": {
+        "brand": 0.345,
+        "feature": 2.8863,
+        "price": -0.896,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a229",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": -0.5823,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.354,
+        "price": -0.2138,
+        "switch": -0.3441,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a230",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.177,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.546,
+        "price": -0.9571,
+        "switch": -0.2095,
+        "risk": -0.0787
+      }
+    },
+    {
+      "agent_id": "a231",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "hawker_kopi",
+      "gap": 0.1343,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.4732,
+        "price": -1.3795,
+        "switch": -0.2622,
+        "risk": -0.0717
+      }
+    },
+    {
+      "agent_id": "a232",
+      "segment": "remote_workers",
+      "choice": "chain_cafe",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": -0.1899,
+      "components": {
+        "brand": 0.2079,
+        "feature": 2.4813,
+        "price": -1.8858,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a233",
+      "segment": "remote_workers",
+      "choice": "outside",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -1.6993,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.3179,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a234",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "chain_cafe",
+      "runner_up": "you",
+      "gap": -0.6281,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.4332,
+        "price": -0.2984,
+        "switch": -0.2692,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a235",
+      "segment": "remote_workers",
+      "choice": "outside",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.8802,
+      "components": {
+        "outside": 0.073
+      }
+    },
+    {
+      "agent_id": "a236",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.4909,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.5438,
+        "price": -0.4919,
+        "switch": -0.2537,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a237",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "you",
+      "gap": -0.187,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.2462,
+        "price": -0.5137,
+        "switch": -0.3814,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a238",
+      "segment": "remote_workers",
+      "choice": "hawker_kopi",
+      "prev_choice": "outside",
+      "runner_up": "chain_cafe",
+      "gap": -0.6518,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.3014,
+        "price": -0.2164,
+        "switch": -0.3574,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a239",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "chain_cafe",
+      "runner_up": "chain_cafe",
+      "gap": -0.328,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.8586,
+        "price": -0.8664,
+        "switch": -0.3115,
+        "risk": -0.2078
+      }
+    },
+    {
+      "agent_id": "a240",
+      "segment": "remote_workers",
+      "choice": "you",
+      "prev_choice": "outside",
+      "runner_up": "chain_cafe",
+      "gap": -0.1827,
+      "components": {
+        "brand": 0.0,
+        "feature": 2.1974,
+        "price": -0.7896,
+        "switch": -0.2673,
+        "risk": -0.1651
+      }
+    },
+    {
+      "agent_id": "a241",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.8363,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.9167,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a242",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.4977,
+      "components": {
+        "outside": 0.4134
+      }
+    },
+    {
+      "agent_id": "a243",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1032,
+      "components": {
+        "brand": 0.7706,
+        "feature": 2.113,
+        "price": -1.4863,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a244",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.8321,
+      "components": {
+        "brand": 0.6656,
+        "feature": 2.0448,
+        "price": -1.5192,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a245",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.0182,
+      "components": {
+        "brand": 0.8676,
+        "feature": 2.0855,
+        "price": -1.6632,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a246",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.6836,
+      "components": {
+        "outside": 0.2367
+      }
+    },
+    {
+      "agent_id": "a247",
+      "segment": "hawker_loyalists",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.8454,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.8828,
+        "price": -2.0198,
+        "switch": -0.6901,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a248",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.6072,
+      "components": {
+        "brand": 0.6993,
+        "feature": 1.9569,
+        "price": -1.6934,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a249",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.677,
+      "components": {
+        "brand": 0.8048,
+        "feature": 2.2462,
+        "price": -1.2128,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a250",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1446,
+      "components": {
+        "brand": 0.8661,
+        "feature": 1.933,
+        "price": -1.2649,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a251",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.0706,
+      "components": {
+        "brand": 0.8805,
+        "feature": 1.7568,
+        "price": -1.3162,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a252",
+      "segment": "hawker_loyalists",
+      "choice": "convenience_store",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.8789,
+      "components": {
+        "brand": 0.0,
+        "feature": 1.7471,
+        "price": -1.3235,
+        "switch": -0.9561,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a253",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.9164,
+      "components": {
+        "brand": 0.8541,
+        "feature": 1.8898,
+        "price": -1.7743,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a254",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1219,
+      "components": {
+        "brand": 0.6106,
+        "feature": 1.9165,
+        "price": -1.3793,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a255",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.7327,
+      "components": {
+        "brand": 0.6271,
+        "feature": 1.9055,
+        "price": -1.3603,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a256",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.695,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.8303,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a257",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.6237,
+      "components": {
+        "outside": 0.174
+      }
+    },
+    {
+      "agent_id": "a258",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.5873,
+      "components": {
+        "brand": 0.6198,
+        "feature": 1.7639,
+        "price": -1.3547,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a259",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.5419,
+      "components": {
+        "brand": 0.847,
+        "feature": 1.6937,
+        "price": -1.5727,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a260",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.8807,
+      "components": {
+        "brand": 0.8279,
+        "feature": 2.0648,
+        "price": -1.6573,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a261",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.528,
+      "components": {
+        "brand": 0.8183,
+        "feature": 1.8709,
+        "price": -1.733,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a262",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.8612,
+      "components": {
+        "outside": 0.1308
+      }
+    },
+    {
+      "agent_id": "a263",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.8364,
+      "components": {
+        "brand": 0.705,
+        "feature": 1.8001,
+        "price": -1.1988,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a264",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.6559,
+      "components": {
+        "brand": 0.534,
+        "feature": 2.0531,
+        "price": -1.6688,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a265",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1798,
+      "components": {
+        "outside": 0.2076
+      }
+    },
+    {
+      "agent_id": "a266",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.002,
+      "components": {
+        "brand": 0.8743,
+        "feature": 1.6386,
+        "price": -1.2289,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a267",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1572,
+      "components": {
+        "brand": 0.7153,
+        "feature": 1.9383,
+        "price": -1.361,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a268",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.8253,
+      "components": {
+        "brand": 0.7742,
+        "feature": 1.9218,
+        "price": -1.5295,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a269",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.9274,
+      "components": {
+        "brand": 0.6696,
+        "feature": 2.0777,
+        "price": -1.5179,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a270",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.9868,
+      "components": {
+        "brand": 0.8797,
+        "feature": 1.8122,
+        "price": -1.395,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a271",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.7988,
+      "components": {
+        "brand": 0.508,
+        "feature": 1.8739,
+        "price": -1.2267,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a272",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.6813,
+      "components": {
+        "brand": 0.7063,
+        "feature": 2.2388,
+        "price": -1.1083,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a273",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.3787,
+      "components": {
+        "brand": 0.8252,
+        "feature": 2.0277,
+        "price": -1.2184,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a274",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.9902,
+      "components": {
+        "brand": 0.5871,
+        "feature": 1.8649,
+        "price": -1.3581,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a275",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.7744,
+      "components": {
+        "brand": 0.6988,
+        "feature": 2.0011,
+        "price": -1.6767,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a276",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.9599,
+      "components": {
+        "brand": 0.8503,
+        "feature": 1.7956,
+        "price": -1.2137,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a277",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.0341,
+      "components": {
+        "brand": 0.7779,
+        "feature": 2.0123,
+        "price": -1.5071,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a278",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1567,
+      "components": {
+        "brand": 0.5219,
+        "feature": 1.8617,
+        "price": -1.1831,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a279",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.2427,
+      "components": {
+        "brand": 0.8918,
+        "feature": 1.7184,
+        "price": -1.2487,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a280",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1064,
+      "components": {
+        "outside": 0.0808
+      }
+    },
+    {
+      "agent_id": "a281",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.0417,
+      "components": {
+        "brand": 0.5351,
+        "feature": 1.868,
+        "price": -1.204,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a282",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.8547,
+      "components": {
+        "brand": 0.7562,
+        "feature": 2.0171,
+        "price": -1.7618,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a283",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.3453,
+      "components": {
+        "brand": 0.5966,
+        "feature": 1.895,
+        "price": -1.6715,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a284",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.477,
+      "components": {
+        "brand": 0.8867,
+        "feature": 2.0526,
+        "price": -1.4029,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a285",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.7149,
+      "components": {
+        "brand": 0.5116,
+        "feature": 1.8619,
+        "price": -1.5806,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a286",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.7788,
+      "components": {
+        "brand": 0.5293,
+        "feature": 1.9449,
+        "price": -1.2775,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a287",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1073,
+      "components": {
+        "brand": 0.7239,
+        "feature": 2.0522,
+        "price": -1.3127,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a288",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.9079,
+      "components": {
+        "brand": 0.7358,
+        "feature": 2.1009,
+        "price": -1.4533,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a289",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1199,
+      "components": {
+        "brand": 0.7925,
+        "feature": 1.9395,
+        "price": -1.3574,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a290",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.7741,
+      "components": {
+        "brand": 0.6898,
+        "feature": 1.9981,
+        "price": -1.6963,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a291",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7157,
+      "components": {
+        "outside": 0.43
+      }
+    },
+    {
+      "agent_id": "a292",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1879,
+      "components": {
+        "brand": 0.8983,
+        "feature": 1.8548,
+        "price": -1.2593,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a293",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.7201,
+      "components": {
+        "outside": 0.0404
+      }
+    },
+    {
+      "agent_id": "a294",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 0.289,
+      "components": {
+        "brand": 0.582,
+        "feature": 1.762,
+        "price": -1.6819,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a295",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.9876,
+      "components": {
+        "outside": 0.4879
+      }
+    },
+    {
+      "agent_id": "a296",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.98,
+      "components": {
+        "outside": 0.3662
+      }
+    },
+    {
+      "agent_id": "a297",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.1283,
+      "components": {
+        "outside": 0.4272
+      }
+    },
+    {
+      "agent_id": "a298",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -0.0788,
+      "components": {
+        "outside": 0.4796
+      }
+    },
+    {
+      "agent_id": "a299",
+      "segment": "hawker_loyalists",
+      "choice": "hawker_kopi",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "outside",
+      "gap": 1.1032,
+      "components": {
+        "brand": 0.8993,
+        "feature": 1.9779,
+        "price": -1.6682,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a300",
+      "segment": "hawker_loyalists",
+      "choice": "outside",
+      "prev_choice": "hawker_kopi",
+      "runner_up": "hawker_kopi",
+      "gap": -1.6163,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": -0.0,
+        "switch": -0.6625,
+        "risk": -0.0
+      }
+    }
+  ],
+  "meta": {
+    "source": "mock_fixture"
+  }
+}

@@ -6,6 +6,8 @@ change the strategy, then run the real experiments. Competition entry, deadline 
 Read first: `MARKET_ARENA_Master_Plan.md` (what and why) and `MARKET_ARENA_Team_Work_Split.md`
 (who owns what, contracts, dependencies).
 
+Person B (Council & Kit) notes: `PERSON_B_README.md`.
+
 ## Quick start
 
 ```bash
@@ -17,6 +19,9 @@ make web        # Next.js on :3000
 
 Day-to-day work uses `MOCK=1` and `LLM_MODE=mock` (set by `make api`): every route returns
 fixtures and no LLM key is needed. Copy `.env.example` to `.env` for live mode.
+
+Person B council/kit routes compute from shared fixtures when possible; they fall back to
+`fixtures/council.json` / `fixtures/kit.json` if computation fails and `MOCK=1`.
 
 ## Layout and ownership
 
@@ -32,9 +37,9 @@ fixtures and no LLM key is needed. Copy `.env.example` to `.env` for live mode.
 | `frontend/components/council/`, `components/kit/` | B | Council screen, Experiment Kit |
 | `frontend/components/arena/`, `components/intake/`, `components/telegram/`, `app/intake/`, `app/project/` | C | Arena, intake, Telegram console, project page |
 | `frontend/components/ui/`, `components/layout/`, `lib/theme.ts`, `app/globals.css` | shared | design system (tokens, primitives, header) |
+| `packs/saas.yaml` / `packs/cafe.yaml` | A / B | industry pack priors |
 
 The 5 screens follow the design boards; see `frontend/DESIGN.md` for the screen map and how to reuse the design system.
-| `packs/saas.yaml` / `packs/cafe.yaml` | A / B | industry pack priors |
 
 ## Rules
 
@@ -42,5 +47,5 @@ The 5 screens follow the design boards; see `frontend/DESIGN.md` for the screen 
 2. Edit only your own folders. Need a change elsewhere or in a contract? Message the owner.
 3. Contract changes: all three agree, add fields as optional, update fixtures and
    `contracts/CHANGELOG.md` in the same commit, run `make schemas`.
-4. Every route keeps its path and response shape; replace the stub body, not the contract.
+4. Every route keeps its path and the response shape; replace the stub body, not the contract.
 5. Run `make test` and `make lint` before pushing.

@@ -100,6 +100,8 @@ class Choice(Contract):
     runner_up: str | None = None
     gap: float | None = None  # U(choice) - U(runner_up); can be negative (stochastic draw)
     components: dict[str, float]  # brand, feature, price, switch, risk (for the chosen option)
+    p_choice: float | None = None  # optional: model probability of the chosen option (engine.py)
+    locked: bool | None = None  # optional: True if a human override pinned this choice (engine.py)
 
 
 class RunResult(Contract):

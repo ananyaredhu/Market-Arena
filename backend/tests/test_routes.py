@@ -60,7 +60,7 @@ def test_stream_emits_progress_then_result():
 
 def test_unimplemented_route_is_501_when_mock_off(monkeypatch):
     monkeypatch.setenv("MOCK", "0")
-    assert client.post("/runs/run_42/council").status_code == 501
+    assert client.post("/scenarios").status_code == 501
 
 
 def test_project_creation_requires_body_when_mock_off(monkeypatch):
@@ -69,3 +69,10 @@ def test_project_creation_requires_body_when_mock_off(monkeypatch):
 
     assert response.status_code == 422
     assert response.json()["detail"] == "request body is required"
+
+
+def test_council_and_kit_work_when_mock_off(monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    monkeypatch.setenv("COUNCIL_ENGINE", "auto")
+    assert client.post("/runs/run_42/council").status_code == 200
+    assert client.post("/runs/run_42/kit").status_code == 200

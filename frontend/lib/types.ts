@@ -27,6 +27,8 @@ export interface Choice {
   runner_up?: string | null;
   gap?: number | null;
   components: Record<string, number>;
+  p_choice?: number | null;
+  locked?: boolean | null;
 }
 
 export interface RunResult {

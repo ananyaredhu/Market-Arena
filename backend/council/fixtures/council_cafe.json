@@ -1,0 +1,61 @@
+{
+  "run_id": "run_cafe_fixture",
+  "verdict": "Simulated outcome under stated assumptions: Corner Brew takes a median share of 0.12 (p10 0.10, p90 0.14). Biggest threat: Willingness to pay is lower than assumed (share 0.137 -> 0.100 (-0.037, -26.8%)). Fragility 0.19, confidence high.",
+  "confidence": "high",
+  "fragility": 0.1878,
+  "who_buys": [
+    "Remote workers: 24 of 60 simulated agents chose Corner Brew (0.40)"
+  ],
+  "who_rejects": [
+    "Office lunch crowd: 7 of 90 simulated agents chose Corner Brew (0.08); most chose Hawker kopi stall",
+    "Students on a budget: 5 of 90 simulated agents chose Corner Brew (0.06); most chose Hawker kopi stall",
+    "Hawker loyalists: 0 of 60 simulated agents chose Corner Brew (0.00); most chose Hawker kopi stall"
+  ],
+  "risks": [
+    {
+      "title": "Willingness to pay is lower than assumed",
+      "evidence": "Devil's Advocate: if willingness to pay (budget) is 20% lower than assumed, the simulated share changes as shown.",
+      "metric": "share 0.137 -> 0.100 (-0.037, -26.8%)"
+    },
+    {
+      "title": "Hawker kopi stall responds with a promotion",
+      "evidence": "Competitor Strategist: the rival's best one-step response among the bounded moves.",
+      "metric": "share 0.137 -> 0.107 (-0.030, -22.0%)"
+    },
+    {
+      "title": "Customers are more price-sensitive than assumed",
+      "evidence": "Devil's Advocate: if price sensitivity is 20% higher than assumed, the simulated share changes as shown.",
+      "metric": "share 0.137 -> 0.113 (-0.023, -17.1%)"
+    }
+  ],
+  "competitor_reaction": {
+    "competitor_id": "hawker_kopi",
+    "move": "promo",
+    "effect_on_share": -0.03
+  },
+  "experiments": [
+    {
+      "title": "Price-board test at S$4.80 vs S$3.84",
+      "hypothesis": "Enough walk-past customers buy Corner Brew at S$4.80 that the lower S$3.84 price is not needed.",
+      "pass_threshold": "Proposed test threshold (not an established benchmark): over two comparable weekday lunch hours, purchases at S$4.80 reach at least 70% of purchases at S$3.84.",
+      "kind": "offline"
+    },
+    {
+      "title": "Loyalty-card retention check against Hawker kopi stall",
+      "hypothesis": "A stamp card keeps repeat visits steady even if Hawker kopi stall reacts with a price cut, a new menu item or a promotion.",
+      "pass_threshold": "Proposed test threshold (not an established benchmark): at least 30% of first-time stamp-card holders return within 14 days.",
+      "kind": "offline"
+    },
+    {
+      "title": "Tasting event with a price-ladder card",
+      "hypothesis": "After tasting, students and office workers state they would pay S$4.80 rather than switch back to a cheaper option.",
+      "pass_threshold": "Proposed test threshold (not an established benchmark): at least 40% of 30+ tasters pick S$4.80 or higher on the price-ladder card.",
+      "kind": "offline"
+    }
+  ],
+  "trend_context": null,
+  "limitations": [
+    "Simulated outcome under stated assumptions; not a forecast of real sales."
+  ],
+  "engine_source": "engine"
+}

@@ -1,0 +1,186 @@
+{
+  "$defs": {
+    "CompetitorReaction": {
+      "additionalProperties": false,
+      "properties": {
+        "competitor_id": {
+          "title": "Competitor Id",
+          "type": "string"
+        },
+        "move": {
+          "title": "Move",
+          "type": "string"
+        },
+        "effect_on_share": {
+          "title": "Effect On Share",
+          "type": "number"
+        }
+      },
+      "required": [
+        "competitor_id",
+        "move",
+        "effect_on_share"
+      ],
+      "title": "CompetitorReaction",
+      "type": "object"
+    },
+    "Experiment": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "hypothesis": {
+          "title": "Hypothesis",
+          "type": "string"
+        },
+        "pass_threshold": {
+          "title": "Pass Threshold",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "landing",
+            "survey",
+            "interview",
+            "offline",
+            "telegram"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "hypothesis",
+        "pass_threshold",
+        "kind"
+      ],
+      "title": "Experiment",
+      "type": "object"
+    },
+    "Risk": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "evidence": {
+          "title": "Evidence",
+          "type": "string"
+        },
+        "metric": {
+          "title": "Metric",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "evidence",
+        "metric"
+      ],
+      "title": "Risk",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "verdict": {
+      "title": "Verdict",
+      "type": "string"
+    },
+    "confidence": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "fragility": {
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Fragility",
+      "type": "number"
+    },
+    "who_buys": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Who Buys",
+      "type": "array"
+    },
+    "who_rejects": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Who Rejects",
+      "type": "array"
+    },
+    "risks": {
+      "items": {
+        "$ref": "#/$defs/Risk"
+      },
+      "maxItems": 3,
+      "title": "Risks",
+      "type": "array"
+    },
+    "competitor_reaction": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CompetitorReaction"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "experiments": {
+      "items": {
+        "$ref": "#/$defs/Experiment"
+      },
+      "maxItems": 3,
+      "title": "Experiments",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "engine_source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Engine Source"
+    }
+  },
+  "required": [
+    "run_id",
+    "verdict",
+    "confidence",
+    "fragility",
+    "who_buys",
+    "who_rejects",
+    "risks",
+    "competitor_reaction",
+    "experiments"
+  ],
+  "title": "CouncilOutput",
+  "type": "object"
+}
