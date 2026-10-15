@@ -187,6 +187,199 @@ def test_adapter_prefers_canonical_share_over_p50():
     assert evaluation.share("you") == 0.2
 
 
+def test_unknown_project_is_404(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    response = client.post("/runs/run_42/council", json={"project_id": "proj_missing"})
+    assert response.status_code == 404
+    assert "proj_missing" in response.json()["detail"]
+
+
+def test_malformed_stored_result_is_422(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    runs = isolated / "runs"
+    runs.mkdir()
+    (runs / "run_bad.json").write_text("{", encoding="utf-8")
+    response = client.post("/runs/run_bad/council")
+    assert response.status_code == 422
+    assert "not valid JSON" in response.json()["detail"]
+
+
+def test_stored_result_that_disagrees_with_the_engine_is_409(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    result = copy.deepcopy(load_fixture("run_result"))
+    result["totals"]["you"]["share"] = 0.99
+    save_bundle({
+        "run_id": "run_42",
+        "project_id": None,
+        "pack": "saas",
+        "population": load_fixture("population_saas"),
+        "options": load_fixture("options_saas"),
+        "run_result": result,
+        "trend_notes": [],
+        "research_notes": [],
+    })
+    response = client.post("/runs/run_42/council")
+    assert response.status_code == 409
+    assert "does not match" in response.json()["detail"]
+
+
+def test_engine_failure_is_an_error_not_a_fixture(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "1")
+
+    def explode(*_args, **_kwargs):
+        raise RuntimeError("solver exploded")
+
+    monkeypatch.setattr("backend.council.run_inputs.run_scenario", explode)
+    response = client.post("/runs/run_42/council")
+    assert response.status_code == 502
+    assert "solver exploded" in response.json()["detail"]
+    assert "verdict" not in response.json()
+
+
+def test_compute_failure_does_not_fall_back_to_the_council_fixture(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "1")
+
+    def explode(*_args, **_kwargs):
+        raise RuntimeError("council blew up")
+
+    monkeypatch.setattr("backend.council_routes.run_council", explode)
+    response = client.post("/runs/run_42/council")
+    assert response.status_code == 500
+    assert "fixture_fallback" not in response.text
+    assert "council blew up" in response.json()["detail"]
+
+
+def test_repeated_requests_return_the_same_run(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    first = client.post("/runs/run_42/council")
+    second = client.post("/runs/run_42/council")
+    assert first.status_code == 200 and second.status_code == 200
+    assert first.json()["verdict"] == second.json()["verdict"]
+    assert first.json()["fragility"] == second.json()["fragility"]
+    assert first.json()["measured"]["baseline_share"] == second.json()["measured"]["baseline_share"]
+    assert first.json()["measured"]["segment_uncertainty"] == "canonical_draw_only"
+    assert any("canonical draw" in line for line in first.json()["limitations"])
+    kit = client.post("/runs/run_42/kit")
+    assert kit.status_code == 200
+    assert kit.json()["run_id"] == "run_42"
+    assert kit.json()["baseline_share"] == first.json()["baseline_share"]
+    assert kit.json()["scenario_origin"] == first.json()["scenario_origin"] == "demo"
+    assert any("Telegram" in line for line in kit.json()["unsupported"])
+
+
+def test_cafe_project_does_not_receive_the_saas_demo(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    project = create_persisted_project(ProjectCreateRequest(
+        idea="A cafe for office workers near the station", pack="cafe", geography="SG",
+    ))
+    response = client.post("/runs/run_42/council", json={"project_id": project["id"]})
+    assert response.status_code == 404
+    assert "cafe" in response.json()["detail"]
+    assert "verdict" not in response.json()
+
+
+def test_fresh_cafe_run_feeds_the_cafe_kit(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    from backend.council.tests.conftest import load
+
+    population = load("population_cafe.json")
+    options = load("options_cafe.json")
+    created = client.post("/runs/run_42/council", json={
+        "population": population, "options": options, "pack": "cafe", "seed": 42,
+    })
+    assert created.status_code == 200, created.text
+    body = created.json()
+    assert body["scenario_origin"] == "engine"
+    assert body["pack"] == "cafe"
+    counted = sum(segment["n_you"] for segment in body["measured"]["segments"])
+    total = sum(segment["n"] for segment in body["measured"]["segments"])
+    assert body["measured"]["baseline_share"] == pytest.approx(counted / total)
+    assert any("illustrative" in line.lower() or "canonical draw" in line for line in body["limitations"])
+    kit = client.post("/runs/run_42/kit", json={"council": body})
+    assert kit.status_code == 200, kit.text
+    assert kit.json()["baseline_share"] == body["baseline_share"]
+    assert kit.json()["pack"] == "cafe"
+    assert "QR" in kit.json()["assets"]["offline"]["flyer"]
+    assert any("Café" in line or "illustrative" in line for line in kit.json()["unsupported"])
+    again = client.post("/runs/run_42/council")
+    assert again.status_code == 200
+    assert again.json()["measured"]["baseline_share"] == body["measured"]["baseline_share"]
+    assert again.json()["scenario_origin"] == "stored"
+
+
+def test_population_pack_must_match_the_request(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    from backend.council.tests.conftest import load
+
+    response = client.post("/runs/run_42/council", json={
+        "population": load("population_cafe.json"),
+        "options": load("options_cafe.json"),
+        "pack": "saas",
+    })
+    assert response.status_code == 409
+    assert "cafe" in response.json()["detail"]
+
+
+def test_a_second_scenario_cannot_overwrite_the_stored_run(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    population = load_fixture("population_saas")
+    options = load_fixture("options_saas")
+    first = client.post("/runs/run_42/council", json={"population": population, "options": options, "pack": "saas"})
+    assert first.status_code == 200
+    changed = copy.deepcopy(options)
+    changed[0]["price"] = 3
+    second = client.post("/runs/run_42/council", json={"population": population, "options": changed, "pack": "saas"})
+    assert second.status_code == 409
+    assert "already stored" in second.json()["detail"]
+
+
+def test_saas_project_uses_the_same_run_as_the_arena(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    monkeypatch.setenv("OVERRIDES_FILE", str(isolated / "overrides.json"))
+    project = create_persisted_project(ProjectCreateRequest(
+        idea="StudyFlow is a planner for university students at S$9", pack="saas", geography="SG",
+    ))
+    before = client.post("/runs/run_42/council", json={"project_id": project["id"]})
+    assert before.status_code == 200
+    assert before.json()["scenario_origin"] == "engine"
+    assert "shared SaaS scenario" in before.json()["scenario_note"]
+    adjusted = client.get("/runs/run_42/adjusted", params={"project_id": project["id"]})
+    assert adjusted.status_code == 200
+    assert before.json()["measured"]["baseline_share"] == adjusted.json()["totals"]["you"]["share"]
+
+    locked = client.post("/overrides", json={
+        "project_id": project["id"], "type": "exclude", "segment_id": "loyal",
+    })
+    assert locked.status_code == 200
+    after = client.post("/runs/run_42/council", json={"project_id": project["id"]})
+    adjusted_after = client.get("/runs/run_42/adjusted", params={"project_id": project["id"]})
+    assert after.status_code == 200
+    assert after.json()["measured"]["baseline_share"] == adjusted_after.json()["totals"]["you"]["share"]
+    assert after.json()["measured"]["baseline_share"] != before.json()["measured"]["baseline_share"]
+
+
+def test_kit_rejects_options_from_a_different_scenario(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    council = client.post("/runs/run_42/council").json()
+    options = copy.deepcopy(load_fixture("options_saas"))
+    options[0]["price"] = 3
+    response = client.post("/runs/run_42/kit", json={"council": council, "options": options, "pack": "saas"})
+    assert response.status_code == 409
+    assert "options" in response.json()["detail"]
+
+
+def test_missing_agents_are_rejected(client, isolated, monkeypatch):
+    monkeypatch.setenv("MOCK", "0")
+    response = client.post("/runs/run_42/council", json={
+        "population": {"pack": "saas", "agents": []},
+        "options": load_fixture("options_saas"),
+        "pack": "saas",
+        "seed": 42,
+    })
+    assert response.status_code == 422
+    assert "agents" in response.json()["detail"]
+
+
 def test_price3_demo_kit_mentions_the_lower_price(client, isolated, monkeypatch):
     monkeypatch.setenv("MOCK", "0")
     response = client.post("/runs/run_42_price3/kit")

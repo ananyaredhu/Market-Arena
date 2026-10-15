@@ -88,6 +88,10 @@ export interface MeasuredSegment {
   n_you: number;
   share: number;
   relationship: "buys" | "rejects";
+  p10?: number | null;
+  p50?: number | null;
+  p90?: number | null;
+  uncertainty?: "canonical_draw_only" | "engine_segment_totals";
 }
 
 export interface CouncilMeasured {
@@ -97,6 +101,7 @@ export interface CouncilMeasured {
   p90: number | null;
   fragility: number;
   segments: MeasuredSegment[];
+  segment_uncertainty?: "canonical_draw_only" | "engine_segment_totals";
   risks: MeasuredRisk[];
   competitor: {
     competitor_id: string;
@@ -122,12 +127,22 @@ export interface CouncilOutput {
   limitations?: string[];
   engine_source?: string;
   scenario_origin?: "demo" | "stored" | "engine" | "request" | "fixture_fallback";
+  scenario_note?: string | null;
   project_id?: string | null;
+  pack?: string;
+  baseline_share?: number | null;
+  unsupported?: string[];
   measured?: CouncilMeasured;
 }
 
 export interface KitOutput {
   hypotheses: string[];
+  run_id?: string;
+  scenario_origin?: CouncilOutput["scenario_origin"];
+  scenario_note?: string | null;
+  pack?: string;
+  baseline_share?: number | null;
+  unsupported?: string[];
   assets: {
     landing_copy: string;
     survey: string[];
