@@ -13,6 +13,10 @@ from backend.kit.generator import ALT_PRICE_FACTOR, generate_kit, money
 from backend.kit.packs import kit_content, load_pack, outside_label
 
 
+class CouncilComputeError(RuntimeError):
+    """The engine could not produce a baseline for this run."""
+
+
 def _product(options: List[dict]) -> dict:
     you = next((o for o in options if o.get("id") == YOU_ID), None)
     return you or {"id": YOU_ID, "label": "your product", "price": 0.0}
@@ -32,9 +36,14 @@ def _measured(rr: RunResult, strategist, advocate, population: dict) -> dict:
     names = {s["id"]: s.get("name", s["id"]) for s in population.get("segments", [])}
     overall_n = sum(s["n"] for s in stats.values()) or 1
     overall = sum(s["n_you"] for s in stats.values()) / overall_n
+    segment_totals = (getattr(rr, "model_extra", None) or {}).get("segment_totals")
+    if not isinstance(segment_totals, dict):
+        segment_totals = {}
     segments = []
     for sid, s in sorted(stats.items(), key=lambda kv: (-kv[1]["share"], kv[0])):
         relationship = "buys" if s["n_you"] > 0 and s["share"] >= overall else "rejects"
+        band = segment_totals.get(sid) if isinstance(segment_totals.get(sid), dict) else None
+        has_band = bool(band) and all(isinstance(band.get(key), (int, float)) for key in ("p10", "p50", "p90"))
         segments.append({
             "id": sid,
             "name": names.get(sid, sid),
@@ -42,6 +51,10 @@ def _measured(rr: RunResult, strategist, advocate, population: dict) -> dict:
             "n_you": s["n_you"],
             "share": s["share"],
             "relationship": relationship,
+            "p10": band["p10"] if has_band else None,
+            "p50": band["p50"] if has_band else s["share"],
+            "p90": band["p90"] if has_band else None,
+            "uncertainty": "engine_segment_totals" if has_band else "canonical_draw_only",
         })
     risks = [
         {
@@ -70,6 +83,7 @@ def _measured(rr: RunResult, strategist, advocate, population: dict) -> dict:
         "p90": you.p90 if you else None,
         "fragility": advocate.fragility,
         "segments": segments,
+        "segment_uncertainty": "engine_segment_totals" if segment_totals else "canonical_draw_only",
         "risks": risks,
         "competitor": competitor,
     }
@@ -90,6 +104,9 @@ def run_council(
         baseline = evaluation_from_result(rr, source=adapter.source)
     strategist = run_strategist(agents, options, adapter, seed, baseline=baseline)
     advocate = run_advocate(agents, options, adapter, seed, baseline=baseline)
+    if strategist.status == "baseline_failed" or advocate.status == "baseline_failed":
+        detail = "; ".join(strategist.limitations + advocate.limitations) or "baseline evaluation failed"
+        raise CouncilComputeError(detail)
 
     product = _product(options)
     context = {"outside": outside_label(pack)}

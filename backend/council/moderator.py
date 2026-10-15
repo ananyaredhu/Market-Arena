@@ -261,6 +261,12 @@ def build_council(
     buys, rejects = _segment_lines(seg_stats, seg_names, labels, overall, product)
     if not seg_stats:
         limitations.append("RunResult has no segment-level choices; buyer and rejector segments omitted.")
+    segment_totals = (getattr(rr, "model_extra", None) or {}).get("segment_totals")
+    if not isinstance(segment_totals, dict) or not segment_totals:
+        limitations.append(
+            "Segment shares are the canonical draw only. This run has no per-segment p10/p50/p90. "
+            "Market-level p10/p50/p90 still come from the engine totals."
+        )
 
     engine_source = advocate.engine_source
     confidence, reasons = decide_confidence(advocate.fragility, engine_source, advocate, strategist, totals_you)

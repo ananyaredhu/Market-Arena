@@ -98,10 +98,16 @@ export default function CouncilView({ params }: { params: Promise<{ id: string }
       )}
       {status === "ready" && council && kit && (
         <div className="flex flex-col gap-4">
-          {origin === "demo" && (
+          {council.scenario_note && <p className="text-sm text-muted">{council.scenario_note}</p>}
+          {origin === "demo" && !council.scenario_note && (
             <p className="text-sm text-muted">
-              Showing shared demo run {council.run_id}. It is checked against the decision engine and is not a result
+              Showing shared demo run {council.run_id}. It is computed by the decision engine and is not a result
               saved for project {id}.
+            </p>
+          )}
+          {council.measured?.segment_uncertainty === "canonical_draw_only" && (
+            <p className="text-sm text-muted">
+              Segment shares are the canonical draw. This run has no per-segment p10–p90.
             </p>
           )}
           <CouncilPanel council={council} kit={kit} />

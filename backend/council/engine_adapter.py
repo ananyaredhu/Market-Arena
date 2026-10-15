@@ -183,18 +183,25 @@ def evaluation_from_result(result: Any, *, source: str) -> EngineEvaluation:
 
 
 def get_default_adapter(mode: Optional[str] = None) -> EngineAdapter:
-    """``COUNCIL_ENGINE=mock`` forces the mock; ``auto`` (default) uses the
-    frozen ``backend.engine.engine_ref.run_scenario`` (or ``engine.py`` when A
-    ships it), otherwise the labelled mock."""
+    """``COUNCIL_ENGINE=mock`` is the only way to get the labelled mock.
+
+    ``auto`` (default) and ``engine`` use ``engine.py``, then ``engine_ref.py``.
+    A missing engine is an error. The mock is never a silent stand-in for it.
+    """
     mode = (mode or os.environ.get("COUNCIL_ENGINE", "auto")).lower()
     if mode == "mock":
         return MockEngineAdapter()
+    if mode not in ("auto", "engine"):
+        raise ValueError(f"COUNCIL_ENGINE must be auto, engine, or mock, got {mode!r}")
+    last_error: Optional[Exception] = None
     for module in ("backend.engine.engine", "backend.engine.engine_ref"):
         try:
             mod = __import__(module, fromlist=["run_scenario"])
             return FrozenSignatureAdapter(getattr(mod, "run_scenario"))
-        except (ImportError, AttributeError):
+        except (ImportError, AttributeError) as exc:
+            last_error = exc
             continue
-    if mode == "engine":
-        raise ImportError("COUNCIL_ENGINE=engine but no engine module with run_scenario is importable")
-    return MockEngineAdapter()
+    raise ImportError(
+        "COUNCIL_ENGINE requires engine.py or engine_ref.py. "
+        "The mock adapter is used only when COUNCIL_ENGINE=mock."
+    ) from last_error

@@ -113,20 +113,31 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
       )}
       {status === "error" && <p className="text-coral">Experiment kit failed. {error}</p>}
       {status === "ready" && kit && (
-        <div className="flex flex-wrap items-stretch gap-5">
-          <HypothesisList items={kit.hypotheses.map((text) => ({ text }))} />
-          <LandingPreview
-            headline={landingParts(kit.assets.landing_copy).headline}
-            body={landingParts(kit.assets.landing_copy).body}
-            ctas={landingParts(kit.assets.landing_copy).ctas}
-            assets={kit.assets}
-          />
-          <TelegramConsole
-            contacts={TELEGRAM.contacts}
-            variants={kit.assets.telegram_variants}
-            variantSizes={TELEGRAM.variantSizes}
-            results={TELEGRAM.results}
-          />
+        <div className="flex flex-col gap-4">
+          {kit.scenario_note && <p className="text-sm text-muted">{kit.scenario_note}</p>}
+          {kit.unsupported && kit.unsupported.length > 0 && (
+            <p className="text-sm text-muted">{kit.unsupported.join(" ")}</p>
+          )}
+          <div className="flex flex-wrap items-stretch gap-5">
+            <HypothesisList items={kit.hypotheses.map((text) => ({ text }))} />
+            <LandingPreview
+              headline={landingParts(kit.assets.landing_copy).headline}
+              body={landingParts(kit.assets.landing_copy).body}
+              ctas={landingParts(kit.assets.landing_copy).ctas}
+              assets={kit.assets}
+            />
+            <div className="flex min-w-0 flex-[1_1_360px] flex-col gap-2">
+              <p className="text-sm text-muted">
+                Sample preview only. These contact counts and rates are not results for {runId}.
+              </p>
+              <TelegramConsole
+                contacts={TELEGRAM.contacts}
+                variants={kit.assets.telegram_variants}
+                variantSizes={TELEGRAM.variantSizes}
+                results={TELEGRAM.results}
+              />
+            </div>
+          </div>
         </div>
       )}
     </PageShell>
