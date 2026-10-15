@@ -4,6 +4,10 @@ Source of truth: `backend/common/contracts.py` (Pydantic). JSON schemas in this 
 with `make schemas` and checked in CI. Change rules: all three people agree, add fields as OPTIONAL
 only, update the fixtures in the same commit, add a line here.
 
+## 2026-10-14: optional `Population.generation` (Person A, population generator)
+- `generation`: free-form note on how the population was made (`source`: `llm` or `template`, optional
+  `fallback_reason`, validation summary). Optional; consumers may ignore it.
+
 ## 2026-10-14: optional fields on Choice (Person A, engine.py)
 - `Choice.p_choice` (model probability of the chosen option) and `Choice.locked` (human override pinned the
   choice). Both optional; `engine_ref.py` does not emit them. Existing consumers can ignore them.

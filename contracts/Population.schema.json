@@ -172,6 +172,19 @@
       "default": null,
       "title": "Evidence Snapshot Id"
     },
+    "generation": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Generation"
+    },
     "geography": {
       "default": "SG",
       "title": "Geography",
