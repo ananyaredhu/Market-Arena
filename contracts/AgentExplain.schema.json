@@ -75,6 +75,30 @@
           ],
           "default": null,
           "title": "Price Drop"
+        },
+        "price_rise": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Price Rise"
+        },
+        "switch_incentive": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Switch Incentive"
         }
       },
       "title": "Flip",
@@ -105,6 +129,18 @@
     "narration": {
       "title": "Narration",
       "type": "string"
+    },
+    "narration_source": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Narration Source"
     },
     "runner_up": {
       "anyOf": [

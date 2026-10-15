@@ -4,6 +4,13 @@ Source of truth: `backend/common/contracts.py` (Pydantic). JSON schemas in this 
 with `make schemas` and checked in CI. Change rules: all three people agree, add fields as OPTIONAL
 only, update the fixtures in the same commit, add a line here.
 
+## 2026-10-15: Glass-Box optional fields (Person A, flips and narration)
+- `Flip.switch_incentive` (trial/migration credit that closes the gap) and `Flip.price_rise` (for agents who
+  chose you: price rise before they would leave). `AgentExplain.narration_source` (`llm` or `template`).
+  All optional; existing consumers can ignore them.
+- `AgentExplain.top_drivers[].delta` is now defined as the component of the chosen option MINUS the same
+  component of the runner-up (positive favours the chosen option).
+
 ## 2026-10-14: optional `Population.generation` (Person A, population generator)
 - `generation`: free-form note on how the population was made (`source`: `llm` or `template`, optional
   `fallback_reason`, validation summary). Optional; consumers may ignore it.
