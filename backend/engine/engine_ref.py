@@ -9,6 +9,9 @@ The returned dict matches the RunResult contract. Math decides, no LLM is involv
            - risk_i * novelty_j
     P(choose j) = softmax(U_ij / tau_i) over affordable options plus the outside option
 
+The draw uses fixed Gumbel noise per (customer, option) (see sampling.py): the same probabilities as a plain
+random draw, but a what-if change only moves customers whose winning option actually got worse.
+
 Notes
 - Options with role "outside" are not scored as products; the outside option uses the agent's
   own `outside_utility`. Its id is taken from that option (default "outside").
@@ -20,6 +23,8 @@ Notes
 from __future__ import annotations
 
 import numpy as np
+
+from backend.engine.sampling import draw_choices, gumbel_noise, noise_keys
 
 COMPONENTS = ("brand", "feature", "price", "switch", "risk")
 
@@ -63,13 +68,6 @@ def _probabilities(U: np.ndarray, tau: np.ndarray) -> np.ndarray:
     return P / P.sum(axis=1, keepdims=True)
 
 
-def _draw(P: np.ndarray, rng: np.random.Generator) -> np.ndarray:
-    """Vectorised categorical draw: one uniform per agent against the cumulative probabilities."""
-    u = rng.random(P.shape[0])
-    idx = (np.cumsum(P, axis=1) < u[:, None]).sum(axis=1)
-    return np.minimum(idx, P.shape[1] - 1)
-
-
 def run_scenario(agents: list[dict], options: list[dict], seed: int, repeats: int = 1) -> dict:
     ids, outside_id, price, budget, tau, out_u, comp = _arrays(agents, options)
     n, m = len(agents), len(ids)
@@ -79,12 +77,14 @@ def run_scenario(agents: list[dict], options: list[dict], seed: int, repeats: in
     U_all = np.hstack([U, out_u[:, None]])
     afford = np.hstack([price[None, :] <= budget[:, None], np.ones((n, 1), dtype=bool)])
     U_all = np.where(afford, U_all, -np.inf)
-    P = _probabilities(U_all, tau)
+
+    logits = U_all / tau[:, None]
+    agent_keys, option_keys = noise_keys([a["id"] for a in agents]), noise_keys(all_ids)
 
     shares = []  # one row of per-option shares per repeat
     first_choice = None
     for r in range(max(1, repeats)):
-        choice = _draw(P, np.random.default_rng(seed + r))
+        choice = draw_choices(logits, gumbel_noise(seed, r, agent_keys, option_keys))
         if r == 0:
             first_choice = choice
         shares.append(np.bincount(choice, minlength=m + 1) / n)

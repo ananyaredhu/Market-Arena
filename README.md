@@ -30,7 +30,7 @@ Person B council/kit routes compute from shared fixtures when possible; they fal
 | `contracts/` | all (changes need all 3) | JSON schemas generated from `backend/common/contracts.py` |
 | `fixtures/` | all | sample JSON for every contract (`make fixtures` regenerates engine-driven ones) |
 | `backend/common/` | B (`llm.py`), shared | contracts, fixture loader, mock switch, LLM wrapper |
-| `backend/engine/`, `backend/population/`, `backend/glassbox/`, `backend/sim_routes.py` | A | decision engine and flip maths, population generator, Glass-Box explain + verified narration, simulation routes |
+| `backend/engine/`, `backend/population/`, `backend/glassbox/`, `backend/scenarios/`, `backend/sim_routes.py` | A | decision engine and flip maths, population generator, Glass-Box explain + verified narration, overrides and scenario compare, simulation routes |
 | `backend/council/`, `backend/kit/`, `backend/council_routes.py` | B | Council and Experiment Kit |
 | `backend/intake/`, `backend/orchestrator/`, `backend/telegram/`, `backend/main.py` | C | intake, runs, Telegram |
 | `frontend/components/glassbox/`, `components/compare/`, `app/compare/` | A | Glass-Box drawer, compare view |

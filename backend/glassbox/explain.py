@@ -78,7 +78,13 @@ def explain_agent(
     drivers = drivers_for(t, c, r)
     f = flip_for_agent(t, 0, target=you, money=money)
     affordable_u = np.where(t.afford[0], t.U_raw[0], -np.inf)
-    against_odds = c != int(np.argmax(affordable_u))
+    top = int(np.argmax(affordable_u))
+    against_odds = c != top
+    chose_you = choice["choice"] == you
+    if chose_you and not f["already_top"]:
+        # They already chose your product (a random draw or a manual pin), so "what would win them" makes no sense.
+        f = {**f, "price_drop": None, "feature_boost": None, "switch_incentive": None, "price_unreachable": False,
+             "note": f"This customer chose your product, but by the numbers they would prefer {labels[t.ids[top]]}."}
 
     # ---- (3): freeze the facts exactly as they may be quoted
     fb = f["feature_boost"]
@@ -95,6 +101,8 @@ def explain_agent(
         locked=bool(choice.get("locked")),
         money=money,
         already_top=f["already_top"],
+        chose_you=chose_you,
+        preferred=labels[t.ids[top]] if (chose_you and against_odds) else None,
         price_drop=f["price_drop"],
         price_rise=f["price_rise"],
         feature_attr=fb["attr"] if fb else None,

@@ -9,32 +9,32 @@
   ],
   "totals": {
     "you": {
-      "count": 6,
-      "share": 0.075,
-      "p10": 0.036250000000000004,
-      "p50": 0.075,
-      "p90": 0.125
+      "count": 5,
+      "share": 0.0625,
+      "p10": 0.05,
+      "p50": 0.0625,
+      "p90": 0.10125000000000002
     },
     "free_tool": {
-      "count": 49,
-      "share": 0.6125,
-      "p10": 0.53625,
-      "p50": 0.59375,
-      "p90": 0.65125
+      "count": 44,
+      "share": 0.55,
+      "p10": 0.5487500000000001,
+      "p50": 0.61875,
+      "p90": 0.66375
     },
     "chain_app": {
       "count": 5,
       "share": 0.0625,
-      "p10": 0.025,
-      "p50": 0.05,
-      "p90": 0.1
+      "p10": 0.036250000000000004,
+      "p50": 0.0625,
+      "p90": 0.07625000000000001
     },
     "outside": {
-      "count": 20,
-      "share": 0.25,
-      "p10": 0.2125,
-      "p50": 0.26875000000000004,
-      "p90": 0.3375
+      "count": 26,
+      "share": 0.325,
+      "p10": 0.21125,
+      "p50": 0.2625,
+      "p90": 0.31375000000000003
     }
   },
   "choices": [
@@ -71,16 +71,16 @@
     {
       "agent_id": "a002",
       "segment": "budget",
-      "choice": "outside",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.7773999999999999,
+      "runner_up": "outside",
+      "gap": 0.7773999999999999,
       "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "brand": 0.348,
+        "feature": 0.7193999999999999,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
@@ -101,76 +101,76 @@
     {
       "agent_id": "a004",
       "segment": "budget",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.10809999999999997,
+      "runner_up": "free_tool",
+      "gap": -0.10809999999999997,
       "components": {
-        "brand": 0.246,
-        "feature": 0.6041000000000001,
-        "price": -0.0,
-        "switch": -0.336,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
       "agent_id": "a005",
       "segment": "budget",
-      "choice": "outside",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.8651000000000001,
+      "runner_up": "outside",
+      "gap": 0.8651000000000001,
       "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "brand": 0.541,
+        "feature": 0.5411,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
       "agent_id": "a006",
       "segment": "budget",
-      "choice": "outside",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.5859999999999999,
+      "runner_up": "outside",
+      "gap": 0.5859999999999999,
       "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "brand": 0.236,
+        "feature": 0.6499999999999999,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
       "agent_id": "a007",
       "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": null,
+      "runner_up": "outside",
+      "gap": 0.654,
+      "components": {
+        "brand": 0.247,
+        "feature": 0.613,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a008",
+      "segment": "budget",
       "choice": "outside",
       "prev_choice": null,
       "runner_up": "free_tool",
-      "gap": -0.654,
+      "gap": 0.03340000000000004,
       "components": {
         "brand": 0.0,
         "feature": 0.0,
         "price": 0.0,
         "switch": 0.0,
         "risk": 0.0
-      }
-    },
-    {
-      "agent_id": "a008",
-      "segment": "budget",
-      "choice": "free_tool",
-      "prev_choice": null,
-      "runner_up": "outside",
-      "gap": -0.03340000000000004,
-      "components": {
-        "brand": 0.281,
-        "feature": 0.5186,
-        "price": -0.0,
-        "switch": -0.39,
-        "risk": -0.0
       }
     },
     {
@@ -206,31 +206,31 @@
     {
       "agent_id": "a011",
       "segment": "budget",
-      "choice": "outside",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.9768999999999999,
+      "runner_up": "outside",
+      "gap": 0.9768999999999999,
       "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "brand": 0.531,
+        "feature": 0.5888999999999999,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
       "agent_id": "a012",
       "segment": "budget",
-      "choice": "outside",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.3299,
+      "runner_up": "outside",
+      "gap": 0.3299,
       "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "brand": 0.215,
+        "feature": 0.5379,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
@@ -266,16 +266,16 @@
     {
       "agent_id": "a015",
       "segment": "budget",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.821,
+      "runner_up": "free_tool",
+      "gap": -0.821,
       "components": {
-        "brand": 0.4,
-        "feature": 0.574,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -296,31 +296,31 @@
     {
       "agent_id": "a017",
       "segment": "budget",
-      "choice": "free_tool",
-      "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.6416999999999999,
-      "components": {
-        "brand": 0.454,
-        "feature": 0.6737,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
-      }
-    },
-    {
-      "agent_id": "a018",
-      "segment": "budget",
       "choice": "outside",
       "prev_choice": null,
       "runner_up": "free_tool",
-      "gap": -0.1598,
+      "gap": -0.6416999999999999,
       "components": {
         "brand": 0.0,
         "feature": 0.0,
         "price": 0.0,
         "switch": 0.0,
         "risk": 0.0
+      }
+    },
+    {
+      "agent_id": "a018",
+      "segment": "budget",
+      "choice": "free_tool",
+      "prev_choice": null,
+      "runner_up": "outside",
+      "gap": 0.1598,
+      "components": {
+        "brand": 0.519,
+        "feature": 0.4528,
+        "price": -0.0,
+        "switch": -0.365,
+        "risk": -0.0
       }
     },
     {
@@ -371,46 +371,46 @@
     {
       "agent_id": "a022",
       "segment": "budget",
-      "choice": "outside",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.4695,
+      "runner_up": "outside",
+      "gap": 0.4695,
       "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "brand": 0.24,
+        "feature": 0.6505,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
       "agent_id": "a023",
       "segment": "budget",
-      "choice": "outside",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.7049999999999998,
+      "runner_up": "outside",
+      "gap": 0.7049999999999998,
       "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "brand": 0.354,
+        "feature": 0.6419999999999999,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
       "agent_id": "a024",
       "segment": "budget",
-      "choice": "outside",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.8432,
+      "runner_up": "outside",
+      "gap": 0.8432,
       "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "brand": 0.58,
+        "feature": 0.5772,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
@@ -431,16 +431,16 @@
     {
       "agent_id": "a026",
       "segment": "budget",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 1.1015000000000001,
+      "runner_up": "free_tool",
+      "gap": -1.1015000000000001,
       "components": {
-        "brand": 0.518,
-        "feature": 0.7215,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -461,31 +461,31 @@
     {
       "agent_id": "a028",
       "segment": "exam",
-      "choice": "you",
+      "choice": "free_tool",
       "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.4099999999999999,
+      "runner_up": "outside",
+      "gap": 0.2187999999999999,
       "components": {
-        "brand": 0.0,
-        "feature": 1.2116,
-        "price": -0.889,
+        "brand": 0.081,
+        "feature": 0.5538,
+        "price": -0.0,
         "switch": -0.257,
-        "risk": -0.0978
+        "risk": -0.0
       }
     },
     {
       "agent_id": "a029",
       "segment": "exam",
-      "choice": "free_tool",
+      "choice": "you",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.6645,
+      "runner_up": "free_tool",
+      "gap": -1.1721000000000001,
       "components": {
-        "brand": 0.113,
-        "feature": 0.6985,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 1.2473999999999998,
+        "price": -0.861,
+        "switch": -0.459,
+        "risk": -0.288
       }
     },
     {
@@ -521,31 +521,31 @@
     {
       "agent_id": "a032",
       "segment": "exam",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.12899999999999995,
+      "runner_up": "free_tool",
+      "gap": -0.12899999999999995,
       "components": {
-        "brand": 0.015,
-        "feature": 0.5539999999999999,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
       "agent_id": "a033",
       "segment": "exam",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": -0.2739,
+      "runner_up": "free_tool",
+      "gap": 0.2739,
       "components": {
-        "brand": 0.037,
-        "feature": 0.6021,
-        "price": -0.0,
-        "switch": -0.473,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -566,16 +566,16 @@
     {
       "agent_id": "a035",
       "segment": "exam",
-      "choice": "free_tool",
+      "choice": "chain_app",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.5198999999999999,
+      "runner_up": "free_tool",
+      "gap": -1.2843000000000002,
       "components": {
-        "brand": 0.284,
-        "feature": 0.5959,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
+        "brand": 0.09,
+        "feature": 1.1225999999999998,
+        "price": -1.1520000000000001,
+        "switch": -0.389,
+        "risk": -0.07600000000000001
       }
     },
     {
@@ -611,16 +611,16 @@
     {
       "agent_id": "a038",
       "segment": "exam",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.01810000000000006,
+      "runner_up": "free_tool",
+      "gap": -0.01810000000000006,
       "components": {
-        "brand": 0.266,
-        "feature": 0.5241,
-        "price": -0.0,
-        "switch": -0.352,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -641,16 +641,16 @@
     {
       "agent_id": "a040",
       "segment": "exam",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.11109999999999998,
+      "runner_up": "free_tool",
+      "gap": -0.11109999999999998,
       "components": {
-        "brand": 0.299,
-        "feature": 0.44909999999999994,
-        "price": -0.0,
-        "switch": -0.255,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -671,166 +671,166 @@
     {
       "agent_id": "a042",
       "segment": "exam",
-      "choice": "outside",
-      "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.47390000000000004,
-      "components": {
-        "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
-      }
-    },
-    {
-      "agent_id": "a043",
-      "segment": "exam",
       "choice": "free_tool",
       "prev_choice": null,
       "runner_up": "outside",
-      "gap": 0.6148,
+      "gap": 0.47390000000000004,
       "components": {
-        "brand": 0.229,
-        "feature": 0.6208,
+        "brand": 0.272,
+        "feature": 0.4979,
         "price": -0.0,
         "switch": -0.0,
         "risk": -0.0
       }
     },
     {
-      "agent_id": "a044",
+      "agent_id": "a043",
       "segment": "exam",
       "choice": "outside",
       "prev_choice": null,
       "runner_up": "free_tool",
-      "gap": -0.5263,
+      "gap": -0.6148,
       "components": {
         "brand": 0.0,
         "feature": 0.0,
         "price": 0.0,
         "switch": 0.0,
         "risk": 0.0
+      }
+    },
+    {
+      "agent_id": "a044",
+      "segment": "exam",
+      "choice": "chain_app",
+      "prev_choice": null,
+      "runner_up": "free_tool",
+      "gap": -1.3581,
+      "components": {
+        "brand": 0.15,
+        "feature": 1.2916,
+        "price": -1.62,
+        "switch": -0.366,
+        "risk": -0.028399999999999998
       }
     },
     {
       "agent_id": "a045",
       "segment": "exam",
-      "choice": "outside",
+      "choice": "you",
       "prev_choice": null,
       "runner_up": "free_tool",
-      "gap": -0.04849999999999999,
+      "gap": -0.2745,
       "components": {
         "brand": 0.0,
-        "feature": 0.0,
-        "price": 0.0,
-        "switch": 0.0,
-        "risk": 0.0
+        "feature": 0.9736,
+        "price": -0.5880000000000001,
+        "switch": -0.104,
+        "risk": -0.1266
       }
     },
     {
       "agent_id": "a046",
       "segment": "exam",
-      "choice": "free_tool",
-      "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.5089,
-      "components": {
-        "brand": 0.235,
-        "feature": 0.7069000000000001,
-        "price": -0.0,
-        "switch": -0.157,
-        "risk": -0.0
-      }
-    },
-    {
-      "agent_id": "a047",
-      "segment": "exam",
-      "choice": "free_tool",
-      "prev_choice": null,
-      "runner_up": "outside",
-      "gap": -0.3208000000000001,
-      "components": {
-        "brand": 0.037,
-        "feature": 0.6251999999999999,
-        "price": -0.0,
-        "switch": -0.489,
-        "risk": -0.0
-      }
-    },
-    {
-      "agent_id": "a048",
-      "segment": "power",
-      "choice": "chain_app",
-      "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.6443000000000002,
-      "components": {
-        "brand": 0.011,
-        "feature": 1.5171,
-        "price": -1.08,
-        "switch": -0.286,
-        "risk": -0.0238
-      }
-    },
-    {
-      "agent_id": "a049",
-      "segment": "power",
-      "choice": "you",
-      "prev_choice": null,
-      "runner_up": "free_tool",
-      "gap": -0.48539999999999994,
-      "components": {
-        "brand": 0.0,
-        "feature": 1.1294,
-        "price": -0.651,
-        "switch": -0.102,
-        "risk": -0.18359999999999999
-      }
-    },
-    {
-      "agent_id": "a050",
-      "segment": "power",
-      "choice": "free_tool",
-      "prev_choice": null,
-      "runner_up": "chain_app",
-      "gap": -0.22039999999999987,
-      "components": {
-        "brand": 0.06,
-        "feature": 0.615,
-        "price": -0.0,
-        "switch": -0.298,
-        "risk": -0.0
-      }
-    },
-    {
-      "agent_id": "a051",
-      "segment": "power",
-      "choice": "you",
-      "prev_choice": null,
-      "runner_up": "chain_app",
-      "gap": -0.6950999999999997,
-      "components": {
-        "brand": 0.0,
-        "feature": 1.2761,
-        "price": -0.602,
-        "switch": -0.599,
-        "risk": -0.22799999999999998
-      }
-    },
-    {
-      "agent_id": "a052",
-      "segment": "power",
       "choice": "outside",
       "prev_choice": null,
       "runner_up": "free_tool",
-      "gap": -0.00660000000000005,
+      "gap": -0.5089,
       "components": {
         "brand": 0.0,
         "feature": 0.0,
         "price": 0.0,
         "switch": 0.0,
         "risk": 0.0
+      }
+    },
+    {
+      "agent_id": "a047",
+      "segment": "exam",
+      "choice": "outside",
+      "prev_choice": null,
+      "runner_up": "free_tool",
+      "gap": 0.3208000000000001,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
+      }
+    },
+    {
+      "agent_id": "a048",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": null,
+      "runner_up": "you",
+      "gap": 0.5777,
+      "components": {
+        "brand": 0.165,
+        "feature": 0.6175999999999999,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
+      }
+    },
+    {
+      "agent_id": "a049",
+      "segment": "power",
+      "choice": "outside",
+      "prev_choice": null,
+      "runner_up": "free_tool",
+      "gap": -0.3071999999999999,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
+      }
+    },
+    {
+      "agent_id": "a050",
+      "segment": "power",
+      "choice": "outside",
+      "prev_choice": null,
+      "runner_up": "chain_app",
+      "gap": -0.14239999999999992,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
+      }
+    },
+    {
+      "agent_id": "a051",
+      "segment": "power",
+      "choice": "outside",
+      "prev_choice": null,
+      "runner_up": "chain_app",
+      "gap": -0.20419999999999977,
+      "components": {
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
+      }
+    },
+    {
+      "agent_id": "a052",
+      "segment": "power",
+      "choice": "free_tool",
+      "prev_choice": null,
+      "runner_up": "outside",
+      "gap": 0.00660000000000005,
+      "components": {
+        "brand": 0.091,
+        "feature": 0.3996,
+        "price": -0.0,
+        "switch": -0.0,
+        "risk": -0.0
       }
     },
     {
@@ -866,31 +866,31 @@
     {
       "agent_id": "a055",
       "segment": "power",
-      "choice": "chain_app",
+      "choice": "you",
       "prev_choice": null,
-      "runner_up": "you",
-      "gap": 0.41880000000000006,
+      "runner_up": "chain_app",
+      "gap": -0.41880000000000006,
       "components": {
-        "brand": 0.288,
-        "feature": 1.4952,
-        "price": -0.66,
-        "switch": -0.0,
-        "risk": -0.023200000000000002
+        "brand": 0.0,
+        "feature": 1.2878,
+        "price": -0.385,
+        "switch": -0.152,
+        "risk": -0.0696
       }
     },
     {
       "agent_id": "a056",
       "segment": "power",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 0.04709999999999992,
+      "runner_up": "free_tool",
+      "gap": -0.04709999999999992,
       "components": {
-        "brand": 0.14,
-        "feature": 0.4251,
-        "price": -0.0,
-        "switch": -0.251,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -926,16 +926,16 @@
     {
       "agent_id": "a059",
       "segment": "power",
-      "choice": "you",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": -0.31290000000000007,
+      "runner_up": "free_tool",
+      "gap": 0.22609999999999997,
       "components": {
         "brand": 0.0,
-        "feature": 1.1721,
-        "price": -0.5670000000000001,
-        "switch": -0.41,
-        "risk": -0.099
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -986,16 +986,16 @@
     {
       "agent_id": "a063",
       "segment": "loyal",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 1.2109,
+      "runner_up": "free_tool",
+      "gap": -1.2109,
       "components": {
-        "brand": 0.838,
-        "feature": 0.7168999999999999,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -1016,31 +1016,31 @@
     {
       "agent_id": "a065",
       "segment": "loyal",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 1.0856999999999999,
+      "runner_up": "free_tool",
+      "gap": -1.0856999999999999,
       "components": {
-        "brand": 0.944,
-        "feature": 0.7406999999999999,
-        "price": -0.0,
-        "switch": -0.206,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
       "agent_id": "a066",
       "segment": "loyal",
-      "choice": "free_tool",
+      "choice": "outside",
       "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 1.516,
+      "runner_up": "free_tool",
+      "gap": -1.516,
       "components": {
-        "brand": 0.962,
-        "feature": 0.736,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
+        "brand": 0.0,
+        "feature": 0.0,
+        "price": 0.0,
+        "switch": 0.0,
+        "risk": 0.0
       }
     },
     {
@@ -1106,31 +1106,31 @@
     {
       "agent_id": "a071",
       "segment": "loyal",
-      "choice": "free_tool",
-      "prev_choice": null,
-      "runner_up": "outside",
-      "gap": 1.0607999999999997,
-      "components": {
-        "brand": 0.718,
-        "feature": 0.7517999999999999,
-        "price": -0.0,
-        "switch": -0.0,
-        "risk": -0.0
-      }
-    },
-    {
-      "agent_id": "a072",
-      "segment": "loyal",
       "choice": "outside",
       "prev_choice": null,
       "runner_up": "free_tool",
-      "gap": -0.7051999999999998,
+      "gap": -1.0607999999999997,
       "components": {
         "brand": 0.0,
         "feature": 0.0,
         "price": 0.0,
         "switch": 0.0,
         "risk": 0.0
+      }
+    },
+    {
+      "agent_id": "a072",
+      "segment": "loyal",
+      "choice": "free_tool",
+      "prev_choice": null,
+      "runner_up": "outside",
+      "gap": 0.7051999999999998,
+      "components": {
+        "brand": 0.765,
+        "feature": 0.6042,
+        "price": -0.0,
+        "switch": -0.223,
+        "risk": -0.0
       }
     },
     {
