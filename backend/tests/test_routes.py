@@ -58,9 +58,9 @@ def test_stream_emits_progress_then_result():
     assert "event: progress" in text and "event: result" in text
 
 
-def test_unimplemented_route_is_501_when_mock_off(monkeypatch):
+def test_scenario_route_requires_body_when_mock_off(monkeypatch):
     monkeypatch.setenv("MOCK", "0")
-    assert client.post("/scenarios").status_code == 501
+    assert client.post("/scenarios").status_code == 422
 
 
 def test_project_creation_requires_body_when_mock_off(monkeypatch):
