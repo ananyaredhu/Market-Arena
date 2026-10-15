@@ -81,6 +81,8 @@ class Population(Contract):
     agents: list[Agent]
     geography: str = "SG"  # v2 optional, ISO country code
     evidence_snapshot_id: str | None = None  # v2 optional
+    # optional: how it was made, e.g. {"source": "llm" | "template", "fallback_reason": ...}
+    generation: dict | None = None
 
 
 # ---------------------------------------------------------------- engine output

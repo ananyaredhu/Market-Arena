@@ -1,27 +1,96 @@
-# SaaS / apps industry pack. OWNER: Person A. PLACEHOLDER priors, to be tuned (Fri 16).
-# Priors are assumptions until the evidence step (Master Plan 4.6) replaces them with sourced numbers.
+# SaaS / apps industry pack. OWNER: Person A.
+#
+# EVERY PRIOR IN THIS FILE IS AN ILLUSTRATIVE ASSUMPTION written for the competition MVP.
+# None has been validated against real customer data. The evidence step (Master Plan 4.6) replaces ranges
+# with sourced numbers when it finds them; otherwise these template priors are the fallback.
+#
+# Format matches packs/cafe.yaml so one generator reads both. Ranges are [low, high] sampled uniformly.
+# Budget and price are per month. alpha is price sensitivity per currency unit (roughly 0.05 to 0.3).
 pack: saas
+version: 0.2
+label: Software / SaaS / apps
+evidence: illustrative_assumption
 currency: SGD
-period: month            # budget and price are per month
+period: month
 attributes: [ai_planning, simplicity, privacy, integrations]
-outside_option: "do nothing / use a free tool"
-min_outside_share: 0.15  # validator: population must keep at least this share of non-buyers
+
+outside_option:
+  id: outside
+  label: Do nothing or use a free tool
+min_outside_share: 0.15   # validator: share of non-buyers the population must keep (structural check)
+
+# Illustrative demo product used by fixtures; real products come from intake.
+demo_product:
+  id: you
+  label: StudyFlow
+  role: you
+  price: 7.0
+  features: [0.8, 0.5, 0.6, 0.3]
+  novelty: 0.6
+
+competitor_archetypes:
+  - {id: free_tool, label: Free planner, role: competitor, price: 0.0, features: [0.1, 0.7, 0.3, 0.1], novelty: 0.0}
+  - {id: chain_app, label: ChainApp, role: competitor, price: 12.0, features: [0.6, 0.6, 0.5, 0.8], novelty: 0.2}
+  - {id: notebook_app, label: NotebookApp, role: competitor, price: 5.0, features: [0.3, 0.8, 0.4, 0.5], novelty: 0.1}
+
 segments:
   - id: budget
     name: Budget-conscious students
     share: 0.35
-    priors: {budget: [3, 9], alpha: [0.15, 0.30], tau: [0.6, 1.0]}
+    evidence: illustrative_assumption
+    priors:
+      budget: [3, 9]
+      alpha: [0.15, 0.30]
+      w: {ai_planning: [0.1, 0.5], simplicity: [0.5, 0.9], privacy: [0.1, 0.4], integrations: [0.0, 0.2]}
+      switch: [0.1, 0.5]
+      risk: [0.1, 0.5]
+      outside_utility: [0.1, 0.5]
+      tau: [0.6, 1.0]
+      brand: {free_tool: [0.2, 0.6], chain_app: [0.0, 0.3]}
+      incumbent: {free_tool: 0.7, outside: 0.3}
   - id: exam
     name: Exam-focused students
     share: 0.25
-    priors: {budget: [6, 15], alpha: [0.05, 0.15], tau: [0.6, 1.0]}
+    evidence: illustrative_assumption
+    priors:
+      budget: [6, 15]
+      alpha: [0.05, 0.15]
+      w: {ai_planning: [0.5, 0.9], simplicity: [0.3, 0.7], privacy: [0.2, 0.5], integrations: [0.1, 0.4]}
+      switch: [0.1, 0.5]
+      risk: [0.1, 0.5]
+      outside_utility: [0.1, 0.5]
+      tau: [0.6, 1.0]
+      brand: {free_tool: [0.0, 0.3], chain_app: [0.0, 0.3]}
+      incumbent: {free_tool: 0.5, chain_app: 0.3, outside: 0.2}
   - id: power
     name: Productivity enthusiasts
     share: 0.15
-    priors: {budget: [8, 25], alpha: [0.05, 0.10], tau: [0.6, 1.0]}
+    evidence: illustrative_assumption
+    priors:
+      budget: [8, 25]
+      alpha: [0.05, 0.10]
+      w: {ai_planning: [0.3, 0.7], simplicity: [0.2, 0.5], privacy: [0.4, 0.9], integrations: [0.5, 0.9]}
+      switch: [0.1, 0.4]
+      risk: [0.1, 0.4]
+      outside_utility: [0.1, 0.4]
+      tau: [0.6, 1.0]
+      brand: {free_tool: [0.0, 0.2], chain_app: [0.0, 0.3]}
+      incumbent: {chain_app: 0.6, free_tool: 0.4}
+  # Hostile segment (required by master plan 4.5): unlikely to ever switch.
   - id: loyal
     name: Free-tool loyalists (hostile)
     share: 0.25
-    priors: {budget: [0, 4], alpha: [0.25, 0.30], tau: [0.6, 1.0]}
-competitor_archetypes: [free_tool, premium_chain_app, notebook_app]
+    hostile: true
+    evidence: illustrative_assumption
+    priors:
+      budget: [0, 4]
+      alpha: [0.25, 0.30]
+      w: {ai_planning: [0.0, 0.2], simplicity: [0.6, 1.0], privacy: [0.1, 0.4], integrations: [0.0, 0.1]}
+      switch: [0.5, 0.9]
+      risk: [0.3, 0.7]
+      outside_utility: [0.1, 0.5]
+      tau: [0.6, 1.0]
+      brand: {free_tool: [0.6, 1.0], chain_app: [0.0, 0.3]}
+      incumbent: {free_tool: 0.85, outside: 0.15}
+
 experiment_menu: [landing_two_prices, waitlist, five_user_interviews, price_ladder_survey]
