@@ -1,65 +1,119 @@
 "use client";
-// OWNER: Person A. Screen 4 mockup: "Scenario compare". Data: POST /scenarios/compare -> {a, b} RunResults.
-import { useEffect, useState } from "react";
+// OWNER: Person A. Screen 4: "Scenario compare". Real data from POST /scenarios/compare: the same customers and the
+// same random seed run twice, with your price changed in Scenario B. All numbers and sentences are computed.
+import { useCallback, useEffect, useState } from "react";
 
 import DeltaCard from "@/components/compare/DeltaCard";
 import FlipSummary from "@/components/compare/FlipSummary";
 import ScenarioCard from "@/components/compare/ScenarioCard";
+import ScenarioControls from "@/components/compare/ScenarioControls";
 import ShareBars from "@/components/compare/ShareBars";
 import TradeoffNote from "@/components/compare/TradeoffNote";
 import AppHeader from "@/components/layout/AppHeader";
 import PageShell from "@/components/layout/PageShell";
 import { post } from "@/lib/api";
-import { FLIP_SUMMARY, SCENARIO_A, SCENARIO_B, TRADEOFF_NOTE } from "@/lib/mock/compare";
-import type { RunResult } from "@/lib/types";
+import type { Tone } from "@/lib/cx";
+import type { CompareResponse } from "@/lib/types";
 
 const signed = (x: number) => {
   const p = Math.round(x * 100);
   return p === 0 ? "0" : `${p > 0 ? "+" : "−"}${Math.abs(p)}`;
 };
 
-export default function ComparePage() {
-  const [pair, setPair] = useState<{ a: RunResult; b: RunResult } | null>(null);
+const FLIP_TONES: Tone[] = ["coral", "amber", "violet", "teal", "blue", "accent"];
 
-  useEffect(() => {
-    post<{ a: RunResult; b: RunResult }>("/scenarios/compare").then(setPair);
+function tradeoff(d: CompareResponse): string {
+  const share = `Your share moves by ${signed(d.headline.delta_p50)} points`;
+  const rev = d.revenue.change_pct;
+  if (rev == null) return `${share}. There is no baseline revenue to compare against.`;
+  const pct = Math.abs(Math.round(rev * 100));
+  const move = pct === 0 ? "does not change" : `${rev > 0 ? "rises" : "falls"} by ${pct}%`;
+  return (
+    `${share}, and the simulated revenue index (median share × price × 100 customers) ${move}. ` +
+    "The model cannot see your costs, so test the price for real before you commit."
+  );
+}
+
+const fetchCompare = (price: string) =>
+  post<CompareResponse>("/scenarios/compare", { changes: { you: { price: Number(price) } }, label_b: "Scenario B" });
+
+const errorText = (e: unknown) => (e instanceof Error ? e.message : "The comparison could not run.");
+
+export default function ComparePage() {
+  const [price, setPrice] = useState("3");
+  const [data, setData] = useState<CompareResponse | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const run = useCallback(async (p: string) => {
+    setBusy(true);
+    setError(null);
+    try {
+      setData(await fetchCompare(p));
+    } catch (e) {
+      setError(errorText(e));
+    } finally {
+      setBusy(false);
+    }
   }, []);
 
-  if (!pair) {
-    return (
-      <PageShell glow="compare">
-        <AppHeader active="compare" subtitle="Scenario lab · compare" />
-        <p className="text-muted">Loading…</p>
-      </PageShell>
-    );
-  }
+  useEffect(() => {
+    // first load: plain fetch, state is set once the answer arrives
+    fetchCompare("3").then(setData).catch((e) => setError(errorText(e)));
+  }, []);
 
-  const { a, b } = pair;
-  // Conservative interval: worst case is B's p10 minus A's p90, best case is B's p90 minus A's p10.
-  const lo = b.totals.you.p10 - a.totals.you.p90;
-  const hi = b.totals.you.p90 - a.totals.you.p10;
+  const subtitle = data?.overrides_applied
+    ? `Scenario lab · compare · ${data.overrides_applied} human adjustment(s) applied`
+    : "Scenario lab · compare";
+  const sym = data?.currency_symbol ?? "S$";
 
   return (
     <PageShell glow="compare" className="!gap-[26px]">
-      <AppHeader active="compare" subtitle="Scenario lab · compare" disclaimer="Sample numbers · simulated outcome under stated assumptions" />
+      <AppHeader active="compare" subtitle={subtitle} />
+      <ScenarioControls symbol={sym} price={price} onPrice={setPrice} onRun={() => run(price)} busy={busy} error={error} />
 
-      <div className="flex flex-wrap items-stretch gap-5">
-        <ScenarioCard {...SCENARIO_A} />
-        <div aria-hidden="true" className="flex items-center justify-center text-[28px] text-accent">→</div>
-        <ScenarioCard {...SCENARIO_B} highlight />
-        <DeltaCard
-          value={`${signed(b.totals.you.p50 - a.totals.you.p50)} pts`}
-          caption="your share, median of repeated runs"
-          range={`range ${signed(lo)} to ${signed(hi)}`}
-        />
-      </div>
+      {!data ? (
+        <p className="text-muted">{busy ? "Running both scenarios…" : "No comparison yet."}</p>
+      ) : (
+        <>
+          <div className="flex flex-wrap items-stretch gap-5">
+            <ScenarioCard
+              tag={`Scenario A · ${data.scenarios.a.label.toLowerCase()}`}
+              price={`${sym}${data.scenarios.a.you_price.toFixed(2)} / ${data.period}`}
+              note="Your current strategy"
+            />
+            <div aria-hidden="true" className="flex items-center justify-center text-[28px] text-accent">→</div>
+            <ScenarioCard
+              tag={`${data.scenarios.b.label} · what if`}
+              price={`${sym}${data.scenarios.b.you_price.toFixed(2)} / ${data.period}`}
+              note={data.scenarios.b.summary.join(" · ") || "No change"}
+              highlight
+            />
+            <DeltaCard
+              value={`${signed(data.headline.delta_p50)} pts`}
+              caption="your share, median of repeated runs"
+              range={`range ${signed(data.headline.range_low)} to ${signed(data.headline.range_high)}`}
+            />
+          </div>
 
-      <ShareBars a={a} b={b} />
+          <ShareBars a={data.a} b={data.b} />
 
-      <div className="flex flex-wrap gap-5">
-        <FlipSummary items={FLIP_SUMMARY} />
-        <TradeoffNote>{TRADEOFF_NOTE}</TradeoffNote>
-      </div>
+          <div className="flex flex-wrap gap-5">
+            <FlipSummary
+              items={
+                data.flip_summary_b.length
+                  ? data.flip_summary_b.slice(0, 3).map((r, i) => ({
+                      pct: `${Math.round(r.pct * 100)}%`,
+                      tone: FLIP_TONES[i % FLIP_TONES.length],
+                      text: r.text.replace(/^\d+% /, ""),
+                    }))
+                  : [{ pct: "0%", tone: "muted" as Tone, text: "of any segment flips to you under the standard price cut or feature boost." }]
+              }
+            />
+            <TradeoffNote>{tradeoff(data)}</TradeoffNote>
+          </div>
+        </>
+      )}
     </PageShell>
   );
 }

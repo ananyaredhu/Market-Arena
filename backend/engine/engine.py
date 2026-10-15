@@ -21,7 +21,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from backend.engine.engine_ref import _arrays, _draw, _probabilities
+from backend.engine.engine_ref import _arrays, _probabilities
+from backend.engine.sampling import draw_choices, gumbel_noise, noise_keys
 
 COMPONENTS = ("brand", "feature", "price", "switch", "risk")
 
@@ -84,20 +85,22 @@ def run_scenario(
     bad = locked & ~afford0[rows, np.where(locked, lock_idx, 0)]
     if bad.any():
         raise ValueError(f"lock to an unaffordable option for agent(s): {[agents[i]['id'] for i in np.where(bad)[0]]}")
-    P0 = _probabilities(U0, tau)
+    P0 = _probabilities(U0, tau)  # the model's probabilities for the canonical run (explanations, p_choice)
+    agent_keys, option_keys = noise_keys([a["id"] for a in agents]), noise_keys(all_ids)
 
     shares = []  # one row of per-option shares per repeat
     choice0 = None
     for r in range(max(1, repeats)):
         if r == 0:
-            P = P0
+            U_r = U0
         else:
             # One shock per segment and parameter, shared by every agent in the segment: "this whole segment
             # is 8% more price sensitive than assumed". Independent per-agent noise would average out.
             seg_factors = np.random.default_rng([seed, r, 1]).uniform(1 - jitter, 1 + jitter, size=(len(seg_names), 3))
             U_r, _ = _utilities(comp, price, budget, out_u, seg_factors[seg_idx])
-            P = _probabilities(U_r, tau)
-        choice = _draw(P, np.random.default_rng(seed + r))
+        # Fixed noise per (customer, option): the same probabilities as a plain draw, but a what-if change only
+        # moves customers whose winning option got worse (see sampling.py).
+        choice = draw_choices(U_r / tau[:, None], gumbel_noise(seed, r, agent_keys, option_keys))
         choice = np.where(locked, lock_idx, choice)
         if r == 0:
             choice0 = choice

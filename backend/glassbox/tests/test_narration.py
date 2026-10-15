@@ -42,6 +42,10 @@ def test_template_is_faithful_to_its_own_verifier():
         dict(feature_amount=None, feature_attr=None, price_unreachable=False),  # no lever at all
         dict(already_top=True, chosen="StudyFlow", runner_up="ChainApp", price_rise=2.4, feature_amount=None,
              feature_attr=None, price_unreachable=False),
+        dict(chose_you=True, chosen="StudyFlow", runner_up="ChainApp", preferred="ChainApp", locked=True,
+             feature_amount=None, feature_attr=None, price_unreachable=False),  # pinned to you against the numbers
+        dict(chose_you=True, chosen="StudyFlow", runner_up="ChainApp", preferred=None, feature_amount=None,
+             feature_attr=None, price_unreachable=False),
     ],
 )
 def test_template_passes_verifier_in_every_shape(kw):

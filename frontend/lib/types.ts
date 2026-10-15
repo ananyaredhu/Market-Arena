@@ -149,3 +149,66 @@ export interface ProductProfile {
   geography: string;
   missing_assumptions: string[];
 }
+
+// ---------------------------------------------------------------- overrides and scenario compare (Person A)
+export interface Override {
+  id: string;
+  project_id: string;
+  type: "lock" | "edit" | "segment_tune" | "exclude";
+  agent_id?: string | null;
+  segment_id?: string | null;
+  option_id?: string | null;
+  param?: string | null;
+  value?: number | null;
+  factor?: number | null;
+  note?: string | null;
+  created_at: string;
+  created_by: string;
+  before?: number | null;
+  after?: number | null;
+  effect: string;
+}
+
+export interface OverrideResponse {
+  override: Override;
+  run: RunResult;
+  moved: number;
+  audit: string;
+}
+
+export interface AuditTrail {
+  project_id: string;
+  machine_generated: { agents: number; seed: number; population_source: string };
+  human_adjustments: Override[];
+  summary: string;
+}
+
+export interface FlipRow {
+  segment: string;
+  segment_name: string;
+  lever: "price_cut" | "feature";
+  attr: string | null;
+  amount: number;
+  pct: number;
+  n_flipped: number;
+  n_segment: number;
+  text: string;
+}
+
+export interface CompareResponse {
+  a: RunResult;
+  b: RunResult;
+  you_id: string;
+  currency_symbol: string;
+  period: string;
+  same_seed: number;
+  overrides_applied: number;
+  scenarios: {
+    a: { label: string; you_price: number; summary: string[] };
+    b: { label: string; you_price: number; summary: string[] };
+  };
+  deltas: { option_id: string; label: string; share_a: number; share_b: number; delta_p50: number }[];
+  headline: { delta_p50: number; range_low: number; range_high: number };
+  revenue: { revenue_a: number; revenue_b: number; change_pct: number | null; note: string };
+  flip_summary_b: FlipRow[];
+}

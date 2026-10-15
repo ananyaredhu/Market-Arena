@@ -5,18 +5,26 @@ Stubs return fixtures when MOCK=1. Replace the body of each route with the real 
 """
 from __future__ import annotations
 
-import copy
-
 from fastapi import APIRouter, HTTPException
 
 from backend.common.fixtures import load_fixture
-from backend.common.mock import mock_enabled, not_built
+from backend.common.mock import mock_enabled
 from backend.glassbox.explain import AgentNotFound, summarize_flips
 from backend.glassbox.explain import explain_agent as build_explain
 from backend.population.generator import PopulationError
 from backend.population.generator import generate_population as build_population
 from backend.population.models import PopulationRequest
 from backend.population.packs import PackError
+from backend.scenarios.compare import CompareError, CompareRequest, compare
+from backend.scenarios.context import DEFAULT_PROJECT, get_context
+from backend.scenarios.overrides import (
+    OverrideError,
+    OverrideRequest,
+    add_override,
+    audit_trail,
+    remove_override,
+)
+from backend.scenarios.state import adjusted_view
 
 router = APIRouter(tags=["simulation (A)"])
 
@@ -34,20 +42,23 @@ def generate_population(body: PopulationRequest | None = None):
         raise HTTPException(status_code=500, detail=str(e)) from e
 
 
-def _run_inputs(run_id: str) -> tuple[dict, dict, list[dict]]:
-    """(run_result, population, options) for a run. Until C's run storage exists these come from the shared
-    fixtures, like the Council route does; swap this one function when runs are stored."""
-    options = copy.deepcopy(load_fixture("options_saas"))
-    if run_id.endswith("price3"):  # the fixture run where "you" cut the price to 3
-        options[0]["price"] = 3.0
-        return load_fixture("run_result_price3"), load_fixture("population_saas"), options
-    return load_fixture("run_result"), load_fixture("population_saas"), options
+def _run_inputs(run_id: str, project_id: str = DEFAULT_PROJECT) -> tuple[dict, dict, list[dict]]:
+    """(run_result, population, options) for a run, with the project's saved human overrides applied.
+    Inputs come from scenarios.context.get_context, which is the one place to swap in C's run storage."""
+    return adjusted_view(get_context(project_id), run_id)
+
+
+@router.get("/runs/{run_id}/adjusted")
+def adjusted_run(run_id: str, project_id: str = DEFAULT_PROJECT):
+    """The run as it stands with the project's saved overrides applied (the Arena should show this one)."""
+    run, _, _ = _run_inputs(run_id, project_id)
+    return run
 
 
 @router.get("/runs/{run_id}/agents/{agent_id}")
-def explain_agent(run_id: str, agent_id: str):
+def explain_agent(run_id: str, agent_id: str, project_id: str = DEFAULT_PROJECT):
     """Glass-Box for one customer: drivers, flips and a verified plain-language reason (AgentExplain)."""
-    run_result, population, options = _run_inputs(run_id)
+    run_result, population, options = _run_inputs(run_id, project_id)
     try:
         return build_explain(run_result, population, options, agent_id)
     except AgentNotFound as e:
@@ -57,21 +68,57 @@ def explain_agent(run_id: str, agent_id: str):
 
 
 @router.get("/runs/{run_id}/flip-summary")
-def flip_summary_route(run_id: str):
+def flip_summary_route(run_id: str, project_id: str = DEFAULT_PROJECT):
     """Founder-level "what would flip the market": share of each segment that flips under a standard lever."""
-    _, population, options = _run_inputs(run_id)
+    _, population, options = _run_inputs(run_id, project_id)
     return {"run_id": run_id, "rows": summarize_flips(population, options)}
 
 
+# ---------------------------------------------------------------- overrides
 @router.post("/overrides")
-def apply_override(body: dict | None = None):
-    if mock_enabled():
-        return {"status": "ok", "override": body or {}}
-    raise not_built("POST /overrides")
+def add_override_route(body: OverrideRequest | None = None):
+    """Lock a choice, edit a customer's parameter, tune a segment or exclude a customer.
+    The override is trial-run first; if the engine refuses it, nothing is saved (422).
+    Returns the saved override, the adjusted run (with prev_choice, so the Arena can animate) and a summary."""
+    if body is None:
+        if mock_enabled():  # bare POST in mock mode keeps the generic route checks working
+            return {"status": "ok", "override": {}}
+        raise HTTPException(status_code=422, detail="request body required")
+    ctx = get_context(body.project_id)
+    try:
+        record, run = add_override(ctx, body)
+    except OverrideError as e:
+        raise HTTPException(status_code=422, detail=str(e)) from e
+    return {"override": record, "run": run, "moved": sum(c["prev_choice"] != c["choice"] for c in run["choices"]),
+            "audit": audit_trail(ctx)["summary"]}
 
 
+@router.get("/overrides")
+def list_overrides(project_id: str = DEFAULT_PROJECT):
+    """The audit trail: what is machine-generated and which human adjustments sit on top."""
+    return audit_trail(get_context(project_id))
+
+
+@router.delete("/overrides/{override_id}")
+def undo_override(override_id: str, project_id: str = DEFAULT_PROJECT):
+    ctx = get_context(project_id)
+    try:
+        run = remove_override(ctx, override_id)
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=f"no override '{override_id}'") from e
+    except OverrideError as e:
+        raise HTTPException(status_code=422, detail=str(e)) from e
+    return {"removed": override_id, "run": run, "audit": audit_trail(ctx)["summary"]}
+
+
+# ---------------------------------------------------------------- scenario compare
 @router.post("/scenarios/compare")
-def compare_scenarios(body: dict | None = None):
-    if mock_enabled():
-        return {"a": load_fixture("run_result"), "b": load_fixture("run_result_price3")}
-    raise not_built("POST /scenarios/compare")
+def compare_scenarios(body: CompareRequest | None = None):
+    """Run the market twice (same customers, same seed) and change your strategy in B.
+    Body (all optional): {changes: {option_id: {price, features, novelty}}, label_a, label_b, seed, repeats}.
+    With no body, B cuts your price to 3."""
+    req = body or CompareRequest()
+    try:
+        return compare(get_context(req.project_id), req)
+    except CompareError as e:
+        raise HTTPException(status_code=422, detail=str(e)) from e

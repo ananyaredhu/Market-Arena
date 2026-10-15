@@ -1,20 +1,25 @@
 "use client";
 // OWNER: Person A. MOCKUP of the Glass-Box inspector (layout and styling from the design board).
-// Frozen props: <GlassBoxDrawer agentId={string} runId={string} onOverride={() => void} />
+// Frozen props: <GlassBoxDrawer agentId={string} runId={string} onOverride={() => void} /> (+ optional optionIds)
 // Data: GET /runs/{runId}/agents/{agentId} -> AgentExplain. Parts the contract does not carry yet
 // (budget, incumbent, switching appetite, gap) are left out; add them as optional contract fields.
 import { useEffect, useState } from "react";
 
-import { Button, DivergingBar, SectionLabel } from "@/components/ui";
+import { DivergingBar, SectionLabel } from "@/components/ui";
 import { api } from "@/lib/api";
-import { optionStyle, segmentStyle } from "@/lib/theme";
+import { OPTION_STYLES, optionStyle, segmentStyle } from "@/lib/theme";
 import type { AgentExplain } from "@/lib/types";
+
+import OverrideControls from "./OverrideControls";
 
 interface Props {
   agentId: string;
   runId: string;
-  onOverride: () => void;
+  onOverride: () => void; // called after an override is saved or undone: reload the run
+  optionIds?: string[]; // options a customer can be pinned to (defaults to the standard SaaS demo options)
 }
+
+const DEFAULT_OPTIONS = Object.keys(OPTION_STYLES);
 
 const TERM_LABEL: Record<string, string> = {
   price: "Price",
@@ -31,8 +36,10 @@ const SOURCE_NOTE: Record<string, string> = {
   template: "Built directly from the numbers below.",
 };
 
-export default function GlassBoxDrawer({ agentId, runId, onOverride }: Props) {
-  // Result is keyed by the request so switching agents shows "Loading" without resetting state in the effect.
+export default function GlassBoxDrawer({ agentId, runId, onOverride, optionIds = DEFAULT_OPTIONS }: Props) {
+  const [version, setVersion] = useState(0); // bumped after an override so the explanation is re-read
+  // The result is keyed by customer, so switching customers shows "Loading" without resetting state in the effect,
+  // while a refresh after an override (version bump) keeps showing the current content instead of flashing blank.
   const key = `${runId}/${agentId}`;
   const [result, setResult] = useState<{ key: string; data?: AgentExplain; error?: string } | null>(null);
 
@@ -40,7 +47,7 @@ export default function GlassBoxDrawer({ agentId, runId, onOverride }: Props) {
     api<AgentExplain>(`/runs/${runId}/agents/${agentId}`)
       .then((data) => setResult({ key, data }))
       .catch((e) => setResult({ key, error: String(e) }));
-  }, [agentId, runId, key]);
+  }, [agentId, runId, key, version]);
 
   const current = result?.key === key ? result : null;
   if (current?.error) return <Panel><p className="text-coral">{current.error}</p></Panel>;
@@ -120,16 +127,15 @@ export default function GlassBoxDrawer({ agentId, runId, onOverride }: Props) {
         {flip?.note && <p className="mt-2.5 text-xs leading-normal text-muted">{flip.note}</p>}
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        {["Lock choice", "Edit parameters", "Exclude"].map((label) => (
-          <Button key={label} onClick={onOverride} className="px-4">
-            {label}
-          </Button>
-        ))}
-      </div>
-      <p className="text-xs leading-normal text-muted">
-        Every override is written to the audit trail: machine-generated vs. human-adjusted.
-      </p>
+      <OverrideControls
+        agentId={data.agent_id}
+        segmentId={data.segment}
+        optionIds={optionIds}
+        onChanged={() => {
+          setVersion((v) => v + 1); // re-read this customer's explanation with the override applied
+          onOverride(); // tell the page to reload the adjusted run
+        }}
+      />
     </Panel>
   );
 }

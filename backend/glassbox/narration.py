@@ -69,6 +69,8 @@ class Facts:
     locked: bool = False
     money: str = "S$"
     already_top: bool = False  # the customer prefers your product
+    chose_you: bool = False  # the customer's actual choice is your product (by preference, a random draw or a pin)
+    preferred: str | None = None  # when the choice went against the numbers: the option they would prefer by utility
     price_drop: float | None = None
     price_rise: float | None = None
     feature_attr: str | None = None
@@ -140,7 +142,11 @@ def template_text(f: Facts) -> str:
         parts.append("This choice was set manually.")
 
     m = f.money
-    if f.already_top:
+    if f.chose_you and not f.already_top:
+        # They already chose your product, so there is nothing to "win"; say what the numbers prefer instead.
+        if f.preferred:
+            parts.append(f"By the numbers they would prefer {f.preferred}.")
+    elif f.already_top:
         if f.price_rise is not None:
             limit = f"{m}{f.price_rise:.2f}"
             parts.append(f"{f.your_product} stays their top choice unless the price rises by more than {limit}.")
@@ -182,6 +188,7 @@ def verify(text: str, f: Facts) -> list[str]:
 
     mentioned = {lbl for lbl in f.option_labels if lbl.lower() in low}
     allowed_labels = {f.chosen, f.your_product} | ({f.runner_up} if f.runner_up else set())
+    allowed_labels |= {f.preferred} if f.preferred else set()
     for lbl in mentioned - allowed_labels:
         problems.append(f"mentions '{lbl}', which is not part of this decision")
     if f.chosen.lower() not in low:

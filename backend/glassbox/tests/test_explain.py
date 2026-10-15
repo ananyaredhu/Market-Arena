@@ -67,6 +67,33 @@ def test_locked_choice_is_said_to_be_manual():
     assert "set manually" in explain_agent(run, POP, OPTIONS, agent)["narration"]
 
 
+def test_a_customer_pinned_to_your_product_is_not_told_what_would_win_them():
+    """Found in the browser: 'Chose StudyFlow ... No single price change would win this customer.' after a lock."""
+    pop_agent = next(a for a in POP["agents"] if a["budget"] >= 7 and
+                     next(c for c in RUN["choices"] if c["agent_id"] == a["id"])["choice"] != "you")
+    run = run_scenario(POP["agents"], OPTIONS, seed=3, locks={"agents": {pop_agent["id"]: "you"}})
+    e = explain_agent(run, POP, OPTIONS, pop_agent["id"])
+    assert e["choice"] == "you"
+    assert "No single price" not in e["narration"] and "would make StudyFlow their top choice" not in e["narration"]
+    assert "set manually" in e["narration"]
+    assert "By the numbers they would prefer" in e["narration"]
+    f = e["flip"]
+    assert f["price_drop"] is None and f["feature_boost"] is None and f["switch_incentive"] is None
+    assert "would prefer" in f["note"]
+
+
+def test_a_customer_who_genuinely_prefers_you_still_gets_the_price_rise_sentence():
+    strong = [dict(o) for o in OPTIONS]
+    strong[0] = dict(strong[0], price=1.0, features=[1.0] * 4, novelty=0.0)
+    run = run_scenario(POP["agents"], strong, seed=3)
+    for ch in run["choices"]:
+        e = explain_agent(run, POP, strong, ch["agent_id"])
+        if ch["choice"] == "you" and e["flip"]["price_rise"] is not None:
+            assert "stays their top choice" in e["narration"]
+            return
+    pytest.fail("expected at least one customer who prefers your product")
+
+
 def test_unknown_agent_raises():
     with pytest.raises(AgentNotFound):
         explain_agent(RUN, POP, OPTIONS, "nobody")
