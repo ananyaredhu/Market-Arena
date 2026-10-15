@@ -1,10 +1,9 @@
 "use client";
 // OWNER: Person B. Council screen body (layout from the design board).
 // Frozen props: <CouncilPanel council={CouncilOutput} kit={KitOutput} />
-// Real data drives verdict, confidence, fragility, experiments, risks, competitor_reaction.
-// Mock copy still fills customer quotes until optional contract fields land.
-import { SEGMENT_VOICES } from "@/lib/mock/council";
+// Headline numbers come from measured fields or from figures already written in the council text.
 import type { CouncilOutput, KitOutput } from "@/lib/types";
+import { baselineShare, formatShare, medianShare, parseSegmentLine, parseShareMove } from "@/lib/councilMetrics";
 
 import CustomerCouncil from "./CustomerCouncil";
 import DevilsAdvocate from "./DevilsAdvocate";
@@ -17,82 +16,105 @@ interface Props {
   kit: KitOutput; // used by the Kit screen; kept here so the prop contract stays frozen
 }
 
-function parseSharePct(metric: string, fallback: number): number {
-  const match = metric.match(/(\d+(?:\.\d+)?)\s*%/);
-  if (match) return Number(match[1]);
-  const arrow = metric.match(/->\s*(\d+(?:\.\d+)?)/);
-  if (arrow) {
-    const value = Number(arrow[1]);
-    return value <= 1 ? Math.round(value * 1000) / 10 : value;
-  }
-  return fallback;
-}
+const MOVE_TEXT: Record<string, string> = {
+  price_cut_10: "a 10% price cut",
+  price_cut_20: "a 20% price cut",
+  add_feature: "adding a feature",
+  promo: "a promotion",
+};
 
 function headlineStats(council: CouncilOutput) {
-  const worst = council.risks[0];
-  const worstPct = worst ? parseSharePct(worst.metric, 6) : 6;
+  const median = medianShare(council);
+  const worst = council.measured?.risks[0];
+  const parsedWorst = council.risks[0] ? parseShareMove(council.risks[0].metric) : null;
+  const worstShare = worst?.perturbed_share ?? parsedWorst?.after ?? null;
   return [
     {
-      value: `${Math.round(council.fragility < 1 ? (1 - council.fragility) * 20 + 5 : 8)}%`,
-      caption: "indicative share · see run totals",
+      value: median == null ? "—" : formatShare(median),
+      caption:
+        council.measured?.p10 != null && council.measured?.p90 != null
+          ? `median share · ${formatShare(council.measured.p10)}–${formatShare(council.measured.p90)}`
+          : "median share from this run",
     },
     {
-      value: `${worstPct}%`,
-      caption: worst ? `if ${worst.title}` : "top risk",
+      value: worstShare == null ? "—" : formatShare(worstShare),
+      caption: worst?.title ?? council.risks[0]?.title ?? "no ranked risk",
       captionTone: "coral" as const,
     },
   ];
 }
 
-function perturbationsFromRisks(council: CouncilOutput) {
-  if (!council.risks.length) {
-    return [{ label: "No ranked risks", from: 10, to: 10, severity: "medium" as const }];
-  }
-  return council.risks.map((risk, index) => {
-    const after = parseSharePct(risk.metric, 10 - index);
-    const beforeMatch = risk.metric.match(/share\s+(\d+(?:\.\d+)?)/i);
-    const beforeRaw = beforeMatch ? Number(beforeMatch[1]) : after + 5;
-    const before = beforeRaw <= 1 ? Math.round(beforeRaw * 1000) / 10 : beforeRaw;
-    return {
+function perturbationsFromCouncil(council: CouncilOutput) {
+  if (council.measured?.risks.length) {
+    return council.measured.risks.map((risk, index) => ({
       label: risk.title,
-      from: before,
-      to: after <= 1 && !risk.metric.includes("%") ? Math.round(after * 1000) / 10 : after,
+      from: Math.round(risk.baseline_share * 1000) / 10,
+      to: Math.round(risk.perturbed_share * 1000) / 10,
       severity: (index === 0 ? "high" : "medium") as "high" | "medium",
-    };
+    }));
+  }
+  return council.risks.flatMap((risk, index) => {
+    const move = parseShareMove(risk.metric);
+    if (!move) return [];
+    return [{
+      label: risk.title,
+      from: Math.round(move.before * 1000) / 10,
+      to: Math.round(move.after * 1000) / 10,
+      severity: (index === 0 ? "high" : "medium") as "high" | "medium",
+    }];
   });
 }
 
 function strategistFromCouncil(council: CouncilOutput) {
+  const measured = council.measured?.competitor;
   const reaction = council.competitor_reaction;
-  if (!reaction) {
+  if (!measured && !reaction) {
     return {
       competitor: "No rival move",
       headline: "No competitor move reduced simulated share",
-      explanation: "Among the four bounded moves, none cut your share under the current priors.",
-      shareImpact: "0 pts",
-      moves: "4 / 4",
+      explanation: "Among the bounded moves the engine evaluated, none cut your share.",
+      shareImpact: "—",
+      moves: "evaluated",
     };
   }
-  const pts = Math.round(reaction.effect_on_share * 1000) / 10;
+  const change = measured?.share_change ?? reaction?.effect_on_share ?? 0;
+  const move = measured?.move ?? reaction?.move ?? "";
+  const name = measured?.competitor_id ?? reaction?.competitor_id ?? "Rival";
+  const pts = Math.round(change * 1000) / 10;
   return {
-    competitor: reaction.competitor_id,
-    headline: `${reaction.competitor_id} responds with ${reaction.move}`,
-    explanation: "Best of four bounded moves: −10% price, −20% price, add a feature, run a promo.",
+    competitor: name,
+    headline: `${name} responds with ${MOVE_TEXT[move] ?? move}`,
+    explanation: measured?.description
+      ? `Selected from engine runs. ${measured.description}.`
+      : "Selected from the bounded moves the engine was able to evaluate.",
     shareImpact: `${pts} pts`,
-    moves: "4 / 4",
+    moves: "calculated",
   };
 }
 
+function voicesFromCouncil(council: CouncilOutput) {
+  if (council.measured?.segments.length) {
+    return council.measured.segments.slice(0, 3).map((segment) => ({
+      segment: segment.id,
+      pct: Math.round(segment.share * 1000) / 10,
+      quote: `${segment.name}: ${segment.n_you} of ${segment.n} simulated agents chose you (${formatShare(segment.share)}).`,
+    }));
+  }
+  return [...council.who_buys, ...council.who_rejects].slice(0, 3).flatMap((line) => {
+    const parsed = parseSegmentLine(line);
+    if (!parsed) return [{ segment: "segment", pct: 0, quote: line }];
+    return [{
+      segment: parsed.name,
+      pct: Math.round(parsed.share * 1000) / 10,
+      quote: line,
+    }];
+  });
+}
+
 export default function CouncilPanel({ council }: Props) {
-  const baseline =
-    perturbationsFromRisks(council)[0]?.from ||
-    Math.max(1, Math.round((1 - council.fragility) * 20));
-  const stats = headlineStats(council);
-  // Prefer a clearer median caption when fragility is available.
-  stats[0] = {
-    value: `${Math.round(baseline)}%`,
-    caption: `baseline share · fragility ${council.fragility.toFixed(2)}`,
-  };
+  const baseline = baselineShare(council);
+  const baselinePct = baseline == null ? 0 : Math.round(baseline * 1000) / 10;
+  const items = perturbationsFromCouncil(council);
 
   return (
     <div className="flex flex-col gap-6">
@@ -101,31 +123,26 @@ export default function CouncilPanel({ council }: Props) {
         runId={council.run_id}
         confidence={council.confidence}
         fragility={council.fragility}
-        stats={stats}
+        stats={headlineStats(council)}
       />
+      {council.scenario_origin === "fixture_fallback" && (
+        <p className="text-sm text-coral">Fixture fallback. These figures were not computed for this run.</p>
+      )}
       <div className="flex flex-wrap items-stretch gap-5">
-        <CustomerCouncil
-          voices={
-            council.who_buys.length || council.who_rejects.length
-              ? [
-                  ...council.who_buys.slice(0, 2).map((line, i) => ({
-                    segment: `buys-${i}`,
-                    pct: Math.max(5, baseline - i * 5),
-                    quote: line,
-                  })),
-                  ...council.who_rejects.slice(0, 1).map((line) => ({
-                    segment: "rejects",
-                    pct: Math.max(3, Math.round(baseline / 3)),
-                    quote: line,
-                  })),
-                ]
-              : SEGMENT_VOICES
-          }
+        <CustomerCouncil voices={voicesFromCouncil(council)} />
+        <DevilsAdvocate
+          items={items.length ? items : [{ label: "No measured risk", from: baselinePct, to: baselinePct, severity: "medium" }]}
+          baseline={baselinePct || 1}
         />
-        <DevilsAdvocate items={perturbationsFromRisks(council)} baseline={baseline || 19} />
         <StrategistCard {...strategistFromCouncil(council)} />
       </div>
       <ExperimentsRow experiments={council.experiments} />
+      {council.trend_context && council.trend_context.length > 0 && (
+        <p className="text-sm text-muted">
+          Cited context, not applied to the shares:{" "}
+          {council.trend_context.map((note) => `${note.trend} (${note.source_url})`).join(" · ")}
+        </p>
+      )}
     </div>
   );
 }

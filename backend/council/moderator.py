@@ -23,7 +23,7 @@ from typing import Dict, List, Optional, Tuple
 from backend.council.advocate import FACTORS, AdvocateReport
 from backend.council.claims import Evidence, is_grounded, unsupported_numbers
 from backend.council.engine_adapter import OUTSIDE_ID, YOU_ID
-from backend.council.schemas import CompetitorReaction, CouncilOutput, Experiment, Risk, RunResult
+from backend.council.schemas import CompetitorReaction, CouncilOutput, Experiment, Risk, RunResult, TrendContext
 from backend.council.strategist import PRICE_CUTS, StrategistReport
 from backend.council.wording import TemplateWording, Wording
 
@@ -208,10 +208,40 @@ def enforce_grounding(output: CouncilOutput, evidence: Evidence) -> CouncilOutpu
     return CouncilOutput(**data)
 
 
+def _cited_context(
+    trend_notes: Optional[List[dict]], research_notes: Optional[List[dict]],
+) -> Tuple[List[TrendContext], List[str]]:
+    """Cite supplied notes. They never change simulated shares, and missing source fields are skipped."""
+    contexts: List[TrendContext] = []
+    notes: List[str] = []
+    for note in trend_notes or []:
+        if not isinstance(note, dict) or not note.get("note") or not note.get("source_url") or not note.get("quote"):
+            notes.append("Skipped a trend note that lacked note, source_url, or quote.")
+            continue
+        contexts.append(TrendContext(
+            trend=str(note["note"]), source_url=str(note["source_url"]), used_in="limitations",
+        ))
+        notes.append(
+            "Trend context was not applied to simulated shares: "
+            f"{note['note']} Source: {note['source_url']}"
+        )
+    for note in research_notes or []:
+        if not isinstance(note, dict) or not note.get("note") or not note.get("source_url") or not note.get("quote"):
+            notes.append("Skipped a research note that lacked note, source_url, or quote.")
+            continue
+        topic = note.get("topic") or "research"
+        contexts.append(TrendContext(
+            trend=str(note["note"]), source_url=str(note["source_url"]), used_in=f"research:{topic}",
+        ))
+        notes.append(f"Research context ({topic}) was not applied to simulated shares. Source: {note['source_url']}")
+    return contexts, notes
+
+
 def build_council(
     run_result, strategist: StrategistReport, advocate: AdvocateReport, *,
     population: Optional[dict] = None, options: Optional[List[dict]] = None,
     experiment_library: dict, context: Optional[dict] = None, wording: Optional[Wording] = None,
+    trend_notes: Optional[List[dict]] = None, research_notes: Optional[List[dict]] = None,
 ) -> CouncilOutput:
     rr = run_result if isinstance(run_result, RunResult) else RunResult(**run_result)
     wording = wording or TemplateWording()
@@ -283,11 +313,13 @@ def build_council(
         ctx.setdefault("competitor", labels.get(cid, cid))
     experiments = _experiments([k for k, _, _ in ranked], experiment_library, ctx)
 
+    cited, cited_limits = _cited_context(trend_notes, research_notes)
     out = CouncilOutput(
         run_id=rr.run_id, verdict=verdict, confidence=confidence, fragility=advocate.fragility,
         who_buys=buys, who_rejects=rejects, risks=[r for _, _, r in ranked],
         competitor_reaction=reaction, experiments=experiments,
-        limitations=limitations + reasons + strategist.limitations + advocate.limitations
+        trend_context=cited or None,
+        limitations=limitations + reasons + strategist.limitations + advocate.limitations + cited_limits
         + ["Simulated outcome under stated assumptions; not a forecast of real sales."],
         engine_source=engine_source,
     )

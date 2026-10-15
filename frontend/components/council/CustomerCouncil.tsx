@@ -19,7 +19,7 @@ export default function CustomerCouncil({ voices }: { voices: SegmentVoice[] }) 
             <div className="text-xs font-bold" style={{ color: s.color }}>
               {s.label} · {v.pct}% choose you
             </div>
-            <div className="mt-1 text-[15px] leading-normal">“{v.quote}”</div>
+            <div className="mt-1 text-[15px] leading-normal">{v.quote}</div>
           </Card>
         );
       })}

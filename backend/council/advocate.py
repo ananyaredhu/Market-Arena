@@ -29,7 +29,7 @@ import math
 from dataclasses import asdict, dataclass, field
 from typing import Dict, List, Optional
 
-from backend.council.engine_adapter import OUTSIDE_ID, YOU_ID, EngineAdapter
+from backend.council.engine_adapter import OUTSIDE_ID, YOU_ID, EngineAdapter, EngineEvaluation
 
 FACTORS = (0.8, 1.2)
 SHARE_FLOOR = 0.05
@@ -142,7 +142,13 @@ def fragility_score(baseline: float, perturbations: List[Perturbation]) -> float
     return round(min(1.0, max(0.0, WEIGHT_MAGNITUDE * magnitude + WEIGHT_LEADER * leader)), 4)
 
 
-def run_advocate(agents: List[dict], options: List[dict], adapter: EngineAdapter, seed: int) -> AdvocateReport:
+def run_advocate(
+    agents: List[dict],
+    options: List[dict],
+    adapter: EngineAdapter,
+    seed: int,
+    baseline: Optional[EngineEvaluation] = None,
+) -> AdvocateReport:
     order = [o["id"] for o in options if o.get("role") != OUTSIDE_ID] + [OUTSIDE_ID]
     report = AdvocateReport(
         status="ok",
@@ -152,7 +158,10 @@ def run_advocate(agents: List[dict], options: List[dict], adapter: EngineAdapter
         baseline_leader=None,
     )
     try:
-        base = adapter.evaluate(agents, options, seed)
+        if baseline is None:
+            base = adapter.evaluate(agents, options, seed)
+        else:
+            base = baseline
         s0 = base.share(YOU_ID)
     except Exception as exc:  # noqa: BLE001 - reported, never hidden
         report.status = "baseline_failed"

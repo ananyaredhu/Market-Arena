@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import copy
 
+import pytest
+
 from backend.council.engine_adapter import YOU_ID, MockEngineAdapter
 from backend.council.strategist import MOVES, apply_move, run_strategist
 
@@ -141,6 +143,55 @@ def test_apply_move_does_not_mutate_inputs():
     apply_move("add_feature", "rival", agents, options)
     apply_move("promo", "rival", agents, options)
     assert agents == before_a and options == before_o
+
+
+def test_supplied_baseline_is_not_recomputed(stub_adapter):
+    from backend.council.engine_adapter import EngineEvaluation
+
+    agents = [{"id": "a1", "brand": {"rival": 0.2}, "budget": 20, "alpha": 0.1, "w": [1.0],
+               "switch": 0.1, "risk": 0.1, "incumbent": "rival", "outside_utility": 0.0, "tau": 1.0}]
+    options = [
+        {"id": "you", "label": "You", "role": "you", "price": 9.0, "features": [0.8], "novelty": 0.5},
+        {"id": "rival", "label": "Rival", "role": "competitor", "price": 10.0, "features": [0.5], "novelty": 0.0},
+    ]
+    adapter = stub_adapter(lambda a, o: {"you": 0.2, "rival": 0.7, "outside": 0.1})
+    baseline = EngineEvaluation(shares={"you": 0.4, "rival": 0.5, "outside": 0.1}, source="engine")
+    report = run_strategist(agents, options, adapter, seed=3, baseline=baseline)
+    assert adapter.calls == len(MOVES)
+    assert report.baseline_share == 0.4
+    assert report.selected["baseline_share"] == 0.4
+    assert report.selected["share_change"] == report.selected["candidate_share"] - 0.4
+
+
+def test_unknown_move_is_rejected():
+    agents = [{"id": "a1", "brand": {}, "budget": 10, "alpha": 0.1, "w": [1.0],
+               "switch": 0.1, "risk": 0.1, "incumbent": "you", "outside_utility": 0.0, "tau": 1.0}]
+    options = [
+        {"id": "you", "role": "you", "price": 9.0, "features": [0.5], "novelty": 0.0},
+        {"id": "rival", "role": "competitor", "price": 8.0, "features": [0.4], "novelty": 0.0},
+    ]
+    with pytest.raises(ValueError, match="unknown move"):
+        apply_move("free_for_everyone", "rival", agents, options)
+
+
+def test_real_engine_reproducible_and_selects_the_worst_measured_move():
+    from backend.common.fixtures import load_fixture
+    from backend.council.engine_adapter import get_default_adapter
+
+    population = load_fixture("population_saas")
+    options = load_fixture("options_saas")
+    adapter = get_default_adapter("engine")
+    first = run_strategist(population["agents"], options, adapter, seed=42)
+    second = run_strategist(population["agents"], options, adapter, seed=42)
+    assert first.engine_source == "engine"
+    assert first.to_dict() == second.to_dict()
+    assert first.baseline_share == load_fixture("run_result")["totals"]["you"]["share"]
+    ok = [c for c in first.candidates if c.status == "ok"]
+    assert ok
+    if first.selected:
+        worst = min(ok, key=lambda c: (c.share_change, ))
+        assert first.selected["share_change"] == worst.share_change
+        assert first.selected["candidate_share"] - first.baseline_share == pytest.approx(first.selected["share_change"])
 
 
 def test_no_competitors(stub_adapter):
