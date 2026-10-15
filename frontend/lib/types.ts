@@ -55,7 +55,10 @@ export interface AgentExplain {
     price_drop?: number | null;
     feature_boost?: { attr: string; amount: number } | null;
     note?: string | null;
+    switch_incentive?: number | null;
+    price_rise?: number | null;
   } | null;
+  narration_source?: string | null;
 }
 
 export interface Risk {

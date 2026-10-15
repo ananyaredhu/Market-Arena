@@ -22,6 +22,13 @@ const TERM_LABEL: Record<string, string> = {
   brand: "Brand",
   switch: "Switching",
   risk: "Risk",
+  outside: "Doing nothing",
+};
+
+// Where the sentence came from, shown under it so the founder knows how much to trust the wording.
+const SOURCE_NOTE: Record<string, string> = {
+  llm: "Wording by AI from the numbers below, checked against them.",
+  template: "Built directly from the numbers below.",
 };
 
 export default function GlassBoxDrawer({ agentId, runId, onOverride }: Props) {
@@ -63,7 +70,12 @@ export default function GlassBoxDrawer({ agentId, runId, onOverride }: Props) {
         </div>
       </div>
 
-      <p className="text-base leading-normal">{data.narration}</p>
+      <div>
+        <p className="m-0 text-base leading-normal">{data.narration}</p>
+        {data.narration_source && SOURCE_NOTE[data.narration_source] && (
+          <p className="m-0 mt-1.5 text-xs text-muted">{SOURCE_NOTE[data.narration_source]}</p>
+        )}
+      </div>
 
       <div>
         <div className="mb-2 flex justify-between text-xs text-muted">
@@ -77,7 +89,7 @@ export default function GlassBoxDrawer({ agentId, runId, onOverride }: Props) {
               key={d.term}
               label={TERM_LABEL[d.term] ?? d.term}
               value={d.delta / maxAbs}
-              display={`${d.delta >= 0 ? "+" : "−"}${Math.abs(d.delta).toFixed(1)}`}
+              display={`${d.delta >= 0 ? "+" : "−"}${Math.abs(d.delta).toFixed(2)}`}
             />
           ))}
         </div>
@@ -86,15 +98,25 @@ export default function GlassBoxDrawer({ agentId, runId, onOverride }: Props) {
       <div className="rounded-[14px] border border-line-2 bg-surface-3 p-4">
         <SectionLabel tone="accent" className="mb-2.5">What would flip me</SectionLabel>
         <div className="flex gap-2.5">
+          {flip?.price_rise != null ? (
+            // Customers who already prefer you: how far the price can rise before they leave.
+            <FlipTile value={`+S$${flip.price_rise.toFixed(2)}`} caption="price rise before they leave" />
+          ) : (
+            <FlipTile
+              value={flip?.price_drop != null ? `−S$${flip.price_drop.toFixed(2)}` : "n/a"}
+              caption="price drop"
+            />
+          )}
           <FlipTile
-            value={flip?.price_drop != null ? `−S$${flip.price_drop.toFixed(2)}` : "n/a"}
-            caption="price drop"
-          />
-          <FlipTile
-            value={flip?.feature_boost ? `+${flip.feature_boost.amount.toFixed(1)}` : "n/a"}
+            value={flip?.feature_boost ? `+${flip.feature_boost.amount.toFixed(2)}` : "n/a"}
             caption={flip?.feature_boost ? `${flip.feature_boost.attr.replace("_", " ")} strength` : "feature boost"}
           />
         </div>
+        {flip?.switch_incentive != null && (
+          <p className="mt-2.5 text-xs leading-normal text-ink-soft">
+            Or a switching credit worth S${flip.switch_incentive.toFixed(2)}.
+          </p>
+        )}
         {flip?.note && <p className="mt-2.5 text-xs leading-normal text-muted">{flip.note}</p>}
       </div>
 

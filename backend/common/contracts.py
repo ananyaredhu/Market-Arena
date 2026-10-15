@@ -129,6 +129,8 @@ class Flip(Contract):
     price_drop: float | None = None  # None = no price cut alone can flip this agent
     feature_boost: FeatureBoost | None = None
     note: str | None = None
+    switch_incentive: float | None = None  # optional: trial/migration credit (in price units) that closes the gap
+    price_rise: float | None = None  # optional: for agents who chose you, the price rise before they would leave
 
 
 class AgentExplain(Contract):
@@ -139,6 +141,7 @@ class AgentExplain(Contract):
     top_drivers: list[Driver]
     narration: str
     flip: Flip | None = None
+    narration_source: str | None = None  # optional: "llm" (verified against the numbers) or "template"
 
 
 # ---------------------------------------------------------------- council and kit
