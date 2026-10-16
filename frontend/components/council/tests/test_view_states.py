@@ -10,6 +10,7 @@ KIT_VIEW = ROOT / "frontend" / "app" / "project" / "[id]" / "kit" / "KitView.tsx
 PANEL = ROOT / "frontend" / "components" / "council" / "CouncilPanel.tsx"
 METRICS = ROOT / "frontend" / "lib" / "councilMetrics.ts"
 API = ROOT / "frontend" / "lib" / "api.ts"
+HISTORY_VIEW = ROOT / "frontend" / "app" / "project" / "[id]" / "history" / "HistoryView.tsx"
 
 MEDIAN_SHARE = re.compile(r"median share of (\d+(?:\.\d+)?)")
 SHARE_MOVE = re.compile(r"share (\d+(?:\.\d+)?) -> (\d+(?:\.\d+)?)")
@@ -53,3 +54,16 @@ def test_metric_patterns_match_the_typescript_helpers():
     assert segment.group(1) == "Power planners"
     assert segment.group(4) == "0.37"
     assert MEDIAN_SHARE.search("No share was calculated.") is None
+
+
+def test_history_view_has_empty_error_and_live_labels():
+    text = HISTORY_VIEW.read_text()
+    assert "Loading decision history" in text
+    assert 'status === "empty"' in text
+    assert 'status === "error"' in text
+    assert 'status === "ready"' in text
+    assert "council-history" in text
+    assert "Demo" in text
+    assert "Live stored run" in text
+    assert "not comparable" in text
+    assert "does not add demo runs" in text
