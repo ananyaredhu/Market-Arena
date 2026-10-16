@@ -5,13 +5,14 @@ import { Pill } from "@/components/ui";
 
 import Logo from "./Logo";
 
-export type NavKey = "arena" | "council" | "compare" | "experiments";
+export type NavKey = "arena" | "council" | "history" | "compare" | "experiments";
 
 export const DEMO_PROJECT_ID = "proj_1";
 
 const NAV: { key: NavKey; label: string; href: (id: string) => string }[] = [
   { key: "arena", label: "Arena", href: (id) => `/project/${id}` },
   { key: "council", label: "Council", href: (id) => `/project/${id}/council` },
+  { key: "history", label: "History", href: (id) => `/project/${id}/history` },
   { key: "compare", label: "Compare", href: () => "/compare" },
   { key: "experiments", label: "Experiments", href: (id) => `/project/${id}/kit` },
 ];

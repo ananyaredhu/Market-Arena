@@ -153,6 +153,56 @@ export interface KitOutput {
   };
 }
 
+export interface HistoryEntry {
+  run_id: string;
+  scenario_id?: string | null;
+  project_id: string;
+  pack?: string | null;
+  created_at?: string | null;
+  council_recorded_at?: string | null;
+  run_label: "live" | "demo";
+  share: number | null;
+  p10?: number | null;
+  p50?: number | null;
+  p90?: number | null;
+  verdict?: string | null;
+  confidence?: "low" | "medium" | "high" | null;
+  competitor_move?: { competitor_id: string; move: string; effect_on_share?: number | null } | null;
+  council_available: boolean;
+  limitations: string[];
+}
+
+export interface CouncilHistory {
+  project_id: string;
+  entries: HistoryEntry[];
+  problems: { run_id: string; detail: string }[];
+  ordering: string;
+  note: string;
+  mode?: "mock";
+}
+
+export interface HistoryComparison {
+  project_id: string;
+  base: HistoryEntry;
+  other: HistoryEntry;
+  observed: {
+    share: { value: number | null; base?: number; other?: number; comparable: boolean; detail: string | null };
+  };
+  interpretation: {
+    verdict: { changed: boolean | null; base?: string | null; other?: string | null; comparable: boolean; detail: string | null };
+    confidence: { base?: string | null; other?: string | null; steps: number | null; comparable: boolean; detail: string | null };
+    competitor_move: {
+      changed: boolean | null;
+      comparable: boolean;
+      detail: string | null;
+      base?: HistoryEntry["competitor_move"];
+      other?: HistoryEntry["competitor_move"];
+    };
+  };
+  scenario_differences: { field: string; statement: string }[];
+  limitations: string[];
+}
+
 export interface ProductProfile {
   name: string;
   description: string;
