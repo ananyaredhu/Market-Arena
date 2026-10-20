@@ -54,6 +54,7 @@ class SegmentSpec(BaseModel):
     share: float = Field(gt=0, le=1)
     hostile: bool = False
     evidence: str = "illustrative_assumption"  # mapped to the contract tag when the Population is built
+    sources: list[dict] = Field(default_factory=list)  # {url, quote, retrieved_at}: evidence behind adjusted priors
     priors: SegmentPriors
 
 
@@ -101,3 +102,6 @@ class PopulationRequest(BaseModel):
     seed: int = 42
     geography: str = "SG"
     product: dict | None = None  # ProductProfile-like dict from intake; used only to brief the LLM
+    research: bool = False  # run the web evidence researcher first (needs SEARXNG_URL and a live LLM)
+    evidence_snapshot_id: str | None = None  # reuse a saved snapshot instead of researching again
+    use_trends: bool = True  # let trend notes nudge budgets and price sensitivity (bounded)

@@ -4,6 +4,19 @@ Source of truth: `backend/common/contracts.py` (Pydantic). JSON schemas in this 
 with `make schemas` and checked in CI. Change rules: all three people agree, add fields as OPTIONAL
 only, update the fixtures in the same commit, add a line here.
 
+## 2026-10-15: Evidence researcher (Person A) - HEADS-UP B (Council) and C (orchestration)
+- No shared shape changed. Already-optional fields are now filled: `Population.evidence_snapshot_id`,
+  `Segment.sources` (`{url, quote, retrieved_at}`, quotes verified to occur in the fetched page) and
+  `Segment.evidence = "evidence"` for segments the research adjusted. `Population.generation.evidence` (free-form) says
+  what was applied, skipped, and why research fell back.
+- `POST /population/generate` body gains optional `research` (run the web researcher), `evidence_snapshot_id`
+  (reuse a saved one) and `use_trends` (default true). Omit all three for the old behaviour.
+- New routes: `POST /evidence/research` `{pack, geography, product}` -> `EvidenceSnapshot` (always 200; read `status`:
+  ok / partial / empty / failed / off, and `fallback_reason`). `GET /evidence/{id}` returns it;
+  `GET /evidence/{id}?view=council` returns exactly the `fixtures/trend_notes.json` shape (`research_notes`,
+  `trend_notes`) for B's Council to read as context. Trend notes change the population by at most +-20% (bounded).
+- Needs a running SearXNG (`make search-up`, `SEARXNG_URL` in `.env`; free, no key) and `LLM_MODE=live`; otherwise the status is `off` and nothing changes.
+
 ## 2026-10-15: Engine draw changed to fixed Gumbel noise per (customer, option) (Person A) - HEADS-UP B and C
 - Shapes are unchanged. What changes: for a given seed, WHICH customers pick what. The probabilities are exactly the
   same (softmax of utility / tau), but a what-if now moves only customers whose winning option actually got worse

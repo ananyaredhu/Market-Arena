@@ -1,4 +1,4 @@
-.PHONY: setup api test lint schemas fixtures web
+.PHONY: setup api test lint schemas fixtures web search-up search-down
 
 PY = .venv/bin/python
 
@@ -26,3 +26,10 @@ schemas:
 # Regenerate the generated fixtures (population, run_result)
 fixtures:
 	$(PY) -m scripts.make_fixtures
+
+# Local SearXNG for the evidence researcher (needs Docker). Then set SEARXNG_URL=http://localhost:8888 in .env
+search-up:
+	docker compose -f infra/searxng/docker-compose.yml up -d
+
+search-down:
+	docker compose -f infra/searxng/docker-compose.yml down

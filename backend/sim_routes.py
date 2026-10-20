@@ -6,9 +6,14 @@ Stubs return fixtures when MOCK=1. Replace the body of each route with the real 
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
 
 from backend.common.fixtures import load_fixture
 from backend.common.mock import mock_enabled
+from backend.evidence.agent import research as research_evidence
+from backend.evidence.store import council_context
+from backend.evidence.store import load as load_snapshot
+from backend.evidence.store import save as save_snapshot
 from backend.glassbox.explain import AgentNotFound, summarize_flips
 from backend.glassbox.explain import explain_agent as build_explain
 from backend.population.generator import PopulationError
@@ -40,6 +45,37 @@ def generate_population(body: PopulationRequest | None = None):
         raise HTTPException(status_code=404, detail=str(e).splitlines()[0]) from e
     except PopulationError as e:
         raise HTTPException(status_code=500, detail=str(e)) from e
+
+
+class ResearchRequest(BaseModel):
+    pack: str = "saas"
+    geography: str = "SG"
+    product: dict | None = None
+
+
+@router.post("/evidence/research")
+def evidence_research(body: ResearchRequest | None = None):
+    """Run the bounded web researcher and save the verified snapshot. Always answers 200 with a snapshot: when
+    nothing could be found its `status` and `fallback_reason` say why and the original priors apply."""
+    body = body or ResearchRequest()
+    if mock_enabled():
+        return load_fixture("trend_notes")
+    snap = research_evidence(body.pack, body.geography, body.product)
+    try:
+        save_snapshot(snap)
+    except OSError:
+        pass
+    return snap.model_dump(mode="json")
+
+
+@router.get("/evidence/{snapshot_id}")
+def evidence_snapshot(snapshot_id: str, view: str = "full"):
+    """A saved snapshot. `?view=council` returns it as research_notes and trend_notes for the Council."""
+    try:
+        snap = load_snapshot(snapshot_id)
+    except KeyError as e:
+        raise HTTPException(status_code=404, detail=f"no evidence snapshot '{snapshot_id}'") from e
+    return council_context(snap) if view == "council" else snap.model_dump(mode="json")
 
 
 def _run_inputs(run_id: str, project_id: str = DEFAULT_PROJECT) -> tuple[dict, dict, list[dict]]:

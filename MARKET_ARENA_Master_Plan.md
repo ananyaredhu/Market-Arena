@@ -761,7 +761,7 @@ Tip: show a *second, non-tech* example (the café) in the video to prove general
 2. **Primary demo case:** study planner (tech) plus café (non-tech) is recommended.
 3. **Telegram scope:** full demo or a short clip? Decide by Day 10 based on progress.
 4. **LLM provider and budget:** *decided (v2):* free open-weight provider chain (Section 12). Still to do: confirm current free-tier limits and get API keys.
-8. **Search provider for the evidence agent (v2):** DuckDuckGo wrapper, Tavily, Brave free tier or self-hosted SearXNG. Verify current free terms first; do not scrape search-engine pages.
+8. **Search provider for the evidence agent (v2):** DECIDED: self-hosted SearXNG (free, open-source, no key; `make search-up`). Do not scrape search-engine pages directly.
 5. **Backtest cases:** agree on 6 to 10 and who sources the data.
 6. **Team roles:** fill in Section 2.11.
 7. **Naming:** confirm "Glass-Box" or your preferred term for the transparent-reasoning feature.
