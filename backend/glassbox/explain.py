@@ -8,6 +8,8 @@ flips, (3) freeze them into `Facts`, (4) only then phrase them (template, or LLM
 """
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 import numpy as np
 
 from backend.common.contracts import AgentExplain
@@ -58,9 +60,20 @@ def drivers_for(
     return kept if limit is None else kept[:limit]
 
 
-def explain_agent(
+@dataclass
+class Gathered:
+    """Everything computed by code for one customer, before any wording is produced."""
+
+    facts: Facts  # frozen, rounded exactly as it may be quoted
+    choice: dict  # the run's choice record
+    shown: list[Driver]  # the (up to 3) drivers shown to the user, rounded to 2 decimals
+    flip: dict  # flip levers and flags from flips.flip_for_agent (adjusted for customers who chose you)
+    full_drivers: list[tuple[str, float]]  # ALL terms, unrounded, biggest first: the ground truth for audits
+
+
+def gather_facts(
     run_result: dict, population: dict, options: list[dict], agent_id: str, *, currency: str = "SGD"
-) -> dict:
+) -> Gathered:
     choice = next((c for c in run_result["choices"] if c["agent_id"] == agent_id), None)
     agent = next((a for a in population["agents"] if a["id"] == agent_id), None)
     if choice is None or agent is None:
@@ -76,6 +89,7 @@ def explain_agent(
 
     # ---- (1) and (2): all numbers, by code
     drivers = drivers_for(t, c, r)
+    full_drivers = drivers_for(t, c, r, limit=None, min_abs=0.0)
     f = flip_for_agent(t, 0, target=you, money=money)
     affordable_u = np.where(t.afford[0], t.U_raw[0], -np.inf)
     top = int(np.argmax(affordable_u))
@@ -111,15 +125,24 @@ def explain_agent(
         price_unreachable=f["price_unreachable"],
     )
 
-    # ---- (4): language
-    narration, source = narrate(facts)
+    return Gathered(facts=facts, choice=choice, shown=shown, flip=f, full_drivers=full_drivers)
+
+
+def explain_agent(
+    run_result: dict, population: dict, options: list[dict], agent_id: str, *, currency: str = "SGD"
+) -> dict:
+    g = gather_facts(run_result, population, options, agent_id, currency=currency)
+    f, fb = g.flip, g.flip["feature_boost"]
+
+    # ---- (4): language (the only step that may involve an LLM, and it only ever sees g.facts)
+    narration, source = narrate(g.facts)
 
     explain = {
         "agent_id": agent_id,
-        "segment": choice["segment"],
-        "choice": choice["choice"],
-        "runner_up": choice.get("runner_up"),
-        "top_drivers": [{"term": d.term, "delta": d.delta} for d in shown],
+        "segment": g.choice["segment"],
+        "choice": g.choice["choice"],
+        "runner_up": g.choice.get("runner_up"),
+        "top_drivers": [{"term": d.term, "delta": d.delta} for d in g.shown],
         "narration": narration,
         "narration_source": source,
         "flip": {
