@@ -13,8 +13,10 @@ from pydantic import BaseModel
 
 from backend.common.contracts import CouncilOutput, RunResult
 from backend.common.mock import mock_enabled
+from backend.council.history import HistoryError, compare_runs, list_history, save_council_record
 from backend.council.run_inputs import ResolutionError, resolve_run
 from backend.council.service import CouncilComputeError, run_council, run_kit
+from backend.intake.projects import get_persisted_project
 from backend.kit.generator import KitValidationError
 from backend.kit.packs import UnknownPackError
 
@@ -123,6 +125,7 @@ def _compute_council(run_id: str, body: Optional[CouncilRequest]) -> dict:
     payload = _payload(result, resolved)
     if payload.get("run_id") != run_id:
         raise ResolutionError(409, "council run_id does not match the requested run")
+    save_council_record(payload)
     return payload
 
 
@@ -144,10 +147,39 @@ def _compute_kit(run_id: str, body: Optional[KitRequest]) -> dict:
         raise ResolutionError(409, f"kit pack is '{body.pack}', but this run is '{resolved.pack}'")
     if body is not None and body.options is not None and not _options_match(body.options, resolved.options):
         raise ResolutionError(409, "kit options do not match the resolved run")
+    save_council_record(_payload(result, resolved))
     kit = run_kit(result["council"], resolved.pack, resolved.options)
     data = kit.model_dump()
     data["run_id"] = run_id
     return _annotate(data, resolved, result)
+
+
+@router.get("/projects/{project_id}/council-history")
+def council_history(project_id: str):
+    if not mock_enabled():
+        get_persisted_project(project_id)
+    try:
+        payload = list_history(project_id)
+    except HistoryError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+    if mock_enabled() and not payload["entries"]:
+        payload["mode"] = "mock"
+        payload["note"] = (
+            "Mock mode does not create project runs. This list contains only persisted bundles, and it is empty."
+        )
+    return payload
+
+
+@router.get("/projects/{project_id}/council-history/compare")
+def council_history_compare(project_id: str, base: str, other: str):
+    if not mock_enabled():
+        get_persisted_project(project_id)
+    try:
+        return compare_runs(project_id, base, other)
+    except ResolutionError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+    except HistoryError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
 
 
 @router.post("/runs/{run_id}/council")
