@@ -111,6 +111,49 @@ def test_prompt_spells_out_direction_instead_of_signed_numbers():
     assert "drivers" not in d
 
 
+def test_reasons_within_ten_percent_are_tied_for_main_reason():
+    """Found in the live evaluation: switching cost 0.4100 vs appeal of doing nothing 0.4090 are one tie, not a
+    'biggest' and a 'second'. Naming either is a faithful answer."""
+    f = facts(chosen="Do nothing", runner_up="Free planner",
+              drivers=(Driver("feature", -0.59), Driver("switch", 0.41), Driver("outside", 0.41)),
+              price_unreachable=False, feature_amount=None, feature_attr=None)
+    either = ("They chose Do nothing because of the appeal of doing nothing (0.41), "
+              "even though features (0.59) counted against it.")
+    assert verify(either, f) == []
+    other = ("They chose Do nothing because switching cost (0.41) mattered, "
+             "even though features (0.59) counted against it.")
+    assert verify(other, f) == []
+    neither = "They chose Do nothing, even though features (0.59) counted against it."
+    assert any("main reason" in p and "or" in p for p in verify(neither, f))
+
+
+def test_a_clearly_smaller_reason_does_not_count_as_the_main_one():
+    f = facts(chosen="Do nothing", runner_up="Free planner",
+              drivers=(Driver("switch", 0.80), Driver("outside", 0.30)), price_unreachable=False,
+              feature_amount=None, feature_attr=None)
+    only_small = "They chose Do nothing because of the appeal of doing nothing (0.30)."
+    assert any("main reason" in p for p in verify(only_small, f))
+
+
+def test_a_real_number_on_the_wrong_reason_is_rejected_by_the_gate():
+    """The live hallucination: 0.41 is the switching-cost size but was attached to 'the appeal of doing nothing'."""
+    f = facts(chosen="Do nothing", runner_up="Free planner",
+              drivers=(Driver("feature", -1.17), Driver("switch", 0.41), Driver("outside", 0.17)),
+              price_unreachable=False, feature_amount=None, feature_attr=None)
+    wrong = ("The appeal of doing nothing (size 0.41) led the customer to choose Do nothing, "
+             "even though features (1.17) were a concern.")
+    assert any("belongs to a different reason" in p for p in verify(wrong, f))
+    right = "Switching cost (0.41) drove the customer to choose Do nothing, even though features (1.17) were a concern."
+    assert verify(right, f) == []
+
+
+def test_number_binding_has_no_false_positives_on_the_templates():
+    for kw in (dict(), dict(price_drop=1.2, price_unreachable=False, feature_amount=None, feature_attr=None),
+               dict(feature_amount=None, feature_attr=None, price_unreachable=False, switch_incentive=0.9)):
+        f = facts(**kw)
+        assert verify(template_text(f), f) == [], template_text(f)
+
+
 def test_reason_not_in_facts_is_rejected():
     f = facts(drivers=(Driver("feature", 1.5),), price_unreachable=False, feature_amount=None, feature_attr=None,
               price_drop=1.0)

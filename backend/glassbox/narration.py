@@ -41,6 +41,7 @@ LEXICON = {
 }
 MAX_CHARS = 320
 MAX_SENTENCES = 3
+TIE = 0.9  # reasons within 10% of the biggest count as tied for "main reason"
 # A reason that counted AGAINST the choice may only be mentioned together with one of these.
 CONTRAST = (
     "despite", "although", "even though", "though", "while", "but", "yet", "however", "outweigh", "beat",
@@ -136,9 +137,12 @@ def template_text(f: Facts) -> str:
     else:
         s1 = f"{base}."
     parts = [s1]
-    if f.against_odds and f.p_choice_pct is not None:
+    odds = f.against_odds and f.p_choice_pct is not None
+    if f.locked and odds:  # one sentence for both notes, so the explanation stays within three sentences
+        parts.append(f"This choice was set manually; the model gave it only {f.p_choice_pct}% likelihood.")
+    elif odds:
         parts.append(f"The model gave this choice only {f.p_choice_pct}% likelihood, so it was an unlikely draw.")
-    if f.locked:
+    elif f.locked:
         parts.append("This choice was set manually.")
 
     m = f.money
@@ -167,6 +171,40 @@ def template_text(f: Facts) -> str:
 
 # ---------------------------------------------------------------- verifier
 _NUM = re.compile(r"\d+(?:\.\d+)?")
+_REASON_REACH = 25  # a number belongs to the nearest reason word that ends within this many characters before it
+
+
+def numbers_by_reason(f: Facts) -> dict[str, set[float]]:
+    """For each reason, the numbers that legitimately belong to it (its driver size and any flip lever of that kind)."""
+    out: dict[str, set[float]] = {k: set() for k in LEXICON}
+    for d in f.drivers:
+        out[d.term].add(abs(d.delta))
+    for concept, value in (("price", f.price_drop), ("price", f.price_rise), ("feature", f.feature_amount),
+                           ("switch", f.switch_incentive)):
+        if value is not None:
+            out[concept].add(value)
+    return out
+
+
+def misbound_numbers(scrubbed: str, allowed: dict[str, set[float]]) -> list[str]:
+    """Numbers sitting next to a reason word that are NOT that reason's number, e.g. "the appeal of doing nothing
+    (0.41)" when 0.41 is really the switching-cost size. Catches a real number attached to the wrong reason, which a
+    plain "is this number in the facts?" check lets through. Percentages are checked separately."""
+    spans = [(m.end(), concept) for concept, words in LEXICON.items() for w in words
+             for m in re.finditer(re.escape(w), scrubbed)]
+    problems = []
+    for m in _NUM.finditer(scrubbed):
+        if scrubbed[m.end():m.end() + 1] == "%":
+            continue
+        near = [(end, c) for end, c in spans
+                if end <= m.start() and m.start() - end <= _REASON_REACH
+                and not re.search(r"[.;!?]", scrubbed[end:m.start()])]
+        if not near:
+            continue
+        concept = max(near)[1]
+        if not any(abs(float(m.group()) - a) < 0.005 for a in allowed[concept]):
+            problems.append(f"the number {m.group()} is next to '{PHRASE[concept]}' but belongs to a different reason")
+    return problems
 
 
 def verify(text: str, f: Facts) -> list[str]:
@@ -201,12 +239,18 @@ def verify(text: str, f: Facts) -> list[str]:
     for concept, words in LEXICON.items():
         if concept not in ok and any(w in scrubbed for w in words):
             problems.append(f"mentions a reason ({PHRASE[concept]}) that is not in the facts")
+    problems += misbound_numbers(scrubbed, numbers_by_reason(f))
     # Direction: the sentence must explain the choice by the biggest reason FOR it (not merely the biggest number).
     pro = [d for d in f.drivers if d.delta > 0]
     pool = pro or list(f.drivers)  # no reason for the choice at all: fall back to the biggest number
-    main = max(pool, key=lambda d: abs(d.delta)) if pool else None
-    if main and not any(w in scrubbed for w in LEXICON[main.term]):
-        problems.append(f"does not mention the main reason for the choice ({PHRASE[main.term]})")
+    if pool:
+        biggest = max(abs(d.delta) for d in pool)
+        # Reasons within 10% of the biggest are tied for "main reason": naming any of them is fine.
+        main = [d for d in pool if abs(d.delta) >= TIE * biggest]
+        if not any(any(w in scrubbed for w in LEXICON[d.term]) for d in main):
+            problems.append(
+                "does not mention the main reason for the choice (" + " or ".join(PHRASE[d.term] for d in main) + ")"
+            )
     # A reason that counted against the choice must be framed as such (despite / even though / outweighed ...).
     against = [d for d in f.drivers if d.delta < 0]
     if any(any(w in scrubbed for w in LEXICON[d.term]) for d in against) and not any(c in low for c in CONTRAST):
