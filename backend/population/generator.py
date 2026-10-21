@@ -10,7 +10,9 @@ Flow
   4. If the LLM answer is malformed, unreachable or fails validation: use the template instead and record why.
   5. If even the template fails validation, raise PopulationError (the pack file needs fixing).
 
-The evidence-first step (Master Plan 4.6) will adjust the proposal before step 3; it plugs in here later.
+Evidence-first (Master Plan 4.6, opt-in with `research` or `evidence_snapshot_id`): after step 2 the verified
+findings of the evidence researcher nudge the proposal inside fixed bands (backend/evidence/apply.py). If the result
+fails validation, or the research found nothing, the proposal without evidence is used and the reason is recorded.
 """
 from __future__ import annotations
 
@@ -21,6 +23,10 @@ from pydantic import ValidationError
 
 from backend.common.contracts import Population
 from backend.common.llm import LLMError, complete_json, register_mock
+from backend.evidence import agent as evidence_agent
+from backend.evidence import store as evidence_store
+from backend.evidence.apply import apply_evidence
+from backend.evidence.models import EvidenceSnapshot
 from backend.population.models import PackSpec, PopulationRequest, PriorsProposal
 from backend.population.packs import available_packs, load_pack
 from backend.population.sampler import sample_agents
@@ -70,7 +76,8 @@ def _check_proposal(proposal: PriorsProposal, pack: PackSpec, option_ids: list[s
     return PackSpec.model_validate({**pack.model_dump(), "segments": [s.model_dump() for s in proposal.segments]})
 
 
-def _build(pack: PackSpec, spec: PackSpec, req: PopulationRequest, option_ids: list[str]) -> dict:
+def _build(pack: PackSpec, spec: PackSpec, req: PopulationRequest, option_ids: list[str],
+           snapshot_id: str | None = None) -> dict:
     agents = sample_agents(spec.segments, pack.attributes, option_ids, pack.outside_id, req.n_agents, req.seed)
     return {
         "population_id": f"pop_{pack.pack}_{req.seed}",
@@ -78,7 +85,7 @@ def _build(pack: PackSpec, spec: PackSpec, req: PopulationRequest, option_ids: l
         "pack": pack.pack,
         "attributes": pack.attributes,
         "geography": req.geography,
-        "evidence_snapshot_id": None,
+        "evidence_snapshot_id": snapshot_id,
         "segments": [
             {
                 "id": s.id,
@@ -87,11 +94,44 @@ def _build(pack: PackSpec, spec: PackSpec, req: PopulationRequest, option_ids: l
                 "hostile": s.hostile,
                 # Template and LLM priors are both assumptions; the pack's own label is not a contract tag.
                 "evidence": s.evidence if s.evidence in CONTRACT_TAGS else "llm_assumption",
+                "sources": s.sources or None,
             }
             for s in spec.segments
         ],
         "agents": agents,
     }
+
+
+def template_population(req: PopulationRequest) -> dict:
+    """A validated population from the pack's own template priors: no LLM, no network, fully deterministic.
+    The backtest uses this so its results cannot vary with a language model's answers."""
+    pack = load_pack(req.pack)
+    option_ids = ["you"] + [c["id"] for c in pack.competitors]
+    population = _build(pack, pack, req, option_ids)
+    issues = validate_population(population, pack)
+    if issues:
+        raise PopulationError(f"template priors for pack '{pack.pack}' fail validation: {[str(i) for i in issues]}")
+    population["generation"] = {"source": "template", "fallback_reason": None, "unchanged_from_template": False,
+                                "validation": "passed"}
+    return Population.model_validate(population).model_dump(mode="json")
+
+
+def _snapshot_for(req: PopulationRequest, pack: PackSpec) -> tuple[EvidenceSnapshot | None, str | None]:
+    """(snapshot, note). A saved snapshot is reused by id; otherwise research runs if asked. Never raises."""
+    if req.evidence_snapshot_id:
+        try:
+            return evidence_store.load(req.evidence_snapshot_id), None
+        except (KeyError, ValueError):
+            return None, f"evidence snapshot '{req.evidence_snapshot_id}' not found; original priors used"
+    if req.research:
+        snap = evidence_agent.research(pack.pack, req.geography, req.product,
+                                       segments={x.id: x.name for x in pack.segments})
+        try:
+            evidence_store.save(snap)
+        except OSError:
+            pass  # not being able to save only means the snapshot cannot be reopened later
+        return snap, snap.fallback_reason
+    return None, None
 
 
 def generate_population(req: PopulationRequest | None = None) -> dict:
@@ -119,11 +159,22 @@ def generate_population(req: PopulationRequest | None = None) -> dict:
     except (LLMError, ValidationError, ValueError) as e:
         source, reason, spec = "template", f"proposal rejected: {str(e).splitlines()[0]}", pack
 
-    population = _build(pack, spec, req, option_ids)
+    snap, evidence_note = _snapshot_for(req, pack)
+    applied = apply_evidence(spec, snap, use_trends=req.use_trends)
+    with_evidence = bool(applied.applied)
+    if with_evidence:
+        adjusted = PackSpec.model_validate(
+            {**spec.model_dump(), "segments": [s.model_dump() for s in applied.segments]})
+        population = _build(pack, adjusted, req, option_ids, snap.snapshot_id if snap else None)
+        if validate_population(population, pack):
+            with_evidence, evidence_note = False, "evidence-adjusted population failed validation; original priors used"
+    if not with_evidence:
+        population = _build(pack, spec, req, option_ids, snap.snapshot_id if snap and snap.status != "off" else None)
     issues = validate_population(population, pack)
     if issues and source != "template":
         source, reason = "template", "validation failed: " + "; ".join(str(i) for i in issues)
         population = _build(pack, pack, req, option_ids)
+        with_evidence = False
         issues = validate_population(population, pack)
     if issues:
         raise PopulationError(f"template priors for pack '{pack.pack}' fail validation: {[str(i) for i in issues]}")
@@ -134,4 +185,13 @@ def generate_population(req: PopulationRequest | None = None) -> dict:
         "unchanged_from_template": unchanged and source == "llm",
         "validation": "passed",
     }
+    if snap is not None or evidence_note:
+        population["generation"]["evidence"] = {
+            "status": snap.status if snap else "failed",
+            "used": with_evidence,
+            "note": evidence_note,
+            "applied": applied.applied if with_evidence else [],
+            "skipped": applied.skipped,
+            "advisory": applied.advisory,
+        }
     return Population.model_validate(population).model_dump(mode="json")
