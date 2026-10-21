@@ -2,7 +2,7 @@ import pytest
 
 from backend.evidence import resources, store
 from backend.evidence.apply import apply_evidence
-from backend.evidence.models import Economics, EvidenceSnapshot, Finding, TrendNote
+from backend.evidence.models import Economics, EvidenceSnapshot, Finding, PriceIndex, TrendNote
 from backend.population.packs import load_pack
 
 URL = "https://example.com/pricing"
@@ -31,6 +31,14 @@ def econ(scale=0.5):
                      baseline_gdp_pc_ppp=160000, budget_scale=scale, source_url=WB_URL)
 
 
+def cpi(**values):
+    series = {"2019": 92.0, "2020": 91.5, "2021": 92.5, "2022": 98.0, "2023": 100.0, "2024": 100.0, "2025": 100.9}
+    series.update({k.lstrip("y"): v for k, v in values.items()})
+    return PriceIndex(name="Consumer Price Index, all items (2024 = 100)", table_id="M213801",
+                      url="https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+                      retrieved_at="2026-10-21T00:00:00+00:00", values=series)
+
+
 def seg(res, sid):
     return next(s for s in res.segments if s.id == sid)
 
@@ -41,8 +49,14 @@ def unchanged(res) -> bool:
 
 def test_nothing_changes_without_evidence():
     assert unchanged(apply_evidence(PACK, None))
-    assert unchanged(apply_evidence(PACK, snapshot(status="off", economics=econ())))
-    assert unchanged(apply_evidence(PACK, snapshot(status="failed", economics=econ())))
+    assert unchanged(apply_evidence(PACK, snapshot(status="off")))
+    assert unchanged(apply_evidence(PACK, snapshot(status="failed")))
+
+
+def test_the_dataset_adjustment_survives_a_failed_web_search():
+    for status in ("off", "failed", "empty"):
+        r = apply_evidence(PACK, snapshot(status=status, economics=econ(0.5)))
+        assert not unchanged(r) and r.applied
 
 
 def test_the_pack_itself_is_never_mutated():
@@ -72,6 +86,45 @@ def test_country_economics_scales_every_budget_and_keeps_the_source():
 
 def test_a_scale_of_one_changes_nothing():
     assert unchanged(apply_evidence(PACK, snapshot(economics=econ(1.0))))
+
+
+def test_budgets_move_by_the_full_reported_price_change_from_the_starting_year():
+    r = apply_evidence(PACK, snapshot(price_index=cpi()), 2024)
+    for before, after in zip(PACK.segments, r.segments, strict=True):
+        lo, hi = before.priors.budget
+        scale = 100.9 / 100.0
+        assert after.priors.budget == (round(lo * scale, 2), round(hi * scale, 2))
+        assert after.evidence == "evidence" and "M213801" in after.sources[0]["url"]
+    assert "+0.9% from 2024 to 2025" in r.applied[0]
+    assert "assumes the pack's budgets are in 2024 prices" in r.applied[0]
+
+
+def test_the_starting_year_is_editable_and_a_big_change_is_not_capped():
+    r = apply_evidence(PACK, snapshot(price_index=cpi()), 2019)  # +9.7% over six years
+    scale = 100.9 / 92.0
+    assert seg(r, "budget").priors.budget[1] == round(PACK.segments[0].priors.budget[1] * scale, 2)
+    huge = apply_evidence(PACK, snapshot(price_index=cpi(y2025=250.0)), 2024)  # +150%: reported, so applied
+    assert seg(huge, "budget").priors.budget[1] == round(PACK.segments[0].priors.budget[1] * 2.5, 2)
+
+
+def test_a_starting_year_the_series_cannot_answer_changes_nothing_and_says_why():
+    for year, words in ((1950, "no 1950 value"), (2031, "before the starting year 2031")):
+        r = apply_evidence(PACK, snapshot(price_index=cpi()), year)
+        assert unchanged(r) and not r.applied and words in r.skipped[0]
+
+
+def test_no_price_change_without_an_index_a_year_or_when_the_year_is_the_latest():
+    assert unchanged(apply_evidence(PACK, snapshot(), 2024))
+    assert unchanged(apply_evidence(PACK, snapshot(price_index=cpi()), None))
+    assert unchanged(apply_evidence(PACK, snapshot(price_index=cpi()), 2025))
+
+
+def test_income_scale_and_price_change_combine_and_survive_a_failed_search():
+    r = apply_evidence(PACK, snapshot(status="failed", economics=econ(0.5), price_index=cpi()), 2024)
+    expected = round(PACK.segments[0].priors.budget[1] * 0.5, 2)
+    assert seg(r, "budget").priors.budget[1] == round(expected * 1.009, 2) or abs(
+        seg(r, "budget").priors.budget[1] - expected * 1.009) < 0.02
+    assert len(r.applied) == 2
 
 
 # ---------------------------------------------------------------- store, council view and the Resources library
@@ -144,6 +197,20 @@ def test_generator_applies_country_economics_from_a_saved_snapshot(tmp_path, mon
     assert ev["used"] and ev["applied"]
     top = PACK.segments[0].priors.budget[1] * 0.5
     assert max(a["budget"] for a in pop["agents"] if a["segment"] == "budget") <= top
+
+
+def test_generator_moves_budgets_with_prices_from_the_chosen_year(tmp_path, monkeypatch):
+    from backend.population.generator import generate_population
+    from backend.population.models import PopulationRequest
+    monkeypatch.setattr(store, "RUN_DIR", tmp_path)
+    store.save(snapshot(snapshot_id="ev_cpi", price_index=cpi(y2025=120.0)))
+    top = PACK.segments[0].priors.budget[1]
+    pop = generate_population(PopulationRequest(n_agents=300, evidence_snapshot_id="ev_cpi", price_base_year=2024))
+    ev = pop["generation"]["evidence"]
+    assert ev["used"] and "+20.0% from 2024 to 2025" in ev["applied"][0] and ev["price_base_year"] == 2024
+    assert max(a["budget"] for a in pop["agents"] if a["segment"] == "budget") > top  # moved past the old top
+    old = generate_population(PopulationRequest(n_agents=300, evidence_snapshot_id="ev_cpi", price_base_year=2025))
+    assert not old["generation"]["evidence"]["used"]  # starting at the latest year: no change to apply
 
 
 def test_generator_keeps_page_findings_as_reference_only(tmp_path, monkeypatch):

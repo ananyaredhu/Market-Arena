@@ -9,6 +9,15 @@ only, update the fixtures in the same commit, add a line here.
   change the population. Only dataset-backed evidence does (today: World Bank GDP per person scales budgets).
   `use_trends` on `POST /population/generate` is now ignored. `Population.generation.evidence` gains `reference_items`
   and no longer has `advisory`.
+- `EvidenceSnapshot` gains `datasets` (official SingStat figures for Singapore: consumer prices and household spending,
+  each with its table id, url and the row as read). Shown in the snapshot, in Resources as topic `official data`
+  (`kind: dataset`) and to the Council as reference. They do not change priors. The country-income scale now also applies
+  when web research is off or failed, because it needs no search or model.
+- Consumer prices move budgets. For Singapore the snapshot keeps the all-items CPI by year (`price_index`) and the
+  generator multiplies every budget range by the full reported change from a starting year to the latest year (no cap).
+  The starting year is the year the pack's budgets are assumed to be in: new optional `price_base_year` (default 2024)
+  on `POST /population/generate`, and on `POST /scenarios` (C's route, 2 lines). A year outside the published series
+  changes nothing and says why in `generation.evidence.skipped`.
 - New route `GET /resources?pack=&geography=&topic=&q=`: the Resources library of everything the researcher read, each with
   a verified quote, url and retrieved date. Reference only. Stored in `data/resources/`, filled whenever a snapshot is saved.
 - `GET /evidence/{id}?view=council` now also carries `reference_only: true`; its trend notes have `effect: null`.

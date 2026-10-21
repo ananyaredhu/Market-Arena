@@ -135,3 +135,25 @@ def test_a_scenario_can_use_a_saved_evidence_snapshot(monkeypatch, tmp_path):
     assert r.status_code == 200, r.text
     evidence = r.json()["assumptions"]["population"]["evidence"]
     assert evidence["status"] == "ok" and evidence["used"] and evidence["applied"]
+
+
+def test_a_scenario_moves_budgets_with_prices_from_the_chosen_starting_year(monkeypatch, tmp_path):
+    from backend.evidence import store
+    from backend.evidence.models import EvidenceSnapshot, PriceIndex
+
+    monkeypatch.setattr(store, "RUN_DIR", tmp_path / "evidence")
+    index = PriceIndex(name="CPI", table_id="M213801", url="https://tablebuilder.singstat.gov.sg/x",
+                       retrieved_at="2026-10-21T00:00:00+00:00", values={"2022": 90.0, "2024": 100.0, "2025": 110.0})
+    store.save(EvidenceSnapshot(snapshot_id="ev_cpi_run", created_at="2026-10-21T00:00:00+00:00", pack="saas",
+                                geography="SG", status="off", price_index=index))
+    project = client.post("/projects", json={"idea": IDEAS["saas"], "pack": "saas", "geography": "SG"}).json()
+
+    def applied(year):
+        r = client.post("/scenarios", json={"project_id": project["id"], "n_agents": 40, "repeats": 2,
+                                            "evidence_snapshot_id": "ev_cpi_run", "price_base_year": year})
+        assert r.status_code == 200, r.text
+        return r.json()["assumptions"]["population"]["evidence"]
+
+    assert "+10.0% from 2024 to 2025" in applied(2024)["applied"][0]
+    assert "+22.2% from 2022 to 2025" in applied(2022)["applied"][0]
+    assert "no 2023 value" in applied(2023)["skipped"][0]

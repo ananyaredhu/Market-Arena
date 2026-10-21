@@ -5,7 +5,7 @@
 A fixed pipeline. CODE does everything except reading; the MODEL does exactly one thing: read a few passages of one
 page and list the facts in them, each with an exact quote.
 
-    1  World Bank economics          code   (no model, no search)
+    1  World Bank economics and      code   (no model, no search) official SingStat figures (Singapore)
     2  plan the searches             code   a fixed list of themes built from the pack, country and product
     3  run the searches              code   SearXNG (or any SearchProvider)
     4  pick the pages to open        code   a scoring rule; one page per website; round-robin across themes
@@ -17,7 +17,7 @@ page and list the facts in them, each with an exact quote.
 The model never chooses a query, a page or a final number. A page that cannot be fetched or read is skipped and
 recorded; the run only fails if nothing at all could be done. Every failure ends in a snapshot whose status says why,
 and the original priors are used: research can make a population better, it cannot make it fail.
-apply.py turns verified findings into bounded adjustments.
+apply.py applies only the dataset-backed adjustment (country income); page findings go to the Resources library.
 """
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ from urllib.parse import urlparse
 
 from backend.common import llm as llm_module
 from backend.common.llm import LLMError, complete_json
-from backend.evidence import net, worldbank
+from backend.evidence import net, singstat, worldbank
 from backend.evidence.models import Dropped, EvidenceSnapshot, Extraction, Step
 from backend.evidence.search import SearchError, SearchHit, SearchProvider, get_provider
 from backend.evidence.verify import verify_extraction
@@ -263,12 +263,20 @@ def research(
         snap.status, snap.fallback_reason, snap.trace, snap.stats = status, reason, trace, stats  # type: ignore[assignment]
         return snap
 
-    # 1. Country economics needs no search and no model, so it runs first and survives any later failure.
+    # 1. Country economics and official statistics need no search and no model, so they run first and survive any
+    #    later failure.
     econ = worldbank.country_economics(geography) if len(geography) in (2, 3) else None
     if econ:
         snap.economics = econ
         trace.append(Step(n=0, action="world_bank", detail=econ.iso, result=(
             f"GDP per capita (PPP) {econ.gdp_pc_ppp:,.0f} in {econ.year}; budget x{econ.budget_scale}")))
+
+    snap.datasets = singstat.dataset_facts(pack, geography)
+    snap.price_index = singstat.cpi_index(geography)
+    if snap.datasets or snap.price_index:
+        trace.append(Step(n=0, action="singstat", detail=geography, result=(
+            f"{len(snap.datasets)} official figures shown; consumer price index "
+            f"{'kept for budgets' if snap.price_index else 'unavailable'}")))
 
     provider = provider or get_provider()
     if provider.name == "none":

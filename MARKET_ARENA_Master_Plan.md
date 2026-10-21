@@ -307,6 +307,8 @@ How findings are used:
 | Finding type | Used for |
 |---|---|
 | Real dataset or time series (e.g. GDP per person for the budget scale) | Bounded, labelled adjustment of the segment priors, tagged `evidence`, with the dataset url |
+| Official statistics, Singapore only (SingStat): consumer prices (all items) | Budgets move by the full reported change from a starting year (editable, default 2024; an assumption about the year the pack's budgets are in). Never capped or skipped |
+| Official statistics: category prices and household spending | Shown as `datasets` and in Resources as official data. Household spending is per household, not per student or per visit, so it is not applied |
 | Page findings: prices, survey statistics, regulation, channels | Stored in the Resources library and as cited `research_notes` for the Council, the narration context and the Experiment Kit. **Reference only: never changes a prior** |
 | Trends and news | Stored as `trend_notes` and in Resources. **Reference only** (formerly a bounded ±10% adjustment, removed) |
 

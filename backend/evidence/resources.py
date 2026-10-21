@@ -1,9 +1,9 @@
 """The Resources library: surveys, news and competitor pages the researcher read, kept for people to read (Person A).
 
-Nothing in here ever changes a simulation prior (see apply.py: only real datasets do). Each entry keeps the verbatim
-quote that was verified against the page, the url, and when it was retrieved, so the user can check it and the
-Council can cite it as labelled reference. Entries from every research run accumulate per pack and geography in
-data/resources/ and are deduplicated by (url, quote).
+Nothing in here changes a simulation prior (see apply.py: only the country-income dataset does). Each entry keeps the
+verbatim quote that was verified against the page (or, for official statistics, the row as the API returned it), the
+url, and when it was retrieved, so the user can check it and the Council can cite it as labelled reference. Entries
+from every research run accumulate per pack and geography in data/resources/ and are deduplicated by (url, quote).
 """
 from __future__ import annotations
 
@@ -32,6 +32,7 @@ TOPIC_OF_KIND = {
 
 class Resource(BaseModel):
     id: str
+    kind: str = "page"  # "page" (read from a web page by the researcher) or "dataset" (official statistics via an API)
     topic: str
     claim: str
     quote: str
@@ -68,6 +69,12 @@ def from_snapshot(snap: EvidenceSnapshot) -> list[Resource]:
                  retrieved_at=snap.created_at, snapshot_id=snap.snapshot_id, value=f.value, low=f.low, high=f.high,
                  unit=f.unit, currency=f.currency)
         for f in snap.findings
+    ]
+    items += [
+        Resource(id=_id(d.url, d.quote), kind="dataset", topic="official data", claim=f"{d.name}: {d.note}",
+                 quote=d.quote, url=d.url, domain=_domain(d.url), pack=snap.pack, geography=snap.geography,
+                 retrieved_at=d.retrieved_at, snapshot_id=snap.snapshot_id, value=d.value, unit=d.unit)
+        for d in snap.datasets
     ]
     items += [
         Resource(id=_id(n.url, n.quote), topic="trends", claim=n.note, quote=n.quote, url=n.url,

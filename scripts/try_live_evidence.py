@@ -68,6 +68,11 @@ def main() -> int:
     for s in snap.trace:
         print(f"  {s.n:>2} {s.action:<10} {s.detail[:70]:<70} -> {s.result[:90]}")
 
+    if snap.datasets:
+        print(f"\nOFFICIAL STATISTICS ({len(snap.datasets)}, SingStat; shown, not applied)")
+        for d in snap.datasets:
+            print(f"  {d.name} [{d.period}]: {d.value} {d.unit}\n     {d.note}")
+
     if snap.economics:
         e = snap.economics
         print(f"\nECONOMICS (World Bank): {e.country} GDP/person PPP {e.gdp_pc_ppp:,.0f} ({e.year}) vs "
