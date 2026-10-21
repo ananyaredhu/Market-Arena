@@ -1,0 +1,23 @@
+# SYNTHETIC SELF-TEST CASE: not a real event. Its outcome is set by construction to check that the backtest
+# plumbing works (load, simulate, score, report). It is NEVER counted in the headline accuracy.
+case_id: selftest_price_rise
+pack: saas
+status: synthetic
+question_type: direction
+question: "Plumbing self-test (not a real event). A large price rise should lower the studied product's share."
+subject: you
+scenario_before:
+  products:
+    - {id: you, label: StudyFlow, role: you, price: 7.0, features: [0.8, 0.5, 0.6, 0.3], novelty: 0.6}
+    - {id: free_tool, label: Free planner, role: competitor, price: 0.0, features: [0.1, 0.7, 0.3, 0.1], novelty: 0.0}
+    - {id: chain_app, label: ChainApp, role: competitor, price: 12.0, features: [0.6, 0.6, 0.5, 0.8], novelty: 0.2}
+    - {id: notebook_app, label: NotebookApp, role: competitor, price: 5.0, features: [0.3, 0.8, 0.4, 0.5], novelty: 0.1}
+scenario_after:
+  change: "you: price 14.0"
+  products:
+    - {id: you, label: StudyFlow, role: you, price: 14.0, features: [0.8, 0.5, 0.6, 0.3], novelty: 0.6}
+    - {id: free_tool, label: Free planner, role: competitor, price: 0.0, features: [0.1, 0.7, 0.3, 0.1], novelty: 0.0}
+    - {id: chain_app, label: ChainApp, role: competitor, price: 12.0, features: [0.6, 0.6, 0.5, 0.8], novelty: 0.2}
+    - {id: notebook_app, label: NotebookApp, role: competitor, price: 5.0, features: [0.3, 0.8, 0.4, 0.5], novelty: 0.1}
+observed_outcome: {direction: down, metric: share (synthetic)}
+limitations: Synthetic. The "observed" outcome was chosen to match what a sane model should say; it tests plumbing only.

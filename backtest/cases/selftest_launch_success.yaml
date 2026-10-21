@@ -1,0 +1,17 @@
+# SYNTHETIC SELF-TEST CASE: not a real event. Its outcome is set by construction to check that the backtest
+# plumbing works (load, simulate, score, report). It is NEVER counted in the headline accuracy.
+case_id: selftest_launch_success
+pack: saas
+status: synthetic
+question_type: success
+question: "Plumbing self-test (not a real event). A cheap, strong product should reach a 5% share."
+subject: you
+scenario_before:
+  products:
+    - {id: you, label: StudyFlow, role: you, price: 3.0, features: [0.9, 0.8, 0.7, 0.6], novelty: 0.6}
+    - {id: free_tool, label: Free planner, role: competitor, price: 0.0, features: [0.1, 0.7, 0.3, 0.1], novelty: 0.0}
+    - {id: chain_app, label: ChainApp, role: competitor, price: 12.0, features: [0.6, 0.6, 0.5, 0.8], novelty: 0.2}
+    - {id: notebook_app, label: NotebookApp, role: competitor, price: 5.0, features: [0.3, 0.8, 0.4, 0.5], novelty: 0.1}
+success: {threshold: 0.05, threshold_rationale: Synthetic threshold fixed before the run.}
+observed_outcome: {result: success, metric: share (synthetic)}
+limitations: Synthetic. The "observed" outcome was chosen to match what a sane model should say; it tests plumbing only.
