@@ -20,8 +20,9 @@ from backend.population.generator import PopulationError
 from backend.population.generator import generate_population as build_population
 from backend.population.models import PopulationRequest
 from backend.population.packs import PackError
+from backend.scenarios import context as scenario_context
 from backend.scenarios.compare import CompareError, CompareRequest, compare
-from backend.scenarios.context import DEFAULT_PROJECT, get_context
+from backend.scenarios.context import DEFAULT_PROJECT, RunContextError
 from backend.scenarios.overrides import (
     OverrideError,
     OverrideRequest,
@@ -78,10 +79,17 @@ def evidence_snapshot(snapshot_id: str, view: str = "full"):
     return council_context(snap) if view == "council" else snap.model_dump(mode="json")
 
 
+def get_context(project_id: str = DEFAULT_PROJECT, run_id: str | None = None):
+    """The market for a run (C's stored run, else the shared fixtures); an unusable stored run is a 422."""
+    try:
+        return scenario_context.get_context(project_id, run_id)
+    except RunContextError as e:
+        raise HTTPException(status_code=422, detail=str(e)) from e
+
+
 def _run_inputs(run_id: str, project_id: str = DEFAULT_PROJECT) -> tuple[dict, dict, list[dict]]:
-    """(run_result, population, options) for a run, with the project's saved human overrides applied.
-    Inputs come from scenarios.context.get_context, which is the one place to swap in C's run storage."""
-    return adjusted_view(get_context(project_id), run_id)
+    """(run_result, population, options) for a run, with the project's saved human overrides applied."""
+    return adjusted_view(get_context(project_id, run_id), run_id)
 
 
 @router.get("/runs/{run_id}/adjusted")
@@ -120,7 +128,7 @@ def add_override_route(body: OverrideRequest | None = None):
         if mock_enabled():  # bare POST in mock mode keeps the generic route checks working
             return {"status": "ok", "override": {}}
         raise HTTPException(status_code=422, detail="request body required")
-    ctx = get_context(body.project_id)
+    ctx = get_context(body.project_id, body.run_id)
     try:
         record, run = add_override(ctx, body)
     except OverrideError as e:
@@ -130,14 +138,14 @@ def add_override_route(body: OverrideRequest | None = None):
 
 
 @router.get("/overrides")
-def list_overrides(project_id: str = DEFAULT_PROJECT):
+def list_overrides(project_id: str = DEFAULT_PROJECT, run_id: str | None = None):
     """The audit trail: what is machine-generated and which human adjustments sit on top."""
-    return audit_trail(get_context(project_id))
+    return audit_trail(get_context(project_id, run_id))
 
 
 @router.delete("/overrides/{override_id}")
-def undo_override(override_id: str, project_id: str = DEFAULT_PROJECT):
-    ctx = get_context(project_id)
+def undo_override(override_id: str, project_id: str = DEFAULT_PROJECT, run_id: str | None = None):
+    ctx = get_context(project_id, run_id)
     try:
         run = remove_override(ctx, override_id)
     except KeyError as e:
@@ -155,6 +163,6 @@ def compare_scenarios(body: CompareRequest | None = None):
     With no body, B cuts your price to 3."""
     req = body or CompareRequest()
     try:
-        return compare(get_context(req.project_id), req)
+        return compare(get_context(req.project_id, req.run_id), req)
     except CompareError as e:
         raise HTTPException(status_code=422, detail=str(e)) from e

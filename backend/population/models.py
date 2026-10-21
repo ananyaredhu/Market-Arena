@@ -64,6 +64,8 @@ class PackSpec(BaseModel):
     pack: str
     label: str = ""
     currency: str = "SGD"
+    period: str | None = None  # what a price is per: "month" (saas)
+    price_unit: str | None = None  # older packs say "per visit" instead
     attributes: list[str]
     outside_id: str = "outside"
     min_outside_share: float = 0.10

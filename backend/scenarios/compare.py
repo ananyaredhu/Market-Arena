@@ -29,6 +29,7 @@ class OptionChange(BaseModel):
 
 class CompareRequest(BaseModel):
     project_id: str = "proj_1"
+    run_id: str | None = None  # compare from a stored run's market instead of the fixtures
     changes: dict[str, OptionChange] = Field(default_factory=lambda: {"you": OptionChange(price=3.0)})
     label_a: str = "Baseline"
     label_b: str | None = None
