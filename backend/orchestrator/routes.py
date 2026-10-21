@@ -31,6 +31,8 @@ class ScenarioCreateRequest(BaseModel):
     n_agents: int = Field(default=300, ge=10, le=5000)
     repeats: int = Field(default=30, ge=1, le=500)
     options: list[dict[str, Any]] | None = None
+    research: bool = False  # run the web evidence researcher first (needs SEARXNG_URL and a live LLM)
+    evidence_snapshot_id: str | None = None  # or reuse a saved evidence snapshot
 
     @field_validator("project_id")
     @classmethod
@@ -143,6 +145,8 @@ def create_scenario(body: ScenarioCreateRequest | None = None):
         seed=body.seed,
         geography=profile.get("geography") or "SG",
         product=profile,
+        research=body.research,
+        evidence_snapshot_id=body.evidence_snapshot_id,
     )
     try:
         population = Population.model_validate(generate_population(pop_request)).model_dump(mode="json")

@@ -37,6 +37,7 @@ class OverrideError(ValueError):
 # ---------------------------------------------------------------- models
 class OverrideRequest(BaseModel):
     project_id: str = "proj_1"
+    run_id: str | None = None  # the stored run being edited; its project's overrides apply (overrides are per project)
     type: Literal["lock", "edit", "segment_tune", "exclude"]
     agent_id: str | None = None
     segment_id: str | None = None
@@ -244,8 +245,8 @@ def add_override(
         before = sum(_get_param(a, req.param, attrs) for a in cur) / max(1, len(cur))
         after = before * req.factor
 
-    record = Override(**req.model_dump(), id=uuid.uuid4().hex[:8], created_at=datetime.now(UTC).isoformat(),
-                      before=before, after=after, effect="")
+    record = Override(**{**req.model_dump(), "project_id": ctx.project_id}, id=uuid.uuid4().hex[:8],
+                      created_at=datetime.now(UTC).isoformat(), before=before, after=after, effect="")
     record.effect = _describe(ctx, req, before, after)
     run, _, _ = run_with_overrides(ctx, existing + [record])  # raises OverrideError if the engine refuses
     store.save(ctx.project_id, existing + [record])

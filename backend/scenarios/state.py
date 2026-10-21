@@ -3,8 +3,8 @@
 `adjusted_view(ctx, run_id)` returns (run_result, population, options) with overrides applied. The Arena, the
 Glass-Box explain route and the adjusted-run route all use it, so every screen shows the same adjusted market.
 
-The run id "run_42_price3" is the fixture scenario where your price is cut to 3; any other id is the base scenario.
-When C's run storage exists, replace this id convention with the stored scenario's options.
+For a stored run (ctx.run_id set) the market is the run's own, and the result carries that run id. For the fixtures,
+the run id "run_42_price3" is the scenario where your price is cut to 3; any other id is the base scenario.
 """
 from __future__ import annotations
 
@@ -26,7 +26,9 @@ def adjusted_view(
 
     base = run_scenario(applied.agents, ctx.options, ctx.seed, ctx.repeats, locks=applied.locks)
     run, options = base, ctx.options
-    if run_id.endswith("price3"):
+    if ctx.run_id:
+        run["run_id"] = ctx.run_id
+    elif run_id.endswith("price3"):
         options = copy.deepcopy(ctx.options)
         next(o for o in options if o["id"] == ctx.you_id)["price"] = PRICE_CUT_FIXTURE
         run = run_scenario(applied.agents, options, ctx.seed, ctx.repeats, locks=applied.locks, prev=base)
