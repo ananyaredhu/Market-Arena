@@ -160,7 +160,7 @@ def generate_population(req: PopulationRequest | None = None) -> dict:
         source, reason, spec = "template", f"proposal rejected: {str(e).splitlines()[0]}", pack
 
     snap, evidence_note = _snapshot_for(req, pack)
-    applied = apply_evidence(spec, snap, use_trends=req.use_trends)
+    applied = apply_evidence(spec, snap)
     with_evidence = bool(applied.applied)
     if with_evidence:
         adjusted = PackSpec.model_validate(
@@ -192,6 +192,6 @@ def generate_population(req: PopulationRequest | None = None) -> dict:
             "note": evidence_note,
             "applied": applied.applied if with_evidence else [],
             "skipped": applied.skipped,
-            "advisory": applied.advisory,
+            "reference_items": (len(snap.findings) + len(snap.trend_notes)) if snap else 0,
         }
     return Population.model_validate(population).model_dump(mode="json")

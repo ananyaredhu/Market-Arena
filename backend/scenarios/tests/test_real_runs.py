@@ -122,15 +122,13 @@ def test_compare_runs_from_the_real_market_with_its_currency_and_period():
 
 def test_a_scenario_can_use_a_saved_evidence_snapshot(monkeypatch, tmp_path):
     from backend.evidence import store
-    from backend.evidence.models import EvidenceSnapshot, Finding
+    from backend.evidence.models import Economics, EvidenceSnapshot
 
     monkeypatch.setattr(store, "RUN_DIR", tmp_path / "evidence")
-    snap = EvidenceSnapshot(snapshot_id="ev_real_runs", created_at="2026-10-21T00:00:00+00:00", pack="saas",
-                            geography="SG", status="ok",
-                            findings=[Finding(kind="segment_budget", subject="budget", claim="s spend 4 to 6", low=4.0,
-                                              high=6.0, currency="SGD", quote="students spend 4 to 6 dollars",
-                                              url="https://example.com/p")])
-    store.save(snap)
+    econ = Economics(country="India", iso="IN", gdp_pc_ppp=10000, year=2025, baseline_iso="SG",
+                     baseline_gdp_pc_ppp=160000, budget_scale=0.5, source_url="https://api.worldbank.org/x")
+    store.save(EvidenceSnapshot(snapshot_id="ev_real_runs", created_at="2026-10-21T00:00:00+00:00", pack="saas",
+                                geography="SG", status="ok", economics=econ))
     project = client.post("/projects", json={"idea": IDEAS["saas"], "pack": "saas", "geography": "SG"}).json()
     r = client.post("/scenarios", json={"project_id": project["id"], "n_agents": 40, "repeats": 2,
                                         "evidence_snapshot_id": "ev_real_runs"})

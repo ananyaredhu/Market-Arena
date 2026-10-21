@@ -88,7 +88,7 @@ def main() -> int:
         return 0
     # The effect of the evidence ALONE: apply it straight to the pack's template priors (no LLM involved).
     res = apply_evidence(pack, snap)
-    print("\nEFFECT OF THE EVIDENCE ON THE TEMPLATE PRIORS (deterministic, no LLM)")
+    print("\nEFFECT OF THE EVIDENCE ON THE TEMPLATE PRIORS (datasets only; deterministic, no LLM)")
     print(f"  {'segment':<18} {'budget range':<24} {'free-tool share (incumbent mix)'}")
     for before, after in zip(pack.segments, res.segments, strict=True):
         fb = before.priors.incumbent.get("free_tool", 0.0) / sum(before.priors.incumbent.values())
@@ -99,7 +99,8 @@ def main() -> int:
     for line in res.applied:
         print("  +", line)
     print("skipped:", res.skipped or "none")
-    print("advisory (shown, never applied):", len(res.advisory))
+    print(f"reference only (not applied): {len(snap.findings)} findings and {len(snap.trend_notes)} trend notes "
+          "-> Resources library (GET /resources)")
     return 0
 
 

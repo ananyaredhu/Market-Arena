@@ -11,8 +11,10 @@ from pydantic import BaseModel
 from backend.common.fixtures import load_fixture
 from backend.common.mock import mock_enabled
 from backend.evidence.agent import research as research_evidence
+from backend.evidence.resources import list_resources
 from backend.evidence.store import council_context
 from backend.evidence.store import load as load_snapshot
+from backend.evidence.store import resources_dir as store_resources_dir
 from backend.evidence.store import save as save_snapshot
 from backend.glassbox.explain import AgentNotFound, summarize_flips
 from backend.glassbox.explain import explain_agent as build_explain
@@ -67,6 +69,19 @@ def evidence_research(body: ResearchRequest | None = None):
     except OSError:
         pass
     return snap.model_dump(mode="json")
+
+
+@router.get("/resources")
+def resources_library(pack: str | None = None, geography: str | None = None, topic: str | None = None,
+                      q: str | None = None):
+    """The Resources library: surveys, news and competitor pages the researcher read, with verified quotes and urls.
+    Reference only: nothing here ever changes a simulation prior. Filters: pack, geography, topic, q (text)."""
+    items = list_resources(store_resources_dir(), pack, geography, topic, q)
+    topics: dict[str, int] = {}
+    for r in items:
+        topics[r.topic] = topics.get(r.topic, 0) + 1
+    return {"reference_only": True, "count": len(items), "topics": topics,
+            "items": [r.model_dump() for r in items]}
 
 
 @router.get("/evidence/{snapshot_id}")
