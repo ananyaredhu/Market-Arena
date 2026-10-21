@@ -70,10 +70,19 @@ def test_free_tool_adoption_moves_the_mix_but_only_so_far():
     t = PACK.segments[0].priors.incumbent
     old = t["free_tool"] / sum(t.values())
     r = apply_evidence(PACK, snapshot(findings=[f(kind="free_tool_adoption", subject="budget", value=0.99,
-                                                  low=None, high=None)]))
+                                                  low=None, high=None, quote="99% rely on free study apps")]))
     inc = seg(r, "budget").priors.incumbent
     assert sum(inc.values()) == pytest.approx(1.0)
     assert inc["free_tool"] == pytest.approx(min(0.99, old + 0.25))
+
+
+def test_free_tool_adoption_needs_the_quote_to_talk_about_free_use():
+    # "86% use generative AI tools" is true but says nothing about free tools.
+    r = apply_evidence(PACK, snapshot(findings=[f(kind="free_tool_adoption", subject="budget", value=0.86,
+                                                  low=None, high=None,
+                                                  quote="86% of students use generative AI tools")]))
+    assert not r.applied and "free" in r.skipped[0]
+    assert seg(r, "budget").priors.incumbent == PACK.segments[0].priors.incumbent
 
 
 def test_competitor_prices_are_advisory_only():
@@ -110,10 +119,22 @@ def test_a_trend_naming_unknown_segments_changes_nothing_and_says_so():
 
 
 def test_repeated_trends_cannot_drift_past_the_bound():
-    n = TrendNote(note="cut", quote="Students are cutting back", url=URL, effect="budget_down")
-    r = apply_evidence(PACK, snapshot(trend_notes=[n] * 10))
+    notes = [TrendNote(note=f"cut {i}", quote="Students are cutting back", url=f"https://site{i}.com/a",
+                       effect="budget_down") for i in range(10)]
+    r = apply_evidence(PACK, snapshot(trend_notes=notes))
     t = PACK.segments[0].priors.budget
     assert seg(r, "budget").priors.budget[1] >= t[1] * 0.8 - 0.01
+
+
+def test_only_one_trend_per_website_counts():
+    a = TrendNote(note="google free", quote="Students are cutting back", url="https://www.news.com/a",
+                  effect="budget_down")
+    b = TrendNote(note="google free again", quote="Students are cutting back", url="https://news.com/b",
+                  effect="budget_down")
+    one = apply_evidence(PACK, snapshot(trend_notes=[a]))
+    two = apply_evidence(PACK, snapshot(trend_notes=[a, b]))
+    assert seg(two, "budget").priors.budget == seg(one, "budget").priors.budget
+    assert len(two.applied) == 1 and "news.com" in two.skipped[0]
 
 
 def test_trend_can_target_named_segments():
