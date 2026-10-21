@@ -15,7 +15,9 @@ Every change is recorded in plain words (`applied`) and the segment keeps the ur
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
+from urllib.parse import urlparse
 
 from backend.evidence.models import EvidenceSnapshot, Finding
 from backend.population.models import PackSpec, SegmentSpec
@@ -26,6 +28,12 @@ DRIFT_BOUNDS = (0.8, 1.2)
 TREND_BUDGET_STEP = 0.10
 TREND_ALPHA_STEP = 0.15
 FREE_TOOL = "free_tool"
+_FREE_WORDS = re.compile(r"\b(free|freemium|no[- ]cost|without paying|at no charge)\b", re.IGNORECASE)
+
+
+def _domain(url: str) -> str:
+    host = (urlparse(url).hostname or url).lower()
+    return host[4:] if host.startswith("www.") else host
 
 
 @dataclass
@@ -96,6 +104,12 @@ def apply_evidence(pack: PackSpec, snap: EvidenceSnapshot | None, *, use_trends:
             if f.value is None or not targets:
                 out.skipped.append(f"{f.claim}: no share or unknown segment '{f.subject}'")
                 continue
+            if not _FREE_WORDS.search(f.quote):
+                # "86% use generative AI tools" is real but is not a share using a *free* tool; the verifier only
+                # proves the number is in the source, so the fit is checked here.
+                out.skipped.append(f"{f.claim}: the quote does not mention free or no-cost use, so it is not "
+                                   "treated as free-tool adoption")
+                continue
             for s in targets:
                 inc = s.priors.incumbent
                 if FREE_TOOL not in inc:
@@ -122,16 +136,23 @@ def apply_evidence(pack: PackSpec, snap: EvidenceSnapshot | None, *, use_trends:
 
     if use_trends:
         drift = {s.id: 1.0 for s in segs}
+        seen_domains: set[str] = set()
         for n in snap.trend_notes:
             step = {"budget_down": ("budget", 1 - TREND_BUDGET_STEP), "budget_up": ("budget", 1 + TREND_BUDGET_STEP),
                     "price_sensitivity_up": ("alpha", 1 + TREND_ALPHA_STEP),
                     "price_sensitivity_down": ("alpha", 1 - TREND_ALPHA_STEP)}.get(n.effect)
             if step is None:
                 continue
+            domain = _domain(n.url)
+            if domain in seen_domains:
+                # Two stories from one site are usually the same event; counting both would double its effect.
+                out.skipped.append(f"Trend '{n.note[:80]}': another trend from {domain} is already applied")
+                continue
             hit = [s for s in segs if n.segments is None or s.id in n.segments]
             if not hit:
                 out.skipped.append(f"Trend '{n.note[:80]}': it names segments that do not exist ({n.segments})")
                 continue
+            seen_domains.add(domain)
             for s in hit:
                 kind, mult = step
                 new_drift = min(max(drift[s.id] * mult, DRIFT_BOUNDS[0]), DRIFT_BOUNDS[1])

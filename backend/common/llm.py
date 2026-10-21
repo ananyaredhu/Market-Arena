@@ -82,17 +82,35 @@ def _providers() -> list[Provider]:
     return [known[n.strip()] for n in order if n.strip() in known and known[n.strip()].api_key]
 
 
-def _http_transport(p: Provider, messages: list[dict], timeout: float) -> dict:
-    r = httpx.post(
-        f"{p.base_url}/chat/completions",
-        headers={"Authorization": f"Bearer {p.api_key}"},
-        json={"model": p.model, "messages": messages, "temperature": 0.2,
-              "response_format": {"type": "json_object"}},
+def _post(p: Provider, messages: list[dict], timeout: float, json_mode: bool) -> httpx.Response:
+    payload: dict = {"model": p.model, "messages": messages, "temperature": 0.2}
+    if json_mode:
+        payload["response_format"] = {"type": "json_object"}
+    return httpx.post(
+        f"{p.base_url}/chat/completions", headers={"Authorization": f"Bearer {p.api_key}"}, json=payload,
         timeout=timeout,
     )
+
+
+def _http_transport(p: Provider, messages: list[dict], timeout: float) -> dict:
+    r = _post(p, messages, timeout, json_mode=True)
+    if r.status_code == 400 and "json_validate_failed" in r.text:
+        # The provider's own JSON check rejected the answer (reasoning models sometimes return nothing usable in
+        # JSON mode). That is not an outage: ask once more without it. Our schema validation still applies.
+        r = _post(p, messages, timeout, json_mode=False)
     r.raise_for_status()
     body = r.json()
-    return {"text": body["choices"][0]["message"]["content"], "usage": body.get("usage", {})}
+    return {"text": body["choices"][0]["message"]["content"] or "", "usage": body.get("usage", {})}
+
+
+def _extract_json(text: str) -> str:
+    """The JSON object inside a reply, tolerating markdown fences or a sentence around it."""
+    s = text.strip()
+    if s.startswith("```"):
+        s = s.split("\n", 1)[1] if "\n" in s else s
+        s = s.rsplit("```", 1)[0].strip()
+    i, j = s.find("{"), s.rfind("}")
+    return s[i : j + 1] if i != -1 and j > i else s
 
 
 def _cache_path(key: str) -> Path:
@@ -147,7 +165,7 @@ def complete_json(
                 break
             _log_usage(p, task, out.get("usage", {}))
             try:
-                result = model.model_validate_json(out["text"])
+                result = model.model_validate_json(_extract_json(out["text"]))
             except ValidationError as e:
                 messages = base + [{"role": "assistant", "content": out["text"]},
                                    {"role": "user", "content": f"Invalid: {e}. Return corrected JSON only."}]
