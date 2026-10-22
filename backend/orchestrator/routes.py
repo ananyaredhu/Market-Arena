@@ -33,6 +33,7 @@ class ScenarioCreateRequest(BaseModel):
     options: list[dict[str, Any]] | None = None
     research: bool = False  # run the web evidence researcher first (needs SEARXNG_URL and a live LLM)
     evidence_snapshot_id: str | None = None  # or reuse a saved evidence snapshot
+    price_base_year: int | None = 2024  # the year the pack's budgets are in; budgets move with consumer prices from it
 
     @field_validator("project_id")
     @classmethod
@@ -147,6 +148,7 @@ def create_scenario(body: ScenarioCreateRequest | None = None):
         product=profile,
         research=body.research,
         evidence_snapshot_id=body.evidence_snapshot_id,
+        price_base_year=body.price_base_year,
     )
     try:
         population = Population.model_validate(generate_population(pop_request)).model_dump(mode="json")

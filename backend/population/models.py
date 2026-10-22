@@ -106,4 +106,5 @@ class PopulationRequest(BaseModel):
     product: dict | None = None  # ProductProfile-like dict from intake; used only to brief the LLM
     research: bool = False  # run the web evidence researcher first (needs SEARXNG_URL and a live LLM)
     evidence_snapshot_id: str | None = None  # reuse a saved snapshot instead of researching again
-    use_trends: bool = True  # let trend notes nudge budgets and price sensitivity (bounded)
+    price_base_year: int | None = 2024  # the year the pack's budgets are in; budgets move with consumer prices from it
+    use_trends: bool = True  # ignored: trend notes are reference only and no longer change priors

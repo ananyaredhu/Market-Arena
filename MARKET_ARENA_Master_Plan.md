@@ -300,13 +300,17 @@ def run_scenario(agents, options, seed=42):
 
 Before the segment priors are generated, a **bounded research agent** (retrieval-augmented generation over the live web) looks for real information that is useful for *this* type of startup in *this* country. It is not limited to economics. It starts from a topic checklist and picks what is relevant: competitor pricing, market size and demand, sourced behaviour statistics (e.g. "62% of students use free planners"), regulation and licensing, distribution channels and costs, seasonality, rent or supply costs, recent trends and news, and country-level economics (e.g. the World Bank API **[VERIFY free access]**).
 
+**Amendment (21 Oct): only real datasets move the simulation.** Statistics read from surveys, news, blogs and competitor pages are never fed into the priors: a page can contain a true number that measures something else (a news-subscription survey is not a study-app price sensitivity), and no check in code can judge that fit. Priors change only from real datasets and time series (numeric series from an official API or file, e.g. World Bank, SingStat, data.gov.sg), each bounded and labelled. Anything with no dataset behind it stays the pack's synthetic assumption. Everything the researcher reads from pages goes to a separate **Resources** library (verified quote, url, retrieved date, topic; `GET /resources`) that the user can browse and the Council can cite as labelled reference.
+
 How findings are used:
 
 | Finding type | Used for |
 |---|---|
-| Maps to a model parameter (price points, budget ranges, segment shares, free-alternative share) | Sets the centre and spread of the segment priors, tagged `evidence` |
-| Everything else (regulation, channels, qualitative facts) | Stored as cited `research_notes` that feed the Council, the narration context and the Experiment Kit |
-| Trends and news | Stored as `trend_notes` (see Section 6). May apply a small, bounded, user-visible, toggleable adjustment (about ±10% on budget or price sensitivity) |
+| Real dataset or time series (e.g. GDP per person for the budget scale) | Bounded, labelled adjustment of the segment priors, tagged `evidence`, with the dataset url |
+| Official statistics, Singapore only (SingStat): consumer prices (all items) | Budgets move by the full reported change from a starting year (editable, default 2024; an assumption about the year the pack's budgets are in). Never capped or skipped |
+| Official statistics: category prices and household spending | Shown as `datasets` and in Resources as official data. Household spending is per household, not per student or per visit, so it is not applied |
+| Page findings: prices, survey statistics, regulation, channels | Stored in the Resources library and as cited `research_notes` for the Council, the narration context and the Experiment Kit. **Reference only: never changes a prior** |
+| Trends and news | Stored as `trend_notes` and in Resources. **Reference only** (formerly a bounded ±10% adjustment, removed) |
 
 Rules that keep it honest:
 1. **Every number carries a source URL and a quote.** Our code (outside the agent) checks that the quote actually appears in the fetched page. If not, the number is dropped and the value stays `llm_assumption`.

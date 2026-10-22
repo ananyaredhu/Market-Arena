@@ -62,7 +62,7 @@ class Step(BaseModel):
     """One tool call in the research trace, kept so the user can see how the evidence was gathered."""
 
     n: int
-    action: Literal["search", "open", "finish", "world_bank"]
+    action: Literal["search", "open", "finish", "world_bank", "singstat"]
     detail: str
     result: str  # short summary, never the page text
 
@@ -78,6 +78,31 @@ class Economics(BaseModel):
     source_url: str
 
 
+class DatasetFact(BaseModel):
+    """One number read from an official dataset (an API table). Shown and cited; never invented by a model."""
+
+    name: str
+    source: str
+    table_id: str
+    url: str
+    period: str  # "2025" or "2023"
+    value: float
+    unit: str
+    note: str  # plain words: the change over time, or what the figure does and does not measure
+    quote: str  # the row exactly as the API returned it
+    retrieved_at: str
+
+
+class PriceIndex(BaseModel):
+    """A consumer price index as reported, one value per year, so any starting year can be compared with the latest."""
+
+    name: str
+    table_id: str
+    url: str
+    retrieved_at: str
+    values: dict[str, float]  # year -> index level, exactly as the source published it
+
+
 class EvidenceSnapshot(BaseModel):
     """Everything one research run produced. Saved with the population so a re-run reuses the same evidence."""
 
@@ -91,5 +116,7 @@ class EvidenceSnapshot(BaseModel):
     trend_notes: list[TrendNote] = Field(default_factory=list)  # verified only
     dropped: list[Dropped] = Field(default_factory=list)
     economics: Economics | None = None
+    datasets: list[DatasetFact] = Field(default_factory=list)  # official statistics shown as reference
+    price_index: PriceIndex | None = None  # all-items consumer prices; budgets move with it from the starting year
     trace: list[Step] = Field(default_factory=list)
     stats: dict = Field(default_factory=dict)  # searches, opens, seconds, llm_calls

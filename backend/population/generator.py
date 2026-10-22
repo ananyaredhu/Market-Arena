@@ -160,8 +160,10 @@ def generate_population(req: PopulationRequest | None = None) -> dict:
         source, reason, spec = "template", f"proposal rejected: {str(e).splitlines()[0]}", pack
 
     snap, evidence_note = _snapshot_for(req, pack)
-    applied = apply_evidence(spec, snap, use_trends=req.use_trends)
+    applied = apply_evidence(spec, snap, req.price_base_year)
     with_evidence = bool(applied.applied)
+    if with_evidence and evidence_note:  # web research fell back, but a dataset adjustment still applied
+        evidence_note = evidence_note.replace("original priors used", "dataset evidence still applied")
     if with_evidence:
         adjusted = PackSpec.model_validate(
             {**spec.model_dump(), "segments": [s.model_dump() for s in applied.segments]})
@@ -192,6 +194,7 @@ def generate_population(req: PopulationRequest | None = None) -> dict:
             "note": evidence_note,
             "applied": applied.applied if with_evidence else [],
             "skipped": applied.skipped,
-            "advisory": applied.advisory,
+            "price_base_year": req.price_base_year,
+            "reference_items": (len(snap.findings) + len(snap.trend_notes) + len(snap.datasets)) if snap else 0,
         }
     return Population.model_validate(population).model_dump(mode="json")
