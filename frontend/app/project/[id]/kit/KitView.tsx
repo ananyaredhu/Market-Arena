@@ -48,8 +48,10 @@ function markdownExport(kit: KitOutput, runId: string): string {
 
 export default function KitView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const runId = useSearchParams().get("run") || "run_42";
-  const requestKey = `${id}:${runId}`;
+  const requestedRunId = useSearchParams().get("run");
+  const runId = requestedRunId || (id === "proj_1" ? "run_42" : null);
+  const activeRunId = runId ?? "";
+  const requestKey = `${id}:${runId ?? ""}`;
   const [activeKey, setActiveKey] = useState(requestKey);
   const [status, setStatus] = useState<Status>("loading");
   const [error, setError] = useState<string | null>(null);
@@ -62,12 +64,13 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
   }
 
   useEffect(() => {
+    if (!runId) return;
     let cancelled = false;
-    post<CouncilOutput>(`/runs/${encodeURIComponent(runId)}/council`, { project_id: id })
+    post<CouncilOutput>(`/runs/${encodeURIComponent(activeRunId)}/council`, { project_id: id })
       .then((council) => {
         if (cancelled) return null;
-        if (council.run_id !== runId) throw new Error(`Council result is for ${council.run_id}, not ${runId}`);
-        return post<KitOutput>(`/runs/${encodeURIComponent(runId)}/kit`, { project_id: id, council });
+        if (council.run_id !== activeRunId) throw new Error(`Council result is for ${council.run_id}, not ${activeRunId}`);
+        return post<KitOutput>(`/runs/${encodeURIComponent(activeRunId)}/kit`, { project_id: id, council });
       })
       .then((nextKit) => {
         if (cancelled || !nextKit) return;
@@ -83,15 +86,24 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
     return () => {
       cancelled = true;
     };
-  }, [id, runId]);
+  }, [activeRunId, id, runId]);
+
+  if (!runId) {
+    return (
+      <PageShell glow="kit">
+        <AppHeader active="experiments" projectId={id} subtitle="Experiment Kit" />
+        <p className="text-muted">Select a completed simulation from the Arena before opening the Experiment Kit.</p>
+      </PageShell>
+    );
+  }
 
   function exportMarkdown() {
     if (!kit) return;
-    const blob = new Blob([markdownExport(kit, runId)], { type: "text/markdown" });
+    const blob = new Blob([markdownExport(kit, activeRunId)], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `experiment-kit-${runId}.md`;
+    link.download = `experiment-kit-${activeRunId}.md`;
     link.click();
     URL.revokeObjectURL(url);
   }
