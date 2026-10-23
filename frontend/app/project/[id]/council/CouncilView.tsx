@@ -14,8 +14,9 @@ type Status = "loading" | "ready" | "empty" | "error";
 
 export default function CouncilView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const runId = useSearchParams().get("run") || "run_42";
-  const requestKey = `${id}:${runId}`;
+  const requestedRunId = useSearchParams().get("run");
+  const runId = requestedRunId || (id === "proj_1" ? "run_42" : null);
+  const requestKey = `${id}:${runId ?? ""}`;
   const [activeKey, setActiveKey] = useState(requestKey);
   const [status, setStatus] = useState<Status>("loading");
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +31,7 @@ export default function CouncilView({ params }: { params: Promise<{ id: string }
   }
 
   useEffect(() => {
+    if (!runId) return;
     let cancelled = false;
     post<CouncilOutput>(`/runs/${encodeURIComponent(runId)}/council`, { project_id: id })
       .then(async (nextCouncil) => {
@@ -61,6 +63,15 @@ export default function CouncilView({ params }: { params: Promise<{ id: string }
       cancelled = true;
     };
   }, [id, runId]);
+
+  if (!runId) {
+    return (
+      <PageShell glow="council">
+        <AppHeader active="council" projectId={id} subtitle="Council" />
+        <p className="text-muted">Select a completed simulation from the Arena before opening Council.</p>
+      </PageShell>
+    );
+  }
 
   const origin = council?.scenario_origin;
   const disclaimer =
