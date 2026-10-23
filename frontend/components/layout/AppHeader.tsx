@@ -5,7 +5,7 @@ import { Pill } from "@/components/ui";
 
 import Logo from "./Logo";
 
-export type NavKey = "arena" | "council" | "history" | "compare" | "experiments";
+export type NavKey = "arena" | "council" | "history" | "compare" | "experiments" | "resources";
 
 export const DEMO_PROJECT_ID = "proj_1";
 
@@ -15,6 +15,7 @@ const NAV: { key: NavKey; label: string; href: (id: string) => string }[] = [
   { key: "history", label: "History", href: (id) => `/project/${id}/history` },
   { key: "compare", label: "Compare", href: () => "/compare" },
   { key: "experiments", label: "Experiments", href: (id) => `/project/${id}/kit` },
+  { key: "resources", label: "Resources", href: () => "/resources" },
 ];
 
 export const DISCLAIMER = "Simulated outcome under stated assumptions";
@@ -45,7 +46,7 @@ export default function AppHeader({
     <header className="flex flex-wrap items-center gap-x-6 gap-y-3">
       <Logo />
       {active && (
-        <nav className="flex gap-1.5 text-sm" aria-label="Main">
+        <nav className="flex flex-wrap gap-1.5 text-sm" aria-label="Main">
           {NAV.map((n) => (
             <Link key={n.key} href={n.href(projectId)} aria-current={n.key === active ? "page" : undefined}>
               <Pill variant={n.key === active ? "nav" : "navIdle"} className="px-3.5 py-[7px] text-sm">

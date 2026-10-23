@@ -171,6 +171,13 @@ def test_the_library_accumulates_runs_without_duplicates(tmp_path):
     assert items[0].retrieved_at >= items[1].retrieved_at  # newest first
 
 
+def test_ids_are_unique_across_packs_even_for_the_same_page_and_quote(tmp_path):
+    store.save(snapshot(snapshot_id="ev_a", findings=[f()]), tmp_path / "evidence")
+    store.save(snapshot(snapshot_id="ev_b", pack="cafe", findings=[f()]), tmp_path / "evidence")
+    items = resources.list_resources(tmp_path / "resources")
+    assert len(items) == 2 and len({r.id for r in items}) == 2
+
+
 def test_library_filters(tmp_path):
     store.save(snapshot(findings=[f(), f(kind="market_size", claim="big market", quote="a big market", url="https://x.org/")]),
                tmp_path / "evidence")

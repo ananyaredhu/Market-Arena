@@ -12,6 +12,7 @@ Everything is a **mockup on mock data**: layout, colours and motion are final-is
 | 3 | Arena Council verdict | `/project/[id]/council` | B | `app/project/[id]/council/CouncilView.tsx` |
 | 4 | Scenario compare | `/compare` | A | `app/compare/page.tsx` |
 | 5 | Experiment Kit + Telegram | `/project/[id]/kit` | B (Kit), C (Telegram) | `app/project/[id]/kit/KitView.tsx` |
+| 6 | Resources (reference library) | `/resources` | A | `app/resources/page.tsx` |
 
 `/` lists them. `/dev/arena`, `/dev/glassbox`, `/dev/council` render one component alone.
 The nav pills in the header link the screens (`components/layout/AppHeader.tsx`). Pages are not final: moving a
@@ -34,7 +35,7 @@ Build new UI from these primitives instead of writing new colours or spacing, so
 
 | Folder | Owner |
 |---|---|
-| `components/glassbox`, `components/compare`, `app/compare` | A |
+| `components/glassbox`, `components/compare`, `app/compare`, `components/resources`, `app/resources` | A |
 | `components/council`, `components/kit` | B |
 | `components/arena`, `components/intake`, `components/telegram`, `app/intake`, `app/project/[id]/ProjectView.tsx` | C |
 

@@ -11,6 +11,7 @@ const SCREENS = [
   { n: 3, title: "Arena Council verdict", href: `/project/${DEMO_PROJECT_ID}/council`, owner: "B" },
   { n: 4, title: "Scenario compare", href: "/compare", owner: "A" },
   { n: 5, title: "Experiment Kit + Telegram", href: `/project/${DEMO_PROJECT_ID}/kit`, owner: "B (Kit) + C (Telegram)" },
+  { n: 6, title: "Resources (reference library)", href: "/resources", owner: "A" },
 ];
 
 const STANDALONE = [
