@@ -128,6 +128,7 @@ export interface CouncilOutput {
   engine_source?: string;
   scenario_origin?: "demo" | "stored" | "engine" | "request" | "fixture_fallback";
   scenario_note?: string | null;
+  overrides_applied?: number;
   project_id?: string | null;
   pack?: string;
   baseline_share?: number | null;
@@ -169,6 +170,7 @@ export interface HistoryEntry {
   confidence?: "low" | "medium" | "high" | null;
   competitor_move?: { competitor_id: string; move: string; effect_on_share?: number | null } | null;
   council_available: boolean;
+  overrides_applied?: number | null;
   limitations: string[];
 }
 

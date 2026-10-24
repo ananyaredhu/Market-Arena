@@ -123,12 +123,21 @@ class FrozenSignatureAdapter:
 
     source = "engine"
 
-    def __init__(self, run_scenario: Callable[..., Any], repeats: int = 1):
+    def __init__(self, run_scenario: Callable[..., Any], repeats: int = 1, locks: Optional[dict] = None):
         self._run = run_scenario
         self._repeats = repeats
+        self._locks = locks
 
     def evaluate(self, agents: List[dict], options: List[dict], seed: int) -> EngineEvaluation:
-        result = self._run(agents, options, seed=seed, repeats=self._repeats)
+        # Locks are not on the agents. Perturbations have to use the same pins as the adjusted run,
+        # or a locked baseline would be compared with an unlocked candidate.
+        if self._locks:
+            try:
+                result = self._run(agents, options, seed, repeats=self._repeats, locks=self._locks)
+            except TypeError as exc:
+                raise EngineEvaluationError("engine cannot apply the project's choice locks") from exc
+        else:
+            result = self._run(agents, options, seed=seed, repeats=self._repeats)
         if hasattr(result, "model_dump"):
             result = result.model_dump()
         elif hasattr(result, "__dict__") and not isinstance(result, dict):
@@ -182,7 +191,7 @@ def evaluation_from_result(result: Any, *, source: str) -> EngineEvaluation:
     )
 
 
-def get_default_adapter(mode: Optional[str] = None) -> EngineAdapter:
+def get_default_adapter(mode: Optional[str] = None, locks: Optional[dict] = None) -> EngineAdapter:
     """``COUNCIL_ENGINE=mock`` is the only way to get the labelled mock.
 
     ``auto`` (default) and ``engine`` use ``engine.py``, then ``engine_ref.py``.
@@ -197,7 +206,7 @@ def get_default_adapter(mode: Optional[str] = None) -> EngineAdapter:
     for module in ("backend.engine.engine", "backend.engine.engine_ref"):
         try:
             mod = __import__(module, fromlist=["run_scenario"])
-            return FrozenSignatureAdapter(getattr(mod, "run_scenario"))
+            return FrozenSignatureAdapter(getattr(mod, "run_scenario"), locks=locks)
         except (ImportError, AttributeError) as exc:
             last_error = exc
             continue

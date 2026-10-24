@@ -93,9 +93,10 @@ def run_council(
     run_result, population: dict, options: List[dict], pack: str, *,
     adapter: Optional[EngineAdapter] = None, wording: Optional[Wording] = None, seed: Optional[int] = None,
     trend_notes: Optional[List[dict]] = None, research_notes: Optional[List[dict]] = None,
+    locks: Optional[dict] = None,
 ) -> dict:
     rr = run_result if isinstance(run_result, RunResult) else RunResult(**run_result)
-    adapter = adapter or get_default_adapter()
+    adapter = adapter or get_default_adapter(locks=locks)
     seed = rr.seed if seed is None else seed
     agents = population.get("agents", [])
     # Reuse the supplied engine result as the baseline only when perturbations use that same engine.

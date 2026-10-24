@@ -76,6 +76,7 @@ def _annotate(data: dict, resolved, result: Optional[dict] = None) -> dict:
     data["pack"] = resolved.pack
     if resolved.scenario_note:
         data["scenario_note"] = resolved.scenario_note
+    data["overrides_applied"] = resolved.overrides_applied
     if result is not None:
         data["baseline_share"] = result["measured"]["baseline_share"]
     unsupported = list(_UNSUPPORTED)
@@ -121,6 +122,7 @@ def _compute_council(run_id: str, body: Optional[CouncilRequest]) -> dict:
         resolved.pack,
         trend_notes=resolved.trend_notes,
         research_notes=resolved.research_notes,
+        locks=resolved.locks,
     )
     payload = _payload(result, resolved)
     if payload.get("run_id") != run_id:
@@ -138,6 +140,7 @@ def _compute_kit(run_id: str, body: Optional[KitRequest]) -> dict:
         resolved.pack,
         trend_notes=resolved.trend_notes,
         research_notes=resolved.research_notes,
+        locks=resolved.locks,
     )
     if result["council"].run_id != run_id:
         raise ResolutionError(409, "council run_id does not match the requested run")

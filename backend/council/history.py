@@ -1,7 +1,12 @@
 """Council decision history for one project.
 
 Reads persisted run bundles and Council snapshots. It does not call the
-simulation engine. A missing Council snapshot stays missing.
+simulation engine, and it does not reapply overrides. A missing Council
+snapshot stays missing.
+
+Overrides belong to the project, not to a run. The share in this list is the
+stored simulation. A saved verdict may have been computed with the project's
+adjustments as they stood at that moment; that count is kept on the snapshot.
 """
 from __future__ import annotations
 
@@ -63,6 +68,7 @@ def save_council_record(payload: dict) -> None:
         "baseline_share": payload.get("baseline_share"),
         "measured": payload.get("measured"),
         "scenario_note": payload.get("scenario_note"),
+        "overrides_applied": _override_count(payload.get("overrides_applied")),
     }
     path = _council_path(run_id)
     # A second council request for the same run (for example a dev double-mount)
@@ -73,6 +79,13 @@ def save_council_record(payload: dict) -> None:
         temporary.replace(path)
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def _override_count(value: Any) -> Optional[int]:
+    """A saved adjustment count. Missing and malformed values stay missing."""
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        return None
+    return value
 
 
 def _finite(value: Any) -> Optional[float]:
@@ -148,6 +161,7 @@ def _entry(bundle: dict, project_id: str) -> dict:
     label = "demo" if origin == "demo" else "live"
     created_at = bundle.get("created_at") if isinstance(bundle.get("created_at"), str) else None
     reaction = _move((council or {}).get("competitor_reaction"))
+    adjustments = _override_count((council or {}).get("overrides_applied")) if council else None
     limitations = []
     if council is None:
         missing = "Council output has not been saved for this run. "
@@ -155,6 +169,11 @@ def _entry(bundle: dict, project_id: str) -> dict:
         limitations.append(council_problem or missing)
     if metrics["metrics_note"]:
         limitations.append(metrics["metrics_note"])
+    if adjustments:
+        limitations.append(
+            f"This Council verdict was saved with {adjustments} human adjustment(s) on the project. "
+            "The share in this list is the stored simulation. Adjustments are not stored on the run."
+        )
     return {
         "run_id": run_id,
         "scenario_id": bundle.get("scenario_id") if isinstance(bundle.get("scenario_id"), str) else None,
@@ -171,6 +190,7 @@ def _entry(bundle: dict, project_id: str) -> dict:
         "confidence": (council or {}).get("confidence") if (council or {}).get("confidence") in _LEVELS else None,
         "competitor_move": reaction,
         "council_available": council is not None and bool((council or {}).get("verdict")),
+        "overrides_applied": adjustments,
         "limitations": limitations,
     }
 
@@ -390,6 +410,16 @@ def compare_runs(project_id: str, base_id: str, other_id: str) -> dict:
         limitations.append(
             "No stored pack, seed, price, or feature difference was found. "
             "That does not mean the runs are identical in every input."
+        )
+    recorded = [entry.get("overrides_applied") for entry in (base, other)]
+    if any(isinstance(count, int) and count > 0 for count in recorded):
+        limitations.append(
+            "Human adjustments are saved on the project, not on each run. "
+            "Opening the Council applies that same project list to every run. "
+            "The share change here is the difference between the two stored simulations "
+            "and does not reapply those adjustments. A change in Council wording can also come from "
+            "adjustments added or removed between the two saved verdicts. "
+            "That will not appear as a pack, seed, price, or feature difference."
         )
     return {
         "project_id": project_id,

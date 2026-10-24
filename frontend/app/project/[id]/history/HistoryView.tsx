@@ -133,6 +133,9 @@ export default function HistoryView({ params }: { params: Promise<{ id: string }
                   <p>Range: <span className="font-mono">{shareText(entry.p10)} – {shareText(entry.p90)}</span></p>
                   <p>Confidence: {entry.confidence ?? "not recorded"}</p>
                   <p>Recommended move: {moveText(entry)}</p>
+                  {typeof entry.overrides_applied === "number" && (
+                    <p>Project adjustments on the saved verdict: {entry.overrides_applied}</p>
+                  )}
                 </div>
                 <p className="text-sm text-ink">
                   {entry.verdict ?? "Council verdict has not been saved for this run."}
