@@ -16,7 +16,9 @@ export default function TelegramConsole({
   results,
   onApprove,
   onEdit,
+  live = false,
 }: {
+  live?: boolean;
   contacts: number;
   variants: string[];
   variantSizes: number[];
@@ -28,7 +30,7 @@ export default function TelegramConsole({
   return (
     <Card variant="raised" className="flex min-w-0 flex-[1_1_360px] flex-col gap-3.5">
       <div className="flex items-center justify-between">
-        <SectionLabel tone="blue">Telegram A/B console</SectionLabel>
+        <SectionLabel tone="blue">{live ? "Telegram A/B console · observed" : "Telegram A/B console · simulated"}</SectionLabel>
         <span className="font-mono text-xs text-muted">{contacts} opted-in contacts</span>
       </div>
 
@@ -40,7 +42,7 @@ export default function TelegramConsole({
             </div>
             <div className="rounded-[16px_16px_16px_4px] bg-tg p-3.5 text-sm leading-[1.45]">
               {text}
-              <div className="mt-2.5 rounded-lg bg-tg-button p-2 text-center text-[13px] font-bold">Try 14 days free</div>
+              <div className="mt-2.5 rounded-lg bg-tg-button p-2 text-center text-[13px] font-bold">{live ? "Interested · Too expensive · Learn more" : "Try 14 days free"}</div>
             </div>
           </div>
         ))}
@@ -51,13 +53,13 @@ export default function TelegramConsole({
           Nothing is sent until you approve. Only people who pressed Start on your bot receive messages, and they can send
           /stop at any time.
         </div>
-        <div className="mt-3 flex flex-wrap gap-2">
-          <Button variant="primary" onClick={onApprove}>Approve &amp; send</Button>
-          <Button variant="warn" onClick={onEdit}>Edit variants</Button>
-        </div>
+        {!live && <div className="mt-3 flex flex-wrap gap-2">
+          <Button variant="primary" disabled={!onApprove} onClick={onApprove}>Approve &amp; send</Button>
+          <Button variant="warn" disabled={!onEdit} onClick={onEdit}>Edit variants</Button>
+        </div>}
       </Card>
 
-      <SectionLabel className="mt-1">Preview of results panel · sample</SectionLabel>
+      <SectionLabel className="mt-1">{live ? "Interested / delivered · real results" : "Preview of results panel · sample"}</SectionLabel>
       <div className="flex flex-col gap-2.5">
         {results.map((r) => (
           <div key={r.variant} className="flex items-center gap-2.5 text-[13px]">
@@ -65,7 +67,7 @@ export default function TelegramConsole({
             <div className="h-3 flex-1 rounded-md bg-raised">
               <div
                 className={cx("h-3 rounded-md", r.rate === best ? "bg-accent" : "bg-slate")}
-                style={{ width: `${(r.rate / (best * 1.6)) * 100}%` }}
+                style={{ width: `${best > 0 ? (r.rate / (best * 1.6)) * 100 : 0}%` }}
               />
             </div>
             <span className="font-mono">{r.rate}%</span>
@@ -73,7 +75,7 @@ export default function TelegramConsole({
         ))}
       </div>
       <div className="text-[13px] leading-normal text-soft">
-        Tiny sample, so treat as a signal, not proof. Send it back to the Arena as evidence to re-fit the Budget segment.
+        Tiny samples are signals, not proof. Review these responses alongside the simulation before deciding what to test next.
       </div>
     </Card>
   );

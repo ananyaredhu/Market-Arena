@@ -1,4 +1,4 @@
-import { type ComponentType, Suspense } from "react";
+import { type ComponentType, Suspense, use } from "react";
 
 export type ProjectParams = Promise<{ id: string }>;
 
@@ -24,7 +24,13 @@ export default function ProjectRoute({
 }) {
   return (
     <Suspense fallback={<main className="p-8 text-muted">Loading…</main>}>
-      <View params={params} />
+      <ProjectScopedView params={params} View={View} />
     </Suspense>
   );
+}
+
+function ProjectScopedView({ params, View }: { params: ProjectParams; View: ComponentType<{ params: ProjectParams }> }) {
+  const { id } = use(params);
+  // A project change discards local selection and pending UI state in every view.
+  return <View key={id} params={params} />;
 }

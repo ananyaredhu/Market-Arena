@@ -9,7 +9,9 @@ from backend.main import app
 
 
 @pytest.fixture
-def client(monkeypatch):
+def client(monkeypatch, tmp_path):
+    monkeypatch.setenv("MARKET_ARENA_DATA_DIR", str(tmp_path / "market-data"))
+    monkeypatch.setenv("OVERRIDES_FILE", str(tmp_path / "overrides.json"))
     monkeypatch.setenv("MOCK", "1")
     monkeypatch.setenv("COUNCIL_ENGINE", "mock")
     return TestClient(app)
