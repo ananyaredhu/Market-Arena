@@ -1,6 +1,7 @@
 "use client";
 // OWNER: Person B. Screen 3: Arena Council verdict for one run.
 import { use, useEffect, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import CouncilPanel from "@/components/council/CouncilPanel";
@@ -69,7 +70,18 @@ export default function CouncilView({ params }: { params: Promise<{ id: string }
     return (
       <PageShell glow="council">
         <AppHeader active="council" projectId={id} subtitle="Council" />
-        <p className="text-muted">Select a completed simulation from the Arena before opening Council.</p>
+        <div className="flex max-w-xl flex-col gap-3">
+          <p className="text-ink">Council requires a selected simulation.</p>
+          <p className="text-sm text-muted">
+            Return to this project&apos;s Arena to choose a completed run before opening Council.
+          </p>
+          <Link
+            href={`/project/${encodeURIComponent(id)}`}
+            className="inline-flex min-h-11 w-fit items-center rounded-[10px] border border-line-3 px-[18px] text-sm text-ink hover:border-accent hover:text-accent"
+          >
+            Choose a simulation in Arena
+          </Link>
+        </div>
       </PageShell>
     );
   }

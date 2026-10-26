@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { tsLoader } from './helpers/load-ts.mjs';
@@ -74,3 +75,10 @@ for (const [name, file] of [['Kit', 'app/project/[id]/kit/KitView.tsx'], ['Counc
     assert.ok(!html.includes('run_42'));
   });
 }
+
+test('Council missing-run state links back to the selected project Arena', () => {
+  const source = fs.readFileSync('app/project/[id]/council/CouncilView.tsx', 'utf8');
+  assert.match(source, /Council requires a selected simulation/);
+  assert.match(source, /href=\{`\/project\/\$\{encodeURIComponent\(id\)\}`\}/);
+  assert.match(source, /Choose a simulation in Arena/);
+});
