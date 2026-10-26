@@ -1,7 +1,7 @@
 "use client";
 // OWNER: Person C. Live Arena for a persisted run, with an explicit shared demo mode.
 import { use, useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import Arena from "@/components/arena/Arena";
 import ScenarioPicker from "@/components/arena/ScenarioPicker";
@@ -11,6 +11,7 @@ import GlassBoxDrawer from "@/components/glassbox/GlassBoxDrawer";
 import AppHeader from "@/components/layout/AppHeader";
 import PageShell from "@/components/layout/PageShell";
 import { getAdjustedRun } from "@/lib/api";
+import { DEMO_PROJECT_ID, projectHref, selectedRunId } from "@/lib/run-context";
 import type { RunResult } from "@/lib/types";
 
 const DEMO_SCENARIOS = [
@@ -21,14 +22,21 @@ const DEMO_SCENARIOS = [
 export default function ProjectView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const requestedRunId = useSearchParams().get("run");
-  const isDemo = id === "proj_1" && !requestedRunId;
-  const [scenario, setScenario] = useState(requestedRunId ?? (isDemo ? DEMO_SCENARIOS[0].id : ""));
-  const selectedRunId = requestedRunId ?? (isDemo ? scenario : null);
-  const scenarios = isDemo
-    ? DEMO_SCENARIOS
-    : selectedRunId
-      ? [{ id: selectedRunId, label: "Live run" }]
-      : [];
+  const runId = selectedRunId(id, requestedRunId);
+  if (!runId) return (
+    <PageShell glow="arena" padded={false}>
+      <AppHeader active="arena" projectId={id} />
+      <p className="p-8 text-muted">This project has no run selected. Start a simulation from the intake screen.</p>
+    </PageShell>
+  );
+  // Changing either route ID remounts the run view before old data can render.
+  return <ArenaRun key={`${id}:${runId}`} projectId={id} selectedRunId={runId} />;
+}
+
+function ArenaRun({ projectId: id, selectedRunId }: { projectId: string; selectedRunId: string }) {
+  const router = useRouter();
+  const isDemo = id === DEMO_PROJECT_ID;
+  const scenarios = isDemo ? DEMO_SCENARIOS : [{ id: selectedRunId, label: "Live run" }];
   const [run, setRun] = useState<RunResult | null>(null);
   const [agentId, setAgentId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +45,10 @@ export default function ProjectView({ params }: { params: Promise<{ id: string }
     if (!selectedRunId) return;
     setError(null);
     getAdjustedRun(selectedRunId, id)
-      .then(setRun)
+      .then(result => {
+        if (result.run_id !== selectedRunId) throw new Error("The backend returned a different run.");
+        setRun(result);
+      })
       .catch((cause: unknown) => {
         setRun(null);
         setError(cause instanceof Error ? cause.message : "The saved simulation could not be loaded.");
@@ -50,13 +61,6 @@ export default function ProjectView({ params }: { params: Promise<{ id: string }
     })();
   }, [load]);
 
-  if (!selectedRunId) {
-    return (
-      <PageShell glow="arena" padded={false}>
-        <p className="p-8 text-muted">This project has no run selected. Start a simulation from the intake screen.</p>
-      </PageShell>
-    );
-  }
   if (error) {
     return (
       <PageShell glow="arena" padded={false}>
@@ -79,15 +83,17 @@ export default function ProjectView({ params }: { params: Promise<{ id: string }
   return (
     <PageShell glow="arena" padded={false}>
       <div className="border-b border-line px-6 py-3.5">
-        <AppHeader active="arena" projectId={id} meta={`StudyFlow · SaaS pack · ${run.run_id} · seed ${run.seed}`} />
+        <AppHeader active="arena" projectId={id} runContext={{ projectId: id, runId: selectedRunId }} meta={`StudyFlow · SaaS pack · ${run.run_id} · seed ${run.seed}`} />
       </div>
       <div className="flex flex-1 flex-wrap items-stretch">
         <aside className="flex flex-[0_0_280px] flex-col gap-6 border-r border-line p-6">
           <ScenarioPicker
             title="Scenario · price per month"
             choices={scenarios}
-            value={scenario}
-            onChange={setScenario}
+            value={selectedRunId}
+            onChange={next => {
+              if (isDemo) router.replace(projectHref(id, "arena", { projectId: id, runId: next }));
+            }}
             summary={summary}
           />
           <ShareList runResult={run} />

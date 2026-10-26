@@ -10,8 +10,9 @@ import ProfileCard from "@/components/intake/ProfileCard";
 import StepPills from "@/components/intake/StepPills";
 import AppHeader from "@/components/layout/AppHeader";
 import PageShell from "@/components/layout/PageShell";
-import { createProject, createScenario, runScenario } from "@/lib/api";
+import { createProject } from "@/lib/api";
 import { IDEA_TEXT, INTAKE_STEPS, PACKS } from "@/lib/mock/intake";
+import { startProjectSimulation } from "@/lib/intake-flow";
 import type { ProductProfile } from "@/lib/types";
 
 const AVAILABLE_PACKS = PACKS.filter((option) => option.id === "saas" || option.id === "cafe");
@@ -52,18 +53,9 @@ export default function IntakePage() {
     setRequestError(null);
     setIsRunning(true);
     try {
-      setRunStatus("Creating your market scenario…");
-      const scenario = await createScenario(projectId);
-      if (scenario.project_id !== projectId) {
-        throw new Error("The scenario was created for a different project. Please try again.");
-      }
-      setRunStatus("Running the simulation…");
-      const run = await runScenario(scenario.id);
-      if (run.project_id !== projectId || run.scenario_id !== scenario.id) {
-        throw new Error("The simulation returned mismatched project data. Please try again.");
-      }
+      const { href } = await startProjectSimulation(projectId, setRunStatus);
       setRunStatus("Simulation complete. Opening the Arena…");
-      router.push(`/project/${encodeURIComponent(projectId)}?run=${encodeURIComponent(run.run_id)}`);
+      router.push(href);
     } catch (error) {
       setRequestError(error instanceof Error ? error.message : "The simulation could not be started.");
       setRunStatus(null);

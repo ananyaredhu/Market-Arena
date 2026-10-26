@@ -8,6 +8,7 @@ import AppHeader from "@/components/layout/AppHeader";
 import PageShell from "@/components/layout/PageShell";
 import { Button } from "@/components/ui";
 import { post } from "@/lib/api";
+import { selectedRunId } from "@/lib/run-context";
 import type { CouncilOutput, KitOutput } from "@/lib/types";
 
 type Status = "loading" | "ready" | "empty" | "error";
@@ -15,7 +16,7 @@ type Status = "loading" | "ready" | "empty" | "error";
 export default function CouncilView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const requestedRunId = useSearchParams().get("run");
-  const runId = requestedRunId || (id === "proj_1" ? "run_42" : null);
+  const runId = selectedRunId(id, requestedRunId);
   const requestKey = `${id}:${runId ?? ""}`;
   const [activeKey, setActiveKey] = useState(requestKey);
   const [status, setStatus] = useState<Status>("loading");
@@ -86,6 +87,7 @@ export default function CouncilView({ params }: { params: Promise<{ id: string }
       <AppHeader
         active="council"
         projectId={id}
+        runContext={{ projectId: id, runId }}
         subtitle={`Council · ${runId}`}
         disclaimer={disclaimer}
       />

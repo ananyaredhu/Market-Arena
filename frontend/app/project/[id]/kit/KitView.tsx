@@ -9,9 +9,12 @@ import PageShell from "@/components/layout/PageShell";
 import HypothesisList from "@/components/kit/HypothesisList";
 import LandingPreview from "@/components/kit/LandingPreview";
 import TelegramConsole from "@/components/telegram/TelegramConsole";
+import LiveTelegramConsole from "@/components/telegram/LiveTelegramConsole";
 import { Button } from "@/components/ui";
 import { post } from "@/lib/api";
 import { KIT_CURRENT, KIT_DONE, KIT_STEPS, TELEGRAM } from "@/lib/mock/kit";
+import { kitPresentationNotices } from "@/components/telegram/presentation";
+import { selectedRunId } from "@/lib/run-context";
 import type { CouncilOutput, KitOutput } from "@/lib/types";
 
 type Status = "loading" | "ready" | "empty" | "error";
@@ -49,8 +52,9 @@ function markdownExport(kit: KitOutput, runId: string): string {
 export default function KitView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const requestedRunId = useSearchParams().get("run");
-  const runId = requestedRunId || (id === "proj_1" ? "run_42" : null);
+  const runId = selectedRunId(id, requestedRunId);
   const activeRunId = runId ?? "";
+  const realTelegram = process.env.NEXT_PUBLIC_TELEGRAM_MODE === "real";
   const requestKey = `${id}:${runId ?? ""}`;
   const [activeKey, setActiveKey] = useState(requestKey);
   const [status, setStatus] = useState<Status>("loading");
@@ -113,6 +117,7 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
       <AppHeader
         active="experiments"
         projectId={id}
+        runContext={{ projectId: id, runId }}
         subtitle={`Experiment Kit · ${runId}`}
         disclaimer="Proposed tests · simulation is not real demand"
         right={<Button type="button" onClick={exportMarkdown} disabled={!kit}>Export as Markdown</Button>}
@@ -127,8 +132,8 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
       {status === "ready" && kit && (
         <div className="flex flex-col gap-4">
           {kit.scenario_note && <p className="text-sm text-muted">{kit.scenario_note}</p>}
-          {kit.unsupported && kit.unsupported.length > 0 && (
-            <p className="text-sm text-muted">{kit.unsupported.join(" ")}</p>
+          {kitPresentationNotices(kit.unsupported).length > 0 && (
+            <p className="text-sm text-muted">{kitPresentationNotices(kit.unsupported).join(" ")}</p>
           )}
           <div className="flex flex-wrap items-stretch gap-5">
             <HypothesisList items={kit.hypotheses.map((text) => ({ text }))} />
@@ -139,8 +144,9 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
               assets={kit.assets}
             />
             <div className="flex min-w-0 flex-[1_1_360px] flex-col gap-2">
+              {realTelegram ? <LiveTelegramConsole key={`${id}:${runId}`} kit={kit} projectId={id} runId={runId} /> : <>
               <p className="text-sm text-muted">
-                Sample preview only. These contact counts and rates are not results for {runId}.
+                Simulated Telegram delivery only; no messages are sent. These sample contact counts and rates are not results for {runId}.
               </p>
               <TelegramConsole
                 contacts={TELEGRAM.contacts}
@@ -148,6 +154,7 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
                 variantSizes={TELEGRAM.variantSizes}
                 results={TELEGRAM.results}
               />
+              </>}
             </div>
           </div>
         </div>
