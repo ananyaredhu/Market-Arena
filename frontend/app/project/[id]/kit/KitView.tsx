@@ -9,9 +9,12 @@ import PageShell from "@/components/layout/PageShell";
 import HypothesisList from "@/components/kit/HypothesisList";
 import LandingPreview from "@/components/kit/LandingPreview";
 import TelegramConsole from "@/components/telegram/TelegramConsole";
+import LiveTelegramConsole from "@/components/telegram/LiveTelegramConsole";
 import { Button } from "@/components/ui";
 import { post } from "@/lib/api";
 import { KIT_CURRENT, KIT_DONE, KIT_STEPS, TELEGRAM } from "@/lib/mock/kit";
+import { kitPresentationNotices } from "@/components/telegram/presentation";
+import { selectedRunId } from "@/lib/run-context";
 import type { CouncilOutput, KitOutput } from "@/lib/types";
 
 type Status = "loading" | "ready" | "empty" | "error";
@@ -48,8 +51,11 @@ function markdownExport(kit: KitOutput, runId: string): string {
 
 export default function KitView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const runId = useSearchParams().get("run") || "run_42";
-  const requestKey = `${id}:${runId}`;
+  const requestedRunId = useSearchParams().get("run");
+  const runId = selectedRunId(id, requestedRunId);
+  const activeRunId = runId ?? "";
+  const realTelegram = process.env.NEXT_PUBLIC_TELEGRAM_MODE === "real";
+  const requestKey = `${id}:${runId ?? ""}`;
   const [activeKey, setActiveKey] = useState(requestKey);
   const [status, setStatus] = useState<Status>("loading");
   const [error, setError] = useState<string | null>(null);
@@ -62,12 +68,13 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
   }
 
   useEffect(() => {
+    if (!runId) return;
     let cancelled = false;
-    post<CouncilOutput>(`/runs/${encodeURIComponent(runId)}/council`, { project_id: id })
+    post<CouncilOutput>(`/runs/${encodeURIComponent(activeRunId)}/council`, { project_id: id })
       .then((council) => {
         if (cancelled) return null;
-        if (council.run_id !== runId) throw new Error(`Council result is for ${council.run_id}, not ${runId}`);
-        return post<KitOutput>(`/runs/${encodeURIComponent(runId)}/kit`, { project_id: id, council });
+        if (council.run_id !== activeRunId) throw new Error(`Council result is for ${council.run_id}, not ${activeRunId}`);
+        return post<KitOutput>(`/runs/${encodeURIComponent(activeRunId)}/kit`, { project_id: id, council });
       })
       .then((nextKit) => {
         if (cancelled || !nextKit) return;
@@ -83,15 +90,24 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
     return () => {
       cancelled = true;
     };
-  }, [id, runId]);
+  }, [activeRunId, id, runId]);
+
+  if (!runId) {
+    return (
+      <PageShell glow="kit">
+        <AppHeader active="experiments" projectId={id} subtitle="Experiment Kit" />
+        <p className="text-muted">Select a completed simulation from the Arena before opening the Experiment Kit.</p>
+      </PageShell>
+    );
+  }
 
   function exportMarkdown() {
     if (!kit) return;
-    const blob = new Blob([markdownExport(kit, runId)], { type: "text/markdown" });
+    const blob = new Blob([markdownExport(kit, activeRunId)], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `experiment-kit-${runId}.md`;
+    link.download = `experiment-kit-${activeRunId}.md`;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -101,6 +117,7 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
       <AppHeader
         active="experiments"
         projectId={id}
+        runContext={{ projectId: id, runId }}
         subtitle={`Experiment Kit · ${runId}`}
         disclaimer="Proposed tests · simulation is not real demand"
         right={<Button type="button" onClick={exportMarkdown} disabled={!kit}>Export as Markdown</Button>}
@@ -115,8 +132,8 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
       {status === "ready" && kit && (
         <div className="flex flex-col gap-4">
           {kit.scenario_note && <p className="text-sm text-muted">{kit.scenario_note}</p>}
-          {kit.unsupported && kit.unsupported.length > 0 && (
-            <p className="text-sm text-muted">{kit.unsupported.join(" ")}</p>
+          {kitPresentationNotices(kit.unsupported).length > 0 && (
+            <p className="text-sm text-muted">{kitPresentationNotices(kit.unsupported).join(" ")}</p>
           )}
           <div className="flex flex-wrap items-stretch gap-5">
             <HypothesisList items={kit.hypotheses.map((text) => ({ text }))} />
@@ -127,8 +144,9 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
               assets={kit.assets}
             />
             <div className="flex min-w-0 flex-[1_1_360px] flex-col gap-2">
+              {realTelegram ? <LiveTelegramConsole key={`${id}:${runId}`} kit={kit} projectId={id} runId={runId} /> : <>
               <p className="text-sm text-muted">
-                Sample preview only. These contact counts and rates are not results for {runId}.
+                Simulated Telegram delivery only; no messages are sent. These sample contact counts and rates are not results for {runId}.
               </p>
               <TelegramConsole
                 contacts={TELEGRAM.contacts}
@@ -136,6 +154,7 @@ export default function KitView({ params }: { params: Promise<{ id: string }> })
                 variantSizes={TELEGRAM.variantSizes}
                 results={TELEGRAM.results}
               />
+              </>}
             </div>
           </div>
         </div>

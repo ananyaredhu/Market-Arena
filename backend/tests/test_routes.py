@@ -9,7 +9,9 @@ client = TestClient(app)
 
 
 @pytest.fixture(autouse=True)
-def mock_on(monkeypatch):
+def mock_on(monkeypatch, tmp_path):
+    monkeypatch.setenv("MARKET_ARENA_DATA_DIR", str(tmp_path / "market-data"))
+    monkeypatch.setenv("OVERRIDES_FILE", str(tmp_path / "overrides.json"))
     monkeypatch.setenv("MOCK", "1")
 
 

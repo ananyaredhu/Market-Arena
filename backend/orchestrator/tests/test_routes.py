@@ -230,7 +230,9 @@ def test_missing_scenario_is_404():
 def test_mock_scenario_and_run_responses_remain_fixture_compatible(monkeypatch):
     monkeypatch.setenv("MOCK", "1")
     assert client.post("/scenarios").json()["id"] == "scn_1"
-    assert client.post("/scenarios/scn_1/run").json() == {"run_id": "run_42", "status": "done"}
+    assert client.post("/scenarios/scn_1/run").json() == {
+        "run_id": "run_42", "project_id": "proj_1", "scenario_id": "scn_1", "status": "done",
+    }
     RunResult.model_validate(client.get("/runs/run_42").json())
     assert "event: progress" in client.get("/runs/run_42/stream").text
 
@@ -239,3 +241,23 @@ def test_real_stream_is_explicitly_deferred():
     response = client.get("/runs/run_missing/stream")
     assert response.status_code == 501
     assert "synchronous runs" in response.json()["detail"]
+
+
+@pytest.mark.parametrize('mode', ['0', '1'])
+def test_intake_response_identity_contract_is_shared_by_mock_and_real(monkeypatch, mode, tmp_path):
+    monkeypatch.setenv('MOCK', mode)
+    project = create_project()
+    scenario = create_scenario(project['id']).json()
+    assert {'id', 'project_id', 'pack', 'seed', 'options'} <= scenario.keys()
+    assert scenario['project_id'] == project['id']
+    response = client.post(f"/scenarios/{scenario['id']}/run")
+    assert response.status_code == 200
+    started = response.json()
+    assert {'run_id', 'project_id', 'scenario_id', 'status'} <= started.keys()
+    assert started['project_id'] == project['id']
+    assert started['scenario_id'] == scenario['id']
+    assert started['status'] == 'done'
+    if mode == '0':
+        assert (tmp_path/'runs'/f"{started['run_id']}.json").is_file()
+    else:
+        assert not (tmp_path/'runs').exists()

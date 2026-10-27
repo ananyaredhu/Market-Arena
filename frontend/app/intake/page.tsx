@@ -1,5 +1,6 @@
 "use client";
 // OWNER: Person C. Screen 2: submit a real idea and show the extracted profile.
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import IdeaInput from "@/components/intake/IdeaInput";
@@ -9,8 +10,9 @@ import ProfileCard from "@/components/intake/ProfileCard";
 import StepPills from "@/components/intake/StepPills";
 import AppHeader from "@/components/layout/AppHeader";
 import PageShell from "@/components/layout/PageShell";
-import { post } from "@/lib/api";
+import { createProject } from "@/lib/api";
 import { IDEA_TEXT, INTAKE_STEPS, PACKS } from "@/lib/mock/intake";
+import { startProjectSimulation } from "@/lib/intake-flow";
 import type { ProductProfile } from "@/lib/types";
 
 const AVAILABLE_PACKS = PACKS.filter((option) => option.id === "saas" || option.id === "cafe");
@@ -22,6 +24,9 @@ export default function IntakePage() {
   const [validationError, setValidationError] = useState<string | null>(null);
   const [requestError, setRequestError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+  const [runStatus, setRunStatus] = useState<string | null>(null);
+  const router = useRouter();
 
   async function submitIdea(idea: string) {
     if (!idea.trim()) {
@@ -33,13 +38,29 @@ export default function IntakePage() {
     setRequestError(null);
     setIsSubmitting(true);
     try {
-      const result = await post<{ id: string; profile: ProductProfile }>("/projects", { idea, pack });
+      const result = await createProject(idea, pack);
       setProjectId(result.id);
       setProfile(result.profile);
     } catch (error) {
       setRequestError(error instanceof Error ? error.message : "We could not build your market. Please try again.");
     } finally {
       setIsSubmitting(false);
+    }
+  }
+
+  async function startSimulation() {
+    if (!projectId || isRunning) return;
+    setRequestError(null);
+    setIsRunning(true);
+    try {
+      const { href } = await startProjectSimulation(projectId, setRunStatus);
+      setRunStatus("Simulation complete. Opening the Arena…");
+      router.push(href);
+    } catch (error) {
+      setRequestError(error instanceof Error ? error.message : "The simulation could not be started.");
+      setRunStatus(null);
+    } finally {
+      setIsRunning(false);
     }
   }
 
@@ -66,7 +87,20 @@ export default function IntakePage() {
         </section>
         <section className="flex min-w-0 flex-[1_1_400px] flex-col">
           {profile ? <ProfileCard profile={profile} /> : <p className="text-muted">Build your market to see the extracted profile.</p>}
-          {projectId && <p className="mt-2 font-mono text-xs text-muted">Project {projectId}</p>}
+          {projectId && (
+            <div className="mt-3 flex flex-col gap-2">
+              <p className="m-0 font-mono text-xs text-muted">Project {projectId}</p>
+              <button
+                type="button"
+                onClick={startSimulation}
+                disabled={isRunning}
+                className="min-h-11 rounded-[10px] bg-accent px-[18px] text-sm font-bold text-bg disabled:cursor-wait disabled:opacity-60"
+              >
+                {isRunning ? "Starting simulation…" : "Start simulation →"}
+              </button>
+              {runStatus && <p className="m-0 text-sm text-muted" role="status">{runStatus}</p>}
+            </div>
+          )}
         </section>
       </div>
 

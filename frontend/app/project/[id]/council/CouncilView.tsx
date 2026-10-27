@@ -1,6 +1,7 @@
 "use client";
 // OWNER: Person B. Screen 3: Arena Council verdict for one run.
 import { use, useEffect, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import CouncilPanel from "@/components/council/CouncilPanel";
@@ -8,14 +9,16 @@ import AppHeader from "@/components/layout/AppHeader";
 import PageShell from "@/components/layout/PageShell";
 import { Button } from "@/components/ui";
 import { post } from "@/lib/api";
+import { selectedRunId } from "@/lib/run-context";
 import type { CouncilOutput, KitOutput } from "@/lib/types";
 
 type Status = "loading" | "ready" | "empty" | "error";
 
 export default function CouncilView({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const runId = useSearchParams().get("run") || "run_42";
-  const requestKey = `${id}:${runId}`;
+  const requestedRunId = useSearchParams().get("run");
+  const runId = selectedRunId(id, requestedRunId);
+  const requestKey = `${id}:${runId ?? ""}`;
   const [activeKey, setActiveKey] = useState(requestKey);
   const [status, setStatus] = useState<Status>("loading");
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +33,7 @@ export default function CouncilView({ params }: { params: Promise<{ id: string }
   }
 
   useEffect(() => {
+    if (!runId) return;
     let cancelled = false;
     post<CouncilOutput>(`/runs/${encodeURIComponent(runId)}/council`, { project_id: id })
       .then(async (nextCouncil) => {
@@ -62,6 +66,26 @@ export default function CouncilView({ params }: { params: Promise<{ id: string }
     };
   }, [id, runId]);
 
+  if (!runId) {
+    return (
+      <PageShell glow="council">
+        <AppHeader active="council" projectId={id} subtitle="Council" />
+        <div className="flex max-w-xl flex-col gap-3">
+          <p className="text-ink">Council requires a selected simulation.</p>
+          <p className="text-sm text-muted">
+            Return to this project&apos;s Arena to choose a completed run before opening Council.
+          </p>
+          <Link
+            href={`/project/${encodeURIComponent(id)}`}
+            className="inline-flex min-h-11 w-fit items-center rounded-[10px] border border-line-3 px-[18px] text-sm text-ink hover:border-accent hover:text-accent"
+          >
+            Choose a simulation in Arena
+          </Link>
+        </div>
+      </PageShell>
+    );
+  }
+
   const origin = council?.scenario_origin;
   const disclaimer =
     origin === "demo"
@@ -75,6 +99,7 @@ export default function CouncilView({ params }: { params: Promise<{ id: string }
       <AppHeader
         active="council"
         projectId={id}
+        runContext={{ projectId: id, runId }}
         subtitle={`Council · ${runId}`}
         disclaimer={disclaimer}
       />

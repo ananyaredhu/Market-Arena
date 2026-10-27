@@ -130,7 +130,8 @@ def get_project(project_id: str):
 @router.post("/scenarios")
 def create_scenario(body: ScenarioCreateRequest | None = None):
     if mock_enabled():
-        return {"id": "scn_1", "options": load_fixture("options_saas")}
+        return {"id": "scn_1", "project_id": "proj_1", "pack": "saas",
+                "seed": load_fixture("run_result")["seed"], "options": load_fixture("options_saas")}
     if body is None:
         raise HTTPException(422, "request body is required")
     project = get_persisted_project(body.project_id)
@@ -191,7 +192,8 @@ def create_scenario(body: ScenarioCreateRequest | None = None):
 @router.post("/scenarios/{scenario_id}/run")
 def run_scenario_route(scenario_id: str):
     if mock_enabled():
-        return {"run_id": load_fixture("run_result")["run_id"], "status": "done"}
+        return {"run_id": load_fixture("run_result")["run_id"], "project_id": "proj_1",
+                "scenario_id": scenario_id, "status": "done"}
     try:
         scenario = storage.load_scenario(scenario_id)
     except storage.StoredDataError as exc:
