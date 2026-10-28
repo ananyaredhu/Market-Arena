@@ -312,3 +312,43 @@ def test_overlapping_snapshot_writes_keep_a_readable_record(isolated):
     assert saved["project_id"] == owner
     assert saved["verdict"].startswith("saved ")
     assert list((isolated / "council").glob("*.tmp")) == []
+
+
+def test_history_compares_stored_shares_not_project_adjustments(client, isolated):
+    owner = _project("StudyFlow is a planner for university students at S$9", "saas")
+    _write(isolated, _bundle("run_base", owner, share=0.2, price=9, created_at="2026-10-15T01:00:00+00:00"))
+    _write(isolated, _bundle("run_next", owner, share=0.35, price=6, created_at="2026-10-16T01:00:00+00:00"))
+    save_council_record({
+        "run_id": "run_base",
+        "project_id": owner,
+        "pack": "saas",
+        "scenario_origin": "stored",
+        "verdict": "Simulated outcome: one project adjustment is included.",
+        "confidence": "medium",
+        "competitor_reaction": {"competitor_id": "chain_app", "move": "price_cut_10", "effect_on_share": -0.04},
+        "overrides_applied": 1,
+    })
+    save_council_record({
+        "run_id": "run_next",
+        "project_id": owner,
+        "pack": "saas",
+        "scenario_origin": "stored",
+        "verdict": "Simulated outcome: two project adjustments are included.",
+        "confidence": "high",
+        "competitor_reaction": {"competitor_id": "chain_app", "move": "add_feature", "effect_on_share": -0.02},
+        "overrides_applied": 2,
+    })
+    listed = client.get(f"/projects/{owner}/council-history").json()["entries"]
+    assert [entry["share"] for entry in listed] == [0.2, 0.35]
+    assert [entry["overrides_applied"] for entry in listed] == [1, 2]
+    assert any("stored simulation" in line for line in listed[0]["limitations"])
+    compared = client.get(
+        f"/projects/{owner}/council-history/compare",
+        params={"base": "run_base", "other": "run_next"},
+    )
+    assert compared.status_code == 200
+    body = compared.json()
+    assert body["observed"]["share"]["value"] == pytest.approx(0.15)
+    assert "not on each run" in " ".join(body["limitations"])
+    assert all("override" not in item["field"] for item in body["scenario_differences"])
+    assert any(item["field"] == "price:you" for item in body["scenario_differences"])

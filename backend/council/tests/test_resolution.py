@@ -187,6 +187,18 @@ def test_adapter_prefers_canonical_share_over_p50():
     assert evaluation.share("you") == 0.2
 
 
+def test_adapter_passes_choice_locks_into_the_engine():
+    seen = {}
+
+    def fake(agents, options, seed, repeats=1, locks=None):
+        seen["locks"] = locks
+        return {"run_id": "run_1", "totals": {"you": {"share": 0.2, "p50": 0.2, "p10": 0.1, "p90": 0.3, "count": 1}}}
+
+    locks = {"agents": {"a1": "outside"}, "segments": {}}
+    FrozenSignatureAdapter(fake, locks=locks).evaluate([{"id": "a1"}], [], seed=1)
+    assert seen["locks"] == locks
+
+
 def test_unknown_project_is_404(client, isolated, monkeypatch):
     monkeypatch.setenv("MOCK", "0")
     response = client.post("/runs/run_42/council", json={"project_id": "proj_missing"})
@@ -354,6 +366,8 @@ def test_saas_project_uses_the_same_run_as_the_arena(client, isolated, monkeypat
     after = client.post("/runs/run_42/council", json={"project_id": project["id"]})
     adjusted_after = client.get("/runs/run_42/adjusted", params={"project_id": project["id"]})
     assert after.status_code == 200
+    assert after.json()["overrides_applied"] == 1
+    assert "1 human adjustment(s) applied" in after.json()["scenario_note"]
     assert after.json()["measured"]["baseline_share"] == adjusted_after.json()["totals"]["you"]["share"]
     assert after.json()["measured"]["baseline_share"] != before.json()["measured"]["baseline_share"]
 
@@ -389,3 +403,123 @@ def test_price3_demo_kit_mentions_the_lower_price(client, isolated, monkeypatch)
     assert response.json()["scenario_origin"] == "demo"
     text = " ".join(kit.hypotheses)
     assert "S$3" in text or "3" in text
+
+
+def test_stored_run_council_uses_project_overrides_without_rewriting_the_run(client, isolated, monkeypatch):
+    """A lock lives on the project. Council must see it; history must keep the stored share."""
+    import backend.engine.engine as engine
+
+    monkeypatch.setenv("MOCK", "0")
+    monkeypatch.setenv("COUNCIL_ENGINE", "engine")
+    monkeypatch.setenv("OVERRIDES_FILE", str(isolated / "overrides.json"))
+    project = client.post("/projects", json={
+        "idea": "StudyFlow is a planner for university students at S$9",
+        "pack": "saas",
+        "geography": "SG",
+    })
+    assert project.status_code == 200, project.text
+    project_id = project.json()["id"]
+    scenario = client.post("/scenarios", json={
+        "project_id": project_id, "seed": 7, "n_agents": 30, "repeats": 1,
+    })
+    assert scenario.status_code == 200, scenario.text
+    created = client.post(f"/scenarios/{scenario.json()['id']}/run")
+    assert created.status_code == 200, created.text
+    run_id = created.json()["run_id"]
+    stored = client.get(f"/runs/{run_id}").json()
+
+    before = client.post(f"/runs/{run_id}/council", json={"project_id": project_id})
+    assert before.status_code == 200, before.text
+    assert before.json()["scenario_origin"] == "stored"
+    assert before.json()["overrides_applied"] == 0
+    assert before.json()["measured"]["baseline_share"] == stored["totals"]["you"]["share"]
+    assert "human adjustment" not in (before.json().get("scenario_note") or "")
+
+    # Pin a customer who does not already buy you. A refused pin is not saved.
+    locked = None
+    target = None
+    for choice in stored["choices"]:
+        if choice["choice"] == "you":
+            continue
+        trial = client.post("/overrides", json={
+            "project_id": project_id,
+            "run_id": run_id,
+            "type": "lock",
+            "agent_id": choice["agent_id"],
+            "option_id": "you",
+        })
+        if trial.status_code == 200:
+            locked = trial
+            target = choice["agent_id"]
+            break
+    assert locked is not None and target is not None, "no customer could be pinned to you"
+
+    seen = []
+    real = engine.run_scenario
+
+    def spy(agents, options, seed, repeats=1, **kwargs):
+        seen.append(kwargs.get("locks"))
+        return real(agents, options, seed, repeats, **kwargs)
+
+    monkeypatch.setattr(engine, "run_scenario", spy)
+    after = client.post(f"/runs/{run_id}/council", json={"project_id": project_id})
+    assert after.status_code == 200, after.text
+    adjusted = client.get(f"/runs/{run_id}/adjusted", params={"project_id": project_id})
+    assert adjusted.status_code == 200, adjusted.text
+    body = after.json()
+    assert body["overrides_applied"] == 1
+    assert body["measured"]["baseline_share"] == adjusted.json()["totals"]["you"]["share"]
+    assert body["measured"]["baseline_share"] != stored["totals"]["you"]["share"]
+    assert "1 human adjustment(s) applied" in body["scenario_note"]
+    assert "not on this run" in body["scenario_note"]
+    assert client.get(f"/runs/{run_id}").json()["choices"] == stored["choices"]
+    assert seen
+    assert all(call and call["agents"].get(target) == "you" for call in seen)
+
+    other_scenario = client.post("/scenarios", json={
+        "project_id": project_id, "seed": 7, "n_agents": 30, "repeats": 1,
+    })
+    assert other_scenario.status_code == 200, other_scenario.text
+    other = client.post(f"/scenarios/{other_scenario.json()['id']}/run")
+    assert other.status_code == 200, other.text
+    other_id = other.json()["run_id"]
+    other_council = client.post(f"/runs/{other_id}/council", json={"project_id": project_id})
+    assert other_council.status_code == 200, other_council.text
+    other_adjusted = client.get(f"/runs/{other_id}/adjusted")
+    assert other_council.json()["overrides_applied"] == 1
+    assert other_council.json()["measured"]["baseline_share"] == other_adjusted.json()["totals"]["you"]["share"]
+
+    stranger = client.post("/projects", json={
+        "idea": "Ledger is a billing tool for small clinics at S$12",
+        "pack": "saas",
+        "geography": "SG",
+    })
+    assert stranger.status_code == 200, stranger.text
+    stranger_scenario = client.post("/scenarios", json={
+        "project_id": stranger.json()["id"], "seed": 5, "n_agents": 30, "repeats": 1,
+    })
+    assert stranger_scenario.status_code == 200, stranger_scenario.text
+    stranger_run = client.post(f"/scenarios/{stranger_scenario.json()['id']}/run")
+    assert stranger_run.status_code == 200, stranger_run.text
+    stranger_council = client.post(
+        f"/runs/{stranger_run.json()['run_id']}/council",
+        json={"project_id": stranger.json()["id"]},
+    )
+    assert stranger_council.status_code == 200, stranger_council.text
+    assert stranger_council.json()["overrides_applied"] == 0
+
+    history = client.get(f"/projects/{project_id}/council-history")
+    assert history.status_code == 200, history.text
+    rows = {entry["run_id"]: entry for entry in history.json()["entries"]}
+    assert rows[run_id]["share"] == stored["totals"]["you"]["share"]
+    assert rows[run_id]["overrides_applied"] == 1
+    assert any("stored simulation" in line for line in rows[run_id]["limitations"])
+    compared = client.get(
+        f"/projects/{project_id}/council-history/compare",
+        params={"base": run_id, "other": other_id},
+    )
+    assert compared.status_code == 200, compared.text
+    report = compared.json()
+    assert report["observed"]["share"]["base"] == stored["totals"]["you"]["share"]
+    assert "not on each run" in " ".join(report["limitations"])
+    assert all("override" not in item["field"] for item in report["scenario_differences"])

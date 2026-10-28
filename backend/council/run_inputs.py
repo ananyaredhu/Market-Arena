@@ -4,7 +4,9 @@ Sources, in order:
 
 1. An explicit population and options in the request, evaluated with ``engine.py``.
 2. A bundle stored after that evaluation. It is checked again against ``engine.py``
-   and is never returned for a different project or a different scenario.
+   and is never returned for a different project or a different scenario. When the
+   run belongs to a project, that project's saved overrides are applied on top
+   through ``adjusted_view``. The stored file is not rewritten.
 3. For a live SaaS project with no stored run, Person A's current scenario view
    (the same ``adjusted_view`` the Arena and Glass-Box use), including saved overrides.
 4. With no project, the shared SaaS demo ids. Those results are computed by
@@ -46,6 +48,18 @@ SHARED_SAAS_NOTE = (
 )
 
 
+def _adjustment_note(count: int, base: Optional[str]) -> Optional[str]:
+    """Say how many project-level corrections the Council is looking at. Zero stays quiet."""
+    if count <= 0:
+        return base
+    sentence = (
+        f"{count} human adjustment(s) applied. "
+        "They are saved on this project (lock, edit, segment tune, or exclude), not on this run. "
+        "The stored simulation is left unchanged."
+    )
+    return f"{base} {sentence}" if base else sentence
+
+
 class ResolutionError(Exception):
     def __init__(self, status_code: int, detail: str):
         super().__init__(detail)
@@ -64,6 +78,9 @@ class ResolvedRun:
     trend_notes: list = field(default_factory=list)
     research_notes: list = field(default_factory=list)
     scenario_note: Optional[str] = None
+    overrides_applied: int = 0
+    # Choice locks from the project's overrides. Edits and exclusions are already in ``population``.
+    locks: Optional[dict] = None
 
 
 def _check_run_id(run_id: str) -> None:
@@ -294,32 +311,74 @@ def _store(resolved: ResolvedRun, project_id: Optional[str]) -> ResolvedRun:
     return resolved
 
 
-def _shared_saas_run(run_id: str, project_id: str, body: Any) -> Optional[ResolvedRun]:
-    """The scenario Arena and Glass-Box are showing for this project, when the run id matches."""
-    from backend.scenarios.context import get_context
+def _project_adjustments(project_id: str, run_id: str, *, stored: bool) -> tuple[dict, dict, list, Optional[dict], int]:
+    """The market Arena is showing: stored or fixture inputs, plus this project's overrides.
+
+    ``stored`` loads ``run_id`` itself. The fixture path must not pass the run id, or a file
+    with that name would replace the shared scenario.
+    """
+    from backend.scenarios.context import RunContextError, get_context
+    from backend.scenarios.overrides import apply_overrides, get_store
     from backend.scenarios.state import adjusted_view
 
-    ctx = get_context(project_id)
     try:
-        run, population, options = adjusted_view(ctx, run_id)
+        ctx = get_context(project_id, run_id if stored else None)
+    except RunContextError as exc:
+        raise ResolutionError(422, str(exc)) from exc
+    if stored and (ctx.run_id != run_id or ctx.project_id != project_id):
+        raise ResolutionError(422, f"stored run '{run_id}' could not be loaded for project '{project_id}'")
+    store = get_store()
+    overrides = store.list(ctx.project_id)
+    try:
+        run, population, options = adjusted_view(ctx, run_id, store)
     except (TypeError, ValueError, KeyError) as exc:
         raise ResolutionError(422, f"scenario could not be evaluated: {exc}") from exc
     except Exception as exc:  # noqa: BLE001
         raise ResolutionError(502, f"engine failed: {exc}") from exc
-    if run.get("run_id") != run_id:
-        return None
-    result = _as_result(run)
-    assert_matches_engine(population, options, result)
-    return ResolvedRun(
-        population=population,
-        options=options,
-        run_result=result,
-        pack=_pack_of(population, "saas"),
+    # Edits and exclusions are already in ``population``. Locks exist only as an engine argument,
+    # so later Council perturbations have to receive the same ones the adjusted run used.
+    locks = apply_overrides(ctx, overrides).locks
+    count = run.get("overrides_applied")
+    if isinstance(count, bool) or not isinstance(count, int) or count < 0:
+        count = len(overrides)
+    return _as_result(run), population, options, locks, count
+
+
+def _with_adjustments(
+    resolved: ResolvedRun, run_id: str, *, stored: bool, base_note: Optional[str], allow_other_run: bool = False,
+) -> Optional[ResolvedRun]:
+    if not resolved.project_id:
+        return resolved
+    result, population, options, locks, count = _project_adjustments(resolved.project_id, run_id, stored=stored)
+    if result.get("run_id") != run_id:
+        # The shared fixture only has run_42 and run_42_price3. A different id is not that scenario.
+        if allow_other_run:
+            return None
+        raise ResolutionError(409, f"adjusted run id is {result.get('run_id')}, not {run_id}")
+    resolved.population = population
+    resolved.options = options
+    resolved.run_result = result
+    resolved.locks = locks
+    resolved.overrides_applied = count
+    resolved.scenario_note = _adjustment_note(count, base_note)
+    resolved.pack = _pack_of(population, resolved.pack)
+    return resolved
+
+
+def _shared_saas_run(run_id: str, project_id: str, body: Any) -> Optional[ResolvedRun]:
+    """The scenario Arena and Glass-Box are showing for this project, when the run id matches."""
+    resolved = ResolvedRun(
+        population={},
+        options=[],
+        run_result={"run_id": run_id},
+        pack="saas",
         project_id=project_id,
         origin="engine",
         trend_notes=_notes(body, "trend_notes"),
         research_notes=_notes(body, "research_notes"),
-        scenario_note=SHARED_SAAS_NOTE,
+    )
+    return _with_adjustments(
+        resolved, run_id, stored=False, base_note=SHARED_SAAS_NOTE, allow_other_run=True,
     )
 
 
@@ -368,7 +427,9 @@ def resolve_run(run_id: str, body: Any, *, live: bool) -> ResolvedRun:
 
     bundle = load_bundle(run_id)
     if bundle is not None:
-        return _from_bundle(bundle, body, project_id)
+        # Check the stored draw first. Overrides are a view on top of it, not a new stored result.
+        resolved = _from_bundle(bundle, body, project_id)
+        return _with_adjustments(resolved, run_id, stored=True, base_note=resolved.scenario_note)
 
     if project is not None:
         if project_pack == "saas":
