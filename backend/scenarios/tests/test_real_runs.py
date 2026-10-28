@@ -157,3 +157,13 @@ def test_a_scenario_moves_budgets_with_prices_from_the_chosen_starting_year(monk
     assert "+10.0% from 2024 to 2025" in applied(2024)["applied"][0]
     assert "+22.2% from 2022 to 2025" in applied(2022)["applied"][0]
     assert "no 2023 value" in applied(2023)["skipped"][0]
+
+
+@pytest.mark.parametrize("pack", ["saas", "cafe"])
+def test_price_suggestion_runs_on_the_real_market_with_its_currency_and_period(pack):
+    _, run_id = make_run(pack, n_agents=300)
+    r = client.post("/pricing/suggest", json={"run_id": run_id, "cost": 1.0})
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["period"] == ("month" if pack == "saas" else "visit") and body["customers"] == 300
+    assert body["curve"][0]["price"] >= 1.0 and len(body["curve"]) >= 14

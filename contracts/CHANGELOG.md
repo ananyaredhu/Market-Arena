@@ -4,6 +4,12 @@ Source of truth: `backend/common/contracts.py` (Pydantic). JSON schemas in this 
 with `make schemas` and checked in CI. Change rules: all three people agree, add fields as OPTIONAL
 only, update the fixtures in the same commit, add a line here.
 
+## 2026-10-27: Price suggestion (Person A) - HEADS-UP C
+- No shared shape changed. New route `POST /pricing/suggest` `{project_id, run_id, cost, min_price, max_price, steps,
+  seed, repeats}` (all optional): runs the stored market at a series of prices and returns `curve`, `suggestion` (best
+  revenue index, or profit index when `cost` is given), `band`, `notes` and `reference_prices` (real prices from the
+  Resources library, reference only). C: use it when intake finds no selling price (a project with price 0).
+
 ## 2026-10-21: Only real datasets move the priors; page evidence goes to Resources (Person A) - HEADS-UP B and C
 - No shared shape changed. Behaviour change: statistics found on web pages (surveys, news, competitor prices) no longer
   change the population. Only dataset-backed evidence does (today: World Bank GDP per person scales budgets).
