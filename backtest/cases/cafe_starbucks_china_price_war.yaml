@@ -1,0 +1,85 @@
+# REAL CASE (Person A drafting, for Person B to review): Starbucks China vs the Luckin and Cotti 9.9-yuan price war.
+#
+# PROTOCOL: this file was written, and its scenario fixed, BEFORE the simulator was run on it. Nothing here was changed
+# after seeing the simulator's answer.
+#
+# How the case is set up. The pack's prices are in Singapore dollars and its budgets are Singapore ranges, so Chinese
+# yuan prices are NOT converted at an exchange rate. Instead every price keeps its RATIO to Starbucks' price, scaled so
+# that Starbucks equals the pack's chain-café price (S$7.0):  scaled price = 7.0 x (yuan price / 30).
+#     Luckin before : 7.0 x 17.3 / 30 = 4.04          Luckin after : 7.0 x 9.9 / 30 = 2.31
+# Only the challenger's price changes between before and after. Everything else is the pack as written.
+case_id: cafe_starbucks_china_price_war
+pack: cafe
+status: sourced
+question_type: direction
+question: >
+  After Luckin and Cotti pushed 9.9-yuan coffee in 2023, did Starbucks China's comparable store sales fall (the
+  simulator should predict that a cheaper challenger takes share from the premium chain)?
+subject: chain_cafe          # the premium chain, standing in for Starbucks (it carries the pack's strong chain-café brand)
+geography: CN
+n_agents: 300
+min_effect: 0.01
+
+scenario_before:
+  notes: >
+    Premium chain (Starbucks, priced about 30 yuan) against a mid-priced challenger (Luckin, average cup 17.3 yuan),
+    with the pack's local-shop and convenience-store alternatives unchanged. The challenger is the "you" option.
+  products:
+    - {id: you, label: Luckin-like challenger, role: you, price: 4.04, features: [0.55, 0.9, 0.8, 0.2, 0.3, 0.7], novelty: 0.4}
+    - {id: chain_cafe, label: Starbucks-like premium chain, role: competitor, price: 7.0, features: [0.7, 0.7, 0.6, 0.7, 0.5, 0.8], novelty: 0.0}
+    - {id: hawker_kopi, label: Local coffee shop, role: competitor, price: 1.8, features: [0.6, 0.8, 0.8, 0.2, 0.3, 0.1], novelty: 0.0}
+    - {id: convenience_store, label: Convenience-store coffee, role: competitor, price: 2.2, features: [0.3, 0.9, 0.9, 0.1, 0.2, 0.2], novelty: 0.0}
+scenario_after:
+  change: "you (Luckin-like): price 4.04 -> 2.31 (17.3 yuan average cup -> 9.9 yuan cup); nothing else changes"
+  products:
+    - {id: you, label: Luckin-like challenger, role: you, price: 2.31, features: [0.55, 0.9, 0.8, 0.2, 0.3, 0.7], novelty: 0.4}
+    - {id: chain_cafe, label: Starbucks-like premium chain, role: competitor, price: 7.0, features: [0.7, 0.7, 0.6, 0.7, 0.5, 0.8], novelty: 0.0}
+    - {id: hawker_kopi, label: Local coffee shop, role: competitor, price: 1.8, features: [0.6, 0.8, 0.8, 0.2, 0.3, 0.1], novelty: 0.0}
+    - {id: convenience_store, label: Convenience-store coffee, role: competitor, price: 2.2, features: [0.3, 0.9, 0.9, 0.1, 0.2, 0.2], novelty: 0.0}
+
+observed_outcome:
+  direction: down
+  metric: Starbucks China comparable store sales, change on the same period a year earlier
+  value_before: 2      # fiscal 2023 (Oct 2022 to Sep 2023): comparable store sales +2%, comparable transactions +4%, average ticket -2%
+  value_after: -8      # fiscal 2024 (Oct 2023 to Sep 2024): comparable store sales -8%, average ticket -8%
+  period: Starbucks fiscal 2023 vs fiscal 2024
+  note: >
+    Fourth quarter of fiscal 2024: comparable store sales -14%, comparable transactions -6%, average ticket -8%
+    (fourth quarter of fiscal 2023 was +5%, with transactions +8%). The full-year 2024 China transactions figure was
+    not in the release. The values are growth rates, not levels.
+
+sources:
+  - url: https://www.sec.gov/Archives/edgar/data/829224/000082922424000051/sbux-9292024xexhibit991.htm
+    title: Starbucks Form 8-K, Exhibit 99.1, fourth quarter and fiscal 2024 results (primary)
+    accessed: 2026-10-28
+    supports: observed_outcome (fiscal 2024 China comparable store sales -8%, average ticket -8%; Q4 -14%, transactions -6%)
+  - url: https://www.sec.gov/Archives/edgar/data/829224/000082922423000051/sbux-1012023xexhibit991.htm
+    title: Starbucks Form 8-K, Exhibit 99.1, fourth quarter and fiscal 2023 results (primary)
+    accessed: 2026-10-28
+    supports: observed_outcome baseline (fiscal 2023 China comparable store sales +2%, transactions +4%, ticket -2%)
+  - url: https://techbuzzchina.substack.com/p/coffee-wars-how-the-arrival-of-cotti
+    title: "Tech Buzz China, Coffee Wars: how the arrival of Cotti has sparked a price war (1 Sep 2023, secondary)"
+    accessed: 2026-10-28
+    supports: scenario inputs (Luckin previous average price per cup 17.3 yuan; Luckin 9.9-yuan promotion in stores near Cotti from April 2023)
+  - url: https://eu.36kr.com/en/p/3933094227007108
+    title: 36Kr, article on the end of the 9.9-yuan era (2026, secondary)
+    accessed: 2026-10-28
+    supports: scenario input (Starbucks regular price "more than 30 yuan", undated in the article)
+
+limitations: >
+  READ BEFORE USING THIS CASE.
+  (1) The pack's priors are illustrative Singapore-written assumptions, not Chinese consumer data; prices are scaled by
+  ratio rather than converted, and that choice is an assumption. A match on this case says the structure points the
+  right way, not that the numbers fit China.
+  (2) The simulated feature scores for the Luckin-like challenger ([0.55, 0.9, 0.8, 0.2, 0.3, 0.7]) are the drafter's
+  judgement from public descriptions (many small pickup stores, app ordering, strong coupons), fixed before running.
+  They are not measured.
+  (3) The outcome is comparable store sales, which mixes transactions and average ticket. The fiscal 2024 fall includes
+  Starbucks' own discounting (average ticket -8%), not only customers leaving. The simulator predicts share, not sales.
+  (4) Confounders: China's post-COVID reopening boosted fiscal 2023, and weak consumer spending in 2024 would lower
+  sales even without a price war. Direction only; no claim about how much of the fall the price war caused.
+  (5) Not verified: when Luckin extended 9.9-yuan pricing to all stores (one search summary said June 2023; the
+  articles read did not state it), Cotti's launch date, and Starbucks' exact 2023 menu price (the 30-yuan figure is
+  undated and comes from a 2026 article; the same figure is stated for 2017 in the 2023 article). The Starbucks
+  figures were read from the SEC pages through an automatic extraction on 2026-10-28; a person should re-read the two
+  Exhibit 99.1 pages before this case is quoted externally.

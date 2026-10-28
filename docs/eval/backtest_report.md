@@ -1,17 +1,27 @@
 # Backtest report
 
-*Generated 2026-10-15 05:07 UTC · priors `cafe:d6977f09ccbf, saas:af5ec85d8bab` · 15 repeats × seeds per case · LLM baseline: off*
+*Generated 2026-10-28 12:47 UTC · priors `cafe:d6977f09ccbf, saas:af5ec85d8bab` · 15 repeats × seeds per case · LLM baseline: off*
 
 **What this tests.** Whether the simulator's predicted *direction* (a price or feature change) or *success* (a launch reaching a stated target) matches what really happened in documented real events. It is not a forecast of sales and says nothing about magnitude.
 
-## Headline
+## Headline (real, sourced cases only)
 
-**No sourced real cases have been scored yet.** 1 case(s) are waiting for sourcing: cafe_case_01. Until real cases exist there is no accuracy to report; the synthetic self-tests below only prove the plumbing works.
+| Method | Correct | Accuracy | 95% interval |
+|---|---|---|---|
+| **Market Arena simulator** | 1 / 1 | 100% | 21% to 100% |
+| Chance (fair coin over the outcomes) | n/a | 33% | |
+| Naive rule of thumb (cheaper → up, dearer → down) | 0 / 1 | 0% | 0% to 79% |
+| Majority-class guess ('down', an oracle that sees the answers) | 1 / 1 | 100% | 21% to 100% |
+
+Chance of doing at least this well by luck alone: p = 0.333 (exact binomial). Head to head with the naive rule: the simulator alone was right on 1 case(s), the naive rule alone on 0.
+
+**Read the interval, not just the percentage:** with 1 case(s) the data cannot separate a good model from a lucky one.
 
 ## Every case
 
 | Case | Question | Observed | Simulator | Seeds agree | Naive | LLM | |
 |---|---|---|---|---|---|---|---|
+| cafe_starbucks_china_price_war | After Luckin and Cotti pushed 9.9-yuan coffee in 2023, did Starbucks C | down | down (-0.9% ± 0.2%) | 60% | flat ✗ | - | right |
 | selftest_launch_fail | Plumbing self-test (not a real event). An expensive, weak product shou | fail | fail | 100% | fail ✓ | - | synthetic |
 | selftest_launch_success | Plumbing self-test (not a real event). A cheap, strong product should  | success | success | 100% | success ✓ | - | synthetic |
 | selftest_no_change | Plumbing self-test (not a real event). An unchanged market should show | flat | flat (+0.0% ± 0.0%) | 100% | flat ✓ | - | synthetic |
@@ -20,7 +30,7 @@
 
 ## Failures
 
-No real cases scored.
+None among the scored real cases.
 
 ## Plumbing self-test (synthetic, not counted above)
 
