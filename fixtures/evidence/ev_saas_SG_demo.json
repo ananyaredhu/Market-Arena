@@ -1,0 +1,455 @@
+{
+  "snapshot_id": "ev_saas_SG_demo",
+  "created_at": "2026-10-23T15:46:23+00:00",
+  "pack": "saas",
+  "geography": "SG",
+  "status": "partial",
+  "fallback_reason": null,
+  "findings": [
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "Microsoft 365 premium plan typically costs $28.99 per month.",
+      "value": 28.99,
+      "low": null,
+      "high": null,
+      "unit": "month",
+      "currency": "USD",
+      "quote": "which typically costs $28.99 a month.",
+      "url": "https://www.straitstimes.com/singapore/parenting-education/sutd-students-and-staff-get-access-to-gpt-claude-gemini-and-other-ai-models"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": "free_tool",
+      "claim": "Google AI Pro Plan will cost S$28.99 per month after the free year",
+      "value": 28.99,
+      "low": null,
+      "high": null,
+      "unit": "per month",
+      "currency": "SGD",
+      "quote": "At the end of the free period, the Google AI Pro Plan will cost S$28.99/month to continue.",
+      "url": "https://www.hardwarezone.com.sg/lifestyle/google-ai-pro-plan-singapore-students-free-subscription-2025"
+    },
+    {
+      "kind": "free_tool_adoption",
+      "subject": null,
+      "claim": "86% of Singapore students already use generative AI tools in their studies",
+      "value": 0.86,
+      "low": null,
+      "high": null,
+      "unit": null,
+      "currency": null,
+      "quote": "According to a Deloitte survey, 86% of students in Singapore already use generative AI tools in their studies.",
+      "url": "https://www.hardwarezone.com.sg/lifestyle/google-ai-pro-plan-singapore-students-free-subscription-2025"
+    },
+    {
+      "kind": "market_size",
+      "subject": null,
+      "claim": "Singapore’s Digital Economy growth reached 19.3% as of Oct 2026",
+      "value": 19.3,
+      "low": null,
+      "high": null,
+      "unit": "percent",
+      "currency": null,
+      "quote": "Singapore’s Digital Economy Continues to Grow Reaching 19.3%, with AI Adoption Deepening Among Enterprises",
+      "url": "https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/singapore-digital-economy-2026"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "MyStudyLife+ monthly subscription costs S$ 8.99",
+      "value": 8.99,
+      "low": null,
+      "high": null,
+      "unit": "month",
+      "currency": "SGD",
+      "quote": "MyStudyLife+ (1 month) S$ 8.99",
+      "url": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "MyStudyLife+ annual subscription costs S$ 49.99",
+      "value": 49.99,
+      "low": null,
+      "high": null,
+      "unit": "year",
+      "currency": "SGD",
+      "quote": "MyStudyLife+ (1 year) S$ 49.99",
+      "url": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "Family Connect 1‑Student monthly plan costs S$ 14.98",
+      "value": 14.98,
+      "low": null,
+      "high": null,
+      "unit": "month",
+      "currency": "SGD",
+      "quote": "MSL+ Family Monthly 1 Student S$ 14.98",
+      "url": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "Family Connect 2‑Student annual plan costs S$ 129.98",
+      "value": 129.98,
+      "low": null,
+      "high": null,
+      "unit": "year",
+      "currency": "SGD",
+      "quote": "Family+ 2 Students Annual S$ 129.98",
+      "url": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "Family Connect 3‑5‑Student monthly plan costs S$ 19.98",
+      "value": 19.98,
+      "low": null,
+      "high": null,
+      "unit": "month",
+      "currency": "SGD",
+      "quote": "Family+ 3-5 Students Monthly S$ 19.98",
+      "url": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "Family Connect 3‑5‑Student annual plan costs S$ 149.98",
+      "value": 149.98,
+      "low": null,
+      "high": null,
+      "unit": "year",
+      "currency": "SGD",
+      "quote": "Family + 3-5 Students Annual S$ 149.98",
+      "url": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "Tutorly costs S$49 a month",
+      "value": 49.0,
+      "low": null,
+      "high": null,
+      "unit": "per month",
+      "currency": "SGD",
+      "quote": "The Tutorly platform, which covers most subjects from primary school to junior college, costs S$49 a month.",
+      "url": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791"
+    },
+    {
+      "kind": "market_size",
+      "subject": null,
+      "claim": "Average Singapore household spends S$104.80 per month on private tuition",
+      "value": 104.8,
+      "low": null,
+      "high": null,
+      "unit": "per month",
+      "currency": "SGD",
+      "quote": "The same survey, which is conducted every five years, showed that households spent an average of S$104.80 per month on private tuition, up from S$88.40 in 2018.",
+      "url": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791"
+    }
+  ],
+  "trend_notes": [
+    {
+      "note": "Microsoft will provide free access to its Microsoft 365 premium plan for over 200,000 tertiary education students, reducing spending.",
+      "quote": "provide more than 200,000 tertiary education students in Singapore with free access to its Microsoft 365 premium plan",
+      "url": "https://www.straitstimes.com/singapore/parenting-education/sutd-students-and-staff-get-access-to-gpt-claude-gemini-and-other-ai-models",
+      "effect": "budget_down",
+      "segments": null
+    },
+    {
+      "note": "Free one-year subscription to Google AI Pro Plan reduces need for paid AI study planners among students",
+      "quote": "Students in Singapore now have the opportunity to supercharge their studies with a free one-year subscription to Google’s AI Pro Plan",
+      "url": "https://www.hardwarezone.com.sg/lifestyle/google-ai-pro-plan-singapore-students-free-subscription-2025",
+      "effect": "budget_down",
+      "segments": null
+    },
+    {
+      "note": "High adoption of generative AI tools (86%) indicates strong demand for AI study solutions",
+      "quote": "According to a Deloitte survey, 86% of students in Singapore already use generative AI tools in their studies.",
+      "url": "https://www.hardwarezone.com.sg/lifestyle/google-ai-pro-plan-singapore-students-free-subscription-2025",
+      "effect": "none",
+      "segments": null
+    },
+    {
+      "note": "AI adoption is deepening among enterprises, indicating growing interest in AI technologies.",
+      "quote": "Singapore’s Digital Economy Continues to Grow Reaching 19.3%, with AI Adoption Deepening Among Enterprises",
+      "url": "https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/singapore-digital-economy-2026",
+      "effect": "none",
+      "segments": null
+    },
+    {
+      "note": "Tutorly offers a free plan that provides sufficient maths support, suggesting some students may prefer free alternatives over paid AI planners.",
+      "quote": "He said the free version of the tool provided the maths support he needed.",
+      "url": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791",
+      "effect": "none",
+      "segments": [
+        "loyal"
+      ]
+    }
+  ],
+  "dropped": [
+    {
+      "what": "Family Connect 1‑Student annual plan costs S$ 89.98",
+      "url": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339",
+      "reason": "the quote does not appear in the source"
+    },
+    {
+      "what": "Family Connect 2‑Student monthly plan costs S$ 19.98",
+      "url": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339",
+      "reason": "the value 19.98 does not appear in the quote"
+    },
+    {
+      "what": "WizzTutor costs S$74 a month",
+      "url": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791",
+      "reason": "the quote does not appear in the source"
+    },
+    {
+      "what": "AI‑tutor market spending grew to S$1.8 billion in 2023, up from S$1.4 billion in 2018",
+      "url": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791",
+      "reason": "the quote does not appear in the source"
+    },
+    {
+      "what": "Private‑tuition hourly rates typically range from S$20 to S$120",
+      "url": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791",
+      "reason": "the quote does not appear in the source"
+    },
+    {
+      "what": "Name‑brand tuition lessons can cost up to S$172, or up to S$688 per month",
+      "url": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791",
+      "reason": "the quote does not appear in the source"
+    },
+    {
+      "what": "AI tutors are on the rise, with household spending on tutoring increasing from S$1.4 billion in 2018 to S$1.8 billion in 2023, indicating higher budget availability for AI study‑planner products.",
+      "url": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791",
+      "reason": "the quote does not appear in the source"
+    }
+  ],
+  "economics": {
+    "country": "Singapore",
+    "iso": "SG",
+    "gdp_pc_ppp": 163353.990260152,
+    "year": 2025,
+    "baseline_iso": "SG",
+    "baseline_gdp_pc_ppp": 163353.990260152,
+    "budget_scale": 1.0,
+    "source_url": "https://api.worldbank.org/v2/country/SG/indicator/NY.GDP.PCAP.PP.CD?format=json&mrnev=1"
+  },
+  "datasets": [
+    {
+      "name": "Consumer prices: All Items",
+      "source": "SingStat Table Builder",
+      "table_id": "M213801",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+      "period": "2025",
+      "value": 100.903,
+      "unit": "index (2024 = 100)",
+      "note": "+0.9% on 2024, +17.6% over 5 years",
+      "quote": "All Items, 2025: 100.903 (Index)",
+      "retrieved_at": "2026-10-23T15:46:23.713408+00:00"
+    },
+    {
+      "name": "Consumer prices: Information & Communication",
+      "source": "SingStat Table Builder",
+      "table_id": "M213801",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+      "period": "2025",
+      "value": 98.129,
+      "unit": "index (2024 = 100)",
+      "note": "-1.9% on 2024, +0.0% over 5 years",
+      "quote": "Information & Communication, 2025: 98.129 (Index)",
+      "retrieved_at": "2026-10-23T15:46:23.713408+00:00"
+    },
+    {
+      "name": "Consumer prices: Education",
+      "source": "SingStat Table Builder",
+      "table_id": "M213801",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+      "period": "2025",
+      "value": 100.69,
+      "unit": "index (2024 = 100)",
+      "note": "+0.7% on 2024, +10.4% over 5 years",
+      "quote": "Education, 2025: 100.69 (Index)",
+      "retrieved_at": "2026-10-23T15:46:23.713408+00:00"
+    },
+    {
+      "name": "Household spending: Information and Communication",
+      "source": "SingStat Household Expenditure Survey",
+      "table_id": "18005",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/18005",
+      "period": "2023",
+      "value": 270.2,
+      "unit": "S$ per resident household per month",
+      "note": "Average over all resident households, not per student or per visit (4.6% of all household spending)",
+      "quote": "Information and Communication, 2023: 270.2 (Dollar)",
+      "retrieved_at": "2026-10-23T15:46:23.713408+00:00"
+    },
+    {
+      "name": "Household spending: Education",
+      "source": "SingStat Household Expenditure Survey",
+      "table_id": "18005",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/18005",
+      "period": "2023",
+      "value": 404.2,
+      "unit": "S$ per resident household per month",
+      "note": "Average over all resident households, not per student or per visit (6.8% of all household spending)",
+      "quote": "Education, 2023: 404.2 (Dollar)",
+      "retrieved_at": "2026-10-23T15:46:23.713408+00:00"
+    }
+  ],
+  "price_index": {
+    "name": "Consumer Price Index, all items (2024 = 100)",
+    "table_id": "M213801",
+    "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+    "retrieved_at": "2026-10-23T15:46:23.715600+00:00",
+    "values": {
+      "1961": 20.953,
+      "1962": 21.046,
+      "1963": 21.494,
+      "1964": 21.848,
+      "1965": 21.902,
+      "1966": 22.345,
+      "1967": 23.057,
+      "1968": 23.223,
+      "1969": 23.196,
+      "1970": 23.263,
+      "1971": 23.7,
+      "1972": 24.208,
+      "1973": 28.957,
+      "1974": 35.433,
+      "1975": 36.346,
+      "1976": 35.657,
+      "1977": 36.793,
+      "1978": 38.289,
+      "1979": 39.822,
+      "1980": 43.223,
+      "1981": 46.763,
+      "1982": 48.595,
+      "1983": 49.1,
+      "1984": 50.378,
+      "1985": 50.626,
+      "1986": 49.926,
+      "1987": 50.168,
+      "1988": 50.932,
+      "1989": 52.1,
+      "1990": 53.898,
+      "1991": 55.752,
+      "1992": 57.003,
+      "1993": 58.309,
+      "1994": 60.114,
+      "1995": 61.15,
+      "1996": 61.994,
+      "1997": 63.248,
+      "1998": 63.076,
+      "1999": 63.091,
+      "2000": 63.942,
+      "2001": 64.59,
+      "2002": 64.337,
+      "2003": 64.651,
+      "2004": 65.732,
+      "2005": 66.043,
+      "2006": 66.681,
+      "2007": 68.088,
+      "2008": 72.606,
+      "2009": 73.033,
+      "2010": 75.099,
+      "2011": 79.043,
+      "2012": 82.664,
+      "2013": 84.618,
+      "2014": 85.493,
+      "2015": 85.046,
+      "2016": 84.596,
+      "2017": 85.084,
+      "2018": 85.457,
+      "2019": 85.942,
+      "2020": 85.794,
+      "2021": 87.781,
+      "2022": 93.163,
+      "2023": 97.666,
+      "2024": 100.0,
+      "2025": 100.903
+    }
+  },
+  "trace": [
+    {
+      "n": 0,
+      "action": "world_bank",
+      "detail": "SG",
+      "result": "GDP per capita (PPP) 163,354 in 2025; budget x1.0"
+    },
+    {
+      "n": 0,
+      "action": "singstat",
+      "detail": "SG",
+      "result": "5 official figures shown; consumer price index kept for budgets"
+    },
+    {
+      "n": 1,
+      "action": "search",
+      "detail": "university students Singapore monthly spending on AI study planner subscription price",
+      "result": "6 results"
+    },
+    {
+      "n": 2,
+      "action": "search",
+      "detail": "university students Singapore use free AI study planner instead of paying survey",
+      "result": "6 results"
+    },
+    {
+      "n": 3,
+      "action": "search",
+      "detail": "Singapore AI study planner market trend demand 2026",
+      "result": "6 results"
+    },
+    {
+      "n": 4,
+      "action": "search",
+      "detail": "AI study planner pricing plans per month Singapore",
+      "result": "6 results"
+    },
+    {
+      "n": 5,
+      "action": "open",
+      "detail": "https://www.straitstimes.com/singapore/parenting-education/sutd-students-and-staff-get-access-to-gpt-claude-gemini-and-other-ai-models",
+      "result": "6148 characters read; [spending] kept 1 findings and 1 trend notes, dropped 0"
+    },
+    {
+      "n": 6,
+      "action": "open",
+      "detail": "https://www.hardwarezone.com.sg/lifestyle/google-ai-pro-plan-singapore-students-free-subscription-2025",
+      "result": "4588 characters read; [free alternatives] kept 2 findings and 2 trend notes, dropped 0"
+    },
+    {
+      "n": 7,
+      "action": "open",
+      "detail": "https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/singapore-digital-economy-2026",
+      "result": "2566 characters read; [trends] kept 1 findings and 1 trend notes, dropped 0"
+    },
+    {
+      "n": 8,
+      "action": "open",
+      "detail": "https://apps.apple.com/sg/app/my-study-life-school-planner/id910639339",
+      "result": "23120 characters read; [competitor prices] kept 6 findings and 0 trend notes, dropped 2"
+    },
+    {
+      "n": 9,
+      "action": "open",
+      "detail": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791",
+      "result": "18737 characters read; [free alternatives] kept 2 findings and 1 trend notes, dropped 5"
+    },
+    {
+      "n": 10,
+      "action": "finish",
+      "detail": "",
+      "result": "12 verified findings, 5 trend notes from 5 page(s)"
+    }
+  ],
+  "stats": {
+    "searches": 4,
+    "opens": 5,
+    "llm_calls": 5,
+    "seconds": 76.5
+  }
+}
