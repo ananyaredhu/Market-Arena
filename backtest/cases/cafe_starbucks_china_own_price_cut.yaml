@@ -1,0 +1,80 @@
+# REAL CASE (Person A drafting, for Person B to review): Starbucks China cuts its own prices in June 2025.
+#
+# PROTOCOL: this file was written, and its scenario fixed, BEFORE the simulator was run on it.
+#
+# Same ratio method as cafe_starbucks_china_price_war: prices keep their RATIO to Starbucks' price, scaled so that
+# Starbucks' typical price (about 28 yuan on the affected drinks, see below) equals the pack's chain-café price of S$7.0.
+# The Luckin-like challenger sits at its 9.9-yuan level (7.0 x 9.9 / 30 = 2.31) in BOTH scenarios, because the price war
+# was already in place. Only Starbucks' own price changes: 7.0 -> 5.75 (23 / 28 x 7.0).
+case_id: cafe_starbucks_china_own_price_cut
+pack: cafe
+status: sourced
+question_type: direction
+question: >
+  After Starbucks China cut the price of dozens of its drinks by about 5 yuan on average in June 2025, did its
+  comparable transactions rise (a cheaper premium chain should win customers back from the discounters)?
+subject: chain_cafe          # Starbucks, the premium chain
+geography: CN
+n_agents: 300
+min_effect: 0.01
+
+scenario_before:
+  notes: >
+    The 9.9-yuan price war is in place; Starbucks sells at its usual price (taken as 28 yuan on the affected drinks).
+  products:
+    - {id: you, label: Luckin-like challenger, role: you, price: 2.31, features: [0.55, 0.9, 0.8, 0.2, 0.3, 0.7], novelty: 0.4}
+    - {id: chain_cafe, label: Starbucks-like premium chain, role: competitor, price: 7.0, features: [0.7, 0.7, 0.6, 0.7, 0.5, 0.8], novelty: 0.0}
+    - {id: hawker_kopi, label: Local coffee shop, role: competitor, price: 1.8, features: [0.6, 0.8, 0.8, 0.2, 0.3, 0.1], novelty: 0.0}
+    - {id: convenience_store, label: Convenience-store coffee, role: competitor, price: 2.2, features: [0.3, 0.9, 0.9, 0.1, 0.2, 0.2], novelty: 0.0}
+scenario_after:
+  change: "chain_cafe (Starbucks-like): price 7.0 -> 5.75 (about 28 yuan -> 23 yuan, the stated average cut of 5 yuan); nothing else changes"
+  products:
+    - {id: you, label: Luckin-like challenger, role: you, price: 2.31, features: [0.55, 0.9, 0.8, 0.2, 0.3, 0.7], novelty: 0.4}
+    - {id: chain_cafe, label: Starbucks-like premium chain, role: competitor, price: 5.75, features: [0.7, 0.7, 0.6, 0.7, 0.5, 0.8], novelty: 0.0}
+    - {id: hawker_kopi, label: Local coffee shop, role: competitor, price: 1.8, features: [0.6, 0.8, 0.8, 0.2, 0.3, 0.1], novelty: 0.0}
+    - {id: convenience_store, label: Convenience-store coffee, role: competitor, price: 2.2, features: [0.3, 0.9, 0.9, 0.1, 0.2, 0.2], novelty: 0.0}
+
+observed_outcome:
+  direction: up
+  metric: Starbucks China comparable transactions, change on the same period a year earlier
+  value_before: 4      # Q2 fiscal 2025 (Jan to Mar 2025), before the cut: comparable transactions +4%, comparable store sales 0%, average ticket -4%
+  value_after: 9       # Q4 fiscal 2025 (Jul to Sep 2025), after the cut: comparable transactions +9%, comparable store sales +2%, average ticket -7%
+  period: Starbucks Q2 fiscal 2025 vs Q4 fiscal 2025
+  note: >
+    Q3 fiscal 2025 (Apr to Jun 2025, the cut began on 10 June) was in between: transactions +6%, comparable store sales
+    +2%, average ticket -4%. The average ticket fell further after the cut (-4% to -7%), as expected from lower prices.
+    The values are growth rates, not levels.
+
+sources:
+  - url: https://www.sec.gov/Archives/edgar/data/829224/000082922425000033/sbux-03302025xexhibit991.htm
+    title: Starbucks Form 8-K, Exhibit 99.1, second quarter fiscal 2025 results (primary)
+    accessed: 2026-10-28
+    supports: observed_outcome baseline (China comparable transactions +4%, comparable store sales flat, ticket -4%)
+  - url: https://www.sec.gov/Archives/edgar/data/829224/000082922425000057/sbux-06292025xexhibit991.htm
+    title: Starbucks Form 8-K, Exhibit 99.1, third quarter fiscal 2025 results (primary)
+    accessed: 2026-10-28
+    supports: the in-between quarter (transactions +6%, comparable store sales +2%, ticket -4%)
+  - url: https://www.sec.gov/Archives/edgar/data/829224/000082922425000074/sbux-09282025xexhibit991.htm
+    title: Starbucks Form 8-K, Exhibit 99.1, fourth quarter and fiscal 2025 results (primary)
+    accessed: 2026-10-28
+    supports: observed_outcome (China comparable transactions +9%, comparable store sales +2%, ticket -7%)
+  - url: https://insideretail.asia/2025/06/10/as-competition-intensifies-starbucks-china-to-cut-drink-prices/
+    title: Inside Retail Asia, As competition intensifies, Starbucks China to cut drink prices (10 Jun 2025, secondary)
+    accessed: 2026-10-28
+    supports: scenario input (average 5-yuan cut on dozens of drinks including non-coffee drinks and Frappuccino; lowest price after the cut 23 yuan)
+
+limitations: >
+  READ BEFORE USING THIS CASE.
+  (1) LOW INFORMATION. A cheaper premium chain winning more customers is what any price-sensitive model predicts, so a
+  correct answer here is weak evidence that the simulator is good. It mainly guards against the model getting a basic
+  direction wrong.
+  (2) The cut applied to dozens of non-coffee drinks and Frappuccinos, not the whole menu. The scenario applies a
+  5-yuan-equivalent cut to the whole chain, which overstates the real change. The "about 28 yuan" starting price is
+  derived (23 yuan lowest price plus the 5-yuan average cut), not published.
+  (3) Confounders: Starbucks was also running a restructuring ("Back to Starbucks" closed 40 stores in the fourth quarter),
+  expanding stores (7,758 to 8,011), seasonal differences between a January-to-March and a July-to-September quarter,
+  and delivery growth. No share of the rise is attributed to the price cut.
+  (4) The pack's priors are illustrative Singapore-written assumptions and prices are scaled by ratio, not converted; the
+  challenger's feature scores are the drafter's judgement (see the first Starbucks case).
+  (5) The Starbucks figures were read from the SEC pages through an automatic extraction on 2026-10-28; a person should
+  re-read the three Exhibit 99.1 pages before this case is quoted externally.

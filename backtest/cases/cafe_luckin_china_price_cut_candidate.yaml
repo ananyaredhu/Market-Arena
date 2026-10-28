@@ -1,0 +1,32 @@
+# CANDIDATE CASE (Person A): Luckin Coffee's own 9.9-yuan price cut in 2023. NOT SCORED (status needs_sourcing).
+#
+# Why it is not scored yet. The outcome depends on WHICH period is measured, and choosing the period after seeing the
+# numbers would be cherry-picking. What is known so far:
+#   * Fourth quarter 2023: same-store sales growth +13.5% (against +9.2% in the same quarter of 2022); store-level margin
+#     fell to 13.5% from 21.6%, "primarily due to the decrease in average selling price". Source: Luckin Form 6-K,
+#     Exhibit 99.1 (https://www.sec.gov/Archives/edgar/data/1767582/000110465924026799/tm246705d1_ex99-1.htm),
+#     seen through a search summary only, not yet read in full.
+#   * A secondary report (not verified) puts Luckin's same-store sales at about -21% in a later period, which would point
+#     the other way. So the answer changes with the window, and the window must be fixed in advance.
+# To score it, someone must (1) fix the question and window BEFORE reading outcomes, for example "same-store sales growth
+# in each quarter of 2023", (2) read every quarter's Luckin results release, and (3) write the scenario.
+case_id: cafe_luckin_china_price_cut_candidate
+pack: cafe
+status: needs_sourcing
+question_type: direction
+question: >
+  After Luckin cut its average cup price to the 9.9-yuan level in 2023, did its same-store sales grow? (Window to be
+  fixed before outcomes are read.)
+subject: you
+geography: CN
+scenario_before:
+  products: []
+scenario_after:
+  products: []
+observed_outcome: null
+sources:
+  - url: https://www.sec.gov/Archives/edgar/data/1767582/000110465924026799/tm246705d1_ex99-1.htm
+    title: Luckin Coffee Form 6-K, Exhibit 99.1, fourth quarter and full year 2023 results (primary, not yet read in full)
+    accessed: 2026-10-28
+    supports: nothing yet; candidate only
+limitations: Candidate only. Do not score. See the comments at the top of the file.
