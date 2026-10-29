@@ -32,6 +32,7 @@ from backend.scenarios.overrides import (
     audit_trail,
     remove_override,
 )
+from backend.scenarios.pricing import PriceSuggestRequest, PricingError, suggest_price
 from backend.scenarios.state import adjusted_view
 
 router = APIRouter(tags=["simulation (A)"])
@@ -168,6 +169,20 @@ def undo_override(override_id: str, project_id: str = DEFAULT_PROJECT, run_id: s
     except OverrideError as e:
         raise HTTPException(status_code=422, detail=str(e)) from e
     return {"removed": override_id, "run": run, "audit": audit_trail(ctx)["summary"]}
+
+
+# ---------------------------------------------------------------- price suggestion
+@router.post("/pricing/suggest")
+def pricing_suggest(body: PriceSuggestRequest | None = None):
+    """Run the market at a series of prices and suggest where to start: the price with the best revenue index (or
+    profit index when `cost` is given), the band of prices within 5% of it, and the full curve. Body (all optional):
+    {project_id, run_id, cost, min_price, max_price, steps, seed, repeats}. Real prices from the Resources library
+    are returned as reference only."""
+    req = body or PriceSuggestRequest()
+    try:
+        return suggest_price(get_context(req.project_id, req.run_id), req)
+    except PricingError as e:
+        raise HTTPException(status_code=422, detail=str(e)) from e
 
 
 # ---------------------------------------------------------------- scenario compare
