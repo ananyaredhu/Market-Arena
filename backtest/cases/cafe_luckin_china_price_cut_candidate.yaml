@@ -1,4 +1,7 @@
-# CANDIDATE CASE (Person A): Luckin Coffee's own 9.9-yuan price cut in 2023. NOT SCORED (status needs_sourcing).
+# REJECTED CASE (Person A): Luckin Coffee's own 9.9-yuan price cut in 2023. NOT SCORED (status rejected).
+#
+# Rejected on 2026-10-29: the fourth-quarter 2023 same-store sales figure (+13.5%) was read while researching, so a
+# window "fixed in advance" could not be shown to be blind. Kept only as a record of what was considered.
 #
 # Why it is not scored yet. The outcome depends on WHICH period is measured, and choosing the period after seeing the
 # numbers would be cherry-picking. What is known so far:
@@ -12,7 +15,7 @@
 # in each quarter of 2023", (2) read every quarter's Luckin results release, and (3) write the scenario.
 case_id: cafe_luckin_china_price_cut_candidate
 pack: cafe
-status: needs_sourcing
+status: rejected
 question_type: direction
 question: >
   After Luckin cut its average cup price to the 9.9-yuan level in 2023, did its same-store sales grow? (Window to be

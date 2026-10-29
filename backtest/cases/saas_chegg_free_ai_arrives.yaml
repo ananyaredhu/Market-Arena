@@ -1,0 +1,72 @@
+# REAL CASE (Person A drafting, for Person B to review): a free general-purpose AI assistant arrives (ChatGPT, 30 Nov 2022)
+# and a paid student-help subscription (Chegg) loses subscribers.
+#
+# PROTOCOL: this file was written, and its scenario fixed, BEFORE the simulator was run on it. The outcome is public
+# and was read first; the scenario inputs below were NOT adjusted to fit it.
+#
+# Method. This is the first case for the SaaS pack. The subject ("you") is a paid study-help subscription priced like
+# the pack's premium app: Chegg's monthly price (US$15.95 in 2022) is mapped to the pack's chain-app level of 12.0 by
+# ratio, not converted. The change is the free tool gaining strong AI help: its ai_planning score rises from 0.1 to 0.7.
+# Nothing else changes.
+case_id: saas_chegg_free_ai_arrives
+pack: saas
+status: sourced
+question_type: direction
+question: >
+  After a free AI assistant became widely available to students (ChatGPT, November 2022), did the number of paying
+  subscribers of a paid study-help service (Chegg) fall between 2022 and 2024?
+subject: you
+geography: US
+n_agents: 300
+min_effect: 0.01
+
+scenario_before:
+  notes: >
+    Late 2022. Students choose between a paid study-help subscription (Chegg-like), a premium all-round app, a notes app,
+    and free tools that offer little AI help (ai_planning 0.1).
+  products:
+    - {id: you, label: Chegg-like paid study-help subscription, role: you, price: 12.0, features: [0.35, 0.6, 0.4, 0.15], novelty: 0.0}
+    - {id: free_tool, label: Free tool (no real AI help), role: competitor, price: 0.0, features: [0.1, 0.7, 0.3, 0.1], novelty: 0.0}
+    - {id: chain_app, label: ChainApp, role: competitor, price: 12.0, features: [0.6, 0.6, 0.5, 0.8], novelty: 0.2}
+    - {id: notebook_app, label: NotebookApp, role: competitor, price: 5.0, features: [0.3, 0.8, 0.4, 0.5], novelty: 0.1}
+scenario_after:
+  change: "free_tool (now a general AI assistant): ai_planning 0.1 -> 0.7, simplicity 0.7 -> 0.8, novelty 0.0 -> 0.5; price stays 0; nothing else changes"
+  products:
+    - {id: you, label: Chegg-like paid study-help subscription, role: you, price: 12.0, features: [0.35, 0.6, 0.4, 0.15], novelty: 0.0}
+    - {id: free_tool, label: Free general AI assistant, role: competitor, price: 0.0, features: [0.7, 0.8, 0.3, 0.1], novelty: 0.5}
+    - {id: chain_app, label: ChainApp, role: competitor, price: 12.0, features: [0.6, 0.6, 0.5, 0.8], novelty: 0.2}
+    - {id: notebook_app, label: NotebookApp, role: competitor, price: 5.0, features: [0.3, 0.8, 0.4, 0.5], novelty: 0.1}
+
+observed_outcome:
+  direction: down
+  metric: Chegg Subscription Services subscribers (customers who subscribed during the year)
+  value_before: 8.1      # millions, 2022
+  value_after: 6.6       # millions, 2024 (7.7 in 2023, about 5 percent lower than 2022; 2024 is 14 percent lower than 2023)
+  period: fiscal 2022 vs fiscal 2024
+  note: >
+    The 10-K states that in 2024 6.6 million students subscribed, down 14% from 7.7 million in 2023. The 2022 figure
+    (8.1 million) is from the same filing's comparison. The filing does not say the fall was caused by AI; it says
+    students "see generative AI products like Chat GPT and others as strong alternatives".
+
+sources:
+  - url: https://www.sec.gov/Archives/edgar/data/1364954/000136495425000013/chgg-20241231.htm
+    title: Chegg Form 10-K for fiscal 2024 (primary)
+    accessed: 2026-10-29
+    supports: observed_outcome (subscribers 8.1M in 2022, 7.7M in 2023, 6.6M in 2024) and the risk-factor statement on generative AI
+  - url: https://stocktitan.net/news/CHGG/chegg-reports-second-quarter-2022-financial-yxz8pnnduro7.html
+    title: Chegg second quarter 2022 results release, mirrored on Stock Titan (secondary copy of a company release)
+    accessed: 2026-10-29
+    supports: scenario input (Chegg Study monthly price raised from 14.95 to 15.95 dollars in mid-July 2022)
+
+limitations: >
+  READ BEFORE USING THIS CASE.
+  (1) LOW INFORMATION. A paid product losing customers when a free competitor improves is what any price-sensitive
+  model predicts, so a correct answer is weak evidence of skill. It guards against basic direction errors, no more.
+  (2) The pack is a student planner market, not homework help. Chegg's feature scores (ai_planning 0.35, simplicity 0.6,
+  privacy 0.4, integrations 0.15) and the free tool's "after" scores are the drafter's judgement, not measured.
+  (3) The price is ratio-mapped to the pack's premium-app level, not converted from dollars.
+  (4) Confounders: post-pandemic return to classrooms, Chegg's own price rises and policy on cheating, a possible
+  fall in student demand that predates ChatGPT (not checked here), and a company restructuring in 2024.
+  No share of the fall is attributed to AI.
+  (5) The 10-K was read through an automatic extraction on 2026-10-29 (first 100,000 characters of about 291,000); a
+  person should re-read the subscriber table and price source before this case is quoted externally.
