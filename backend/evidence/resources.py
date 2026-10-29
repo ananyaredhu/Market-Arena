@@ -54,8 +54,9 @@ def _domain(url: str) -> str:
     return host[4:] if host.startswith("www.") else host
 
 
-def _id(url: str, quote: str) -> str:
-    return hashlib.blake2b(f"{url}\n{quote}".encode(), digest_size=6).hexdigest()
+def _id(pack: str, geography: str, url: str, quote: str) -> str:
+    """Stable id of a quote within a pack and geography: the same page can serve two packs, as two entries."""
+    return hashlib.blake2b(f"{pack}\n{geography}\n{url}\n{quote}".encode(), digest_size=6).hexdigest()
 
 
 def _file(directory: Path, pack: str, geography: str) -> Path:
@@ -63,23 +64,26 @@ def _file(directory: Path, pack: str, geography: str) -> Path:
 
 
 def from_snapshot(snap: EvidenceSnapshot) -> list[Resource]:
+    where = dict(pack=snap.pack, geography=snap.geography, snapshot_id=snap.snapshot_id)
+
+    def key(url: str, quote: str) -> str:
+        return _id(snap.pack, snap.geography, url, quote)
+
     items = [
-        Resource(id=_id(f.url, f.quote), topic=TOPIC_OF_KIND.get(f.kind, "general"), claim=f.claim, quote=f.quote,
-                 url=f.url, domain=_domain(f.url), pack=snap.pack, geography=snap.geography,
-                 retrieved_at=snap.created_at, snapshot_id=snap.snapshot_id, value=f.value, low=f.low, high=f.high,
-                 unit=f.unit, currency=f.currency)
+        Resource(id=key(f.url, f.quote), topic=TOPIC_OF_KIND.get(f.kind, "general"), claim=f.claim, quote=f.quote,
+                 url=f.url, domain=_domain(f.url), retrieved_at=snap.created_at, value=f.value, low=f.low,
+                 high=f.high, unit=f.unit, currency=f.currency, **where)
         for f in snap.findings
     ]
     items += [
-        Resource(id=_id(d.url, d.quote), kind="dataset", topic="official data", claim=f"{d.name}: {d.note}",
-                 quote=d.quote, url=d.url, domain=_domain(d.url), pack=snap.pack, geography=snap.geography,
-                 retrieved_at=d.retrieved_at, snapshot_id=snap.snapshot_id, value=d.value, unit=d.unit)
+        Resource(id=key(d.url, d.quote), kind="dataset", topic="official data", claim=f"{d.name}: {d.note}",
+                 quote=d.quote, url=d.url, domain=_domain(d.url), retrieved_at=d.retrieved_at, value=d.value,
+                 unit=d.unit, **where)
         for d in snap.datasets
     ]
     items += [
-        Resource(id=_id(n.url, n.quote), topic="trends", claim=n.note, quote=n.quote, url=n.url,
-                 domain=_domain(n.url), pack=snap.pack, geography=snap.geography, retrieved_at=snap.created_at,
-                 snapshot_id=snap.snapshot_id)
+        Resource(id=key(n.url, n.quote), topic="trends", claim=n.note, quote=n.quote, url=n.url,
+                 domain=_domain(n.url), retrieved_at=snap.created_at, **where)
         for n in snap.trend_notes
     ]
     return items

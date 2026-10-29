@@ -6,7 +6,7 @@ import { DEMO_PROJECT_ID, projectHref, type RunContext } from "@/lib/run-context
 
 import Logo from "./Logo";
 
-export type NavKey = "arena" | "council" | "history" | "compare" | "experiments";
+export type NavKey = "arena" | "council" | "history" | "compare" | "experiments" | "resources";
 
 export { DEMO_PROJECT_ID } from "@/lib/run-context";
 
@@ -16,6 +16,7 @@ const NAV: { key: NavKey; label: string }[] = [
   { key: "history", label: "History" },
   { key: "compare", label: "Compare" },
   { key: "experiments", label: "Experiments" },
+  { key: "resources", label: "Resources" },
 ];
 
 export const DISCLAIMER = "Simulated outcome under stated assumptions";
@@ -48,7 +49,7 @@ export default function AppHeader({
     <header className="flex flex-wrap items-center gap-x-6 gap-y-3">
       <Logo />
       {active && (
-        <nav className="flex gap-1.5 text-sm" aria-label="Main">
+        <nav className="flex flex-wrap gap-1.5 text-sm" aria-label="Main">
           {NAV.map((n) => (
             <Link key={n.key} href={projectHref(projectId, n.key, runContext)} aria-current={n.key === active ? "page" : undefined}>
               <Pill variant={n.key === active ? "nav" : "navIdle"} className="px-3.5 py-[7px] text-sm">

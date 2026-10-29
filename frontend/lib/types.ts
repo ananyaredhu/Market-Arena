@@ -279,3 +279,30 @@ export interface CompareResponse {
   revenue: { revenue_a: number; revenue_b: number; change_pct: number | null; note: string };
   flip_summary_b: FlipRow[];
 }
+
+/** One entry of the Resources library (GET /resources): a quote read from a web page, or an official statistic. */
+export interface Resource {
+  id: string;
+  kind: "page" | "dataset";
+  topic: string;
+  claim: string;
+  quote: string;
+  url: string;
+  domain: string;
+  pack: string;
+  geography: string;
+  retrieved_at: string;
+  snapshot_id: string;
+  value: number | null;
+  low: number | null;
+  high: number | null;
+  unit: string | null;
+  currency: string | null;
+}
+
+export interface ResourcesResponse {
+  reference_only: true;
+  count: number;
+  topics: Record<string, number>;
+  items: Resource[];
+}
