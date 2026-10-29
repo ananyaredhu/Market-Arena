@@ -14,7 +14,7 @@ Everything is a **mockup on mock data**: layout, colours and motion are final-is
 | 5 | Experiment Kit + Telegram | `/project/[id]/kit` | B (Kit), C (Telegram) | `app/project/[id]/kit/KitView.tsx` |
 | 6 | Resources (reference library) | `/resources` | A | `app/resources/page.tsx` |
 
-`/` lists them. `/dev/arena`, `/dev/glassbox`, `/dev/council` render one component alone.
+`/` is the public landing page. `/screens` lists the product screens. `/dev/arena`, `/dev/glassbox`, `/dev/council` render one component alone.
 The nav pills in the header link the screens (`components/layout/AppHeader.tsx`). Pages are not final: moving a
 screen means changing its route folder and the `NAV` list.
 
