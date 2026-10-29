@@ -1,34 +1,77 @@
 {
   "meta": {
-    "when": "2026-10-15 05:07 UTC",
+    "when": "2026-10-28 12:55 UTC",
     "llm_baseline": false,
     "pack_fingerprints": "cafe:d6977f09ccbf, saas:af5ec85d8bab"
   },
   "summary": {
-    "real_cases_scored": 0,
-    "ours_correct": 0,
+    "real_cases_scored": 2,
+    "ours_correct": 2,
     "ours_interval": [
-      0.0,
+      0.34237195288961925,
       1.0
     ],
-    "chance_expected": 0.5,
-    "p_value_vs_chance": null,
-    "naive_correct": 0,
-    "majority_class": null,
-    "majority_correct": 0,
+    "chance_expected": 0.3333333333333333,
+    "p_value_vs_chance": 0.1111111111111111,
+    "naive_correct": 1,
+    "majority_class": "up",
+    "majority_correct": 1,
     "llm_cases": 0,
     "llm_correct": 0,
     "ours_vs_naive": {
-      "ours_only": 0,
+      "ours_only": 1,
       "naive_only": 0
     },
     "synthetic_scored": 5,
     "synthetic_correct": 5,
     "needs_sourcing": [
-      "cafe_case_01"
+      "cafe_case_01",
+      "cafe_luckin_china_price_cut_candidate"
     ]
   },
   "results": [
+    {
+      "case_id": "cafe_starbucks_china_own_price_cut",
+      "pack": "cafe",
+      "synthetic": false,
+      "question": "After Starbucks China cut the price of dozens of its drinks by about 5 yuan on average in June 2025, did its comparable transactions rise (a cheaper premium chain should win customers back from the discounters)?",
+      "question_type": "direction",
+      "observed": "up",
+      "predicted": "up",
+      "correct": true,
+      "agreement": 1.0,
+      "mean_before": 0.08266666666666667,
+      "mean_after": 0.134,
+      "mean_delta": 0.051333333333333335,
+      "sd_delta": 0.006182412330330474,
+      "naive": "up",
+      "naive_correct": true,
+      "coin": 0.3333333333333333,
+      "llm": null,
+      "llm_correct": null,
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/cafe_starbucks_china_own_price_cut.yaml"
+    },
+    {
+      "case_id": "cafe_starbucks_china_price_war",
+      "pack": "cafe",
+      "synthetic": false,
+      "question": "After Luckin and Cotti pushed 9.9-yuan coffee in 2023, did Starbucks China's comparable store sales fall (the simulator should predict that a cheaper challenger takes share from the premium chain)?",
+      "question_type": "direction",
+      "observed": "down",
+      "predicted": "down",
+      "correct": true,
+      "agreement": 0.6,
+      "mean_before": 0.09133333333333334,
+      "mean_after": 0.08266666666666667,
+      "mean_delta": -0.008666666666666673,
+      "sd_delta": 0.0016329931618554558,
+      "naive": "flat",
+      "naive_correct": false,
+      "coin": 0.3333333333333333,
+      "llm": null,
+      "llm_correct": null,
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/cafe_starbucks_china_price_war.yaml"
+    },
     {
       "case_id": "selftest_launch_fail",
       "pack": "saas",

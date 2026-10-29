@@ -22,6 +22,8 @@ from scripts.run_backtest import main as run_cli
 PATHS = default_case_paths()
 CASES, PROBLEMS = load_cases(PATHS)
 BY_ID = {c.case_id: c for c in CASES}
+# The plumbing tests below need a known set. Real cases keep being added, so they must not assume there are none.
+PLUMBING = [c for c in CASES if c.status != "sourced"]
 
 
 def raw(case_id: str) -> dict:
@@ -180,9 +182,9 @@ def test_llm_baseline_is_none_when_the_provider_fails(monkeypatch):
 
 # ---------------------------------------------------------------- scoring and the headline
 def test_synthetic_cases_never_count_in_the_headline():
-    s = summarise(evaluate(CASES), CASES)
+    s = summarise(evaluate(PLUMBING), PLUMBING)
     assert s["real_cases_scored"] == 0 and s["synthetic_scored"] == 5 and s["synthetic_correct"] == 5
-    assert s["needs_sourcing"] == ["cafe_case_01"]
+    assert "cafe_case_01" in s["needs_sourcing"]
 
 
 def test_a_wrong_prediction_is_marked_wrong_and_listed_as_a_failure():
@@ -208,9 +210,9 @@ def test_headline_reports_an_interval_and_the_comparison_with_chance():
 
 
 def test_report_says_plainly_when_there_are_no_real_cases():
-    results = evaluate(CASES)
-    s = summarise(results, CASES)
-    md = render_markdown(results, CASES, PROBLEMS, s, {"when": "now", "pack_fingerprints": "saas:x",
+    results = evaluate(PLUMBING)
+    s = summarise(results, PLUMBING)
+    md = render_markdown(results, PLUMBING, PROBLEMS, s, {"when": "now", "pack_fingerprints": "saas:x",
                                                        "llm_baseline": False})
     assert "No sourced real cases have been scored yet" in md and "cafe_case_01" in md
     assert "Plumbing self-test" in md and "5 of 5" in md
@@ -223,6 +225,20 @@ def test_write_report_creates_both_files(tmp_path):
 
 
 def test_cli_end_to_end(tmp_path, capsys):
-    assert run_cli(["--out", str(tmp_path)]) == 0
+    assert run_cli(["--out", str(tmp_path), *[c.path for c in PLUMBING]]) == 0
     out = capsys.readouterr().out
     assert "5 scored" in out and "0 real" in out and (tmp_path / "backtest_report.md").exists()
+
+
+# ---------------------------------------------------------------- the real cases that are committed
+REAL = [c for c in CASES if c.status == "sourced"]
+
+
+@pytest.mark.parametrize("case", REAL, ids=[c.case_id for c in REAL])
+def test_every_committed_real_case_is_complete_and_dated(case):
+    assert not case.synthetic and case.observed is not None and case.limitations.strip()
+    assert all(src.get("url", "").startswith("https://") and src.get("accessed") and src.get("supports")
+               for src in case.sources)
+    assert any("sec.gov" in src["url"] or "investor." in src["url"] for src in case.sources), \
+        "a real case needs at least one primary source"
+    assert case.scorable and case.scenario_before.products
