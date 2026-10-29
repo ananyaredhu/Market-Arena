@@ -62,7 +62,7 @@ class Step(BaseModel):
     """One tool call in the research trace, kept so the user can see how the evidence was gathered."""
 
     n: int
-    action: Literal["search", "open", "finish", "world_bank", "singstat"]
+    action: Literal["search", "open", "finish", "world_bank", "singstat", "eurostat", "bls"]
     detail: str
     result: str  # short summary, never the page text
 
@@ -101,6 +101,7 @@ class PriceIndex(BaseModel):
     url: str
     retrieved_at: str
     values: dict[str, float]  # year -> index level, exactly as the source published it
+    source: str = "SingStat"  # who publishes it, used in the plain-words log
 
 
 class EvidenceSnapshot(BaseModel):

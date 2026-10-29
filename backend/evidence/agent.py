@@ -31,7 +31,7 @@ from urllib.parse import urlparse
 
 from backend.common import llm as llm_module
 from backend.common.llm import LLMError, complete_json
-from backend.evidence import net, singstat, worldbank
+from backend.evidence import bls, eurostat, net, singstat, worldbank
 from backend.evidence.models import Dropped, EvidenceSnapshot, Extraction, Step
 from backend.evidence.search import SearchError, SearchHit, SearchProvider, get_provider
 from backend.evidence.verify import verify_extraction
@@ -271,12 +271,14 @@ def research(
         trace.append(Step(n=0, action="world_bank", detail=econ.iso, result=(
             f"GDP per capita (PPP) {econ.gdp_pc_ppp:,.0f} in {econ.year}; budget x{econ.budget_scale}")))
 
-    snap.datasets = singstat.dataset_facts(pack, geography)
-    snap.price_index = singstat.cpi_index(geography)
-    if snap.datasets or snap.price_index:
-        trace.append(Step(n=0, action="singstat", detail=geography, result=(
-            f"{len(snap.datasets)} official figures shown; consumer price index "
-            f"{'kept for budgets' if snap.price_index else 'unavailable'}")))
+    for name, source in (("singstat", singstat), ("eurostat", eurostat), ("bls", bls)):
+        facts, index = source.dataset_facts(pack, geography), source.cpi_index(geography)
+        if facts or index:
+            snap.datasets += facts
+            snap.price_index = snap.price_index or index
+            trace.append(Step(n=0, action=name, detail=geography, result=(  # type: ignore[arg-type]
+                f"{len(facts)} official figures shown; consumer price index "
+                f"{'kept for budgets' if index else 'unavailable'}")))
 
     provider = provider or get_provider()
     if provider.name == "none":

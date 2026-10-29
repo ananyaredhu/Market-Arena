@@ -4,6 +4,16 @@ Source of truth: `backend/common/contracts.py` (Pydantic). JSON schemas in this 
 with `make schemas` and checked in CI. Change rules: all three people agree, add fields as OPTIONAL
 only, update the fixtures in the same commit, add a line here.
 
+## 2026-10-29: Eurostat and US price indices; committed demo Resources (Person A)
+- No shared shape changed. The evidence snapshot (internal) gains optional `price_index.source` (who publishes the
+  index, default `SingStat`) and step actions `eurostat` and `bls`.
+- Budgets now move with consumer prices for Europe (Eurostat harmonised index) and the US (BLS CPI-U, taken from the
+  FRED download of the same series because BLS's key-free API returns only three years), exactly as for Singapore:
+  the full measured change from `price_base_year` to the latest year. Other countries still get the income scale only.
+- Eurostat's share of people paying for apps and software (EU countries, saas pack) is shown as reference, never used
+  as a prior. `GET /resources` also lists the committed demo copy in `fixtures/resources/` (so a fresh clone is not
+  empty), including price-sensitivity references filed under topic `price sensitivity`, pack `saas`, geography `global`.
+
 ## 2026-10-27: Price suggestion (Person A) - HEADS-UP C
 - No shared shape changed. New route `POST /pricing/suggest` `{project_id, run_id, cost, min_price, max_price, steps,
   seed, repeats}` (all optional): runs the stored market at a series of prices and returns `curve`, `suggestion` (best

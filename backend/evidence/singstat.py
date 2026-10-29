@@ -162,7 +162,7 @@ def cpi_index(geography: str, client: httpx.Client | None = None, cache_dir: Pat
         return None
     return PriceIndex(name="Consumer Price Index, all items (2024 = 100)", table_id=CPI_TABLE,
                       url=BASE_URL.format(table_id=CPI_TABLE), retrieved_at=datetime.now(UTC).isoformat(),
-                      values=values)
+                      values=values, source="SingStat")
 
 
 def dataset_facts(pack: str, geography: str, client: httpx.Client | None = None,

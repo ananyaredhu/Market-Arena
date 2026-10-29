@@ -10,9 +10,10 @@ Today the datasets are:
   * country economics     budget ranges x `economics.budget_scale` (World Bank GDP per person, PPP; the scale is
                           bounded 0.25 to 2.0; an assumption that spending scales with income, said so in the log)
   * consumer prices       budget ranges x (all-items CPI in the latest year / CPI in the starting year), the full
-                          reported change (SingStat, Singapore). The starting year is the year the pack's budgets are
-                          in; that is an assumption the user can edit (`price_base_year`, default 2024), said so in
-                          the log. A starting year outside the published series changes nothing and says why.
+                          reported change (SingStat for Singapore, Eurostat for Europe, BLS for the US). The starting
+                          year is the year the pack's budgets are in; that is an assumption the user can edit
+                          (`price_base_year`, default 2024), said so in the log. A starting year outside the published
+                          series changes nothing and says why.
 
 Every change is recorded in plain words (`applied`) and the segment keeps the url behind it (`sources`).
 New datasets plug in here, each labelled.
@@ -78,5 +79,5 @@ def apply_evidence(pack: PackSpec, snap: EvidenceSnapshot | None, price_base_yea
                 f"{pi.name}: {pi.values[base]} in {base}, {pi.values[latest]} in {latest}"), snap.created_at)
             out.applied.append(
                 f"All segments: budget x{scale:.3f} (consumer prices {(scale - 1) * 100:+.1f}% from {base} to "
-                f"{latest}, SingStat all-items CPI; assumes the pack's budgets are in {base} prices)")
+                f"{latest}, {pi.source} all-items prices; assumes the pack's budgets are in {base} prices)")
     return out
