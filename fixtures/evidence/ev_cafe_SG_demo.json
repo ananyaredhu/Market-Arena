@@ -1,0 +1,308 @@
+{
+  "snapshot_id": "ev_cafe_SG_demo",
+  "created_at": "2026-10-23T15:47:44+00:00",
+  "pack": "cafe",
+  "geography": "SG",
+  "status": "partial",
+  "fallback_reason": null,
+  "findings": [
+    {
+      "kind": "segment_budget",
+      "subject": "office_lunch",
+      "claim": "Office workers spending on a daily specialty coffee habit is S$180–S$240 per month",
+      "value": null,
+      "low": 180.0,
+      "high": 240.0,
+      "unit": "month",
+      "currency": "S$",
+      "quote": "A daily specialty coffee habit costs approximately S$180–S$240 per month",
+      "url": "https://www.smartcalculator.sg/articles/singapore-dining-out-costs-2026"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": "hawker_kopi",
+      "claim": "Hawker kopi coffee costs S$1.20–S$1.80 per cup",
+      "value": null,
+      "low": 1.2,
+      "high": 1.8,
+      "unit": "cup",
+      "currency": "S$",
+      "quote": "Kopi (coffee) S$1.20–S$1.80",
+      "url": "https://www.smartcalculator.sg/articles/singapore-dining-out-costs-2026"
+    },
+    {
+      "kind": "market_size",
+      "subject": null,
+      "claim": "The Singapore coffee market was valued at USD 29.49 million in 2024.",
+      "value": 29.49,
+      "low": null,
+      "high": null,
+      "unit": "million",
+      "currency": "USD",
+      "quote": "In 2024, the market was valued at USD 29.49 million",
+      "url": "https://www.linkedin.com/pulse/singapore-coffee-market-growth-trends-2034-saurabh-badoni-7imwc"
+    },
+    {
+      "kind": "other",
+      "subject": null,
+      "claim": "The market is projected to reach USD 64.86 million by 2034 with an 8.20% CAGR.",
+      "value": 64.86,
+      "low": null,
+      "high": null,
+      "unit": "million",
+      "currency": "USD",
+      "quote": "reaching USD 64.86 million by 2034",
+      "url": "https://www.linkedin.com/pulse/singapore-coffee-market-growth-trends-2034-saurabh-badoni-7imwc"
+    }
+  ],
+  "trend_notes": [
+    {
+      "note": "Food courts are popular with office workers in central business district malls.",
+      "quote": "Food courts are popular with office workers in central business district malls.",
+      "url": "https://www.smartcalculator.sg/articles/singapore-dining-out-costs-2026",
+      "effect": "none",
+      "segments": [
+        "office_lunch"
+      ]
+    },
+    {
+      "note": "A daily specialty coffee habit costs approximately S$180–S$240 per month — a S$125–S$185 monthly difference compared to traditional kopi.",
+      "quote": "A daily specialty coffee habit costs approximately S$180–S$240 per month — a S$125–S$185 monthly difference compared to traditional kopi.",
+      "url": "https://www.smartcalculator.sg/articles/singapore-dining-out-costs-2026",
+      "effect": "price_sensitivity_up",
+      "segments": [
+        "office_lunch"
+      ]
+    },
+    {
+      "note": "Projected CAGR of 8.20% 2025-2034 indicates growing demand for specialty coffee.",
+      "quote": "projected to grow at a CAGR of 8.20% during 2025–2034",
+      "url": "https://www.linkedin.com/pulse/singapore-coffee-market-growth-trends-2034-saurabh-badoni-7imwc",
+      "effect": "none",
+      "segments": null
+    }
+  ],
+  "dropped": [
+    {
+      "what": "Office workers in Singapore spend about $403 per month on restaurants, cafes, and pubs",
+      "url": "https://assembled.sg/insights/hawker-vs-restaurant-spending-singapore-research",
+      "reason": "the quote does not appear in the source"
+    },
+    {
+      "what": "Households spend about $491 per month at hawker centres, food courts, coffee shops, and canteens",
+      "url": "https://assembled.sg/insights/hawker-vs-restaurant-spending-singapore-research",
+      "reason": "the quote does not appear in the source"
+    },
+    {
+      "what": "Price pressure at the cheap end is increasing consumer price sensitivity",
+      "url": "https://assembled.sg/insights/hawker-vs-restaurant-spending-singapore-research",
+      "reason": "the quote does not appear in the source"
+    },
+    {
+      "what": "Overall food‑out spending has risen, indicating a budget increase for diners",
+      "url": "https://assembled.sg/insights/hawker-vs-restaurant-spending-singapore-research",
+      "reason": "the quote does not appear in the source"
+    }
+  ],
+  "economics": {
+    "country": "Singapore",
+    "iso": "SG",
+    "gdp_pc_ppp": 163353.990260152,
+    "year": 2025,
+    "baseline_iso": "SG",
+    "baseline_gdp_pc_ppp": 163353.990260152,
+    "budget_scale": 1.0,
+    "source_url": "https://api.worldbank.org/v2/country/SG/indicator/NY.GDP.PCAP.PP.CD?format=json&mrnev=1"
+  },
+  "datasets": [
+    {
+      "name": "Consumer prices: All Items",
+      "source": "SingStat Table Builder",
+      "table_id": "M213801",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+      "period": "2025",
+      "value": 100.903,
+      "unit": "index (2024 = 100)",
+      "note": "+0.9% on 2024, +17.6% over 5 years",
+      "quote": "All Items, 2025: 100.903 (Index)",
+      "retrieved_at": "2026-10-23T15:47:44.208282+00:00"
+    },
+    {
+      "name": "Consumer prices: Food & Beverage Serving Services",
+      "source": "SingStat Table Builder",
+      "table_id": "M213801",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+      "period": "2025",
+      "value": 101.22,
+      "unit": "index (2024 = 100)",
+      "note": "+1.2% on 2024, +18.9% over 5 years",
+      "quote": "Food & Beverage Serving Services, 2025: 101.22 (Index)",
+      "retrieved_at": "2026-10-23T15:47:44.208282+00:00"
+    },
+    {
+      "name": "Household spending: Food and Beverage Serving Services",
+      "source": "SingStat Household Expenditure Survey",
+      "table_id": "18005",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/18005",
+      "period": "2023",
+      "value": 965.7,
+      "unit": "S$ per resident household per month",
+      "note": "Average over all resident households, not per student or per visit (16.3% of all household spending)",
+      "quote": "Food and Beverage Serving Services 2/, 2023: 965.7 (Dollar)",
+      "retrieved_at": "2026-10-23T15:47:44.208282+00:00"
+    }
+  ],
+  "price_index": {
+    "name": "Consumer Price Index, all items (2024 = 100)",
+    "table_id": "M213801",
+    "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+    "retrieved_at": "2026-10-23T15:47:44.210793+00:00",
+    "values": {
+      "1961": 20.953,
+      "1962": 21.046,
+      "1963": 21.494,
+      "1964": 21.848,
+      "1965": 21.902,
+      "1966": 22.345,
+      "1967": 23.057,
+      "1968": 23.223,
+      "1969": 23.196,
+      "1970": 23.263,
+      "1971": 23.7,
+      "1972": 24.208,
+      "1973": 28.957,
+      "1974": 35.433,
+      "1975": 36.346,
+      "1976": 35.657,
+      "1977": 36.793,
+      "1978": 38.289,
+      "1979": 39.822,
+      "1980": 43.223,
+      "1981": 46.763,
+      "1982": 48.595,
+      "1983": 49.1,
+      "1984": 50.378,
+      "1985": 50.626,
+      "1986": 49.926,
+      "1987": 50.168,
+      "1988": 50.932,
+      "1989": 52.1,
+      "1990": 53.898,
+      "1991": 55.752,
+      "1992": 57.003,
+      "1993": 58.309,
+      "1994": 60.114,
+      "1995": 61.15,
+      "1996": 61.994,
+      "1997": 63.248,
+      "1998": 63.076,
+      "1999": 63.091,
+      "2000": 63.942,
+      "2001": 64.59,
+      "2002": 64.337,
+      "2003": 64.651,
+      "2004": 65.732,
+      "2005": 66.043,
+      "2006": 66.681,
+      "2007": 68.088,
+      "2008": 72.606,
+      "2009": 73.033,
+      "2010": 75.099,
+      "2011": 79.043,
+      "2012": 82.664,
+      "2013": 84.618,
+      "2014": 85.493,
+      "2015": 85.046,
+      "2016": 84.596,
+      "2017": 85.084,
+      "2018": 85.457,
+      "2019": 85.942,
+      "2020": 85.794,
+      "2021": 87.781,
+      "2022": 93.163,
+      "2023": 97.666,
+      "2024": 100.0,
+      "2025": 100.903
+    }
+  },
+  "trace": [
+    {
+      "n": 0,
+      "action": "world_bank",
+      "detail": "SG",
+      "result": "GDP per capita (PPP) 163,354 in 2025; budget x1.0"
+    },
+    {
+      "n": 0,
+      "action": "singstat",
+      "detail": "SG",
+      "result": "3 official figures shown; consumer price index kept for budgets"
+    },
+    {
+      "n": 1,
+      "action": "search",
+      "detail": "office workers Singapore monthly spending on neighbourhood cafe serving specialty coffee subscription price",
+      "result": "6 results"
+    },
+    {
+      "n": 2,
+      "action": "search",
+      "detail": "office workers Singapore use free neighbourhood cafe serving specialty coffee instead of paying survey",
+      "result": "6 results"
+    },
+    {
+      "n": 3,
+      "action": "search",
+      "detail": "Singapore neighbourhood cafe serving specialty coffee market trend demand 2026",
+      "result": "6 results"
+    },
+    {
+      "n": 4,
+      "action": "search",
+      "detail": "neighbourhood cafe serving specialty coffee pricing plans per month Singapore",
+      "result": "6 results"
+    },
+    {
+      "n": 5,
+      "action": "open",
+      "detail": "https://www.smartcalculator.sg/articles/singapore-dining-out-costs-2026",
+      "result": "10907 characters read; [spending] kept 2 findings and 2 trend notes, dropped 0"
+    },
+    {
+      "n": 6,
+      "action": "open",
+      "detail": "https://www.eco-business.com/news/singapore-smes-are-struggling-with-sustainability-but-for-some-its-a-competitive-edge/",
+      "result": "18066 characters read; [free alternatives] kept 0 findings and 0 trend notes, dropped 0"
+    },
+    {
+      "n": 7,
+      "action": "open",
+      "detail": "https://www.linkedin.com/pulse/singapore-coffee-market-growth-trends-2034-saurabh-badoni-7imwc",
+      "result": "15055 characters read; [trends] kept 2 findings and 1 trend notes, dropped 0"
+    },
+    {
+      "n": 8,
+      "action": "open",
+      "detail": "https://koffeekollectivesg.com/",
+      "result": "0 characters read; [competitor prices] kept 0 findings and 0 trend notes, dropped 0"
+    },
+    {
+      "n": 9,
+      "action": "open",
+      "detail": "https://assembled.sg/insights/hawker-vs-restaurant-spending-singapore-research",
+      "result": "19576 characters read; [spending] kept 0 findings and 0 trend notes, dropped 4"
+    },
+    {
+      "n": 10,
+      "action": "finish",
+      "detail": "",
+      "result": "4 verified findings, 3 trend notes from 5 page(s)"
+    }
+  ],
+  "stats": {
+    "searches": 4,
+    "opens": 5,
+    "llm_calls": 5,
+    "seconds": 131.7
+  }
+}
