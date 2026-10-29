@@ -39,6 +39,9 @@ class CaseResult:
     llm: str | None
     llm_correct: bool | None
     owner_path: str
+    relative_predicted: str | None = None
+    relative_correct: bool | None = None
+    relative_prospective: bool = False
 
 
 def score_case(case: Case, use_llm: bool) -> CaseResult:
@@ -52,6 +55,9 @@ def score_case(case: Case, use_llm: bool) -> CaseResult:
         mean_after=pred.mean_after, mean_delta=pred.mean_delta, sd_delta=pred.sd_delta, naive=naive,
         naive_correct=naive == case.observed, coin=coin_expected_accuracy(case), llm=llm,
         llm_correct=(llm == case.observed) if llm is not None else None, owner_path=case.path,
+        relative_predicted=pred.relative_outcome,
+        relative_correct=None if pred.relative_outcome is None else pred.relative_outcome == case.observed,
+        relative_prospective=case.relative_rule_prospective,
     )
 
 
@@ -66,8 +72,13 @@ def summarise(results: list[CaseResult], cases: list[Case]) -> dict:
     chance = sum(r.coin for r in real) / n if n else 0.5
     llm_real = [r for r in real if r.llm_correct is not None]
     maj = majority_class([c for c in cases if c.scorable and not c.synthetic])
+    rel = [r for r in real if r.relative_correct is not None]
     return {
         "real_cases_scored": n,
+        "relative_cases": len(rel),
+        "relative_correct": sum(r.relative_correct for r in rel),
+        "relative_prospective_cases": sum(r.relative_prospective for r in rel),
+        "relative_prospective_correct": sum(r.relative_correct for r in rel if r.relative_prospective),
         "ours_correct": k,
         "ours_interval": wilson_interval(k, n),
         "chance_expected": chance,
@@ -112,6 +123,11 @@ def render_markdown(results: list[CaseResult], cases: list[Case], problems: list
                _row("Naive rule of thumb (cheaper → up, dearer → down)", s["naive_correct"], n),
                _row(f"Majority-class guess ('{s['majority_class']}', an oracle that sees the answers)",
                     s["majority_correct"], n)]
+        if s["relative_cases"]:
+            md.append(_row("Simulator, relative rule (all direction cases; see note)", s["relative_correct"],
+                           s["relative_cases"]))
+            md.append(_row("Simulator, relative rule, only cases written after it was declared",
+                           s["relative_prospective_correct"], s["relative_prospective_cases"]))
         if s["llm_cases"]:
             md.append(_row("Single LLM prompt (majority of 3)", s["llm_correct"], s["llm_cases"]))
         p = s["p_value_vs_chance"]
@@ -120,14 +136,19 @@ def render_markdown(results: list[CaseResult], cases: list[Case], problems: list
                f"case(s), the naive rule alone on {s['ours_vs_naive']['naive_only']}.", "",
                f"**Read the interval, not just the percentage:** with {n} case(s) the data cannot separate a good "
                "model from a lucky one.", ""]
-    md += ["## Every case", "", "| Case | Question | Observed | Simulator | Seeds agree | Naive | LLM | |",
-           "|---|---|---|---|---|---|---|---|"]
+    md += ["## Every case", "",
+           "| Case | Question | Observed | Simulator | Seeds agree | Relative rule | Naive | LLM | |",
+           "|---|---|---|---|---|---|---|---|---|"]
     for r in results:
         tag = "synthetic" if r.synthetic else ("right" if r.correct else "**wrong**")
         llm = "-" if r.llm is None else f"{r.llm} {'✓' if r.llm_correct else '✗'}"
         shift = "" if r.mean_delta is None else f" ({r.mean_delta:+.1%} ± {r.sd_delta:.1%})"
+        mark = "✓" if r.relative_correct else "✗"
+        relc = "-" if r.relative_predicted is None else (
+            f"{r.relative_predicted} {mark}" + ("" if r.relative_prospective else " (retro)"))
+        naive_mark = "✓" if r.naive_correct else "✗"
         md.append(f"| {r.case_id} | {r.question[:70]} | {r.observed} | {r.predicted}{shift} | {pct(r.agreement)} | "
-                  f"{r.naive} {'✓' if r.naive_correct else '✗'} | {llm} | {tag} |")
+                  f"{relc} | {r.naive} {naive_mark} | {llm} | {tag} |")
     wrong = [r for r in results if not r.synthetic and not r.correct]
     md += ["", "## Failures", ""]
     md += [f"- **{r.case_id}**: observed `{r.observed}`, simulator said `{r.predicted}` "
@@ -145,6 +166,11 @@ def render_markdown(results: list[CaseResult], cases: list[Case], problems: list
            "2. No LLM is used by the simulator side, so a result cannot depend on a model's mood.",
            "3. The prediction rule (share change of at least ±1 point is up/down, otherwise flat; success if the "
            "share reaches the threshold) is fixed in code before any outcome is looked at.",
+           "3b. A second rule is reported alongside, never instead: a change of at least 5% of the product's own "
+           "starting share is up/down (declared 2026-10-29, after the first SaaS case moved from 1.6% to 1.5% and "
+           "scored flat under the one-point floor). Cases written before that date show \"(retro)\": they were seen "
+           "before the rule existed, so only cases marked prospective count as a clean test of it. The headline "
+           "table above stays on the original rule.",
            "4. Case inputs must come from information public *before* the event, and thresholds must be fixed "
            "beforehand with a written rationale.",
            "5. Five independent populations are simulated per case; the prediction is the majority, and how many "

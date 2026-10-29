@@ -242,3 +242,21 @@ def test_every_committed_real_case_is_complete_and_dated(case):
     assert any("sec.gov" in src["url"] or "investor." in src["url"] for src in case.sources), \
         "a real case needs at least one primary source"
     assert case.scorable and case.scenario_before.products
+
+
+def test_relative_rule_sees_small_shares_the_point_floor_misses():
+    from backend.backtest.runner import relative_rule
+
+    assert direction_rule(-0.001, 0.01) == "flat"  # 1.6% -> 1.5% is under the one-point floor
+    assert relative_rule(0.016, 0.0149) == "down"  # but it is a 6.9% fall of the product's own share
+    assert relative_rule(0.016, 0.0155) == "flat"  # 3% of its own share: under the 5% line
+    assert relative_rule(0.0, 0.2) == "flat"  # no starting share: never invents a direction
+
+
+def test_relative_result_is_reported_alongside_not_instead():
+    results = evaluate(CASES)
+    direction = [r for r in results if r.question_type == "direction"]
+    assert direction and all(r.relative_predicted in {"up", "down", "flat"} for r in direction)
+    assert all(r.relative_predicted is None for r in results if r.question_type == "success")
+    summary = summarise(results, CASES)
+    assert summary["ours_correct"] == sum(r.correct for r in results if not r.synthetic)  # headline unchanged

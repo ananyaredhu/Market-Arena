@@ -22,6 +22,11 @@ from backend.population.models import PopulationRequest
 from backend.population.packs import PACKS_DIR, load_pack
 
 REPEATS = 15
+# Second prediction rule, declared on 2026-10-29 after the first SaaS case (a product with a 1.6% share moved to 1.5%,
+# under the 1-point floor of the original rule). Reported ALONGSIDE the original, never instead of it. A change of at
+# least this fraction of the product's own starting share counts as up/down. Cases written before that date were seen
+# before the rule existed, so their relative result is retrospective and is labelled so in the report.
+RELATIVE_EFFECT = 0.05
 
 
 class CaseError(ValueError):
@@ -34,12 +39,14 @@ class SeedResult:
     share_before: float
     share_after: float | None
     prediction: str
+    relative_prediction: str | None = None
 
 
 @dataclass
 class Prediction:
     outcome: str
     agreement: float  # share of seeds that agree with the majority outcome
+    relative_outcome: str | None = None  # the same question under the relative rule (direction cases only)
     seeds: list[SeedResult] = field(default_factory=list)
     mean_before: float = 0.0
     mean_after: float | None = None
@@ -81,6 +88,14 @@ def direction_rule(delta: float, min_effect: float) -> str:
     return "up" if delta >= min_effect else "down" if delta <= -min_effect else "flat"
 
 
+def relative_rule(share_before: float, share_after: float, min_relative: float = RELATIVE_EFFECT) -> str:
+    """Up/down when the share moved by at least `min_relative` of where it started; a zero start only counts as flat."""
+    if share_before <= 0:
+        return "flat"
+    change = (share_after - share_before) / share_before
+    return "up" if change >= min_relative else "down" if change <= -min_relative else "flat"
+
+
 def predict(case: Case) -> Prediction:
     before = build_options(case, case.scenario_before.products)
     after = build_options(case, case.scenario_after.products) if case.question_type == "direction" else None
@@ -92,10 +107,11 @@ def predict(case: Case) -> Prediction:
         if case.question_type == "direction":
             s_after = _share(pop["agents"], after, seed, case.subject)
             pred = direction_rule(s_after - s_before, case.min_effect)
+            rel = relative_rule(s_before, s_after)
         else:
-            s_after = None
+            s_after = rel = None
             pred = "success" if s_before >= case.success.threshold else "fail"
-        results.append(SeedResult(seed, s_before, s_after, pred))
+        results.append(SeedResult(seed, s_before, s_after, pred, rel))
 
     votes = Counter(r.prediction for r in results)
     top = max(votes.values())
@@ -110,6 +126,11 @@ def predict(case: Case) -> Prediction:
     pred = Prediction(outcome=outcome, agreement=votes[outcome] / len(results), seeds=results,
                       mean_before=mean(r.share_before for r in results))
     if case.question_type == "direction":
+        rel_votes = Counter(r.relative_prediction for r in results)
+        rel_top = max(rel_votes.values())
+        rel_tied = [o for o in case.outcomes if rel_votes.get(o, 0) == rel_top]
+        pred.relative_outcome = rel_tied[0] if len(rel_tied) == 1 else relative_rule(
+            pred.mean_before, mean(r.share_after for r in results))
         deltas = [r.share_after - r.share_before for r in results]
         pred.mean_after = mean(r.share_after for r in results)
         pred.mean_delta, pred.sd_delta = mean(deltas), pstdev(deltas)

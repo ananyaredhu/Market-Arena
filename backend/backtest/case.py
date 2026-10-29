@@ -70,6 +70,8 @@ class Case(BaseModel):
     observed_outcome: Observed | None = None
     sources: list[dict] = Field(default_factory=list)
     limitations: str = ""
+    # True when the case was written after the relative rule was declared (2026-10-29), so the rule was not seen first
+    relative_rule_prospective: bool = False
     synthetic: bool = False
     path: str = ""  # filled in by load_cases
 

@@ -1,21 +1,25 @@
 {
   "meta": {
-    "when": "2026-10-28 12:55 UTC",
+    "when": "2026-10-29 07:35 UTC",
     "llm_baseline": false,
     "pack_fingerprints": "cafe:d6977f09ccbf, saas:af5ec85d8bab"
   },
   "summary": {
-    "real_cases_scored": 2,
+    "real_cases_scored": 3,
+    "relative_cases": 3,
+    "relative_correct": 2,
+    "relative_prospective_cases": 0,
+    "relative_prospective_correct": 0,
     "ours_correct": 2,
     "ours_interval": [
-      0.34237195288961925,
-      1.0
+      0.2076549551264879,
+      0.9385096847238394
     ],
     "chance_expected": 0.3333333333333333,
-    "p_value_vs_chance": 0.1111111111111111,
+    "p_value_vs_chance": 0.25925925925925924,
     "naive_correct": 1,
-    "majority_class": "up",
-    "majority_correct": 1,
+    "majority_class": "down",
+    "majority_correct": 2,
     "llm_cases": 0,
     "llm_correct": 0,
     "ours_vs_naive": {
@@ -49,7 +53,10 @@
       "coin": 0.3333333333333333,
       "llm": null,
       "llm_correct": null,
-      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/cafe_starbucks_china_own_price_cut.yaml"
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/cafe_starbucks_china_own_price_cut.yaml",
+      "relative_predicted": "up",
+      "relative_correct": true,
+      "relative_prospective": false
     },
     {
       "case_id": "cafe_starbucks_china_price_war",
@@ -70,7 +77,34 @@
       "coin": 0.3333333333333333,
       "llm": null,
       "llm_correct": null,
-      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/cafe_starbucks_china_price_war.yaml"
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/cafe_starbucks_china_price_war.yaml",
+      "relative_predicted": "down",
+      "relative_correct": true,
+      "relative_prospective": false
+    },
+    {
+      "case_id": "saas_chegg_free_ai_arrives",
+      "pack": "saas",
+      "synthetic": false,
+      "question": "After a free AI assistant became widely available to students (ChatGPT, November 2022), did the number of paying subscribers of a paid study-help service (Chegg) fall between 2022 and 2024?",
+      "question_type": "direction",
+      "observed": "down",
+      "predicted": "flat",
+      "correct": false,
+      "agreement": 1.0,
+      "mean_before": 0.016,
+      "mean_after": 0.014666666666666666,
+      "mean_delta": -0.0013333333333333335,
+      "sd_delta": 0.0016329931618554523,
+      "naive": "flat",
+      "naive_correct": false,
+      "coin": 0.3333333333333333,
+      "llm": null,
+      "llm_correct": null,
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/saas_chegg_free_ai_arrives.yaml",
+      "relative_predicted": "flat",
+      "relative_correct": false,
+      "relative_prospective": false
     },
     {
       "case_id": "selftest_launch_fail",
@@ -91,7 +125,10 @@
       "coin": 0.5,
       "llm": null,
       "llm_correct": null,
-      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_launch_fail.yaml"
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_launch_fail.yaml",
+      "relative_predicted": null,
+      "relative_correct": null,
+      "relative_prospective": false
     },
     {
       "case_id": "selftest_launch_success",
@@ -112,7 +149,10 @@
       "coin": 0.5,
       "llm": null,
       "llm_correct": null,
-      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_launch_success.yaml"
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_launch_success.yaml",
+      "relative_predicted": null,
+      "relative_correct": null,
+      "relative_prospective": false
     },
     {
       "case_id": "selftest_no_change",
@@ -133,7 +173,10 @@
       "coin": 0.3333333333333333,
       "llm": null,
       "llm_correct": null,
-      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_no_change.yaml"
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_no_change.yaml",
+      "relative_predicted": "flat",
+      "relative_correct": true,
+      "relative_prospective": false
     },
     {
       "case_id": "selftest_price_cut",
@@ -154,7 +197,10 @@
       "coin": 0.3333333333333333,
       "llm": null,
       "llm_correct": null,
-      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_price_cut.yaml"
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_price_cut.yaml",
+      "relative_predicted": "up",
+      "relative_correct": true,
+      "relative_prospective": false
     },
     {
       "case_id": "selftest_price_rise",
@@ -175,7 +221,10 @@
       "coin": 0.3333333333333333,
       "llm": null,
       "llm_correct": null,
-      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_price_rise.yaml"
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/selftest_price_rise.yaml",
+      "relative_predicted": "down",
+      "relative_correct": true,
+      "relative_prospective": false
     }
   ],
   "problems": []
