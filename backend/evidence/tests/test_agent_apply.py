@@ -276,8 +276,10 @@ def test_routes(tmp_path, monkeypatch):
 def test_resources_route(tmp_path, monkeypatch):
     from fastapi.testclient import TestClient
 
+    from backend import sim_routes
     from backend.main import app
     monkeypatch.setattr(store, "RUN_DIR", tmp_path / "evidence")
+    monkeypatch.setattr(sim_routes, "SEED_RESOURCES_DIR", tmp_path / "no_seed")
     monkeypatch.setenv("MOCK", "0")
     c = TestClient(app)
     empty = c.get("/resources").json()
@@ -288,3 +290,24 @@ def test_resources_route(tmp_path, monkeypatch):
     assert body["items"][0]["url"] and body["items"][0]["quote"]
     assert c.get("/resources", params={"topic": "market size"}).json()["count"] == 1
     assert c.get("/resources", params={"pack": "cafe"}).json()["count"] == 0
+
+
+def test_a_fresh_clone_still_has_the_committed_demo_resources(tmp_path, monkeypatch):
+    from fastapi.testclient import TestClient
+
+    from backend.main import app
+    monkeypatch.setattr(store, "RUN_DIR", tmp_path / "evidence")  # an empty runtime library
+    monkeypatch.setenv("MOCK", "0")
+    body = TestClient(app).get("/resources").json()
+    assert body["count"] > 0 and body["reference_only"] is True
+    assert {"saas", "cafe"} <= {i["pack"] for i in body["items"]}
+    assert all(i["quote"] and i["url"].startswith("https://") and i["retrieved_at"] for i in body["items"])
+    sensitivity = [i for i in body["items"] if i["topic"] == "price sensitivity"]
+    assert sensitivity and all(i["pack"] == "saas" and i["geography"] == "global" for i in sensitivity)
+
+
+def test_a_runtime_entry_is_not_listed_twice_when_the_demo_copy_has_it(tmp_path):
+    seed = tmp_path / "seed"
+    resources.add(snapshot(findings=[f()]), seed)
+    resources.add(snapshot(findings=[f()]), tmp_path / "run")
+    assert len(resources.list_resources([tmp_path / "run", seed])) == 1

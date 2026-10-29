@@ -19,6 +19,9 @@ DEMO_DIR = ROOT / "fixtures" / "evidence"
 _SAFE = re.compile(r"^[A-Za-z0-9_.-]{1,80}$")
 
 
+SEED_RESOURCES_DIR = ROOT / "fixtures" / "resources"  # committed demo copy, so a fresh clone's library is not empty
+
+
 def resources_dir() -> Path:
     """Where the Resources library lives: next to the run snapshots."""
     return RUN_DIR.parent / "resources"

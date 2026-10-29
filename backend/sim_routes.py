@@ -12,7 +12,7 @@ from backend.common.fixtures import load_fixture
 from backend.common.mock import mock_enabled
 from backend.evidence.agent import research as research_evidence
 from backend.evidence.resources import list_resources
-from backend.evidence.store import council_context
+from backend.evidence.store import SEED_RESOURCES_DIR, council_context
 from backend.evidence.store import load as load_snapshot
 from backend.evidence.store import resources_dir as store_resources_dir
 from backend.evidence.store import save as save_snapshot
@@ -77,7 +77,7 @@ def resources_library(pack: str | None = None, geography: str | None = None, top
                       q: str | None = None):
     """The Resources library: surveys, news and competitor pages the researcher read, with verified quotes and urls.
     Reference only: nothing here ever changes a simulation prior. Filters: pack, geography, topic, q (text)."""
-    items = list_resources(store_resources_dir(), pack, geography, topic, q)
+    items = list_resources([store_resources_dir(), SEED_RESOURCES_DIR], pack, geography, topic, q)
     topics: dict[str, int] = {}
     for r in items:
         topics[r.topic] = topics.get(r.topic, 0) + 1

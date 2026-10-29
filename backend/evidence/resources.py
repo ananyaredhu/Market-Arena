@@ -1,9 +1,10 @@
 """The Resources library: surveys, news and competitor pages the researcher read, kept for people to read (Person A).
 
-Nothing in here changes a simulation prior (see apply.py: only the country-income dataset does). Each entry keeps the
-verbatim quote that was verified against the page (or, for official statistics, the row as the API returned it), the
-url, and when it was retrieved, so the user can check it and the Council can cite it as labelled reference. Entries
-from every research run accumulate per pack and geography in data/resources/ and are deduplicated by (url, quote).
+Nothing in here changes a simulation prior (see apply.py: only the country-income and price-index datasets do).
+Each entry keeps the verbatim quote that was verified against the page (or, for official statistics, the row as the
+API returned it), the url, and when it was retrieved, so the user can check it and the Council can cite it as
+labelled reference. Entries from every research run accumulate per pack and geography in data/resources/ and are
+deduplicated by (url, quote).
 """
 from __future__ import annotations
 
@@ -111,14 +112,20 @@ def add(snap: EvidenceSnapshot, directory: Path) -> int:
     return len(fresh)
 
 
-def list_resources(directory: Path, pack: str | None = None, geography: str | None = None,
+def list_resources(directory: Path | list[Path], pack: str | None = None, geography: str | None = None,
                    topic: str | None = None, q: str | None = None) -> list[Resource]:
-    """Newest first. `q` matches the claim, quote or website."""
+    """Newest first. `q` matches the claim, quote or website.
+
+    `directory` may be several folders (the runtime library first, then the committed demo copy); an entry that is in
+    more than one is listed once, from the first.
+    """
     out: list[Resource] = []
-    for path in sorted(directory.glob("*.json")) if directory.is_dir() else []:
-        out += [r for r in _read(path)
-                if (pack is None or r.pack == pack) and (geography is None or r.geography == geography)
-                and (topic is None or r.topic == topic)]
+    seen: set[str] = set()
+    for folder in directory if isinstance(directory, list) else [directory]:
+        for path in sorted(folder.glob("*.json")) if folder.is_dir() else []:
+            out += [r for r in _read(path)
+                    if (pack is None or r.pack == pack) and (geography is None or r.geography == geography)
+                    and (topic is None or r.topic == topic) and r.id not in seen and not seen.add(r.id)]
     if q:
         needle = q.lower()
         out = [r for r in out if needle in f"{r.claim} {r.quote} {r.domain}".lower()]
