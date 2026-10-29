@@ -1,36 +1,35 @@
 {
   "meta": {
-    "when": "2026-10-29 07:35 UTC",
+    "when": "2026-10-29 07:41 UTC",
     "llm_baseline": false,
     "pack_fingerprints": "cafe:d6977f09ccbf, saas:af5ec85d8bab"
   },
   "summary": {
-    "real_cases_scored": 3,
-    "relative_cases": 3,
-    "relative_correct": 2,
-    "relative_prospective_cases": 0,
-    "relative_prospective_correct": 0,
+    "real_cases_scored": 4,
+    "relative_cases": 4,
+    "relative_correct": 3,
+    "relative_prospective_cases": 1,
+    "relative_prospective_correct": 1,
     "ours_correct": 2,
     "ours_interval": [
-      0.2076549551264879,
-      0.9385096847238394
+      0.15003570882017148,
+      0.8499642911798285
     ],
     "chance_expected": 0.3333333333333333,
-    "p_value_vs_chance": 0.25925925925925924,
-    "naive_correct": 1,
+    "p_value_vs_chance": 0.40740740740740744,
+    "naive_correct": 2,
     "majority_class": "down",
-    "majority_correct": 2,
+    "majority_correct": 3,
     "llm_cases": 0,
     "llm_correct": 0,
     "ours_vs_naive": {
       "ours_only": 1,
-      "naive_only": 0
+      "naive_only": 1
     },
     "synthetic_scored": 5,
     "synthetic_correct": 5,
     "needs_sourcing": [
-      "cafe_case_01",
-      "cafe_luckin_china_price_cut_candidate"
+      "cafe_case_01"
     ]
   },
   "results": [
@@ -105,6 +104,30 @@
       "relative_predicted": "flat",
       "relative_correct": false,
       "relative_prospective": false
+    },
+    {
+      "case_id": "saas_netflix_us_price_rise_2022",
+      "pack": "saas",
+      "synthetic": false,
+      "question": "After Netflix raised its US and Canada prices in January 2022 (Standard 13.99 -> 15.49 dollars), did its paid memberships in the US and Canada go down in the first quarter of 2022, compared with the quarter before?",
+      "question_type": "direction",
+      "observed": "down",
+      "predicted": "flat",
+      "correct": false,
+      "agreement": 0.6,
+      "mean_before": 0.019333333333333334,
+      "mean_after": 0.013333333333333334,
+      "mean_delta": -0.006,
+      "sd_delta": 0.0038873012632302008,
+      "naive": "down",
+      "naive_correct": true,
+      "coin": 0.3333333333333333,
+      "llm": null,
+      "llm_correct": null,
+      "owner_path": "/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/saas_netflix_us_price_rise_2022.yaml",
+      "relative_predicted": "down",
+      "relative_correct": true,
+      "relative_prospective": true
     },
     {
       "case_id": "selftest_launch_fail",

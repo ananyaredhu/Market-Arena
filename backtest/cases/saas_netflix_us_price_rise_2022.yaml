@@ -1,0 +1,70 @@
+# REAL CASE (Person A drafting, for Person B to review): Netflix raises its US and Canada prices on 14 January 2022.
+#
+# PROTOCOL: this file was written, and its scenario fixed, BEFORE the simulator was run on it. The outcome was read first
+# (the company itself attributes the quarter's membership loss to the price change); the scenario inputs were not adjusted.
+# Written after the relative rule was declared (2026-10-29), so `relative_rule_prospective` is true.
+#
+# Method. The pack is a software and apps subscription market; a streaming service does not fit its feature axes
+# (ai_planning, simplicity, privacy, integrations), so the feature scores are neutral judgement calls and stay the same
+# before and after. Only the price changes, so the case tests the price response alone. Prices keep their RATIO: Netflix
+# Standard 13.99 -> 15.49 dollars (+10.7%) is mapped onto the pack's premium-app level 12.0 -> 13.29.
+case_id: saas_netflix_us_price_rise_2022
+pack: saas
+status: sourced
+relative_rule_prospective: true
+question_type: direction
+question: >
+  After Netflix raised its US and Canada prices in January 2022 (Standard 13.99 -> 15.49 dollars), did its paid
+  memberships in the US and Canada go down in the first quarter of 2022, compared with the quarter before?
+subject: you
+geography: US
+n_agents: 300
+min_effect: 0.01
+
+scenario_before:
+  notes: Late 2021. A paid subscription at the premium-app price level, with a free tool, a rival premium app and a cheaper notes-type app.
+  products:
+    - {id: you, label: Netflix-like paid subscription, role: you, price: 12.0, features: [0.3, 0.8, 0.4, 0.3], novelty: 0.0}
+    - {id: free_tool, label: Free tool, role: competitor, price: 0.0, features: [0.1, 0.7, 0.3, 0.1], novelty: 0.0}
+    - {id: chain_app, label: ChainApp, role: competitor, price: 12.0, features: [0.6, 0.6, 0.5, 0.8], novelty: 0.2}
+    - {id: notebook_app, label: NotebookApp, role: competitor, price: 5.0, features: [0.3, 0.8, 0.4, 0.5], novelty: 0.1}
+scenario_after:
+  change: "you: price 12.0 -> 13.29 (Netflix Standard 13.99 -> 15.49 dollars, +10.7%); nothing else changes"
+  products:
+    - {id: you, label: Netflix-like paid subscription, role: you, price: 13.29, features: [0.3, 0.8, 0.4, 0.3], novelty: 0.0}
+    - {id: free_tool, label: Free tool, role: competitor, price: 0.0, features: [0.1, 0.7, 0.3, 0.1], novelty: 0.0}
+    - {id: chain_app, label: ChainApp, role: competitor, price: 12.0, features: [0.6, 0.6, 0.5, 0.8], novelty: 0.2}
+    - {id: notebook_app, label: NotebookApp, role: competitor, price: 5.0, features: [0.3, 0.8, 0.4, 0.5], novelty: 0.1}
+
+observed_outcome:
+  direction: down
+  metric: Netflix paid memberships in the US and Canada (UCAN), end of quarter
+  value_before: 75.22   # millions, end of Q4 2021
+  value_after: 74.58    # millions, end of Q1 2022 (paid net additions -0.64 million; Q4 2021 was +1.19 million)
+  period: end of Q4 2021 vs end of Q1 2022
+  note: >
+    The company's own letter says: "UCAN paid net adds of -0.6M was largely the result of our price change which is
+    tracking in-line with our expectations and is significantly revenue positive." Revenue still rose, so the price
+    rise was good for revenue; the case only asks about members.
+
+sources:
+  - url: https://www.sec.gov/Archives/edgar/data/1065280/000106528022000144/ex991_q122.htm
+    title: Netflix Form 8-K, Exhibit 99.1, first quarter 2022 shareholder letter (primary)
+    accessed: 2026-10-29
+    supports: observed_outcome (UCAN memberships 75.22M then 74.58M) and the company's attribution to the price change
+  - url: https://www.upi.com/Top_News/US/2022/01/14/Netflix-prices/8101642201873/
+    title: UPI, Netflix prices (14 Jan 2022, secondary)
+    accessed: 2026-10-29
+    supports: scenario input (Standard 13.99 -> 15.49 dollars from 14 January 2022; Basic 8.99 -> 9.99; Premium 17.99 -> 19.99)
+
+limitations: >
+  READ BEFORE USING THIS CASE.
+  (1) LOW INFORMATION. A dearer product losing members is what the naive rule predicts, so a correct answer is weak
+  evidence of skill.
+  (2) Poor pack fit. Streaming is not a student planner market; the feature scores are neutral judgements and the
+  segments are the pack's. This case really tests only the price response of a subscription.
+  (3) The price is mapped by ratio onto the pack's level, not converted.
+  (4) Confounders: the quarter also included the Russia suspension and weak content, and Netflix itself said the rest of
+  the loss was partly seasonal; the letter attributes "largely" (not wholly) to the price change.
+  (5) The letter was read through an automatic extraction on 2026-10-29; a person should re-read the UCAN table and the
+  quoted sentence before this case is quoted externally. The January price source is a news report, not Netflix.

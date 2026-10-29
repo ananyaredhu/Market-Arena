@@ -1,6 +1,6 @@
 # Backtest report
 
-*Generated 2026-10-29 07:35 UTC · priors `cafe:d6977f09ccbf, saas:af5ec85d8bab` · 15 repeats × seeds per case · LLM baseline: off*
+*Generated 2026-10-29 07:41 UTC · priors `cafe:d6977f09ccbf, saas:af5ec85d8bab` · 15 repeats × seeds per case · LLM baseline: off*
 
 **What this tests.** Whether the simulator's predicted *direction* (a price or feature change) or *success* (a launch reaching a stated target) matches what really happened in documented real events. It is not a forecast of sales and says nothing about magnitude.
 
@@ -8,16 +8,16 @@
 
 | Method | Correct | Accuracy | 95% interval |
 |---|---|---|---|
-| **Market Arena simulator** | 2 / 3 | 67% | 21% to 94% |
+| **Market Arena simulator** | 2 / 4 | 50% | 15% to 85% |
 | Chance (fair coin over the outcomes) | n/a | 33% | |
-| Naive rule of thumb (cheaper → up, dearer → down) | 1 / 3 | 33% | 6% to 79% |
-| Majority-class guess ('down', an oracle that sees the answers) | 2 / 3 | 67% | 21% to 94% |
-| Simulator, relative rule (all direction cases; see note) | 2 / 3 | 67% | 21% to 94% |
-| Simulator, relative rule, only cases written after it was declared | 0 / 0 | n/a | n/a |
+| Naive rule of thumb (cheaper → up, dearer → down) | 2 / 4 | 50% | 15% to 85% |
+| Majority-class guess ('down', an oracle that sees the answers) | 3 / 4 | 75% | 30% to 95% |
+| Simulator, relative rule (all direction cases; see note) | 3 / 4 | 75% | 30% to 95% |
+| Simulator, relative rule, only cases written after it was declared | 1 / 1 | 100% | 21% to 100% |
 
-Chance of doing at least this well by luck alone: p = 0.259 (exact binomial). Head to head with the naive rule: the simulator alone was right on 1 case(s), the naive rule alone on 0.
+Chance of doing at least this well by luck alone: p = 0.407 (exact binomial). Head to head with the naive rule: the simulator alone was right on 1 case(s), the naive rule alone on 1.
 
-**Read the interval, not just the percentage:** with 3 case(s) the data cannot separate a good model from a lucky one.
+**Read the interval, not just the percentage:** with 4 case(s) the data cannot separate a good model from a lucky one.
 
 ## Every case
 
@@ -26,6 +26,7 @@ Chance of doing at least this well by luck alone: p = 0.259 (exact binomial). He
 | cafe_starbucks_china_own_price_cut | After Starbucks China cut the price of dozens of its drinks by about 5 | up | up (+5.1% ± 0.6%) | 100% | up ✓ (retro) | up ✓ | - | right |
 | cafe_starbucks_china_price_war | After Luckin and Cotti pushed 9.9-yuan coffee in 2023, did Starbucks C | down | down (-0.9% ± 0.2%) | 60% | down ✓ (retro) | flat ✗ | - | right |
 | saas_chegg_free_ai_arrives | After a free AI assistant became widely available to students (ChatGPT | down | flat (-0.1% ± 0.2%) | 100% | flat ✗ (retro) | flat ✗ | - | **wrong** |
+| saas_netflix_us_price_rise_2022 | After Netflix raised its US and Canada prices in January 2022 (Standar | down | flat (-0.6% ± 0.4%) | 60% | down ✓ | down ✓ | - | **wrong** |
 | selftest_launch_fail | Plumbing self-test (not a real event). An expensive, weak product shou | fail | fail | 100% | - | fail ✓ | - | synthetic |
 | selftest_launch_success | Plumbing self-test (not a real event). A cheap, strong product should  | success | success | 100% | - | success ✓ | - | synthetic |
 | selftest_no_change | Plumbing self-test (not a real event). An unchanged market should show | flat | flat (+0.0% ± 0.0%) | 100% | flat ✓ (retro) | flat ✓ | - | synthetic |
@@ -35,6 +36,7 @@ Chance of doing at least this well by luck alone: p = 0.259 (exact binomial). He
 ## Failures
 
 - **saas_chegg_free_ai_arrives**: observed `down`, simulator said `flat` (share before 1.6%, after 1.5%). Explain why before using it.
+- **saas_netflix_us_price_rise_2022**: observed `down`, simulator said `flat` (share before 1.9%, after 1.3%). Explain why before using it.
 
 ## Plumbing self-test (synthetic, not counted above)
 
@@ -43,7 +45,7 @@ Chance of doing at least this well by luck alone: p = 0.259 (exact binomial). He
 ## Cases not scored
 
 - `cafe_case_01` (needs_sourcing) from `/Users/ananyaredhu/PycharmProjects/Market-Arena/backend/council/backtest/cafe_case_01.yaml`
-- `cafe_luckin_china_price_cut_candidate` (needs_sourcing) from `/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/cafe_luckin_china_price_cut_candidate.yaml`
+- `cafe_luckin_china_price_cut_candidate` (rejected) from `/Users/ananyaredhu/PycharmProjects/Market-Arena/backtest/cases/cafe_luckin_china_price_cut_candidate.yaml`
 
 ## Protocol (what keeps this honest)
 
