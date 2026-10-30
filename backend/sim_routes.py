@@ -18,13 +18,16 @@ from backend.evidence.store import resources_dir as store_resources_dir
 from backend.evidence.store import save as save_snapshot
 from backend.glassbox.explain import AgentNotFound, summarize_flips
 from backend.glassbox.explain import explain_agent as build_explain
-from backend.population.generator import PopulationError
+from backend.intake.projects import get_persisted_project
+from backend.orchestrator.routes import _build_options  # the same options a real scenario would be built with
+from backend.population.generator import PopulationError, template_population
 from backend.population.generator import generate_population as build_population
+from backend.population.localise import localised
 from backend.population.models import PopulationRequest
-from backend.population.packs import PackError
+from backend.population.packs import PackError, load_pack
 from backend.scenarios import context as scenario_context
 from backend.scenarios.compare import CompareError, CompareRequest, compare
-from backend.scenarios.context import DEFAULT_PROJECT, RunContextError
+from backend.scenarios.context import DEFAULT_PROJECT, RunContextError, ScenarioContext
 from backend.scenarios.overrides import (
     OverrideError,
     OverrideRequest,
@@ -183,6 +186,61 @@ def pricing_suggest(body: PriceSuggestRequest | None = None):
         return suggest_price(get_context(req.project_id, req.run_id), req)
     except PricingError as e:
         raise HTTPException(status_code=422, detail=str(e)) from e
+
+
+class ProjectPriceRequest(BaseModel):
+    cost: float | None = None
+    min_price: float | None = None
+    max_price: float | None = None
+    steps: int = 14
+    seed: int = 42
+    n_agents: int = 300
+    repeats: int = 15
+
+
+@router.post("/projects/{project_id}/price-suggestion")
+def project_price_suggestion(project_id: str, body: ProjectPriceRequest | None = None):
+    """A price to START testing at, for a project that has no stored run (typically because the founder gave no price).
+
+    Builds the project's market from the pack's template customers (no model, no network), with a placeholder price for
+    the product (its stated price, else the pack's demo price) that does not affect the answer because the price is
+    swept anyway, and runs the same price search as POST /pricing/suggest. Nothing is saved: the suggestion is for the
+    founder to confirm or replace, and is never stored as the project's price. Reference prices are not included."""
+    req = body or ProjectPriceRequest()
+    if mock_enabled():
+        found = suggest_price(scenario_context.get_context(project_id), PriceSuggestRequest(
+            project_id=project_id, cost=req.cost, min_price=req.min_price, max_price=req.max_price, steps=req.steps))
+        return {**found, "price_was_missing": False, "placeholder_price": found["current_price"],
+                "basis": "fixture market (mock mode)"}
+    project = get_persisted_project(project_id)
+    profile = project["profile"]
+    try:
+        pack = load_pack(profile["pack"])
+    except (KeyError, PackError) as e:
+        raise HTTPException(status_code=422, detail=f"project has an unsupported industry pack: {e}") from e
+    missing = profile.get("price", 0) <= 0
+    geography = profile.get("geography") or "SG"
+    market, loc = localised(pack, profile.get("currency"), geography)  # the founder's currency, never converted
+    placeholder = float((market.demo_product or {}).get("price", 5.0)) if missing else float(profile["price"])
+    options = _build_options({**project, "profile": {**profile, "price": placeholder}}, market)
+    try:
+        population = template_population(PopulationRequest(
+            pack=pack.pack, n_agents=req.n_agents, seed=req.seed, geography=geography,
+            currency=profile.get("currency")))
+        ctx = ScenarioContext(project_id=project["id"], population=population, options=options, seed=req.seed,
+                              repeats=req.repeats, currency=market.currency,
+                              period=pack.period or (pack.price_unit or "per month").removeprefix("per ").strip())
+        found = suggest_price(ctx, PriceSuggestRequest(
+            project_id=project["id"], cost=req.cost, min_price=req.min_price, max_price=req.max_price,
+            steps=req.steps, apply_overrides=False))
+    except PricingError as e:
+        raise HTTPException(status_code=422, detail=str(e)) from e
+    except (PackError, PopulationError, ValueError) as e:
+        raise HTTPException(status_code=422, detail=f"the market could not be built: {e}") from e
+    found["reference_prices"] = []
+    return {**found, "price_was_missing": missing, "placeholder_price": placeholder, "currency": market.currency,
+            "currency_note": loc.note,
+            "basis": "the pack's template customers; no run is stored and the price is not saved"}
 
 
 # ---------------------------------------------------------------- scenario compare

@@ -4,6 +4,19 @@ Source of truth: `backend/common/contracts.py` (Pydantic). JSON schemas in this 
 with `make schemas` and checked in CI. Change rules: all three people agree, add fields as OPTIONAL
 only, update the fixtures in the same commit, add a line here.
 
+## 2026-10-30: Intake rules and project price suggestion (Person A) - HEADS-UP C and B
+- No shared shape changed. `backend/intake/projects.py` now reads `$9`, `3$`, `9 dollars`, euros, pounds and rupees as
+  prices, finds the country or city in the idea (`backend/intake/geography.py`), warns when the idea does not fit the
+  pack, asks the café equivalent of the free-trial question, and keeps product-name capitals.
+- Packs name their currency by code (`cafe` was `S$`). `backend/common/money.py` is the one code-to-symbol map; the Kit
+  and Council use it (their SaaS text read `SGD7`).
+- The founder's currency is kept (`profile.currency`: written currency, else the country's, else the pack's) and the
+  market is simulated in it: `backend/population/localise.py` re-expresses the pack's money assumptions with the World
+  Bank purchasing-power factor (not an exchange rate; the founder's price is never converted). Recorded in
+  `Population.generation.currency` (`code`, `scale`, `scaled`, `note`); stored runs read their currency from it.
+- New route `POST /projects/{project_id}/price-suggestion` for a project with no stored run or no price. See
+  `docs/integrations/intake-notes-for-C.md`.
+
 ## 2026-10-27: Price suggestion (Person A) - HEADS-UP C
 - No shared shape changed. New route `POST /pricing/suggest` `{project_id, run_id, cost, min_price, max_price, steps,
   seed, repeats}` (all optional): runs the stored market at a series of prices and returns `curve`, `suggestion` (best
