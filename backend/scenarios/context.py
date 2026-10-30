@@ -13,6 +13,7 @@ import copy
 from dataclasses import dataclass
 
 from backend.common.fixtures import load_fixture
+from backend.common.money import currency_of
 from backend.orchestrator import storage
 from backend.population.packs import PackError, load_pack
 
@@ -71,7 +72,7 @@ def _stored_context(run_id: str) -> ScenarioContext | None:
         options=bundle["options"],
         seed=int(bundle.get("seed", bundle["run_result"].get("seed", 42))),
         repeats=repeats,
-        currency=pack.currency,
+        currency=currency_of(bundle["population"], pack.currency),
         period=_period(pack),
         run_id=run_id,
     )

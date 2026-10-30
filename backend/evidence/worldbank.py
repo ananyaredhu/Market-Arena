@@ -20,7 +20,8 @@ from backend.common import llm
 from backend.evidence.models import Economics
 
 INDICATOR = "NY.GDP.PCAP.PP.CD"
-BASE_URL = "https://api.worldbank.org/v2/country/{iso}/indicator/" + INDICATOR + "?format=json&mrnev=1"
+PPP_INDICATOR = "PA.NUS.PPP"  # PPP conversion factor, GDP (local currency units per international dollar)
+BASE_URL = "https://api.worldbank.org/v2/country/{iso}/indicator/{indicator}?format=json&mrnev=1"
 CACHE_TTL = 30 * 24 * 3600
 SCALE_EXPONENT = 0.5  # budget scales with the square root of the income ratio: spending rises slower than income
 SCALE_BOUNDS = (0.25, 2.0)
@@ -33,21 +34,23 @@ def budget_scale(gdp: float, baseline_gdp: float) -> float:
     return max(lo, min(hi, (gdp / baseline_gdp) ** SCALE_EXPONENT))
 
 
-def _cache_file(iso: str, cache_dir: Path | None) -> Path:
-    return (cache_dir or (llm.CACHE_DIR / "evidence" / "worldbank")) / f"{iso.upper()}.json"
+def _cache_file(iso: str, cache_dir: Path | None, indicator: str = INDICATOR) -> Path:
+    name = f"{iso.upper()}.json" if indicator == INDICATOR else f"{iso.upper()}_{indicator}.json"
+    return (cache_dir or (llm.CACHE_DIR / "evidence" / "worldbank")) / name
 
 
-def fetch_gdp(iso: str, client: httpx.Client | None = None, cache_dir: Path | None = None) -> dict | None:
-    """{"country", "year", "value", "url"} for one country, or None if unavailable. Cached 30 days."""
+def fetch_gdp(iso: str, client: httpx.Client | None = None, cache_dir: Path | None = None,
+              indicator: str = INDICATOR) -> dict | None:
+    """{"country", "year", "value", "url"} for one country and indicator, or None if unavailable. Cached 30 days."""
     iso = iso.strip().upper()
-    f = _cache_file(iso, cache_dir)
+    f = _cache_file(iso, cache_dir, indicator)
     if f.exists():
         d = json.loads(f.read_text())
         if time.time() - d["fetched_at"] < CACHE_TTL:
             return d
     if not (len(iso) in (2, 3) and iso.isalpha()):
         return None
-    url = BASE_URL.format(iso=iso)
+    url = BASE_URL.format(iso=iso, indicator=indicator)
     own = client is None
     client = client or httpx.Client(timeout=15.0)
     try:
@@ -81,3 +84,8 @@ def country_economics(iso: str, baseline: str = "SG", client: httpx.Client | Non
     return Economics(country=here["country"], iso=iso.upper(), gdp_pc_ppp=here["value"], year=here["year"],
                      baseline_iso=baseline.upper(), baseline_gdp_pc_ppp=base["value"],
                      budget_scale=round(budget_scale(here["value"], base["value"]), 3), source_url=here["url"])
+
+
+def ppp_factor(iso: str, client: httpx.Client | None = None, cache_dir: Path | None = None) -> dict | None:
+    """Local currency units that buy what one international dollar buys in the country (World Bank PPP factor)."""
+    return fetch_gdp(iso, client, cache_dir, PPP_INDICATOR)

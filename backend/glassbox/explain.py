@@ -13,21 +13,17 @@ from dataclasses import dataclass
 import numpy as np
 
 from backend.common.contracts import AgentExplain
+from backend.common.money import MONEY, money_symbol  # noqa: F401  (re-exported: other modules import them from here)
 from backend.engine.flips import build_table, default_price_cut, flip_for_agent, flip_summary
 from backend.glassbox.narration import Driver, Facts, narrate
 
 TERMS = ("brand", "feature", "price", "switch", "risk")
-MONEY = {"SGD": "S$", "USD": "$", "EUR": "€", "GBP": "£", "S$": "S$"}
 MIN_DRIVER = 0.05  # ignore terms that barely moved the decision
 MAX_DRIVERS = 3
 
 
 class AgentNotFound(KeyError):
     pass
-
-
-def money_symbol(currency: str) -> str:
-    return MONEY.get(currency, f"{currency} ")
 
 
 def _labels(options: list[dict]) -> dict[str, str]:

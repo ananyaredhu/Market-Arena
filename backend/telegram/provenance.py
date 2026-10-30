@@ -6,6 +6,7 @@ import re
 
 from fastapi import HTTPException
 
+from backend.common.money import currency_of
 from backend.council.engine_adapter import get_default_adapter
 from backend.council.service import run_council, run_kit
 from backend.council.wording import TemplateWording
@@ -62,7 +63,8 @@ def source_for(body):
             trend_notes=bundle.get("trend_notes"),
             research_notes=bundle.get("research_notes"),
         )
-        kit = run_kit(council["council"], bundle["pack"], bundle["options"]).model_dump(mode="json")
+        kit = run_kit(council["council"], bundle["pack"], bundle["options"],
+                      currency_of(bundle["population"], "") or None).model_dump(mode="json")
     except Exception:
         raise HTTPException(422, "Could not derive Experiment Kit from persisted run") from None
     expected = {"hypotheses": kit["hypotheses"], "telegram_variants": kit["assets"]["telegram_variants"]}

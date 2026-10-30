@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
+from backend.common.money import currency_of
 from backend.council.advocate import run_advocate
 from backend.council.engine_adapter import YOU_ID, EngineAdapter, evaluation_from_result, get_default_adapter
 from backend.council.moderator import _segment_stats, build_council
@@ -113,7 +114,7 @@ def run_council(
     context = {"outside": outside_label(pack)}
     price = product.get("price")
     if isinstance(price, (int, float)) and price >= 0:
-        currency = load_pack(pack).get("currency", "S$")
+        currency = currency_of(population, load_pack(pack).get("currency", "SGD"))
         context.update(price=money(currency, price), price_low=money(currency, round(price * ALT_PRICE_FACTOR, 2)))
 
     council = build_council(
@@ -130,5 +131,5 @@ def run_council(
     }
 
 
-def run_kit(council: CouncilOutput, pack: str, options: List[dict]) -> KitOutput:
-    return generate_kit(council, pack, _product(options), competitor_label(council, options))
+def run_kit(council: CouncilOutput, pack: str, options: List[dict], currency: Optional[str] = None) -> KitOutput:
+    return generate_kit(council, pack, _product(options), competitor_label(council, options), currency)

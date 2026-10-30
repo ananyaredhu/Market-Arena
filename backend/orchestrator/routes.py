@@ -18,6 +18,7 @@ from backend.engine.engine import run_scenario as run_engine
 from backend.intake.projects import ProjectCreateRequest, create_persisted_project, get_persisted_project
 from backend.orchestrator import storage
 from backend.population.generator import PopulationError, generate_population
+from backend.population.localise import localised
 from backend.population.models import PopulationRequest
 from backend.population.packs import PackError, load_pack
 
@@ -139,13 +140,17 @@ def create_scenario(body: ScenarioCreateRequest | None = None):
         pack = load_pack(project["profile"]["pack"])
     except (KeyError, PackError) as exc:
         raise HTTPException(422, f"project has an unsupported industry pack: {exc}") from exc
-    options = _validate_options(body.options if body.options is not None else _build_options(project, pack), pack)
     profile = project["profile"]
+    geography = profile.get("geography") or "SG"
+    # The founder's currency is kept; the pack's own money assumptions (rival prices) are put into it (localise.py).
+    market, _ = localised(pack, profile.get("currency"), geography)
+    options = _validate_options(body.options if body.options is not None else _build_options(project, market), pack)
     pop_request = PopulationRequest(
         pack=pack.pack,
         n_agents=body.n_agents,
         seed=body.seed,
-        geography=profile.get("geography") or "SG",
+        geography=geography,
+        currency=profile.get("currency"),
         product=profile,
         research=body.research,
         evidence_snapshot_id=body.evidence_snapshot_id,

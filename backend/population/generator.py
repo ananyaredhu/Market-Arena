@@ -27,6 +27,7 @@ from backend.evidence import agent as evidence_agent
 from backend.evidence import store as evidence_store
 from backend.evidence.apply import apply_evidence
 from backend.evidence.models import EvidenceSnapshot
+from backend.population.localise import localised
 from backend.population.models import PackSpec, PopulationRequest, PriorsProposal
 from backend.population.packs import available_packs, load_pack
 from backend.population.sampler import sample_agents
@@ -105,14 +106,14 @@ def _build(pack: PackSpec, spec: PackSpec, req: PopulationRequest, option_ids: l
 def template_population(req: PopulationRequest) -> dict:
     """A validated population from the pack's own template priors: no LLM, no network, fully deterministic.
     The backtest uses this so its results cannot vary with a language model's answers."""
-    pack = load_pack(req.pack)
+    pack, loc = localised(load_pack(req.pack), req.currency, req.geography)
     option_ids = ["you"] + [c["id"] for c in pack.competitors]
     population = _build(pack, pack, req, option_ids)
     issues = validate_population(population, pack)
     if issues:
         raise PopulationError(f"template priors for pack '{pack.pack}' fail validation: {[str(i) for i in issues]}")
     population["generation"] = {"source": "template", "fallback_reason": None, "unchanged_from_template": False,
-                                "validation": "passed"}
+                                "validation": "passed", "currency": loc.as_dict()}
     return Population.model_validate(population).model_dump(mode="json")
 
 
@@ -136,28 +137,31 @@ def _snapshot_for(req: PopulationRequest, pack: PackSpec) -> tuple[EvidenceSnaps
 
 def generate_population(req: PopulationRequest | None = None) -> dict:
     req = req or PopulationRequest()
-    pack = load_pack(req.pack)
+    pack, loc = localised(load_pack(req.pack), req.currency, req.geography)
     option_ids = ["you"] + [c["id"] for c in pack.competitors]
 
     source, reason, unchanged = "llm", None, False
     spec = pack
-    try:
-        proposal = complete_json(
-            f"population_priors:{pack.pack}",
-            _prompt(req, pack, option_ids),
-            PriorsProposal,
-            system=SYSTEM,
-            # No `fallback=` here on purpose: complete_json would swallow the failure and we could not
-            # record why the template was used. We catch LLMError below instead.
-        )
-        spec = _check_proposal(proposal, pack, option_ids)
-        unchanged = [s.model_dump() for s in spec.segments] == [s.model_dump() for s in pack.segments]
-        if unchanged and os.getenv("LLM_MODE", "mock") == "mock":
-            source = "template"  # offline mode: the "answer" is the template itself
-        # In live mode an unchanged answer is still the model's answer (small models often echo the
-        # template back); it is reported as source "llm" with unchanged_from_template=True.
-    except (LLMError, ValidationError, ValueError) as e:
-        source, reason, spec = "template", f"proposal rejected: {str(e).splitlines()[0]}", pack
+    if loc.scaled and os.getenv("LLM_MODE", "mock") == "mock":
+        source = "template"  # the offline answer is the pack's own template, which must be the localised one
+    else:
+        try:
+            proposal = complete_json(
+                f"population_priors:{pack.pack}",
+                _prompt(req, pack, option_ids),
+                PriorsProposal,
+                system=SYSTEM,
+                # No `fallback=` here on purpose: complete_json would swallow the failure and we could not
+                # record why the template was used. We catch LLMError below instead.
+            )
+            spec = _check_proposal(proposal, pack, option_ids)
+            unchanged = [s.model_dump() for s in spec.segments] == [s.model_dump() for s in pack.segments]
+            if unchanged and os.getenv("LLM_MODE", "mock") == "mock":
+                source = "template"  # offline mode: the "answer" is the template itself
+            # In live mode an unchanged answer is still the model's answer (small models often echo the
+            # template back); it is reported as source "llm" with unchanged_from_template=True.
+        except (LLMError, ValidationError, ValueError) as e:
+            source, reason, spec = "template", f"proposal rejected: {str(e).splitlines()[0]}", pack
 
     snap, evidence_note = _snapshot_for(req, pack)
     applied = apply_evidence(spec, snap, req.price_base_year)
@@ -186,6 +190,7 @@ def generate_population(req: PopulationRequest | None = None) -> dict:
         "fallback_reason": reason,
         "unchanged_from_template": unchanged and source == "llm",
         "validation": "passed",
+        "currency": loc.as_dict(),
     }
     if snap is not None or evidence_note:
         population["generation"]["evidence"] = {

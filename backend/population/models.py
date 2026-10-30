@@ -103,6 +103,7 @@ class PopulationRequest(BaseModel):
     n_agents: int = Field(default=300, ge=10, le=5000)
     seed: int = 42
     geography: str = "SG"
+    currency: str | None = None  # the founder's currency; the pack's money assumptions are re-expressed in it
     product: dict | None = None  # ProductProfile-like dict from intake; used only to brief the LLM
     research: bool = False  # run the web evidence researcher first (needs SEARXNG_URL and a live LLM)
     evidence_snapshot_id: str | None = None  # reuse a saved snapshot instead of researching again

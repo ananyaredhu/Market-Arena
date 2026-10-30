@@ -13,6 +13,7 @@ from pydantic import BaseModel
 
 from backend.common.contracts import CouncilOutput, RunResult
 from backend.common.mock import mock_enabled
+from backend.common.money import currency_of
 from backend.council.history import HistoryError, compare_runs, list_history, save_council_record
 from backend.council.run_inputs import ResolutionError, resolve_run
 from backend.council.service import CouncilComputeError, run_council, run_kit
@@ -151,7 +152,7 @@ def _compute_kit(run_id: str, body: Optional[KitRequest]) -> dict:
     if body is not None and body.options is not None and not _options_match(body.options, resolved.options):
         raise ResolutionError(409, "kit options do not match the resolved run")
     save_council_record(_payload(result, resolved))
-    kit = run_kit(result["council"], resolved.pack, resolved.options)
+    kit = run_kit(result["council"], resolved.pack, resolved.options, currency_of(resolved.population, "") or None)
     data = kit.model_dump()
     data["run_id"] = run_id
     return _annotate(data, resolved, result)

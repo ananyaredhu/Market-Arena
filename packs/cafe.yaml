@@ -7,7 +7,7 @@ pack: cafe
 version: 0.1
 label: Café / local F&B retail
 evidence: illustrative_assumption
-currency: "S$"
+currency: SGD
 price_unit: per visit
 known_limitations: >
   Priors are hand-written ranges, not fitted to Singapore data. Location,

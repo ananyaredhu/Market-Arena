@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
+from backend.common.money import money_symbol
 from backend.council.schemas import CouncilOutput, KitAssets, KitOffline, KitOutput, TrackingPlan
 from backend.kit.packs import kit_content, load_pack, outside_label
 
@@ -31,7 +32,9 @@ class _SafeDict(dict):
 
 
 def money(currency: str, value: float) -> str:
-    return f"{currency}{value:.0f}" if float(value).is_integer() else f"{currency}{value:.2f}"
+    """A price with the currency's symbol. The pack may name the currency by code (SGD) or by symbol (S$)."""
+    symbol = money_symbol(currency)
+    return f"{symbol}{value:.0f}" if float(value).is_integer() else f"{symbol}{value:.2f}"
 
 
 def risk_order(council: CouncilOutput) -> List[str]:
@@ -49,9 +52,10 @@ def _prioritise(items: List[dict], order: List[str]) -> List[dict]:
     return sorted(items, key=lambda it: rank.get(it.get("key", "default"), len(rank)))
 
 
-def build_context(council: CouncilOutput, pack: str, product: dict, competitor_label: Optional[str] = None) -> dict:
+def build_context(council: CouncilOutput, pack: str, product: dict, competitor_label: Optional[str] = None,
+                  currency: Optional[str] = None) -> dict:
     data = load_pack(pack)
-    currency = data.get("currency", "S$")
+    currency = currency or data.get("currency", "SGD")
     price = product.get("price")
     if not isinstance(price, (int, float)) or price < 0:
         raise KitValidationError(f"product price must be a non-negative number, got {price!r}")
@@ -69,9 +73,10 @@ def build_context(council: CouncilOutput, pack: str, product: dict, competitor_l
     }
 
 
-def generate_kit(council: CouncilOutput, pack: str, product: dict, competitor_label: Optional[str] = None) -> KitOutput:
+def generate_kit(council: CouncilOutput, pack: str, product: dict, competitor_label: Optional[str] = None,
+                 currency: Optional[str] = None) -> KitOutput:
     content = kit_content(pack)
-    ctx = _SafeDict(build_context(council, pack, product, competitor_label))
+    ctx = _SafeDict(build_context(council, pack, product, competitor_label, currency))
     def fmt(s):
         return s.format_map(ctx).strip()
     order = risk_order(council)
