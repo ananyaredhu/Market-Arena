@@ -1,7 +1,8 @@
 "use client";
 // OWNER: Person A. Screen 4: "Scenario compare". Real data from POST /scenarios/compare: the same customers and the
 // same random seed run twice, with your price changed in Scenario B. All numbers and sentences are computed.
-import { useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useCallback, useEffect, useState } from "react";
 
 import DeltaCard from "@/components/compare/DeltaCard";
 import FlipSummary from "@/components/compare/FlipSummary";
@@ -11,8 +12,10 @@ import ShareBars from "@/components/compare/ShareBars";
 import TradeoffNote from "@/components/compare/TradeoffNote";
 import AppHeader from "@/components/layout/AppHeader";
 import PageShell from "@/components/layout/PageShell";
+import PriceFinder from "@/components/compare/PriceFinder";
 import { post } from "@/lib/api";
 import type { Tone } from "@/lib/cx";
+import { DEMO_PROJECT_ID } from "@/lib/run-context";
 import type { CompareResponse } from "@/lib/types";
 
 const signed = (x: number) => {
@@ -34,33 +37,44 @@ function tradeoff(d: CompareResponse): string {
   );
 }
 
-const fetchCompare = (price: string) =>
-  post<CompareResponse>("/scenarios/compare", { changes: { you: { price: Number(price) } }, label_b: "Scenario B" });
+// A stored run can be opened with /compare?project=<id>&run=<id>; with neither, the demo market is used.
+type Market = { projectId: string; runId: string | null };
+
+const fetchCompare = (price: string, m: Market) =>
+  post<CompareResponse>("/scenarios/compare", {
+    project_id: m.projectId,
+    run_id: m.runId,
+    changes: { you: { price: Number(price) } },
+    label_b: "Scenario B",
+  });
 
 const errorText = (e: unknown) => (e instanceof Error ? e.message : "The comparison could not run.");
 
-export default function ComparePage() {
+function CompareView() {
+  const query = useSearchParams();
+  const market: Market = { projectId: query.get("project")?.trim() || DEMO_PROJECT_ID, runId: query.get("run")?.trim() || null };
   const [price, setPrice] = useState("3");
   const [data, setData] = useState<CompareResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
+  const { projectId, runId } = market;
   const run = useCallback(async (p: string) => {
     setBusy(true);
     setError(null);
     try {
-      setData(await fetchCompare(p));
+      setData(await fetchCompare(p, { projectId, runId }));
     } catch (e) {
       setError(errorText(e));
     } finally {
       setBusy(false);
     }
-  }, []);
+  }, [projectId, runId]);
 
   useEffect(() => {
     // first load: plain fetch, state is set once the answer arrives
-    fetchCompare("3").then(setData).catch((e) => setError(errorText(e)));
-  }, []);
+    fetchCompare("3", { projectId, runId }).then(setData).catch((e) => setError(errorText(e)));
+  }, [projectId, runId]);
 
   const subtitle = data?.overrides_applied
     ? `Scenario lab · compare · ${data.overrides_applied} human adjustment(s) applied`
@@ -70,6 +84,17 @@ export default function ComparePage() {
   return (
     <PageShell glow="compare" className="!gap-[26px]">
       <AppHeader active="compare" subtitle={subtitle} />
+      <PriceFinder
+        key={`${projectId}:${runId ?? ""}`}
+        projectId={projectId}
+        runId={runId}
+        symbol={sym}
+        onUsePrice={(p) => {
+          const text = String(p);
+          setPrice(text);
+          run(text);
+        }}
+      />
       <ScenarioControls symbol={sym} price={price} onPrice={setPrice} onRun={() => run(price)} busy={busy} error={error} />
 
       {!data ? (
@@ -115,5 +140,14 @@ export default function ComparePage() {
         </>
       )}
     </PageShell>
+  );
+}
+
+export default function ComparePage() {
+  // useSearchParams must be read inside Suspense in this Next.js version
+  return (
+    <Suspense fallback={<main className="p-8 text-muted">Loading…</main>}>
+      <CompareView />
+    </Suspense>
   );
 }

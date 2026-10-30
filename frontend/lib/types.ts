@@ -280,6 +280,36 @@ export interface CompareResponse {
   flip_summary_b: FlipRow[];
 }
 
+export interface PriceCurveRow {
+  price: number;
+  share_p10: number;
+  share_p50: number;
+  share_p90: number;
+  revenue_index: number;
+  profit_index?: number;
+  is_current: boolean;
+}
+
+/** POST /pricing/suggest: the market run at a series of prices (same customers, same seed) and where to start testing. */
+export interface PriceSuggestResponse {
+  project_id: string;
+  you_id: string;
+  currency_symbol: string;
+  period: string;
+  objective: string;
+  cost: number | null;
+  current_price: number;
+  same_seed: number;
+  overrides_applied: number;
+  customers: number;
+  curve: PriceCurveRow[];
+  suggestion: { price: number; share_p50: number; objective: string; revenue_index?: number; profit_index?: number } | null;
+  band: { low: number; high: number; within: string } | null;
+  notes: string[];
+  reference_prices: { claim: string; quote: string; url: string; domain: string; retrieved_at: string }[];
+  reference_note: string;
+}
+
 /** One entry of the Resources library (GET /resources): a quote read from a web page, or an official statistic. */
 export interface Resource {
   id: string;
