@@ -7,7 +7,7 @@ from backend.population.generator import generate_population
 from backend.population.models import PopulationRequest
 from backend.population.packs import load_pack
 
-DEMOS = ["ev_saas_SG_demo", "ev_cafe_SG_demo"]
+DEMOS = ["ev_saas_SG_demo", "ev_saas_SG_demo2", "ev_cafe_SG_demo"]
 
 
 @pytest.fixture(autouse=True)

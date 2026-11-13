@@ -1,0 +1,292 @@
+{
+  "snapshot_id": "ev_saas_SG_demo2",
+  "created_at": "2026-11-13T14:14:09+00:00",
+  "pack": "saas",
+  "geography": "SG",
+  "status": "ok",
+  "fallback_reason": null,
+  "findings": [
+    {
+      "kind": "competitor_price",
+      "subject": null,
+      "claim": "Microsoft 365 premium plan typically costs $28.99 per month.",
+      "value": 28.99,
+      "low": null,
+      "high": null,
+      "unit": "month",
+      "currency": "USD",
+      "quote": "which typically costs $28.99 a month.",
+      "url": "https://www.straitstimes.com/singapore/parenting-education/sutd-students-and-staff-get-access-to-gpt-claude-gemini-and-other-ai-models"
+    },
+    {
+      "kind": "regulation",
+      "subject": null,
+      "claim": "NTUC members can claim 50% back on approved AI tool subscriptions, capped at $250 (under 40) or $500 (40 and above) per year, with the subsidy window running until 30 April 2028.",
+      "value": 50.0,
+      "low": null,
+      "high": null,
+      "unit": "percent",
+      "currency": "SGD",
+      "quote": "Members get 50% back on subscription fees, capped at $250 (under 40) or $500 (40 and above) per year",
+      "url": "https://verticalinstitute.com/blog/utap-approved-ai-tools/"
+    },
+    {
+      "kind": "competitor_price",
+      "subject": "free_tool",
+      "claim": "A competitor tool offers a free tier with 300 monthly transcription minutes, AI chat within meetings, AI workflows, live transcription, speaker identification, and 3 lifetime file imports.",
+      "value": 0.0,
+      "low": null,
+      "high": null,
+      "unit": "minutes/month",
+      "currency": "USD",
+      "quote": "Free tier: Basic includes 300 monthly transcription minutes, AI chat within meetings, AI workflows, live transcription, speaker identification, and 3 lifetime file imports",
+      "url": "https://verticalinstitute.com/blog/utap-approved-ai-tools/"
+    }
+  ],
+  "trend_notes": [
+    {
+      "note": "Microsoft will provide free access to its Microsoft 365 premium plan for over 200,000 tertiary education students, reducing spending.",
+      "quote": "provide more than 200,000 tertiary education students in Singapore with free access to its Microsoft 365 premium plan",
+      "url": "https://www.straitstimes.com/singapore/parenting-education/sutd-students-and-staff-get-access-to-gpt-claude-gemini-and-other-ai-models",
+      "effect": "budget_down",
+      "segments": null
+    },
+    {
+      "note": "NTUC expanded UTAP in May 2026 to cover 21 approved AI tool subscriptions, allowing members to claim 50% back on subscription fees, which may increase demand for paid AI tools among Singaporean users.",
+      "quote": "NTUC expanded UTAP in May 2026 to cover 21 approved AI tool subscriptions, including ChatGPT, Claude, and Midjourney",
+      "url": "https://verticalinstitute.com/blog/utap-approved-ai-tools/",
+      "effect": "budget_up",
+      "segments": [
+        "budget",
+        "exam",
+        "power"
+      ]
+    }
+  ],
+  "dropped": [],
+  "economics": {
+    "country": "Singapore",
+    "iso": "SG",
+    "gdp_pc_ppp": 163353.990260152,
+    "year": 2025,
+    "baseline_iso": "SG",
+    "baseline_gdp_pc_ppp": 163353.990260152,
+    "budget_scale": 1.0,
+    "source_url": "https://api.worldbank.org/v2/country/SG/indicator/NY.GDP.PCAP.PP.CD?format=json&mrnev=1"
+  },
+  "datasets": [
+    {
+      "name": "Consumer prices: All Items",
+      "source": "SingStat Table Builder",
+      "table_id": "M213801",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+      "period": "2025",
+      "value": 100.903,
+      "unit": "index (2024 = 100)",
+      "note": "+0.9% on 2024, +17.6% over 5 years",
+      "quote": "All Items, 2025: 100.903 (Index)",
+      "retrieved_at": "2026-11-13T14:14:09.162458+00:00"
+    },
+    {
+      "name": "Consumer prices: Information & Communication",
+      "source": "SingStat Table Builder",
+      "table_id": "M213801",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+      "period": "2025",
+      "value": 98.129,
+      "unit": "index (2024 = 100)",
+      "note": "-1.9% on 2024, +0.0% over 5 years",
+      "quote": "Information & Communication, 2025: 98.129 (Index)",
+      "retrieved_at": "2026-11-13T14:14:09.162458+00:00"
+    },
+    {
+      "name": "Consumer prices: Education",
+      "source": "SingStat Table Builder",
+      "table_id": "M213801",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+      "period": "2025",
+      "value": 100.69,
+      "unit": "index (2024 = 100)",
+      "note": "+0.7% on 2024, +10.4% over 5 years",
+      "quote": "Education, 2025: 100.69 (Index)",
+      "retrieved_at": "2026-11-13T14:14:09.162458+00:00"
+    },
+    {
+      "name": "Household spending: Information and Communication",
+      "source": "SingStat Household Expenditure Survey",
+      "table_id": "18005",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/18005",
+      "period": "2023",
+      "value": 270.2,
+      "unit": "S$ per resident household per month",
+      "note": "Average over all resident households, not per student or per visit (4.6% of all household spending)",
+      "quote": "Information and Communication, 2023: 270.2 (Dollar)",
+      "retrieved_at": "2026-11-13T14:14:09.162458+00:00"
+    },
+    {
+      "name": "Household spending: Education",
+      "source": "SingStat Household Expenditure Survey",
+      "table_id": "18005",
+      "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/18005",
+      "period": "2023",
+      "value": 404.2,
+      "unit": "S$ per resident household per month",
+      "note": "Average over all resident households, not per student or per visit (6.8% of all household spending)",
+      "quote": "Education, 2023: 404.2 (Dollar)",
+      "retrieved_at": "2026-11-13T14:14:09.162458+00:00"
+    }
+  ],
+  "price_index": {
+    "name": "Consumer Price Index, all items (2024 = 100)",
+    "table_id": "M213801",
+    "url": "https://tablebuilder.singstat.gov.sg/api/table/tabledata/M213801",
+    "retrieved_at": "2026-11-13T14:14:09.166143+00:00",
+    "values": {
+      "1961": 20.953,
+      "1962": 21.046,
+      "1963": 21.494,
+      "1964": 21.848,
+      "1965": 21.902,
+      "1966": 22.345,
+      "1967": 23.057,
+      "1968": 23.223,
+      "1969": 23.196,
+      "1970": 23.263,
+      "1971": 23.7,
+      "1972": 24.208,
+      "1973": 28.957,
+      "1974": 35.433,
+      "1975": 36.346,
+      "1976": 35.657,
+      "1977": 36.793,
+      "1978": 38.289,
+      "1979": 39.822,
+      "1980": 43.223,
+      "1981": 46.763,
+      "1982": 48.595,
+      "1983": 49.1,
+      "1984": 50.378,
+      "1985": 50.626,
+      "1986": 49.926,
+      "1987": 50.168,
+      "1988": 50.932,
+      "1989": 52.1,
+      "1990": 53.898,
+      "1991": 55.752,
+      "1992": 57.003,
+      "1993": 58.309,
+      "1994": 60.114,
+      "1995": 61.15,
+      "1996": 61.994,
+      "1997": 63.248,
+      "1998": 63.076,
+      "1999": 63.091,
+      "2000": 63.942,
+      "2001": 64.59,
+      "2002": 64.337,
+      "2003": 64.651,
+      "2004": 65.732,
+      "2005": 66.043,
+      "2006": 66.681,
+      "2007": 68.088,
+      "2008": 72.606,
+      "2009": 73.033,
+      "2010": 75.099,
+      "2011": 79.043,
+      "2012": 82.664,
+      "2013": 84.618,
+      "2014": 85.493,
+      "2015": 85.046,
+      "2016": 84.596,
+      "2017": 85.084,
+      "2018": 85.457,
+      "2019": 85.942,
+      "2020": 85.794,
+      "2021": 87.781,
+      "2022": 93.163,
+      "2023": 97.666,
+      "2024": 100.0,
+      "2025": 100.903
+    }
+  },
+  "trace": [
+    {
+      "n": 0,
+      "action": "world_bank",
+      "detail": "SG",
+      "result": "GDP per capita (PPP) 163,354 in 2025; budget x1.0"
+    },
+    {
+      "n": 0,
+      "action": "singstat",
+      "detail": "SG",
+      "result": "5 official figures shown; consumer price index kept for budgets"
+    },
+    {
+      "n": 1,
+      "action": "search",
+      "detail": "university students Singapore monthly spending on AI study planner subscription price",
+      "result": "6 results"
+    },
+    {
+      "n": 2,
+      "action": "search",
+      "detail": "university students Singapore use free AI study planner instead of paying survey",
+      "result": "6 results"
+    },
+    {
+      "n": 3,
+      "action": "search",
+      "detail": "Singapore AI study planner market trend demand 2026",
+      "result": "6 results"
+    },
+    {
+      "n": 4,
+      "action": "search",
+      "detail": "AI study planner pricing plans per month Singapore",
+      "result": "6 results"
+    },
+    {
+      "n": 5,
+      "action": "open",
+      "detail": "https://www.straitstimes.com/singapore/parenting-education/sutd-students-and-staff-get-access-to-gpt-claude-gemini-and-other-ai-models",
+      "result": "6161 characters read; [spending] kept 1 findings and 1 trend notes, dropped 0"
+    },
+    {
+      "n": 6,
+      "action": "open",
+      "detail": "https://www.deloitte.com/southeast-asia/en/about/press-room/agentic-and-physical-ai-set-for-rapid-growth-in-singapore-in-the-next-two-years.html",
+      "result": "17804 characters read; [trends] kept 0 findings and 0 trend notes, dropped 0"
+    },
+    {
+      "n": 7,
+      "action": "open",
+      "detail": "https://verticalinstitute.com/blog/utap-approved-ai-tools/",
+      "result": "30000 characters read; [competitor prices] kept 8 findings and 1 trend notes, dropped 0"
+    },
+    {
+      "n": 8,
+      "action": "open",
+      "detail": "https://www.channelnewsasia.com/singapore/ai-tutors-tuition-industry-moe-learning-5357791",
+      "result": "18737 characters read; model could not read it: all providers failed for task 'evidence_extract'"
+    },
+    {
+      "n": 9,
+      "action": "open",
+      "detail": "https://digitalinasia.com/singapore-ai-market/",
+      "result": "16726 characters read; model could not read it: all providers failed for task 'evidence_extract'"
+    },
+    {
+      "n": 10,
+      "action": "finish",
+      "detail": "",
+      "result": "9 verified findings, 2 trend notes from 3 page(s)"
+    }
+  ],
+  "stats": {
+    "searches": 4,
+    "opens": 5,
+    "llm_calls": 5,
+    "seconds": 168.7
+  }
+}
